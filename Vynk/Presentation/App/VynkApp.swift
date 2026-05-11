@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct VynkApp: App {
+    @State private var appDIContainer = AppDIContainer()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView(appDIContainer: appDIContainer)
         }
     }
 }
