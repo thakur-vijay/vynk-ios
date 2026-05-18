@@ -24,4 +24,5 @@ struct AuthView: View {
             }
         }
     }
+    
 }

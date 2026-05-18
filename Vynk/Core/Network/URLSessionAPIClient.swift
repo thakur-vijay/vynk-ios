@@ -8,11 +8,11 @@
 import Foundation
 
 final class URLSessionAPIClient: APIClient {
-    private let baseURL: URL
+    private let configuration: NetworkConfiguration
     private let session: URLSession
     
-    init(baseURL: URL, session: URLSession = .shared) {
-        self.baseURL = baseURL
+    init(configuration: NetworkConfiguration, session: URLSession = .shared) {
+        self.configuration = configuration
         self.session = session
     }
     
@@ -43,7 +43,7 @@ final class URLSessionAPIClient: APIClient {
     }
     
     private func makeRequest(from endpoint: Endpoint)throws->URLRequest {
-        var components = URLComponents(url: baseURL.appending(path: endpoint.path), resolvingAgainstBaseURL: false)
+        var components = URLComponents(url: configuration.baseURL.appending(path: endpoint.path), resolvingAgainstBaseURL: false)
         if !endpoint.queryItems.isEmpty {
             components?.queryItems = endpoint.queryItems
         }

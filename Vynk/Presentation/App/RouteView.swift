@@ -21,13 +21,13 @@ struct RootView: View {
         case .splash:
             Text("Splash")
                 .onAppear {
-                    router.showAuth()
+                    router.showMain()
                 }
             
         case .auth:
             appDIContainer.authDIContainer.makeAuthView()
         case .main:
-            Text("Main")
+            MainTabView()
         }
     }
 }

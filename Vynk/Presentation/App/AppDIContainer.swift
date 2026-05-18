@@ -10,11 +10,16 @@ import Foundation
 
 @MainActor
 final class AppDIContainer {
+    private let configuration = AppConfiguration.shared
     lazy var appRouter: AppRouter = {
         AppRouter()
     }()
     
     lazy var authDIContainer: AuthDIContainer = {
-        AuthDIContainer()
+        AuthDIContainer(apiClient: apiClient)
+    }()
+    
+    lazy var apiClient: APIClient = {
+        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
     }()
 }
