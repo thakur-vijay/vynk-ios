@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-@MainActor
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
     lazy var appRouter: AppRouter = {

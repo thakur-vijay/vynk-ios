@@ -8,33 +8,58 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selection: Int = 0
+    @State private var activeTab: AnimatedTab = .chats
+    
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.stackedLayoutAppearance.selected.iconColor = UIColor(AppColors.accent)
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
+            .foregroundColor: UIColor(AppColors.accentSoft)
+        ]
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
     var body: some View {
-        TabView(selection: $selection){
-            Tab(value: 0) {
+        AnimatedTabView(selection: $activeTab) {
+            Tab.init(AnimatedTab.updates.title, systemImage: AnimatedTab.updates.symbolImage, value: .updates) {
                 UpdatesView()
-            } label: {
-                Label("Updates", systemImage: "circle.dashed")
             }
-            Tab(value: 0) {
+            Tab.init(AnimatedTab.calls.title, systemImage: AnimatedTab.calls.symbolImage, value: .calls) {
                 CallsView()
-            } label: {
-                Label("Updates", systemImage: "phone")
             }
-            Tab(value: 0) {
+            Tab.init(AnimatedTab.communities.title, systemImage: AnimatedTab.communities.symbolImage, value: .communities) {
                 CommunitiesView()
-            } label: {
-                Label("Updates", systemImage: "person.3")
             }
-            Tab(value: 0) {
+            Tab.init(AnimatedTab.chats.title, systemImage: AnimatedTab.chats.symbolImage, value: .chats) {
                 ChatsView()
-            } label: {
-                Label("Updates", systemImage: "message")
             }
-            Tab(value: 0) {
+            Tab.init(AnimatedTab.settings.title, systemImage: AnimatedTab.settings.symbolImage, value: .settings) {
                 SettingsView()
-            } label: {
-                Label("Updates", systemImage: "gearshape")
+            }
+        } effects: { tab in
+            switch tab {
+
+            case .updates:
+
+                [.pulse]
+
+            case .calls:
+
+                [.bounce.up]
+
+            case .communities:
+
+                [.wiggle]
+
+            case .chats:
+
+                [.bounce.down]
+
+            case .settings:
+
+                [.rotate]
+
             }
         }
     }

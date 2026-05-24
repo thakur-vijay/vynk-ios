@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class URLSessionAPIClient: APIClient {
+final class URLSessionAPIClient: APIClient, Sendable{
     private let configuration: NetworkConfiguration
     private let session: URLSession
     
@@ -16,7 +16,10 @@ final class URLSessionAPIClient: APIClient {
         self.session = session
     }
     
-    func request<T>(_ endpoint: any Endpoint, as type: T.Type) async throws -> T where T : Decodable {
+    func request<T>(
+        _ endpoint: any Endpoint,
+        as type: T.Type
+    ) async throws -> T where T : Decodable & Sendable {
         let request = try makeRequest(from: endpoint)
         
         do {
@@ -42,7 +45,7 @@ final class URLSessionAPIClient: APIClient {
         }
     }
     
-    private func makeRequest(from endpoint: Endpoint)throws->URLRequest {
+    private func makeRequest(from endpoint: any Endpoint)throws->URLRequest {
         var components = URLComponents(url: configuration.baseURL.appending(path: endpoint.path), resolvingAgainstBaseURL: false)
         if !endpoint.queryItems.isEmpty {
             components?.queryItems = endpoint.queryItems

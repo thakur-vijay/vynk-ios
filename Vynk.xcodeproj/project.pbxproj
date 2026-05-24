@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 18ACE9B92FC238280098A584 /* NukeUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		188696962FB1AD3400A5BFA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Vynk;
 			packageProductDependencies = (
+				18ACE9B92FC238280098A584 /* NukeUI */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 1886967F2FB1AD3200A5BFA7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 188696892FB1AD3200A5BFA7 /* Products */;
 			projectDirPath = "";
@@ -578,6 +587,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18ACE9B92FC238280098A584 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 188696802FB1AD3200A5BFA7 /* Project object */;
 }
