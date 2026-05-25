@@ -13,8 +13,14 @@ enum AppColors {
     static let accentDeemphasized = Color(.accentDeemphasized)
     static let accentSoft = Color(.accentSoft)
     static let contentDeemphasized = Color.primary.opacity(0.6)
+    static let contentDefault = Color(.contentDefault)
+    static let contentRead = Color(.contentRead)
+    static let chatBackground = Color(.chatBackground)
     static let linesOutlineDeemphasized = Color.primary.opacity(0.2)
     static let neutralMuted = Color(.neutralMuted)
     static let neutralSubtle = Color(.neutralSubtle)
     static let white = Color.white
+    static let background = Color.white
+    static let toolbarBackground: Material = .ultraThinMaterial
+    static let chatInputBarBackground: Material = .ultraThinMaterial
 }

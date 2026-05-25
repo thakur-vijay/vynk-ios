@@ -149,5 +149,5 @@ struct ChatRowView: View{
 }
 
 #Preview {
-    ChatsView()
+    ChatsView(viewModel: .init())
 }

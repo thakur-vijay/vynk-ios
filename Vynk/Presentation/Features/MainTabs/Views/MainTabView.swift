@@ -32,7 +32,7 @@ struct MainTabView: View {
                 CommunitiesView()
             }
             Tab.init(AnimatedTab.chats.title, systemImage: AnimatedTab.chats.symbolImage, value: .chats) {
-                ChatsView()
+                ChatsView(viewModel: .init())
             }
             Tab.init(AnimatedTab.settings.title, systemImage: AnimatedTab.settings.symbolImage, value: .settings) {
                 SettingsView()

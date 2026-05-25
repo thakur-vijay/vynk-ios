@@ -35,5 +35,5 @@ struct ChatFilterChipView: View {
 }
 
 #Preview {
-    ChatsView()
+    ChatsView(viewModel: .init())
 }

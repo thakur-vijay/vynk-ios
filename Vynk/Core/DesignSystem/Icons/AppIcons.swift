@@ -25,6 +25,10 @@ enum AppIcons {
     static let dashedCircle = "circle.dashed"
     static let camera = "camera.fill"
     static let rupee = "indianrupeesign.circle.fill"
+    static let phone = "phone"
+    static let video = "video"
+    static let send = "paperplane.fill"
+    static let doubleTick = "double.tick"
     
     enum ChatAction {
         static let markUnreadSwipe = "message.badge.filled.fill"

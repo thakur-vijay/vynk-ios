@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatRowModel: Identifiable {
+struct ChatRowModel: Identifiable, Hashable{
 
     let id: String = UUID().uuidString
 

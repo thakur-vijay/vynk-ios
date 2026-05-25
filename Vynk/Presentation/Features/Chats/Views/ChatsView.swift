@@ -8,22 +8,27 @@
 import SwiftUI
 
 struct ChatsView: View{
-    @State private var searchText: String = ""
-    @State private var isSearchPresented: Bool = false
+    @State private var viewModel: ChatsViewModel
+    
+    init(viewModel: ChatsViewModel) {
+        _viewModel = State(wrappedValue: viewModel)
+    }
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $viewModel.path) {
             List {
                 ChatFilterBarView()
                     .listRowSeparator(.hidden)
                     .listRowInsets(.all, 0)
 
-                ForEach(ChatRowModel.sampleList) { model in
+                ForEach(viewModel.chats) { model in
                     ChatRowView(model: model)
-                        .task {
-                            print(index)
-                        }
                         .listRowSeparator(.hidden)
                         .listRowInsets(.all, 0)
+                        .contentShape(.rect)
+                        .onTapGesture {
+                            viewModel.openChat(model)
+                        }
                 }
                 
             }
@@ -78,13 +83,25 @@ struct ChatsView: View{
                     .buttonStyle(.glassProminent)
                 }
             }
-            .searchable(text: $searchText, isPresented: $isSearchPresented, prompt: Text("Ask Meta Al or Search"))
+            .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
+            .navigationDestination(for: ChatsRoute.self) { route in
+                switch route {
+                case .detail(let model):
+                    ChatDetailView(model: model)
+
+                }
+            }
+            .toolbarVisibility(toolbarVisiblity, for: .tabBar)
         }
+    }
+    
+    var toolbarVisiblity: Visibility {
+        return viewModel.path.isEmpty ? .visible : .hidden
     }
     
 }
 
 #Preview {
-    ChatsView()
+    ChatsView(viewModel: .init())
 }
 //#1daa61
