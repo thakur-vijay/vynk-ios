@@ -46,11 +46,8 @@ struct VynkRemoteImage<S: Shape>: View {
             }
             
         }
-        
         .frame(width: width, height: height)
-        
         .clipped()
-        
         .clipShape(shape)
         .frame(width: width, height: height)
         .clipShape(shape)

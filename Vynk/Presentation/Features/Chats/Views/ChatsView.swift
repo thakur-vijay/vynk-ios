@@ -87,7 +87,7 @@ struct ChatsView: View{
             .navigationDestination(for: ChatsRoute.self) { route in
                 switch route {
                 case .detail(let model):
-                    ChatDetailView(model: model)
+                    ChatDetailView(model: model, viewModel: .init())
 
                 }
             }

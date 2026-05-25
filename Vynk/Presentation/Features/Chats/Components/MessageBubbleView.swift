@@ -11,6 +11,7 @@ struct MessageBubbleView: View {
     let model: MessageModel
     let screenWidth: CGFloat
     let isLast: Bool
+    let isNewGroup: Bool
     var body: some View {
         VStack {
             switch model.type {
@@ -20,6 +21,7 @@ struct MessageBubbleView: View {
         .frame(maxWidth: screenWidth * 0.8, alignment: model.isCurrentUser ? .trailing : .leading)
         .hSpacing(model.isCurrentUser ? .trailing : .leading)
         .padding(.horizontal, AppSpacing.md)
+        .padding(.top, isNewGroup ? AppSpacing.md : AppSpacing.xxs)
     }
     
     var textView: some View {
