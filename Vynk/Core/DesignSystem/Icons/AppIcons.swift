@@ -8,7 +8,7 @@
 import Foundation
 
 enum AppIcons {
-    static let pin = "pin.fill"
+    static let pin = "pin"
     static let pinSlash = "pin.slash.fill"
     static let message = "message.fill"
     static let plus = "plus"
@@ -29,8 +29,16 @@ enum AppIcons {
     static let video = "video"
     static let send = "paperplane.fill"
     static let doubleTick = "double.tick"
+    static let reply = "arrowshape.turn.up.left"
+    static let forward = "arrowshape.turn.up.right"
+    static let copy = "document.on.document"
+    static let info = "info.circle"
+    static let star = "star"
+    static let ellipsisCircle = "ellipsis.circle"
+    static let translate = "translate"
     
     enum ChatAction {
+        static let pin = "pin.fill"
         static let markUnreadSwipe = "message.badge.filled.fill"
         static let markUnreadMenu = "message.badge"
         static let archiveSwipe = "archivebox.fill"

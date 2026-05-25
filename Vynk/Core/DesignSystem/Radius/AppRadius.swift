@@ -14,6 +14,8 @@ enum AppRadius {
     
     static let md: CGFloat = 14
     
+    static let messageBubble: CGFloat = 15
+    
     static let lg: CGFloat = 18
     
     static let xl: CGFloat = 24

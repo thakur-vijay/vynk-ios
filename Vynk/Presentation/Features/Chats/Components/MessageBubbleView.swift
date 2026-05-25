@@ -10,6 +10,7 @@ import SwiftUI
 struct MessageBubbleView: View {
     let model: MessageModel
     let screenWidth: CGFloat
+    let isLast: Bool
     var body: some View {
         VStack {
             switch model.type {
@@ -40,7 +41,44 @@ struct MessageBubbleView: View {
         .padding(.vertical, AppSpacing.sm)
         .padding(.horizontal, AppSpacing.md)
         .background(bubbleBackground)
-        .clipShape(BubbleShape(myMessage: model.isCurrentUser))
+        .overlay {
+            BubbleShape(myMessage: model.isCurrentUser, showsTail: isLast)
+                .stroke(AppColors.linesOutlineDeemphasized, lineWidth: 0.5)
+        }
+        .clipShape(BubbleShape(myMessage: model.isCurrentUser, showsTail: isLast))
+        .contentShape(.contextMenuPreview, BubbleShape(myMessage: model.isCurrentUser, showsTail: isLast))
+        .compositingGroup()
+        .contextMenu {
+            Button("Reply", systemImage: AppIcons.reply) {
+                
+            }
+            Button("Forward", systemImage: AppIcons.forward) {
+                
+            }
+            Button("Copy", systemImage: AppIcons.copy) {
+                
+            }
+            
+            Button("Info", systemImage: AppIcons.info) {
+                
+            }
+            
+            Button("Star", systemImage: AppIcons.star) {
+                
+            }
+            
+            Button("Pin", systemImage: AppIcons.pin) {
+                
+            }
+            
+            Button("Translate", systemImage: AppIcons.translate) {
+                
+            }
+            
+            Button("Delete", systemImage: AppIcons.trash, role: .destructive) {
+                
+            }
+        }
 
     }
     
@@ -50,12 +88,33 @@ struct MessageBubbleView: View {
 }
 
 struct BubbleShape: Shape {
-    var myMessage : Bool
+    
+    let myMessage: Bool
+    let showsTail: Bool
+    
     func path(in rect: CGRect) -> Path {
+        if showsTail {
+            return tailedPath(in: rect)
+        } else {
+            return roundedPath(in: rect)
+        }
+    }
+    
+    private func roundedPath(in rect: CGRect) -> Path {
+        Path(
+            UIBezierPath(
+                roundedRect: rect,
+                cornerRadius: AppRadius.messageBubble
+            ).cgPath
+        )
+    }
+    
+    private func tailedPath(in rect: CGRect) -> Path {
         let width = rect.width
         let height = rect.height
         
         let bezierPath = UIBezierPath()
+        
         if !myMessage {
             bezierPath.move(to: CGPoint(x: 20, y: height))
             bezierPath.addLine(to: CGPoint(x: width - 15, y: height))
@@ -83,7 +142,7 @@ struct BubbleShape: Shape {
             bezierPath.addCurve(to: CGPoint(x: width - 12, y: height - 4), controlPoint1: CGPoint(x: width - 4, y: height + 1), controlPoint2: CGPoint(x: width - 8, y: height - 1))
             bezierPath.addCurve(to: CGPoint(x: width - 20, y: height), controlPoint1: CGPoint(x: width - 15, y: height), controlPoint2: CGPoint(x: width - 20, y: height))
         }
+        
         return Path(bezierPath.cgPath)
     }
 }
-

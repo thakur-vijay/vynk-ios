@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChatDetailView: View {
     let model: ChatRowModel
-    
     init(model: ChatRowModel) {
         self.model = model
     }
@@ -19,8 +18,29 @@ struct ChatDetailView: View {
             let size = $0.size
             ScrollView {
                 LazyVStack(spacing: AppSpacing.md) {
-                    ForEach(MessageModel.sampleList) { message in
-                        MessageBubbleView(model: message, screenWidth: size.width)
+                    ForEach(messageSections) { section in
+                        Text(section.title)
+                            .font(AppFont.footnoteMedium)
+                            .foregroundStyle(AppColors.contentDeemphasized)
+                            .padding(.horizontal, AppSpacing.md)
+                            .padding(.vertical, AppSpacing.xs)
+                            .background(AppColors.background, in: .capsule)
+                        VStack(spacing: AppSpacing.xs) {
+                            ForEach(Array(section.messages.enumerated()), id: \.element.id) { index, message in
+                                let nextMessage = index < section.messages.count - 1
+                                    ? section.messages[index + 1]
+                                    : nil
+                                let isLastInGroup =
+                                    nextMessage == nil ||
+                                    nextMessage?.isCurrentUser != message.isCurrentUser
+                                MessageBubbleView(
+                                    model: message,
+                                    screenWidth: size.width,
+                                    isLast: isLastInGroup
+                                )
+
+                            }
+                        }
                     }
                 }
             }
@@ -66,4 +86,9 @@ struct ChatDetailView: View {
             ChatInputBar()
         }
     }
+    
+    private var messageSections: [MessageSection] {
+        MessageGroupingHelper.groupMessagesByDay(MessageModel.sampleList)
+    }
 }
+
