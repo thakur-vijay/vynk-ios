@@ -20,44 +20,12 @@ struct ChatDetailView: View {
     var body: some View {
         GeometryReader {
             let size = $0.size
-            MessagesListUI(sections: messageSections, screenWidth: size.width)
-//            ScrollViewReader { scrollProxy in
-//                ScrollView {
-//                    LazyVStack(spacing: AppSpacing.md) {
-//                        ForEach(messageSections) { section in
-//                            Text(section.title)
-//                                .font(AppFont.footnoteMedium)
-//                                .foregroundStyle(AppColors.contentDeemphasized)
-//                                .padding(.horizontal, AppSpacing.md)
-//                                .padding(.vertical, AppSpacing.xs)
-//                                .background(AppColors.background, in: .capsule)
-//                            VStack(spacing: AppSpacing.xs) {
-//                                ForEach(Array(section.messages.enumerated()), id: \.element.id) { index, message in
-//                                    let nextMessage = index < section.messages.count - 1
-//                                        ? section.messages[index + 1]
-//                                        : nil
-//                                    let isLastInGroup =
-//                                        nextMessage == nil ||
-//                                        nextMessage?.isCurrentUser != message.isCurrentUser
-//                                    MessageBubbleView(
-//                                        model: message,
-//                                        screenWidth: size.width,
-//                                        isLast: isLastInGroup
-//                                    )
-//                                    .id(message.id)
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//                .task {
-//                    var transation = Transaction()
-//                    transation.disablesAnimations = true
-//                    withTransaction(transation) {
-//                        scrollProxy.scrollTo(messageSections.last?.messages.last?.id, anchor: .bottom)
-//                    }
-//                }
-//            }
+            VStack(spacing: 0) {
+                MessagesListUI(sections: viewModel.messageSections, screenWidth: size.width)
+                ChatInputBar(message: $viewModel.text) {
+                    viewModel.sendMessage()
+                }
+            }
         }
         .defaultScrollAnchor(.bottom, for: .initialOffset)
         .background(AppColors.chatBackground)
@@ -95,14 +63,7 @@ struct ChatDetailView: View {
         .toolbarBackground(AppColors.toolbarBackground, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleDisplayMode(.inline)
-        .scrollDismissesKeyboard(.interactively)
-        .safeAreaInset(edge: .bottom) {
-            ChatInputBar()
-        }
     }
-    
-    private var messageSections: [MessageSection] {
-        MessageGroupingHelper.groupMessagesByDay(MessageModel.sampleList)
-    }
+
 }
 

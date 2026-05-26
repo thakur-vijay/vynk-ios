@@ -14,10 +14,18 @@ final class MessageListCoordinator: NSObject, UITableViewDelegate, UITableViewDa
     let screenWidth: CGFloat
     
     var didInitialScroll: Bool = false
+    weak var tableView: UITableView?
+    private var currentKeyboardOverlap: CGFloat = 0
     
     init(sections: [MessageSection], screenWidth: CGFloat) {
         self.sections = sections
         self.screenWidth = screenWidth
+        super.init()
+        observeKeyboard()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -61,6 +69,7 @@ final class MessageListCoordinator: NSObject, UITableViewDelegate, UITableViewDa
         return cell
 
     }
+    
     func tableView(
         _ tableView: UITableView,
         viewForHeaderInSection section: Int
@@ -82,4 +91,137 @@ final class MessageListCoordinator: NSObject, UITableViewDelegate, UITableViewDa
 
     }
     
+}
+
+private extension MessageListCoordinator {
+
+    func observeKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardFrameChange),
+            name: UIResponder.keyboardWillChangeFrameNotification,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleKeyboardFrameChange),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc func handleKeyboardFrameChange(_ notification: Notification) {
+
+        guard
+
+            let tableView,
+
+            let userInfo = notification.userInfo,
+
+            let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
+
+            let window = tableView.window
+
+        else { return }
+
+        let screenHeight = window.bounds.height
+
+        let newOverlap = max(0, screenHeight - keyboardFrame.minY)
+
+        let delta = newOverlap - currentKeyboardOverlap
+        AppLogger.info(delta, tag: "Delta")
+        guard abs(delta) > 20 else {
+
+            currentKeyboardOverlap = newOverlap
+
+            return
+
+        }
+
+        currentKeyboardOverlap = newOverlap
+
+        currentKeyboardOverlap = newOverlap
+        let wasAtBottom = isNearBottom(tableView)
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double ?? 0.25
+
+        let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt ?? 7
+
+        let options = UIView.AnimationOptions(rawValue: curveRaw << 16)
+        AppLogger.info(wasAtBottom, tag: String(describing: self))
+        let inputBarHeight: CGFloat = 30
+        let correctedDelta = delta - inputBarHeight
+        UIView.animate(
+
+            withDuration: duration,
+
+            delay: 0,
+
+            options: [.beginFromCurrentState, options]
+
+        ) {
+
+            if wasAtBottom {
+
+                self.scrollToAbsoluteBottom(tableView)
+
+            } else {
+
+                tableView.contentOffset.y += correctedDelta
+
+            }
+
+            tableView.superview?.layoutIfNeeded()
+            tableView.layoutIfNeeded()
+
+        }
+
+    }
+
+    func isNearBottom(_ tableView: UITableView) -> Bool {
+        
+        tableView.layoutIfNeeded()
+        
+        
+        
+        let bottomY = tableView.contentSize.height
+        
+        - tableView.bounds.height
+        
+        + tableView.contentInset.bottom
+        
+        
+        
+        let targetY = max(
+            
+            bottomY,
+            
+            -tableView.contentInset.top
+            
+        )
+        
+        
+        
+        let threshold: CGFloat = 80
+        
+        
+        
+        return tableView.contentOffset.y >= targetY - threshold
+        
+    }
+
+    private func scrollToAbsoluteBottom(_ tableView: UITableView) {
+        let bottomY = tableView.contentSize.height
+            - tableView.bounds.height
+            + tableView.contentInset.bottom
+
+        tableView.setContentOffset(
+
+            CGPoint(x: 0, y: max(bottomY, -tableView.contentInset.top)),
+
+            animated: false
+
+        )
+
+    }
 }

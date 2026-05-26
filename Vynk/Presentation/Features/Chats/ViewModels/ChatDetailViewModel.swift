@@ -18,8 +18,6 @@ final class ChatDetailViewModel {
     }
     
     func sendMessage() {
-        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        
         messages.append(
             MessageModel(
                 id: UUID().uuidString,
@@ -32,5 +30,9 @@ final class ChatDetailViewModel {
         )
         
         text = ""
+    }
+    
+    var messageSections: [MessageSection] {
+        MessageGroupingHelper.groupMessagesByDay(messages)
     }
 }

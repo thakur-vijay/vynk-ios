@@ -20,10 +20,10 @@ struct MessagesListUI: UIViewRepresentable {
         tableView.backgroundColor = UIColor(AppColors.chatBackground)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.estimatedRowHeight = 80
-
         tableView.rowHeight = UITableView.automaticDimension
-
+//        tableView.keyboardDismissMode = .onDragWithAccessory
         tableView.contentInsetAdjustmentBehavior = .never
+        context.coordinator.tableView = tableView
         return tableView
 
     }
@@ -42,11 +42,8 @@ struct MessagesListUI: UIViewRepresentable {
     }
 
     func makeCoordinator() -> MessageListCoordinator {
-
         MessageListCoordinator(
-
             sections: sections,
-
             screenWidth: screenWidth
 
         )
@@ -55,13 +52,9 @@ struct MessagesListUI: UIViewRepresentable {
     
     private func scrollToAbsoluteBottom(_ tableView: UITableView) {
         let bottomY = tableView.contentSize.height
-
             - tableView.bounds.height
-
             + tableView.adjustedContentInset.bottom
-
         tableView.setContentOffset(
-
             CGPoint(x: 0, y: max(bottomY, -tableView.adjustedContentInset.top)),
 
             animated: false
