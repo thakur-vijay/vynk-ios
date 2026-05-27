@@ -20,4 +20,12 @@ extension View {
         self
             .frame(maxHeight: .infinity, alignment: alignment)
     }
+    
+    @ViewBuilder
+    func clearListRowStyle() -> some View {
+        self
+            .listRowSeparator(.hidden)
+            .listRowInsets(.all, 0)
+            .listRowBackground(EmptyView())
+    }
 }

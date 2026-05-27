@@ -60,7 +60,7 @@ struct ChatsView: View{
                     Button {
                     
                     } label: {
-                        Image(systemName: AppIcons.rupee)
+                        Image(systemName: AppIcons.rupeeFill)
                     }
                     
                     Button {
@@ -87,7 +87,11 @@ struct ChatsView: View{
             .navigationDestination(for: ChatsRoute.self) { route in
                 switch route {
                 case .detail(let model):
-                    ChatDetailView(model: model, viewModel: .init())
+                    ChatDetailView(model: model, viewModel: .init()){
+                        viewModel.openUserDetail()
+                    }
+                case .userDetail:
+                    UserProfileView(viewModel: .init())
 
                 }
             }

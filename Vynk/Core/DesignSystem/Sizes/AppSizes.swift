@@ -39,4 +39,6 @@ enum AppSizes {
     static let tabBarHeight: CGFloat = 64
     
     static let chatRowHeight: CGFloat = 84
+    
+    static let userProfileImageXL: CGFloat = 120
 }

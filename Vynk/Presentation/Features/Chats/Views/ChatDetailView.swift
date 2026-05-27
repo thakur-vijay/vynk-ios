@@ -11,9 +11,11 @@ import UIKit
 
 struct ChatDetailView: View {
     private let model: ChatRowModel
+    var openUserDetail: ()->()
     @State private var viewModel: ChatDetailViewModel
-    init(model: ChatRowModel, viewModel: ChatDetailViewModel) {
+    init(model: ChatRowModel, viewModel: ChatDetailViewModel, openUserDetail: @escaping ()->()) {
         self.model = model
+        self.openUserDetail = openUserDetail
         _viewModel = State(wrappedValue: viewModel)
     }
     
@@ -31,20 +33,23 @@ struct ChatDetailView: View {
         .background(AppColors.chatBackground)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                HStack {
-                    VynkRemoteImage(
-                        url: .init(string: model.avatarImage),
-                        width: AppSizes.avatarMD,
-                        height: AppSizes.avatarMD,
-                        shape: .circle
-                    )
-                    VStack(alignment: .leading){
-                        Text(model.title)
-                        Text("tab here for contact info")
-                            .font(AppFont.footnote)
-                            .foregroundStyle(AppColors.contentDeemphasized)
+                Button(action: openUserDetail){
+                    HStack {
+                        VynkRemoteImage(
+                            url: .init(string: model.avatarImage),
+                            width: AppSizes.avatarMD,
+                            height: AppSizes.avatarMD,
+                            shape: .circle
+                        )
+                        VStack(alignment: .leading){
+                            Text(model.title)
+                            Text("tab here for contact info")
+                                .font(AppFont.footnote)
+                                .foregroundStyle(AppColors.contentDeemphasized)
+                        }
                     }
                 }
+
             }
             
             ToolbarSpacer()
@@ -59,7 +64,7 @@ struct ChatDetailView: View {
                 }
             }
         }
-        .navigationTitle("")
+        .navigationTitle(model.title)
         .toolbarBackground(AppColors.toolbarBackground, for: .navigationBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleDisplayMode(.inline)

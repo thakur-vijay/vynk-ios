@@ -12,6 +12,7 @@ enum AppColors {
     static let accentEmphasized = Color(.accentEmphasized)
     static let accentDeemphasized = Color(.accentDeemphasized)
     static let accentSoft = Color(.accentSoft)
+    static let backgroundSecondary = Color(.backgroundSecondary)
     static let contentDeemphasized = Color.primary.opacity(0.6)
     static let contentDefault = Color(.contentDefault)
     static let contentRead = Color(.contentRead)

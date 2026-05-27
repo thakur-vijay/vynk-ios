@@ -9,6 +9,7 @@ import Foundation
 
 enum ChatsRoute: Hashable {
     case detail(ChatRowModel)
+    case userDetail
 }
 
 @MainActor
@@ -23,8 +24,10 @@ final class ChatsViewModel {
     
     
     func openChat(_ chat: ChatRowModel) {
-        
         path.append(.detail(chat))
-        
+    }
+    
+    func openUserDetail(){
+        path.append(.userDetail)
     }
 }
