@@ -22,9 +22,9 @@ extension View {
     }
     
     @ViewBuilder
-    func clearListRowStyle() -> some View {
+    func clearListRowStyle(separator: Visibility = .hidden) -> some View {
         self
-            .listRowSeparator(.hidden)
+            .listRowSeparator(separator)
             .listRowInsets(.all, 0)
             .listRowBackground(EmptyView())
     }

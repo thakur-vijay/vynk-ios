@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var activeTab: AnimatedTab = .settings
+    @State private var activeTab: AnimatedTab = .calls
     
     init() {
         let appearance = UITabBarAppearance()
@@ -26,7 +26,7 @@ struct MainTabView: View {
                 UpdatesView()
             }
             Tab.init(AnimatedTab.calls.title, systemImage: AnimatedTab.calls.symbolImage, value: .calls) {
-                CallsView()
+                CallsView(viewModel: .init())
             }
             Tab.init(AnimatedTab.communities.title, systemImage: AnimatedTab.communities.symbolImage, value: .communities) {
                 CommunitiesView()

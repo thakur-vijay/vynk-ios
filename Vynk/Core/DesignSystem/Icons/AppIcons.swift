@@ -54,6 +54,14 @@ enum AppIcons {
     static let key = "key"
     static let appBadge = "app.badge"
     static let questionmarkCircle = "questionmark.circle"
+    static let calendar = "calendar"
+    static let megaphone = "megaphone"
+    static let missedPhoneCall = "phone.arrow.down.left.fill"
+    static let outgoingPhoneCall = "phone.arrow.up.right.fill"
+    static let missedVideoCall = "arrow.down.left.video.fill"
+    static let outgoingVideoCall = "arrow.up.right.video.fill"
+    static let threeDots = "ellipsis"
+    static let edit = "pencil.line"
     
     enum ChatAction {
         static let pin = "pin.fill"

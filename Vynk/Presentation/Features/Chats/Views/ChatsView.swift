@@ -69,18 +69,12 @@ struct ChatsView: View{
                         Image(systemName: AppIcons.camera)
                     }
 
-
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    ProminentToolbarButton {
                         
-                    } label: {
-                        Image(systemName: AppIcons.plus)
                     }
-                    .frame(width: 28, height: 28)
-                    .tint(AppColors.accent)
-                    .buttonStyle(.glassProminent)
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
