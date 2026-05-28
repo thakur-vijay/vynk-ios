@@ -11,7 +11,7 @@ import Foundation
 @Observable
 final class UserProfileViewModel {
     
-    var sections: [[SettingsRowModel<UserProfileRowID>]] = [
+    var sections: [[SectionRowModel<UserProfileRowID>]] = [
         [
             .init(
                 id: .media,

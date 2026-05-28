@@ -10,7 +10,8 @@ import Foundation
 enum AppIcons {
     static let pin = "pin"
     static let pinSlash = "pin.slash.fill"
-    static let message = "message.fill"
+    static let messageFill = "message.fill"
+    static let message = "message"
     static let plus = "plus"
     static let checkmarkCircle = "checkmark.circle"
     static let checkmarkBubble = "checkmark.bubble"
@@ -48,6 +49,11 @@ enum AppIcons {
     static let lock = "lock"
     static let shield = "shield.checkerboard"
     static let personCircle = "person.crop.circle"
+    static let qrcode = "qrcode"
+    static let laptop = "laptopcomputer"
+    static let key = "key"
+    static let appBadge = "app.badge"
+    static let questionmarkCircle = "questionmark.circle"
     
     enum ChatAction {
         static let pin = "pin.fill"

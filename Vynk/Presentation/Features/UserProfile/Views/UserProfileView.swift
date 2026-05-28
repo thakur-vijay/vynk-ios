@@ -18,9 +18,9 @@ struct UserProfileView: View {
                 UserProfileHeaderView()
                 UserQuickActionView()
                 ForEach(viewModel.sections.indices, id: \.self) { sectionIndex in
-                    SettingsGroupContainer {
+                    SectionGroupContainer {
                         ForEach(viewModel.sections[sectionIndex]) { row in
-                            SettingsRow(
+                            SectionRow(
                                 model: row,
                                 showDivider: row.id != viewModel.sections[sectionIndex].last?.id,
                                 onTap: {

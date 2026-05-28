@@ -29,7 +29,6 @@ struct UserProfileHeaderView: View {
                     .foregroundStyle(AppColors.neutralMuted)
             }
         }
-        .hSpacing()
     }
 }
 

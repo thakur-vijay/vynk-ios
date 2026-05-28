@@ -7,8 +7,7 @@
 
 import Foundation
 
-
-enum UserProfileRowID: Hashable {
+enum UserProfileRowID: RowIDProtocol {
     case media
     case storage
     case starred

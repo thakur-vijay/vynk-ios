@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsGroupContainer<Content: View>: View {
+struct SectionGroupContainer<Content: View>: View {
     let content: Content
     
     init(@ViewBuilder content: () -> Content) {

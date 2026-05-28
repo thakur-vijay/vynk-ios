@@ -35,7 +35,7 @@ enum AnimatedTab: AnimatedTabSelectionProtocol {
         case .updates: AppIcons.dashedCircle
         case .calls: AppIcons.calls
         case .communities: AppIcons.group
-        case .chats: AppIcons.message
+        case .chats: AppIcons.messageFill
         case .settings: AppIcons.settings
         }
     }

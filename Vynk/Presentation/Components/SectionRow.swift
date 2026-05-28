@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct SettingsRow<ID: Hashable, Leading: View, Trailing: View>: View {
-    let model: SettingsRowModel<ID>
+struct SectionRow<ID: RowIDProtocol, Leading: View, Trailing: View>: View {
+    let model: SectionRowModel<ID>
     let showDivider: Bool
     @ViewBuilder var leading: Leading
     @ViewBuilder var trailing: Trailing
@@ -104,10 +104,10 @@ struct SettingsRow<ID: Hashable, Leading: View, Trailing: View>: View {
     }
 }
 
-extension SettingsRow where Trailing == EmptyView {
+extension SectionRow where Trailing == EmptyView {
     
     init(
-        model: SettingsRowModel<ID>,
+        model: SectionRowModel<ID>,
         showDivider: Bool,
         onTap: (()->())? = nil,
         @ViewBuilder leading: () -> Leading
