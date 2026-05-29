@@ -28,4 +28,10 @@ extension View {
             .listRowInsets(.all, 0)
             .listRowBackground(EmptyView())
     }
+    
+    @ViewBuilder
+    func frame(_ size: CGSize)-> some View {
+        self
+            .frame(width: size.width, height: size.height)
+    }
 }

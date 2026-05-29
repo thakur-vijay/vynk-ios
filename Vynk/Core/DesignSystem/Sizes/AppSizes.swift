@@ -22,7 +22,8 @@ enum AppSizes {
     static let iconSM: CGFloat = 16
     static let iconMD: CGFloat = 20
     static let iconLG: CGFloat = 24
-    static let iconXL: CGFloat = 32
+    static let iconXL: CGFloat = 28
+    static let iconXXL: CGFloat = 32
     
     // MARK: - Buttons
     
@@ -41,4 +42,12 @@ enum AppSizes {
     static let chatRowHeight: CGFloat = 84
     
     static let userProfileImageXL: CGFloat = 120
+    
+    static let statusCardSize = CGSize(
+
+        width: 112,
+
+        height: 184
+
+    )
 }

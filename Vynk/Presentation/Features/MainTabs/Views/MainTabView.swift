@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var activeTab: AnimatedTab = .calls
+    @State private var activeTab: AnimatedTab = .updates
     
     init() {
         let appearance = UITabBarAppearance()
@@ -23,7 +23,7 @@ struct MainTabView: View {
     var body: some View {
         AnimatedTabView(selection: $activeTab) {
             Tab.init(AnimatedTab.updates.title, systemImage: AnimatedTab.updates.symbolImage, value: .updates) {
-                UpdatesView()
+                UpdatesView(viewModel: .init())
             }
             Tab.init(AnimatedTab.calls.title, systemImage: AnimatedTab.calls.symbolImage, value: .calls) {
                 CallsView(viewModel: .init())

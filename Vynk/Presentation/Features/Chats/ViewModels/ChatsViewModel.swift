@@ -8,7 +8,7 @@
 import Foundation
 
 enum ChatsRoute: Hashable {
-    case detail(ChatRowModel)
+    case detail(MessageThreadRowModel)
     case userDetail
 }
 
@@ -19,11 +19,11 @@ final class ChatsViewModel {
     var isSearchPresented: Bool = false
     
     var path: [ChatsRoute] = []
-    var chats: [ChatRowModel] = ChatRowModel.sampleList
+    var chats: [MessageThreadRowModel] = MessageThreadRowModel.sampleList
     
     
     
-    func openChat(_ chat: ChatRowModel) {
+    func openChat(_ chat: MessageThreadRowModel) {
         path.append(.detail(chat))
     }
     

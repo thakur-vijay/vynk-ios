@@ -25,4 +25,5 @@ enum AppColors {
     static let toolbarBackground: Material = .ultraThinMaterial
     static let chatInputBarBackground: Material = .ultraThinMaterial
     static let statusDanger = Color(.statusDanger)
+    static let accentLight = Color(.accentLight)
 }

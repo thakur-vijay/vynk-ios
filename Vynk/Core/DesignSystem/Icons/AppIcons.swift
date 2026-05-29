@@ -62,6 +62,9 @@ enum AppIcons {
     static let outgoingVideoCall = "arrow.up.right.video.fill"
     static let threeDots = "ellipsis"
     static let edit = "pencil.line"
+    static let pencil = "pencil"
+    static let create = "plus.circle.dashed"
+    static let hide = "eye.slash"
     
     enum ChatAction {
         static let pin = "pin.fill"

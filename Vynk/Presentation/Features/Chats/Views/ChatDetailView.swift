@@ -10,10 +10,10 @@ import Combine
 import UIKit
 
 struct ChatDetailView: View {
-    private let model: ChatRowModel
+    private let model: MessageThreadRowModel
     var openUserDetail: ()->()
     @State private var viewModel: ChatDetailViewModel
-    init(model: ChatRowModel, viewModel: ChatDetailViewModel, openUserDetail: @escaping ()->()) {
+    init(model: MessageThreadRowModel, viewModel: ChatDetailViewModel, openUserDetail: @escaping ()->()) {
         self.model = model
         self.openUserDetail = openUserDetail
         _viewModel = State(wrappedValue: viewModel)

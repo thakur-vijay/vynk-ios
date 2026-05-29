@@ -1,13 +1,13 @@
 //
-//  ChatRowModel.swift
+//  MessageThreadRowModel.swift
 //  Vynk
 //
-//  Created by Vijay Thakur on 18/05/26.
+//  Created by Vijay Thakur on 30/05/26.
 //
 
 import Foundation
 
-struct ChatRowModel: Identifiable, Hashable{
+struct MessageThreadRowModel: Identifiable, Hashable{
 
     let id: String = UUID().uuidString
 
