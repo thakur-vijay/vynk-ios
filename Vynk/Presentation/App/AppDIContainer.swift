@@ -13,11 +13,16 @@ final class AppDIContainer {
         AppRouter()
     }()
     
+    lazy var apiClient: APIClient = {
+        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
+    }()
+    
     lazy var authDIContainer: AuthDIContainer = {
         AuthDIContainer(apiClient: apiClient)
     }()
     
-    lazy var apiClient: APIClient = {
-        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
+    lazy var contactsDIContainer: ContactsDIContainer = {
+        ContactsDIContainer()
     }()
+    
 }

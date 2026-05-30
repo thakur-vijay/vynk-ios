@@ -14,11 +14,11 @@ enum AppLogger {
 
     static func debug(
         _ message: Any,
-        tag: String = "General"
+        tag: AnyObject
     ) {
         let logger = Logger(
             subsystem: subsystem,
-            category: tag
+            category: String(describing: tag)
         )
 
         logger.debug("\(String(describing: message))")
