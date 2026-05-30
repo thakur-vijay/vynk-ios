@@ -12,6 +12,7 @@ struct ChannelsSectionView: View {
         VStack(spacing: AppSpacing.xs){
             header
             list
+            actions
         }
     }
     
@@ -37,46 +38,36 @@ struct ChannelsSectionView: View {
     
     var list: some View {
         LazyVStack {
-            ForEach(MessageThreadRowModel.sampleList) { channel in
+            ForEach(MessageThreadRowModel.sampleList.prefix(3)) { channel in
                 MessageThreadRowView(model: channel)
             }
         }
     }
-}
-
-#Preview {
-    ChannelsSectionView()
-}
-
-struct ScrollViewSwipeActionsModifier: ViewModifier {
-    @State private var size: CGSize = .init(width: 1, height: 1)
-    func body(content: Content) -> some View {
-        List {
-            LazyVStack {
-                content
-            }
-            .onGeometryChange(for: CGSize.self) {
-                $0.size
-            } action: { newValue in
-                print(newValue)
-                size = newValue
-            }
-            .listRowInsets(.init())
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
-
+    
+    @ViewBuilder
+    func actionButton(icon: String, label: String, action: ()->())-> some View {
+        HStack(spacing: AppSpacing.md){
+            Image(systemName: icon)
+            Text(label)
         }
-        .scrollDisabled(true)
-        .listStyle(.plain)
-        .frame(height: size.height)
-        .contentMargins(.vertical, .init(), for: .scrollContent)
+        .font(AppFont.bodySemibold)
+        .foregroundStyle(AppColors.contentDefault)
+        .hSpacing()
+        .padding(.vertical)
+        .background(AppColors.backgroundSecondary, in: .capsule)
+    }
+    
+    var actions: some View {
+        VStack(spacing: AppSpacing.md){
+            actionButton(icon: AppIcons.grid, label: "Explore more") {
+                
+            }
+            
+            actionButton(icon: AppIcons.plus, label: "Create channel") {
+                
+            }
+        }
+        .padding()
+
     }
 }
-
-extension View {
-    func enableScrollViewSwipeActions()-> some View {
-        self
-            .modifier(ScrollViewSwipeActionsModifier())
-    }
-}
-

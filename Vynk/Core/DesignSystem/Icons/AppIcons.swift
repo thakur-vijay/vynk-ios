@@ -65,6 +65,7 @@ enum AppIcons {
     static let pencil = "pencil"
     static let create = "plus.circle.dashed"
     static let hide = "eye.slash"
+    static let grid = "square.grid.2x2"
     
     enum ChatAction {
         static let pin = "pin.fill"
