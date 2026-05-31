@@ -12,7 +12,7 @@ struct InviteToVynkSection: View {
     var body: some View {
         Section {
             ForEach(contacts) { contact in
-                ContactRowView(model: contact)
+                DeviceContactRow(model: contact)
                     .listRowInsets(.vertical, 0)
             }
         } header: {

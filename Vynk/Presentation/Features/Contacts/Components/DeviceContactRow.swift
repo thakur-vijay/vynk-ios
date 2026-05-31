@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContactRowView: View {
+struct DeviceContactRow: View {
     let model: DeviceContact
     var body: some View {
         HStack {
