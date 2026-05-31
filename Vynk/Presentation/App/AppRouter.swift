@@ -22,6 +22,7 @@ final class AppRouter {
     }
     
     var root: Root = .splash
+    var activeTab: AnimatedTab = .chats
     
     func showAuth(){
         root = .auth
@@ -29,5 +30,10 @@ final class AppRouter {
     
     func showMain(){
         root = .main
+    }
+    
+    func selectTab(_ tab: AnimatedTab) {
+        activeTab = tab
+        
     }
 }

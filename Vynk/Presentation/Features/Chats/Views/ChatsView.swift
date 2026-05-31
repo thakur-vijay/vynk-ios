@@ -17,7 +17,7 @@ struct ChatsView: View{
     @Environment(\.appDIContainer) private var appDiContainer
     
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
+        NavigationStack(path: $viewModel.router.path) {
             List {
                 ChatFilterBarView()
                     .listRowSeparator(.hidden)
@@ -62,7 +62,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    viewModel.isNewChatBottomSheetPresented.toggle()
+                    viewModel.router.presentSheet(.newChat)
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
@@ -77,17 +77,20 @@ struct ChatsView: View{
 
                 }
             }
-            .toolbarVisibility(toolbarVisiblity, for: .tabBar)
-            .sheet(isPresented: $viewModel.isNewChatBottomSheetPresented) {
-                NewChatBottomSheet {
-                    viewModel.isNewChatBottomSheetPresented = false
+            .sheet(item: $viewModel.router.activeSheet) { sheet in
+                switch sheet {
+                case .newChat:
+                    NewChatBottomSheet {
+                        viewModel.router.dismissSheet()
+                    }
                 }
             }
+            .toolbarVisibility(toolbarVisiblity, for: .tabBar)
         }
     }
     
     var toolbarVisiblity: Visibility {
-        return viewModel.path.isEmpty ? .visible : .hidden
+        return viewModel.router.path.isEmpty ? .visible : .hidden
     }
     
     @ViewBuilder
@@ -105,8 +108,3 @@ struct ChatsView: View{
     }
     
 }
-
-#Preview {
-    ChatsView(viewModel: .init())
-}
-//#1daa61

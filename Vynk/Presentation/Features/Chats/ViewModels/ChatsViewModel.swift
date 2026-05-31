@@ -7,28 +7,24 @@
 
 import Foundation
 
-enum ChatsRoute: Hashable {
-    case detail(MessageThreadRowModel)
-    case userDetail
-}
-
 @MainActor
 @Observable
 final class ChatsViewModel {
     var searchText: String = ""
     var isSearchPresented: Bool = false
-    var isNewChatBottomSheetPresented: Bool = false
-    
-    var path: [ChatsRoute] = []
     var chats: [MessageThreadRowModel] = MockDataFactory.chats
     
+    var router: ChatsRouter
     
+    init(router: ChatsRouter) {
+        self.router = router
+    }
     
-    func openChat(_ chat: MessageThreadRowModel) {
-        path.append(.detail(chat))
+    func openChat(_ model: MessageThreadRowModel){
+        router.push(.detail(model))
     }
     
     func openUserDetail(){
-        path.append(.userDetail)
+        router.push(.userDetail)
     }
 }

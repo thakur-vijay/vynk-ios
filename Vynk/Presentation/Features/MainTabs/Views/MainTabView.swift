@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var activeTab: AnimatedTab = .chats
-    
+    @Environment(\.appDIContainer) private var appDIContainer
     init() {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
@@ -21,7 +20,8 @@ struct MainTabView: View {
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     var body: some View {
-        AnimatedTabView(selection: $activeTab) {
+        @Bindable var router = appDIContainer.appRouter
+        AnimatedTabView(selection: $router.activeTab) {
             Tab.init(AnimatedTab.updates.title, systemImage: AnimatedTab.updates.symbolImage, value: .updates) {
                 UpdatesView(viewModel: .init())
             }
@@ -32,7 +32,7 @@ struct MainTabView: View {
                 CommunitiesView()
             }
             Tab.init(AnimatedTab.chats.title, systemImage: AnimatedTab.chats.symbolImage, value: .chats) {
-                ChatsView(viewModel: .init())
+                appDIContainer.chatsDIContainer.makeChatsView()
             }
             Tab.init(AnimatedTab.settings.title, systemImage: AnimatedTab.settings.symbolImage, value: .settings) {
                 SettingsView()

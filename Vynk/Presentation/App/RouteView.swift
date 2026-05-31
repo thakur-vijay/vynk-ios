@@ -8,20 +8,17 @@
 import SwiftUI
 
 struct RootView: View {
-    
-    @State private var router: AppRouter
     private let appDIContainer: AppDIContainer
     init(appDIContainer: AppDIContainer) {
         self.appDIContainer = appDIContainer
-        _router = State(wrappedValue: appDIContainer.appRouter)
     }
     
     var body: some View {
-        switch router.root {
+        switch appDIContainer.appRouter.root {
         case .splash:
             Text("Splash")
                 .onAppear {
-                    router.showMain()
+                    appDIContainer.appRouter.showMain()
                 }
             
         case .auth:
