@@ -13,14 +13,22 @@ final class ContactsViewModel {
     private let requestContactPermissionUseCase: RequestContactsPermissionUseCase
     private let fetchPermissionStatusUseCase: FetchPermissionStatusUseCase
     private let fetchDeviceContactsUseCase: FetchDeviceContactsUseCase
+    private let groupVynkContactsUseCase: GroupVynkContactsUseCase
     
-    init(requestContactPermissionUseCase: RequestContactsPermissionUseCase, fetchPermissionStatusUseCase: FetchPermissionStatusUseCase, fetchDeviceContactsUseCase: FetchDeviceContactsUseCase) {
+    init(
+        requestContactPermissionUseCase: RequestContactsPermissionUseCase,
+        fetchPermissionStatusUseCase: FetchPermissionStatusUseCase,
+        fetchDeviceContactsUseCase: FetchDeviceContactsUseCase,
+        groupVynkContactsUseCase: GroupVynkContactsUseCase
+    ) {
         self.requestContactPermissionUseCase = requestContactPermissionUseCase
         self.fetchPermissionStatusUseCase = fetchPermissionStatusUseCase
         self.fetchDeviceContactsUseCase = fetchDeviceContactsUseCase
+        self.groupVynkContactsUseCase = groupVynkContactsUseCase
     }
     
     var contacts: [DeviceContact] = []
+    var contactsOnVynkSections: [ContactSectionModel] = []
     
     func fetchContacts()async{
         do {
@@ -53,5 +61,9 @@ final class ContactsViewModel {
         }catch {
             AppLogger.error(error.localizedDescription, tag: String(describing: self))
         }
+    }
+    
+    func fetchVynkContacts(){
+        contactsOnVynkSections = groupVynkContactsUseCase.execute(contacts: MockDataFactory.makeVynkContacts(count: 50))
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NewChatBottomSheet: View {
+    let onClose: ()->()
     @Environment(\.appDIContainer) private var appDIContainer
     var body: some View {
         NavigationStack {
@@ -19,9 +20,7 @@ struct NewChatBottomSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("", systemImage: AppIcons.close, role: .close) {
-                        
-                    }
+                    Button("", systemImage: AppIcons.close, role: .close, action: onClose)
                 }
             }
         }

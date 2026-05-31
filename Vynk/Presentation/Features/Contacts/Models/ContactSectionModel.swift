@@ -10,5 +10,5 @@ import Foundation
 struct ContactSectionModel: Identifiable {
     let id: String = UUID().uuidString
     let title: String
-    let contacts: [DeviceContact]
+    let contacts: [VynkContactModel]
 }

@@ -16,10 +16,12 @@ final class ContactsDIContainer {
         let requestContactPermissionUseCase = RequestContactsPermissionUseCase(repository: repository)
         let fetchPermissionStatusUseCase = FetchPermissionStatusUseCase(repository: repository)
         let fetchDeviceContactsUseCase = FetchDeviceContactsUseCase(repository: repository)
+        let groupVynkContactsUseCase = GroupVynkContactsUseCase()
         return ContactsViewModel(
             requestContactPermissionUseCase: requestContactPermissionUseCase,
             fetchPermissionStatusUseCase: fetchPermissionStatusUseCase,
-            fetchDeviceContactsUseCase: fetchDeviceContactsUseCase
+            fetchDeviceContactsUseCase: fetchDeviceContactsUseCase,
+            groupVynkContactsUseCase: groupVynkContactsUseCase
         )
     }
     

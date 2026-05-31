@@ -38,7 +38,7 @@ struct ChannelsSectionView: View {
     
     var list: some View {
         LazyVStack {
-            ForEach(MessageThreadRowModel.sampleList.prefix(3)) { channel in
+            ForEach(MockDataFactory.chats.prefix(3)) { channel in
                 MessageThreadRowView(model: channel)
             }
         }

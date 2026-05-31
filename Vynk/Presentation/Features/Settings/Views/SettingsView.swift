@@ -57,7 +57,7 @@ struct SettingsView: View {
     }
     
     var userInfo: some View {
-        let user = MessageThreadRowModel.sampleList.first
+        let user = MockDataFactory.chats.first
         return SectionGroupContainer {
             Button {
                 

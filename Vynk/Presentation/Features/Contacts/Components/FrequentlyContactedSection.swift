@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct FrequentlyContactedSection: View {
+    let contacts: [VynkContactModel]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section {
+            ForEach(contacts) { contact in
+                VynkContactRow(model: contact)
+                    .listRowInsets(.vertical, 0)
+            }
+        } header: {
+            Text("Frequently Contacted")
+        }
     }
-}
-
-#Preview {
-    FrequentlyContactedSection()
 }

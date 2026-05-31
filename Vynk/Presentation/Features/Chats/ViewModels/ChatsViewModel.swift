@@ -17,10 +17,10 @@ enum ChatsRoute: Hashable {
 final class ChatsViewModel {
     var searchText: String = ""
     var isSearchPresented: Bool = false
-    var isContactsPresented: Bool = true
+    var isNewChatBottomSheetPresented: Bool = false
     
     var path: [ChatsRoute] = []
-    var chats: [MessageThreadRowModel] = MessageThreadRowModel.sampleList
+    var chats: [MessageThreadRowModel] = MockDataFactory.chats
     
     
     

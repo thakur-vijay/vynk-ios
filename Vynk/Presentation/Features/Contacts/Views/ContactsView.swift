@@ -16,11 +16,15 @@ struct ContactsView: View {
     
     var body: some View {
         Group {
-            FrequentlyContactedSection()
-            ContactsOnVynkSection()
+            FrequentlyContactedSection(contacts: MockDataFactory.makeVynkContacts(count: 5))
+            ContactsOnVynkSection(contacts: [
+                VynkContactModel(avatar: MockImages.avatar, name: "Contact 8146408409 (You)", about: "Message yourself")
+            ])
+            VynkContactsGroupSection(sections: viewModel.contactsOnVynkSections)
             InviteToVynkSection(contacts: viewModel.contacts)
         }
         .task {
+            viewModel.fetchVynkContacts()
             await viewModel.fetchContacts()
         }
     }

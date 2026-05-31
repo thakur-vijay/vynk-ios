@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserProfileHeaderView: View {
     var body: some View {
-        let user = MessageThreadRowModel.sampleList.first
+        let user = MockDataFactory.chats.first
         VStack(spacing: AppSpacing.md){
             VynkRemoteImage(
                 url: .init(

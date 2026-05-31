@@ -62,7 +62,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    viewModel.isContactsPresented.toggle()
+                    viewModel.isNewChatBottomSheetPresented.toggle()
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
@@ -78,8 +78,10 @@ struct ChatsView: View{
                 }
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
-            .sheet(isPresented: $viewModel.isContactsPresented) {
-                NewChatBottomSheet()
+            .sheet(isPresented: $viewModel.isNewChatBottomSheetPresented) {
+                NewChatBottomSheet {
+                    viewModel.isNewChatBottomSheetPresented = false
+                }
             }
         }
     }

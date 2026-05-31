@@ -47,11 +47,11 @@ struct StatusSectionView: View {
             LazyHStack(spacing: 6) {
                 StatusCardView(
                     isCurrentUser: true,
-                    user: .init(id: UUID().uuidString, name: "Vijay Thakur", avatarURL: MessageThreadRowModel.sampleList.first?.avatarImage ?? ""),
+                    user: .init(id: UUID().uuidString, name: "Vijay Thakur", avatarURL: MockDataFactory.chats.first?.avatarImage ?? ""),
                     statuses: [
                         .init(
                             id: UUID().uuidString,
-                            mediaURL: MessageThreadRowModel.sampleList[2].avatarImage,
+                            mediaURL: MockDataFactory.chats[2].avatarImage,
                             type: .image,
                             createdAt: .now
                         )
@@ -63,12 +63,12 @@ struct StatusSectionView: View {
                         user: .init(
                             id: UUID().uuidString,
                             name: "Test User",
-                            avatarURL: MessageThreadRowModel.sampleList.last?.avatarImage ?? ""
+                            avatarURL: MockDataFactory.chats.last?.avatarImage ?? ""
                         ),
                         statuses: [
                             .init(
                                 id: UUID().uuidString,
-                                mediaURL: MessageThreadRowModel.sampleList[2].avatarImage,
+                                mediaURL: MockDataFactory.chats[2].avatarImage,
                                 type: .image,
                                 createdAt: .now
                             )
