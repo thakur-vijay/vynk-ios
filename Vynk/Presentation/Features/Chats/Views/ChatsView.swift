@@ -14,6 +14,8 @@ struct ChatsView: View{
         _viewModel = State(wrappedValue: viewModel)
     }
     
+    @Environment(\.appDIContainer) private var appDiContainer
+    
     var body: some View {
         NavigationStack(path: $viewModel.path) {
             List {
@@ -59,7 +61,9 @@ struct ChatsView: View{
             .environment(\.defaultMinListRowHeight, 0)
             .navigationTitle("Chats")
             .toolbar {
-                ChatsToolbarContent()
+                ChatsToolbarContent {
+                    viewModel.isContactsPresented.toggle()
+                }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
             .navigationDestination(for: ChatsRoute.self) { route in
@@ -74,6 +78,9 @@ struct ChatsView: View{
                 }
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
+            .sheet(isPresented: $viewModel.isContactsPresented) {
+                NewChatBottomSheet()
+            }
         }
     }
     

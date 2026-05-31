@@ -13,12 +13,12 @@ enum AppLogger {
     private static let subsystem = Bundle.main.bundleIdentifier ?? "Vynk"
 
     static func debug(
-        _ message: Any,
-        tag: AnyObject
+        _ message: Any...,
+        tag: String
     ) {
         let logger = Logger(
             subsystem: subsystem,
-            category: String(describing: tag)
+            category: tag
         )
 
         logger.debug("\(String(describing: message))")

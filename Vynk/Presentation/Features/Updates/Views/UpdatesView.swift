@@ -17,7 +17,7 @@ struct UpdatesView: View {
     var body: some View {
         NavigationStack {
             ScrollView{
-                LazyVStack(spacing: AppSpacing.lg) {
+                VStack(spacing: AppSpacing.lg) {
                     StatusSectionView()
                     ChannelsSectionView()
                 }

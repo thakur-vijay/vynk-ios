@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatsToolbarContent: ToolbarContent {
-    
+    var onAddTap:()->()
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
@@ -43,9 +43,7 @@ struct ChatsToolbarContent: ToolbarContent {
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            ProminentToolbarButton {
-                
-            }
+            ProminentToolbarButton(action: onAddTap)
         }
     }
 }

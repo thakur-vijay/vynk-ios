@@ -9,9 +9,7 @@ import Foundation
 
 @MainActor
 @Observable
-final class ContactsViewModel {
-    var contacts: [DeviceContact] = []
-    
+final class ContactsViewModel {    
     private let requestContactPermissionUseCase: RequestContactsPermissionUseCase
     private let fetchPermissionStatusUseCase: FetchPermissionStatusUseCase
     private let fetchDeviceContactsUseCase: FetchDeviceContactsUseCase
@@ -22,27 +20,35 @@ final class ContactsViewModel {
         self.fetchDeviceContactsUseCase = fetchDeviceContactsUseCase
     }
     
-    func fetchContacts()async throws{
+    var contacts: [DeviceContact] = []
+    
+    func fetchContacts()async{
         do {
             let permission = fetchPermissionStatusUseCase.execute()
             switch permission {
             case .notDetermined:
                 let isGranted = try await requestContactPermissionUseCase.execute()
                 if isGranted {
-                    let contacts = try await fetchDeviceContactsUseCase.execute()
-                    AppLogger.debug(contacts.count, tag: self)
+                    contacts = try await fetchDeviceContactsUseCase.execute()
+                    AppLogger.debug(contacts.count, tag: String(describing: self))
+                    contacts.forEach { contact in
+                        AppLogger.debug(contact.phoneNumbers, tag: "Number")
+                    }
                 }else {
-                    AppLogger.debug("Permission Denied", tag: self)
+                    AppLogger.debug("Permission Denied", tag: String(describing: self))
 
                 }
             case .denied:
-                AppLogger.debug("Permission Denied", tag: self)
+                AppLogger.debug("Permission Denied", tag: String(describing: self))
             case .restricted:
-                AppLogger.debug("Permission Restricted", tag: self)
+                AppLogger.debug("Permission Restricted", tag: String(describing: self))
             case .authorized:
-                AppLogger.debug("Permission Authorized", tag: self)
-                let contacts = try await fetchDeviceContactsUseCase.execute()
-                AppLogger.debug(contacts.count, tag: self)
+                AppLogger.debug("Permission Authorized", tag: String(describing: self))
+                contacts = try await fetchDeviceContactsUseCase.execute()
+                contacts.forEach { contact in
+                    AppLogger.debug(contact.phoneNumbers, contact.id, contact.fullName, tag: "ContactModel")
+                }
+                AppLogger.debug(contacts.count, tag: String(describing: self))
             }
         }catch {
             AppLogger.error(error.localizedDescription, tag: String(describing: self))

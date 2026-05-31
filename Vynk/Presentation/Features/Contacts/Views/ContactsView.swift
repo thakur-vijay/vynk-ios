@@ -15,6 +15,13 @@ struct ContactsView: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Group {
+            FrequentlyContactedSection()
+            ContactsOnVynkSection()
+            InviteToVynkSection(contacts: viewModel.contacts)
+        }
+        .task {
+            await viewModel.fetchContacts()
+        }
     }
 }

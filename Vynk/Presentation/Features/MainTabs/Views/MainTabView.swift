@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var activeTab: AnimatedTab = .updates
+    @State private var activeTab: AnimatedTab = .chats
     
     init() {
         let appearance = UITabBarAppearance()

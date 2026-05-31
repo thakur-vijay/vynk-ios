@@ -17,6 +17,7 @@ enum ChatsRoute: Hashable {
 final class ChatsViewModel {
     var searchText: String = ""
     var isSearchPresented: Bool = false
+    var isContactsPresented: Bool = true
     
     var path: [ChatsRoute] = []
     var chats: [MessageThreadRowModel] = MessageThreadRowModel.sampleList

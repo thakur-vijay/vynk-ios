@@ -48,19 +48,21 @@ final class DeviceContactsDataSource {
     }
     
     func fetchContacts() async throws -> [DeviceContact]{
-        let keysToFetch: [CNKeyDescriptor] = [
-            CNContactIdentifierKey as CNKeyDescriptor,
-            CNContactGivenNameKey as CNKeyDescriptor,
-            CNContactFamilyNameKey as CNKeyDescriptor,
-            CNContactPhoneNumbersKey as CNKeyDescriptor,
-            CNContactThumbnailImageDataKey as CNKeyDescriptor
-        ]
-        
-        var contacts: [DeviceContact] = []
-        let request = CNContactFetchRequest(keysToFetch: keysToFetch)
-        try store.enumerateContacts(with: request) { contact, _ in
-            contacts.append(ContactMapper.map(contact))
-        }
-        return contacts
+        try await Task.detached(priority: .utility) {[store] in
+            let keysToFetch: [CNKeyDescriptor] = [
+                CNContactIdentifierKey as CNKeyDescriptor,
+                CNContactGivenNameKey as CNKeyDescriptor,
+                CNContactFamilyNameKey as CNKeyDescriptor,
+                CNContactPhoneNumbersKey as CNKeyDescriptor,
+                CNContactThumbnailImageDataKey as CNKeyDescriptor
+            ]
+            
+            var contacts: [DeviceContact] = []
+            let request = CNContactFetchRequest(keysToFetch: keysToFetch)
+            try store.enumerateContacts(with: request) { contact, _ in
+                contacts.append(ContactMapper.map(contact))
+            }
+            return contacts
+        }.value
     }
 }

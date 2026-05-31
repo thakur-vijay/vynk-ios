@@ -13,6 +13,7 @@ struct VynkApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(appDIContainer: appDIContainer)
+                .environment(\.appDIContainer, appDIContainer)
         }
     }
 }

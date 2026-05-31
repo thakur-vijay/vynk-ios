@@ -15,7 +15,6 @@ final class DefaultContactsRepository: ContactsRepository {
         self.dataSource = dataSource
     }
     
-    
     func permissionStatus() -> ContactsPermissionStatus {
         dataSource.permissionStatus()
     }
