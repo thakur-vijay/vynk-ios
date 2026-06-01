@@ -59,6 +59,29 @@ enum MockDataFactory {
 
                 avatarImage: "https://images.pexels.com/photos/10754449/pexels-photo-10754449.jpeg",
 
+                title: "Badmash Bachi",
+
+                lastMessage: "Mujhe bhi add karana jara",
+
+                timestampText: "09:00 AM",
+
+                unreadCount: 2,
+
+                isPinned: false,
+
+                isMuted: false,
+
+                isYou: false,
+
+                isLastMessageDelivered: true,
+
+                isLastMessageSeen: true
+
+            ),
+        .init(
+
+                avatarImage: "https://images.pexels.com/photos/10754449/pexels-photo-10754449.jpeg",
+
                 title: "Rahul Sharma",
 
                 lastMessage: "Bhai kal milte hain, kaafi time ho gaya properly baat kiye hue.",

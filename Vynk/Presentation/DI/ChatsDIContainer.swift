@@ -31,6 +31,7 @@ final class ChatsDIContainer {
     ) -> NewChatBottomSheet<some View> {
         NewChatBottomSheet(
             viewModel: .init(),
+            router: .init(),
             content: contactsDIContainer.makeContactsView,
             onClose: onClose
         )

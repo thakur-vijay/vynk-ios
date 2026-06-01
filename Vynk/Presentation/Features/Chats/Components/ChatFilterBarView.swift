@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ChatFilterBarView: View {
     let list = [
         ChatFilterChipModel(title: "All", isSelected: true),
@@ -22,6 +23,9 @@ struct ChatFilterBarView: View {
                     ChatFilterChipView(model: value){
                         
                     }
+                    .customContextMenu(actions: [
+                    
+                    ])
                 }
                 ChatFilterChipView(model: .init(), icon: AppIcons.plus) {
                     

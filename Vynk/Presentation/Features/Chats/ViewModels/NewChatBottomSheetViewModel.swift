@@ -15,7 +15,7 @@ final class NewChatBottomSheetViewModel {
         .init(id: .newGroup, title: "New group", symbol: AppIcons.newGroup),
         .init(id: .newContact, title: "New contact", symbol: AppIcons.newPerson),
         .init(id: .newCommunity, title: "New community", subtitle: "Bring together topic-based groups", symbol: AppIcons.group),
-        .init(id: .newBroadcast, title: "New broadcast", symbol: AppIcons.newGroup),
+        .init(id: .newBroadcast, title: "New broadcast", symbol: AppIcons.broadcast),
     ]
     
     var search: String = ""

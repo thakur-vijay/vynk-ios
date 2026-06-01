@@ -16,14 +16,18 @@ struct UpdatesView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView{
-                VStack(spacing: AppSpacing.lg) {
+            List{
+                Section {
                     StatusSectionView()
-                    ChannelsSectionView()
+                        .clearListRowStyle()
                 }
-                .padding(.vertical)
+                Section {
+                    ChannelsSectionView()
+                        .clearListRowStyle()
+                }
             }
             .listStyle(.plain)
+            .listSectionSpacing(20)
             .listRowSpacing(0)
             .environment(\.defaultMinListRowHeight, 0)
             .navigationTitle("Updates")

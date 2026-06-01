@@ -47,10 +47,8 @@ struct CallsView: View {
                        Image(systemName: "ellipsis")
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    ProminentToolbarButton {
-                        
-                    }
+                ProminentToolbarButton {
+                    
                 }
             }
             .searchable(text: $viewModel.search)

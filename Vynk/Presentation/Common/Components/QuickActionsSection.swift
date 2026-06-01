@@ -15,25 +15,26 @@ struct QuickActionsSection<ID: Hashable>: View {
     var body: some View {
         Section {
             ForEach(actions) { action in
-                HStack {
-                    Image(systemName: action.symbol)
-                        .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
-                        .foregroundStyle(AppColors.accent)
-                    VStack(alignment: .leading) {
-                        Text(action.title)
-                            .font(AppFont.subheadline)
-                        if let subtitle = action.subtitle, subtitle.isNotEmptyString{
-                            Text(subtitle)
-                                .font(AppFont.caption)
-                                .foregroundStyle(AppColors.contentDeemphasized)
+                Button {
+                    onTap(action.id)
+                } label: {
+                    HStack {
+                        Image(systemName: action.symbol)
+                            .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                            .foregroundStyle(AppColors.accent)
+                        VStack(alignment: .leading) {
+                            Text(action.title)
+                                .font(AppFont.subheadline)
+                            if let subtitle = action.subtitle, subtitle.isNotEmptyString{
+                                Text(subtitle)
+                                    .font(AppFont.caption)
+                                    .foregroundStyle(AppColors.contentDeemphasized)
+                            }
                         }
                     }
                 }
                 .listRowInsets(.vertical, 0)
-//                .contentShape(.rect)
-//                .onTapGesture {
-//                    onTap(action.id)
-//                }
+                .tint(AppColors.contentDefault)
             }
         }
     }

@@ -29,4 +29,8 @@ final class AppDIContainer {
         ChatsDIContainer(contactsDIContainer: contactsDIContainer)
     }()
     
+    lazy var countryPickerDIContainer: CountryPickerDIContainer = {
+        CountryPickerDIContainer()
+    }()
+    
 }

@@ -42,8 +42,6 @@ struct ChatsToolbarContent: ToolbarContent {
             }
         }
         
-        ToolbarItem(placement: .topBarTrailing) {
-            ProminentToolbarButton(action: onAddTap)
-        }
+        ProminentToolbarButton(action: onAddTap)
     }
 }

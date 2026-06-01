@@ -15,6 +15,7 @@ enum AppIcons {
     static let plus = "plus"
     static let checkmarkCircle = "checkmark.circle"
     static let checkmarkBubble = "checkmark.bubble"
+    static let checkmark = "checkmark"
     static let bellSlash = "bell.slash"
     static let bell = "bell"
     static let heart = "heart"
@@ -70,6 +71,8 @@ enum AppIcons {
     static let create = "plus.circle.dashed"
     static let hide = "eye.slash"
     static let grid = "square.grid.2x2"
+    static let rightChevron = "chevron.right"
+    static let broadcast = "megaphone"
     
     enum ChatAction {
         static let pin = "pin.fill"

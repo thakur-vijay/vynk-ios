@@ -22,7 +22,7 @@ struct ChatFilterChipView: View {
         .font(AppFont.captionMedium)
         .padding(.horizontal, AppSpacing.md)
         .padding(.vertical, icon != nil ? AppSpacing.smd : AppSpacing.sm)
-        .background(model.isSelected ? AppColors.accentDeemphasized : .clear, in: .capsule)
+        .background(model.isSelected ? AppColors.accentDeemphasized : .white, in: .capsule)
         .overlay {
             Capsule()
                 .stroke(AppColors.linesOutlineDeemphasized, lineWidth: 0.5)

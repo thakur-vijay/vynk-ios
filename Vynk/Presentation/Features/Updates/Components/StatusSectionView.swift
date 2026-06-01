@@ -74,6 +74,12 @@ struct StatusSectionView: View {
                             )
                         ]
                     )
+                    .customContextMenu(actions: [
+                        UIAction(title: "Hide", image: UIImage(named: AppIcons.hide)){ _ in
+                            
+                        }
+                    ]
+                    )
                 }
             }
             .padding(.horizontal)

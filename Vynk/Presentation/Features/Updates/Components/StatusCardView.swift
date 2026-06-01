@@ -81,15 +81,6 @@ struct StatusCardView: View {
                 .padding(AppSpacing.smd)
                 .padding(.top, isCurrentUser && !hasStatus ? AppSpacing.lg : 0)
             }
-            .contextMenu {
-                if !isCurrentUser {
-                    Button {
-                        
-                    } label: {
-                        Label("Hide", systemImage: AppIcons.hide)
-                    }
-                }
-            }
             .contentShape(
                 .contextMenuPreview,
                 .rect(cornerRadius: AppRadius.lg, style: .continuous)
