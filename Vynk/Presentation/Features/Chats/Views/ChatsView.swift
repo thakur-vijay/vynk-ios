@@ -80,7 +80,7 @@ struct ChatsView: View{
             .sheet(item: $viewModel.router.activeSheet) { sheet in
                 switch sheet {
                 case .newChat:
-                    NewChatBottomSheet {
+                    appDiContainer.chatsDIContainer.makeNewChatBottomSheet {
                         viewModel.router.dismissSheet()
                     }
                 }

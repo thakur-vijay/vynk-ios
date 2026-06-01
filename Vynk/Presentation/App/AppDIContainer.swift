@@ -26,7 +26,7 @@ final class AppDIContainer {
     }()
     
     lazy var chatsDIContainer: ChatsDIContainer = {
-        ChatsDIContainer()
+        ChatsDIContainer(contactsDIContainer: contactsDIContainer)
     }()
     
 }

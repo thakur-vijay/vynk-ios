@@ -51,6 +51,8 @@ enum AppIcons {
     static let shield = "shield.checkerboard"
     static let personCircle = "person.crop.circle"
     static let person = "person.fill"
+    static let newGroup = "person.2"
+    static let newPerson = "person.badge.plus"
     static let qrcode = "qrcode"
     static let laptop = "laptopcomputer"
     static let key = "key"
