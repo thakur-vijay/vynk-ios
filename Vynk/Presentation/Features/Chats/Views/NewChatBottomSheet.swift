@@ -7,17 +7,24 @@
 
 import SwiftUI
 
-struct NewChatBottomSheet<Content: View>: View {
+struct NewChatBottomSheet: View {
     @State private var viewModel: NewChatBottomSheetViewModel
     @State private var router: NewChatRouter
-    var content: Content
+    let diContainer: NewChatDIContainer
     let onClose: ()->()
-    init(viewModel: NewChatBottomSheetViewModel, router: NewChatRouter, @ViewBuilder content: @escaping ()->Content, onClose: @escaping () -> Void) {
+    init(
+        viewModel: NewChatBottomSheetViewModel,
+        router: NewChatRouter,
+        diContainer: NewChatDIContainer,
+        onClose: @escaping () -> Void
+    ) {
         _viewModel = State(wrappedValue: viewModel)
         _router = State(wrappedValue: router)
-        self.content = content()
+        self.diContainer = diContainer
         self.onClose = onClose
     }
+    
+    @Environment(\.appDIContainer) private var appDIContainer
     var body: some View {
         NavigationStack(path: $router.path){
             List {
@@ -34,7 +41,7 @@ struct NewChatBottomSheet<Content: View>: View {
                     }
                 }
                 .listSectionMargins(.top, 5)
-                content
+                diContainer.makeContactsView()
             }
             .background(AppColors.backgroundSecondary)
             .navigationTitle("New chat")
@@ -52,7 +59,7 @@ struct NewChatBottomSheet<Content: View>: View {
             .sheet(item: $router.activeSheet) { sheet in
                 switch sheet{
                 case .addContact:
-                    AddContactView(viewModel: .init())
+                    diContainer.makeAddContactView()
                 }
             }
         }

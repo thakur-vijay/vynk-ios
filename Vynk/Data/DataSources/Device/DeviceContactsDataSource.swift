@@ -65,4 +65,28 @@ final class DeviceContactsDataSource {
             return contacts
         }.value
     }
+    
+    func saveContact(payload: CreateContactPayload) async throws {
+        let contact = CNMutableContact()
+
+        contact.givenName = payload.firstName
+
+        contact.familyName = payload.lastName
+
+        let phone = CNLabeledValue(
+
+            label: CNLabelPhoneNumberMobile,
+
+            value: CNPhoneNumber(stringValue: payload.phoneNumber)
+
+        )
+
+        contact.phoneNumbers = [phone]
+
+        let request = CNSaveRequest()
+
+        request.add(contact, toContainerWithIdentifier: nil)
+
+        try store.execute(request)
+    }
 }

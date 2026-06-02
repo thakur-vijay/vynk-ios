@@ -26,4 +26,8 @@ final class DefaultContactsRepository: ContactsRepository {
     func fetchContacts() async throws -> [DeviceContact] {
         try await dataSource.fetchContacts()
     }
+    
+    func saveContact(payload: CreateContactPayload) async throws {
+        try await dataSource.saveContact(payload: payload)
+    }
 }

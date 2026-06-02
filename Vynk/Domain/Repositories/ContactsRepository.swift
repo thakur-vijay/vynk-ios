@@ -14,4 +14,6 @@ protocol ContactsRepository {
     func requestPermission() async throws -> ContactsPermissionStatus
     
     func fetchContacts() async throws -> [DeviceContact]
+    
+    func saveContact(payload: CreateContactPayload) async throws
 }

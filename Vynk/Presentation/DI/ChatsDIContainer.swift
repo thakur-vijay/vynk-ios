@@ -9,9 +9,14 @@ import SwiftUI
 
 final class ChatsDIContainer {
     private let contactsDIContainer: ContactsDIContainer
+    private let addContactDIContainer: AddContactDIContainer
     
-    init(contactsDIContainer: ContactsDIContainer) {
+    init(
+        contactsDIContainer: ContactsDIContainer,
+        addContactDIContainer: AddContactDIContainer,
+    ) {
         self.contactsDIContainer = contactsDIContainer
+        self.addContactDIContainer = addContactDIContainer
     }
 
     func makeChatsView() -> ChatsView {
@@ -28,13 +33,19 @@ final class ChatsDIContainer {
 
     func makeNewChatBottomSheet(
         onClose: @escaping () -> Void
-    ) -> NewChatBottomSheet<some View> {
+    ) -> NewChatBottomSheet{
         NewChatBottomSheet(
             viewModel: .init(),
             router: .init(),
-            content: contactsDIContainer.makeContactsView,
+            diContainer: newChatDIContainer,
             onClose: onClose
         )
     }
 
+    lazy var newChatDIContainer: NewChatDIContainer = {
+        NewChatDIContainer(
+            addContactDIContainer: addContactDIContainer,
+            contactsDIContainer: contactsDIContainer
+        )
+    }()
 }

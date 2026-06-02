@@ -9,9 +9,13 @@ import SwiftUI
 
 struct AddContactView: View {
     @State private var viewModel: AddContactViewModel
-    
-    init(viewModel: AddContactViewModel) {
+    private let diContainer: AddContactDIContainer
+    init(
+        viewModel: AddContactViewModel,
+        diContainer: AddContactDIContainer
+    ) {
         _viewModel = State(wrappedValue: viewModel)
+        self.diContainer = diContainer
     }
     
     @Environment(\.appDIContainer) private var appDIContainer
@@ -93,11 +97,13 @@ struct AddContactView: View {
                 }
                 
                 ProminentToolbarButton(icon: AppIcons.checkmark) {
-                    
+                    Task {
+                        await viewModel.addContact()
+                    }
                 }
             }
             .sheet(isPresented: $viewModel.isCountryPickerPresented) {
-                appDIContainer.countryPickerDIContainer.makeCountryPickerView(
+                diContainer.makeCountryPickerView(
                     selectedCountry: viewModel.selectedCountry
                 ) { selectedCountry in
                     viewModel.selectedCountry = selectedCountry

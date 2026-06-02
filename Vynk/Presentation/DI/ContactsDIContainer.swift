@@ -26,7 +26,7 @@ final class ContactsDIContainer {
     }
     
     @ViewBuilder
-    func makeContactsView() -> some View {
+    func makeContactsView() -> ContactsView {
         ContactsView(
             viewModel: makeContactsViewModel()
         )
