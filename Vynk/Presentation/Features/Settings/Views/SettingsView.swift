@@ -11,32 +11,22 @@ struct SettingsView: View {
     @State private var viewModel: SettingsViewModel = .init()
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: AppSpacing.lg) {
-                    userInfo
-                    ForEach(viewModel.sections.indices, id: \.self) { sectionIndex in
-                        SectionGroupContainer {
-                            ForEach(viewModel.sections[sectionIndex]) { row in
-                                SectionRow(
-                                    model: row,
-                                    showDivider: row.id != viewModel.sections[sectionIndex].last?.id,
-                                    onTap: {
-                                        
-                                    },
-                                    leading: {
-                                        if let symbol = row.id.symbol {
-                                            Image(systemName: symbol)
-                                        }
-                                    }
-                                )
+            List {
+                userInfo
+                ForEach(viewModel.sections.indices, id: \.self) { sectionIndex in
+                    Section {
+                        ForEach(viewModel.sections[sectionIndex]) { row in
+                            NavigationLink(value: row.id) {
+                                Label(row.title, systemImage: row.id.symbol ?? "")
+                                    .foregroundStyle(AppColors.contentDefault)
 
                             }
-                            
+
                         }
                         
                     }
+                    
                 }
-                .padding()
             }
             .background(AppColors.backgroundSecondary)
             .navigationTitle("Settings")
@@ -52,6 +42,9 @@ struct SettingsView: View {
                         
                     }
                 }
+            }
+            .navigationDestination(for: SettingsRowID.self) { id in
+               Text("View")
             }
         }
     }
@@ -77,10 +70,8 @@ struct SettingsView: View {
                     }
                     .hSpacing(.leading)
                 }
-                .padding()
-                .contentShape(.rect)
             }
-            .buttonStyle(.row)
+            .tint(AppColors.contentDefault)
 
         }
     }

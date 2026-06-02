@@ -10,13 +10,16 @@ import SwiftUI
 final class ChatsDIContainer {
     private let contactsDIContainer: ContactsDIContainer
     private let addContactDIContainer: AddContactDIContainer
+    private let inviteDIContainer: InviteDIContainer
     
     init(
         contactsDIContainer: ContactsDIContainer,
         addContactDIContainer: AddContactDIContainer,
+        inviteDIContainer: InviteDIContainer
     ) {
         self.contactsDIContainer = contactsDIContainer
         self.addContactDIContainer = addContactDIContainer
+        self.inviteDIContainer = inviteDIContainer
     }
 
     func makeChatsView() -> ChatsView {
@@ -45,7 +48,8 @@ final class ChatsDIContainer {
     lazy var newChatDIContainer: NewChatDIContainer = {
         NewChatDIContainer(
             addContactDIContainer: addContactDIContainer,
-            contactsDIContainer: contactsDIContainer
+            contactsDIContainer: contactsDIContainer,
+            inviteDIContaier: inviteDIContainer
         )
     }()
 }

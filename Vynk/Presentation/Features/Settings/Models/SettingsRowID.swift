@@ -26,7 +26,7 @@ enum SettingsRowID: RowIDProtocol{
         case .lists:
             AppIcons.ChatAction.addToListMenu
         case .broadcastMessages:
-            AppIcons.appBadge
+            AppIcons.broadcast
         case .starred:
             AppIcons.star
         case .linkedDevices:

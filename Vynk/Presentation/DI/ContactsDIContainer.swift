@@ -26,9 +26,10 @@ final class ContactsDIContainer {
     }
     
     @ViewBuilder
-    func makeContactsView() -> ContactsView {
+    func makeContactsView(onInviteTap: @escaping (DeviceContact)->()) -> ContactsView {
         ContactsView(
-            viewModel: makeContactsViewModel()
+            viewModel: makeContactsViewModel(),
+            onInviteTap: onInviteTap
         )
     }
 }

@@ -9,46 +9,47 @@ import SwiftUI
 
 struct DeviceContactRow: View {
     let model: DeviceContact
+    let onInviteTap: (DeviceContact)->()
     var body: some View {
-        HStack {
-            if let data = model.thumbnailImageData, let uiImage = UIImage(data: data){
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
-                    .clipShape(.circle)
-            }else {
-                Circle()
-                    .fill(AppColors.neutralSubtle)
-                    .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
-                    .overlay {
-                        Image(systemName: AppIcons.person)
-                            .foregroundStyle(AppColors.neutralMuted)
-                    }
-            }
-            
-            VStack(alignment: .leading){
-                if model.fullName.isNotEmptyString {
-                    Text(model.fullName)
-                        .font(AppFont.bodySemibold)
+        Button {
+            onInviteTap(model)
+        } label: {
+            HStack {
+                if let data = model.thumbnailImageData, let uiImage = UIImage(data: data){
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                        .clipShape(.circle)
+                }else {
+                    Circle()
+                        .fill(AppColors.neutralSubtle)
+                        .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                        .overlay {
+                            Image(systemName: AppIcons.person)
+                                .foregroundStyle(AppColors.neutralMuted)
+                        }
                 }
-                if !model.phoneNumbers.isEmpty{
-                    Text(model.phoneNumbers.joined(separator: ", "))
-                        .font(model.fullName.isEmptyString ? AppFont.bodySemibold : AppFont.caption)
-                        .foregroundStyle(model.fullName.isEmptyString ? AppColors.contentDefault : AppColors.contentDeemphasized)
-                }
-            }
-            .hSpacing(.leading)
-            
-            Button {
                 
-            } label: {
+                VStack(alignment: .leading){
+                    if model.fullName.isNotEmptyString {
+                        Text(model.fullName)
+                            .font(AppFont.bodySemibold)
+                    }
+                    if !model.phoneNumbers.isEmpty{
+                        Text(model.phoneNumbers.joined(separator: ", "))
+                            .font(model.fullName.isEmptyString ? AppFont.bodySemibold : AppFont.caption)
+                            .foregroundStyle(model.fullName.isEmptyString ? AppColors.contentDefault : AppColors.contentDeemphasized)
+                    }
+                }
+                .hSpacing(.leading)
+                
                 Text("Invite")
                     .font(AppFont.captionMedium)
                     .foregroundStyle(AppColors.accentEmphasized)
             }
-
         }
+
     }
 }
 
