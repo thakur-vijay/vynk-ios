@@ -17,6 +17,14 @@ final class AppDIContainer {
         URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
     }()
     
+    lazy var appDatabase: AppDatabase = {
+        do {
+            return try AppDatabase()
+        } catch {
+            fatalError("Failed to initialize database: \(error)")
+        }
+    }()
+    
     lazy var authDIContainer: AuthDIContainer = {
         AuthDIContainer(apiClient: apiClient)
     }()

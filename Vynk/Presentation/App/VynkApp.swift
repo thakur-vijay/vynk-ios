@@ -14,6 +14,9 @@ struct VynkApp: App {
         WindowGroup {
             RootView(appDIContainer: appDIContainer)
                 .environment(\.appDIContainer, appDIContainer)
+                .task {
+                    _ = appDIContainer.appDatabase
+                }
         }
     }
 }

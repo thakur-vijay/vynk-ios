@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184398C42FD08D5000F2A38F /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 184398C32FD08D5000F2A38F /* GRDB */; };
 		18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 18ACE9B92FC238280098A584 /* NukeUI */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */,
+				184398C42FD08D5000F2A38F /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +120,7 @@
 			name = Vynk;
 			packageProductDependencies = (
 				18ACE9B92FC238280098A584 /* NukeUI */,
+				184398C32FD08D5000F2A38F /* GRDB */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -204,6 +207,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */,
+				184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 188696892FB1AD3200A5BFA7 /* Products */;
@@ -595,6 +599,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke.git";
@@ -606,6 +618,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		184398C32FD08D5000F2A38F /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
+		};
 		18ACE9B92FC238280098A584 /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */;
