@@ -15,7 +15,7 @@ final class FetchDeviceContactsUseCase {
     }
     
     func execute() async throws -> [DeviceContact] {
-           let contacts = try await repository.fetchContacts()
+           let contacts = try await repository.fetchDeviceContacts()
 
            let contactsWithPhoneNumbers = contacts.filter {
                !$0.phoneNumbers.isEmpty

@@ -10,21 +10,20 @@ import Foundation
 @MainActor
 @Observable
 final class ContactsViewModel {    
-    private let requestContactPermissionUseCase: RequestContactsPermissionUseCase
-    private let fetchPermissionStatusUseCase: FetchPermissionStatusUseCase
+    private let contactsPermissionUseCase: ContactsPermissionUseCase
     private let fetchDeviceContactsUseCase: FetchDeviceContactsUseCase
     private let groupVynkContactsUseCase: GroupVynkContactsUseCase
-    
+    private let syncContactsUseCase: SyncContactsUseCase
     init(
-        requestContactPermissionUseCase: RequestContactsPermissionUseCase,
-        fetchPermissionStatusUseCase: FetchPermissionStatusUseCase,
+        contactsPermissionUseCase: ContactsPermissionUseCase,
         fetchDeviceContactsUseCase: FetchDeviceContactsUseCase,
-        groupVynkContactsUseCase: GroupVynkContactsUseCase
+        groupVynkContactsUseCase: GroupVynkContactsUseCase,
+        syncContactsUseCase: SyncContactsUseCase,
     ) {
-        self.requestContactPermissionUseCase = requestContactPermissionUseCase
-        self.fetchPermissionStatusUseCase = fetchPermissionStatusUseCase
+        self.contactsPermissionUseCase = contactsPermissionUseCase
         self.fetchDeviceContactsUseCase = fetchDeviceContactsUseCase
         self.groupVynkContactsUseCase = groupVynkContactsUseCase
+        self.syncContactsUseCase = syncContactsUseCase
     }
     
     var contacts: [DeviceContact] = []
@@ -32,31 +31,29 @@ final class ContactsViewModel {
     
     func fetchContacts()async{
         do {
-            let permission = fetchPermissionStatusUseCase.execute()
+            let permission = contactsPermissionUseCase.status()
             switch permission {
             case .notDetermined:
-                let isGranted = try await requestContactPermissionUseCase.execute()
+                let isGranted = try await contactsPermissionUseCase.request()
                 if isGranted {
-                    contacts = try await fetchDeviceContactsUseCase.execute()
-                    AppLogger.debug(contacts.count, tag: String(describing: self))
-                    contacts.forEach { contact in
-                        AppLogger.debug(contact.phoneNumbers, tag: "Number")
-                    }
+                    let deviceContacts = try await fetchDeviceContactsUseCase.execute()
+                    try await syncContactsUseCase.sync(
+                        deviceContacts: deviceContacts
+                    )
+                    contacts = try await syncContactsUseCase.fetchLocalContacts()
                 }else {
-                    AppLogger.debug("Permission Denied", tag: String(describing: self))
-
+                    contacts = try await syncContactsUseCase.fetchLocalContacts()
                 }
             case .denied:
-                AppLogger.debug("Permission Denied", tag: String(describing: self))
+                contacts = try await syncContactsUseCase.fetchLocalContacts()
             case .restricted:
-                AppLogger.debug("Permission Restricted", tag: String(describing: self))
+                contacts = try await syncContactsUseCase.fetchLocalContacts()
             case .authorized:
-                AppLogger.debug("Permission Authorized", tag: String(describing: self))
-                contacts = try await fetchDeviceContactsUseCase.execute()
-                contacts.forEach { contact in
-                    AppLogger.debug(contact.phoneNumbers, contact.id, contact.fullName, tag: "ContactModel")
-                }
-                AppLogger.debug(contacts.count, tag: String(describing: self))
+                let deviceContacts = try await fetchDeviceContactsUseCase.execute()
+                try await syncContactsUseCase.sync(
+                    deviceContacts: deviceContacts
+                )
+                contacts = try await syncContactsUseCase.fetchLocalContacts()
             }
         }catch {
             AppLogger.error(error.localizedDescription, tag: String(describing: self))

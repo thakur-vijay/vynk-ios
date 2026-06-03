@@ -13,7 +13,13 @@ protocol ContactsRepository {
     
     func requestPermission() async throws -> ContactsPermissionStatus
     
-    func fetchContacts() async throws -> [DeviceContact]
+    func fetchDeviceContacts() async throws -> [DeviceContact]
     
-    func saveContact(payload: CreateContactPayload) async throws
+    func saveContactToDevice(payload: CreateContactPayload) async throws
+    
+    func fetchLocalContacts() async throws -> [DeviceContact]
+    
+    func saveLocalContacts(_ contacts: [DeviceContact]) async throws
+    
+    func fetchSavedNormalizedPhoneNumbers() async throws -> Set<String>
 }

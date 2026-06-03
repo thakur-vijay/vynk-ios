@@ -15,6 +15,6 @@ final class SaveContactUseCase {
     }
     
     func execute(payload: CreateContactPayload)async throws {
-        try await repository.saveContact(payload: payload)
+        try await repository.saveContactToDevice(payload: payload)
     }
 }

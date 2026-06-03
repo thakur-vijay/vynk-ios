@@ -13,15 +13,19 @@ enum DatabaseMigratorFactory {
 
         var migrator = DatabaseMigrator()
 
-        migrator.registerMigration("create_initial_schema") { db in
+        let migrations: [DatabaseMigration] = [
 
-            // Empty for now.
+            CreateDeviceContactsMigration()
 
-            // Later:
+        ]
 
-            // try db.create(table: "chats") { table in ... }
+        migrations.forEach { migration in
 
-            // try db.create(table: "messages") { table in ... }
+            migrator.registerMigration(migration.identifier) { db in
+
+                try migration.migrate(db)
+
+            }
 
         }
 

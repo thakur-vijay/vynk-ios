@@ -30,7 +30,7 @@ final class AppDIContainer {
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {
-        ContactsDIContainer()
+        ContactsDIContainer(database: appDatabase)
     }()
     
     lazy var chatsDIContainer: ChatsDIContainer = {
@@ -46,7 +46,7 @@ final class AppDIContainer {
     }()
     
     lazy var addContactDIContainer: AddContactDIContainer = {
-        AddContactDIContainer(countryPickerDIContainer: countryPickerDIContainer)
+        AddContactDIContainer(countryPickerDIContainer: countryPickerDIContainer, database: appDatabase)
     }()
 
     lazy var inviteDIContainer: InviteDIContainer = {

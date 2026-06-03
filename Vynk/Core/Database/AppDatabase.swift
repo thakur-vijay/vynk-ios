@@ -30,6 +30,7 @@ final class AppDatabase {
         try DatabaseMigratorFactory
             .makeMigrator()
             .migrate(dbQueue)
+        AppLogger.debug(databaseURL, tag: String(describing: self))
     }
 
     private static func databaseURL(

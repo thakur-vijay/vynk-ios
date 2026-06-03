@@ -9,25 +9,42 @@ import Foundation
 
 final class DefaultContactsRepository: ContactsRepository {
     
-    private let dataSource: DeviceContactsDataSource
+    private let deviceDataSource: DeviceContactsDataSource
+    private let localDataSource: LocalContactsDataSource
     
-    init(dataSource: DeviceContactsDataSource) {
-        self.dataSource = dataSource
+    init(
+        deviceDataSource: DeviceContactsDataSource,
+        localDataSource: LocalContactsDataSource
+    ) {
+        self.deviceDataSource = deviceDataSource
+        self.localDataSource = localDataSource
     }
     
     func permissionStatus() -> ContactsPermissionStatus {
-        dataSource.permissionStatus()
+        deviceDataSource.permissionStatus()
     }
     
     func requestPermission() async throws -> ContactsPermissionStatus {
-        try await dataSource.requestPermission()
+        try await deviceDataSource.requestPermission()
     }
     
-    func fetchContacts() async throws -> [DeviceContact] {
-        try await dataSource.fetchContacts()
+    func fetchDeviceContacts() async throws -> [DeviceContact] {
+        try await deviceDataSource.fetchContacts()
     }
     
-    func saveContact(payload: CreateContactPayload) async throws {
-        try await dataSource.saveContact(payload: payload)
+    func saveContactToDevice(payload: CreateContactPayload) async throws {
+        try await deviceDataSource.saveContact(payload: payload)
+    }
+    
+    func fetchLocalContacts() async throws -> [DeviceContact] {
+        return try await localDataSource.fetchContacts()
+    }
+    
+    func saveLocalContacts(_ contacts: [DeviceContact]) async throws {
+        try await localDataSource.saveContacts(contacts)
+    }
+    
+    func fetchSavedNormalizedPhoneNumbers() async throws -> Set<String> {
+        return try await localDataSource.fetchSavedNormalizedPhoneNumbers()
     }
 }
