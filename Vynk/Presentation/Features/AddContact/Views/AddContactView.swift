@@ -19,17 +19,30 @@ struct AddContactView: View {
     }
     
     @Environment(\.appDIContainer) private var appDIContainer
+    @FocusState private var focusedField: Field?
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     TextField("First name", text: $viewModel.firstName)
+                        .focused($focusedField, equals: .firstName)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            withoutAnimation {
+                                focusedField = .lastName
+                            }
+                        }
 
                     TextField("Last name", text: $viewModel.lastName)
-
+                        .focused($focusedField, equals: .lastName)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            withoutAnimation {
+                                focusedField = .phone
+                            }
+                        }
                 }
-
                 
                 Section {
                     Button {
@@ -42,7 +55,7 @@ struct AddContactView: View {
                                 .hSpacing(.leading)
                                 .frame(width: 100)
                             
-                            Text("India")
+                            Text(viewModel.selectedCountry?.name ?? "")
                                 .hSpacing(.leading)
                             
                             Image(systemName: AppIcons.rightChevron)
@@ -53,6 +66,7 @@ struct AddContactView: View {
                             
                         }
                     }
+                    .tint(.primary)
                     .alignmentGuide(.listRowSeparatorLeading) { dimensions in
                         100
                     }
@@ -65,8 +79,11 @@ struct AddContactView: View {
                             .hSpacing(.leading)
                             .frame(width: 100)
                         HStack {
-                            Text("+91")
+                            Text(viewModel.selectedCountry?.dialCode ?? "")
                             TextField("Phone", text: $viewModel.phone)
+                                .focused($focusedField, equals: .phone)
+                                .keyboardType(.numberPad)
+                                .textContentType(.telephoneNumber)
                         }
                     }
 
@@ -93,15 +110,29 @@ struct AddContactView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarCloseButton(placement: .topBarLeading) {
-                    
-                }
-                
-                ProminentToolbarButton(icon: AppIcons.checkmark) {
-                    Task {
-                        await viewModel.addContact()
+                    focusedField = nil
+                    if viewModel.phone.isNotEmptyString {
+                        viewModel.isDiscardConfirmationDialogPresented.toggle()
+                    }else {
+                        
                     }
                 }
+                
+                if viewModel.isSaveEnabled {
+                    ProminentToolbarButton(icon: AppIcons.checkmark, accent: AppColors.accent) {
+                        Task {
+                            await viewModel.addContact()
+                        }
+                    }
+                    
+                }else {
+                    ProminentToolbarButton(icon: AppIcons.checkmark, accent: AppColors.contentDeemphasized) {
+                       
+                    }
+                }
+                
             }
+            .animation(.snappy(duration: 0.25), value: viewModel.isSaveEnabled)
             .sheet(isPresented: $viewModel.isCountryPickerPresented) {
                 diContainer.makeCountryPickerView(
                     selectedCountry: viewModel.selectedCountry
@@ -111,5 +142,19 @@ struct AddContactView: View {
                 }
             }
         }
+        .confirmationDialog(.init(title: "Discard changes?", message: "Are you sure you want to discard this new contact?", actions: [
+            .init(title: "Discard changes", role: .destructive) {},
+            .init(title: "Keep editing", role: .cancel) {},
+        ]), isPresented: $viewModel.isDiscardConfirmationDialogPresented)
+    }
+    
+    private enum Field {
+
+        case firstName
+
+        case lastName
+
+        case phone
+
     }
 }

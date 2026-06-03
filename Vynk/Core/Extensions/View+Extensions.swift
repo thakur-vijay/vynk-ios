@@ -34,4 +34,14 @@ extension View {
         self
             .frame(width: size.width, height: size.height)
     }
+    
+    func withoutAnimation(action: @escaping ()->()) {
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            action()
+        }
+    }
+    
 }
+

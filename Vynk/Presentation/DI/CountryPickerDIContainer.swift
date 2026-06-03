@@ -26,4 +26,14 @@ final class CountryPickerDIContainer {
             onClose: onClose
         )
     }
+    
+    func makeGetCurrentCountryUseCase() -> GetCurrentCountryUseCase {
+
+        let dataSource = LocalCountryDataSource()
+
+        let repository = DefaultCountryRepository(dataSource: dataSource)
+
+        return GetCurrentCountryUseCase(repository: repository)
+
+    }
 }

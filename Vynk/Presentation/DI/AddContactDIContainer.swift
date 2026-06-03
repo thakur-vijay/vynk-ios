@@ -20,7 +20,10 @@ final class AddContactDIContainer {
         let repository = DefaultContactsRepository(dataSource: dataSource)
         let useCase = SaveContactUseCase(repository: repository)
 
-        return AddContactViewModel(addContactUseCase: useCase)
+        return AddContactViewModel(
+            addContactUseCase: useCase,
+            getCurrentCountryUseCase: countryPickerDIContainer.makeGetCurrentCountryUseCase()
+        )
     }
 
     func makeAddContactView() -> AddContactView {
