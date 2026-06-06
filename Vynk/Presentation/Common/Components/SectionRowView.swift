@@ -1,0 +1,67 @@
+//
+//  SectionRowView.swift
+//  Vynk
+//
+//  Created by Vijay Thakur on 06/06/26.
+//
+
+import SwiftUI
+
+struct SectionRowView<ID: RowIDProtocol>: View {
+    let row: SectionRowModel<ID>
+    let toggleBinding: Binding<Bool>?
+    let action: ()->()
+    var body: some View {
+        if row.kind == .toggle {
+            Toggle(row.title, isOn: toggleBinding ?? .constant(false))
+        }else {
+            Button(action: action) {
+                NavigationLink {
+                    
+                } label: {
+                    HStack(spacing: AppSpacing.md) {
+                        if let icon = row.id.symbol {
+                            Image(systemName: icon)
+                        }
+                        
+                        VStack(alignment: .leading) {
+                            Text(row.title)
+                                .foregroundStyle(titleColor)
+                            if let subtitle = row.subtitle {
+                                Text(subtitle)
+                                    .font(AppFont.caption)
+                                    .foregroundStyle(AppColors.contentDeemphasized)
+                            }
+                        }
+                        .hSpacing(.leading)
+                        
+                        if let trailingText = row.trailingText {
+                            Text(trailingText)
+                                .foregroundStyle(AppColors.contentDeemphasized)
+                        }
+                    }
+                }
+                .allowsHitTesting(false)
+                .navigationLinkIndicatorVisibility(row.showsChevron ? .visible : .hidden)
+            }
+            .tint(AppColors.contentDefault)
+        }
+      
+    }
+    
+    private var titleColor: Color {
+        switch row.kind {
+        case .destructive:
+            return .red
+        case .action(let style):
+            switch style {
+            case .normal:
+                return AppColors.contentDefault
+            case .accent:
+                return AppColors.accent
+            }
+        default:
+            return AppColors.contentDefault
+        }
+    }
+}

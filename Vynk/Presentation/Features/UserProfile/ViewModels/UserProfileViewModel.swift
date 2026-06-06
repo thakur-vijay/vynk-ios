@@ -61,7 +61,7 @@ final class UserProfileViewModel {
                 id: .lockChat,
                 title: "Lock chat",
                 subtitle: "Lock and hide this chat on this device.",
-                kind: .toggle(isOn: false)
+                kind: .toggle
             ),
             .init(
                 id: .advancedChatPrivacy,

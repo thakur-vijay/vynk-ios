@@ -33,7 +33,7 @@ struct SectionRowModel<ID: RowIDProtocol>: Identifiable, Equatable {
 
 enum SectionRowKind: Equatable {
     case navigation
-    case toggle(isOn: Bool)
+    case toggle
     case action(style: SectionActionStyle = .normal)
     case destructive
 }

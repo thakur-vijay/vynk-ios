@@ -35,7 +35,7 @@ struct MainTabView: View {
                 appDIContainer.chatsDIContainer.makeChatsView()
             }
             Tab.init(AnimatedTab.settings.title, systemImage: AnimatedTab.settings.symbolImage, value: .settings) {
-                SettingsView()
+                appDIContainer.settingsDIContainer.makeSettingsView()
             }
         } effects: { tab in
             switch tab {

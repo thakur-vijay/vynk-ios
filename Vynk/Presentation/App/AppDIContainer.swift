@@ -42,6 +42,10 @@ final class AppDIContainer {
         )
     }()
     
+    lazy var settingsDIContainer: SettingsDIContainer = {
+        SettingsDIContainer()
+    }()
+    
     lazy var countryPickerDIContainer: CountryPickerDIContainer = {
         CountryPickerDIContainer()
     }()

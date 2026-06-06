@@ -8,24 +8,25 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var viewModel: SettingsViewModel = .init()
+    @State private var viewModel: SettingsViewModel
+    @State private var router: SettingsRouter
+    private let diContainer: SettingsDIContainer
+    
+    init(viewModel: SettingsViewModel, router: SettingsRouter, diContainer: SettingsDIContainer) {
+        _viewModel = State(wrappedValue: viewModel)
+        _router = State(wrappedValue: router)
+        self.diContainer = diContainer
+    }
+    
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $router.path) {
             List {
                 userInfo
-                ForEach(viewModel.sections.indices, id: \.self) { sectionIndex in
-                    Section {
-                        ForEach(viewModel.sections[sectionIndex]) { row in
-                            NavigationLink(value: row.id) {
-                                Label(row.title, systemImage: row.id.symbol ?? "")
-                                    .foregroundStyle(AppColors.contentDefault)
-
-                            }
-
-                        }
-                        
+                ForEach(viewModel.sections) { section in
+                    SectionView(section: section) { rowID in
+                        router.push(.row(rowID))
                     }
-                    
                 }
             }
             .background(AppColors.backgroundSecondary)
@@ -43,8 +44,8 @@ struct SettingsView: View {
                     }
                 }
             }
-            .navigationDestination(for: SettingsRowID.self) { id in
-               Text("View")
+            .navigationDestination(for: SettingsRoute.self) { route in
+                diContainer.makeDestination(for: route)
             }
         }
     }
