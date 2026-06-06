@@ -13,22 +13,33 @@ final class AddContactViewModel {
     var firstName: String = ""
     var lastName: String = ""
     var phone: String = ""
-    var syncContactToPhone: Bool = false
+    var syncContactToPhone: Bool
     var isCountryPickerPresented: Bool = false
     var isDiscardConfirmationDialogPresented: Bool = false
     var selectedCountry: CountryModel?
+    var alertConfig: DialogConfig?
     
     private let addContactUseCase: SaveContactUseCase
+    let permissionStatus: ContactsPermissionStatus
     
     init(
         addContactUseCase: SaveContactUseCase,
-        getCurrentCountryUseCase: GetCurrentCountryUseCase
+        getCurrentCountryUseCase: GetCurrentCountryUseCase,
+        permissionStatus: ContactsPermissionStatus
     ) {
         self.addContactUseCase = addContactUseCase
+        self.permissionStatus = permissionStatus
+        self.syncContactToPhone = self.permissionStatus == .authorized
         self.selectedCountry = try? getCurrentCountryUseCase.execute()
     }
     
     func addContact()async{
+        guard permissionStatus == .authorized else {
+            alertConfig = .init(title: "Can't save contact", message: "Can't save contact right now, try again later.", actions: [
+                .init(title: "OK")
+            ])
+            return
+        }
         do {
             let payload = CreateContactPayload(firstName: firstName, lastName: lastName, phoneNumber: phone)
             try await addContactUseCase.execute(payload: payload)
@@ -38,11 +49,6 @@ final class AddContactViewModel {
     }
     
     var isSaveEnabled: Bool {
-        let condition  = firstName.isNotEmptyString && lastName.isNotEmptyString && phone.isNotEmptyString
-//        AppLogger.debug(firstName.isNotEmptyString, tag: String(describing: self))
-//        AppLogger.debug(lastName.isNotEmptyString, tag: String(describing: self))
-//        AppLogger.debug(phone.isNotEmptyString, tag: String(describing: self))
-        AppLogger.debug(condition, tag: String(describing: self))
-        return condition
+        return phone.isNotEmptyString
     }
 }

@@ -10,12 +10,15 @@ import SwiftUI
 struct AddContactView: View {
     @State private var viewModel: AddContactViewModel
     private let diContainer: AddContactDIContainer
+    let onClose: ()->()
     init(
         viewModel: AddContactViewModel,
-        diContainer: AddContactDIContainer
+        diContainer: AddContactDIContainer,
+        onClose: @escaping ()->()
     ) {
         _viewModel = State(wrappedValue: viewModel)
         self.diContainer = diContainer
+        self.onClose = onClose
     }
     
     @Environment(\.appDIContainer) private var appDIContainer
@@ -90,7 +93,18 @@ struct AddContactView: View {
                 }
                 
                 Section {
-                    Toggle("Sync contact to phone", isOn: $viewModel.syncContactToPhone)
+                    Toggle("Sync contact to phone", isOn: .init(get: {
+                        return viewModel.syncContactToPhone
+                    }, set: { newValue in
+                        if viewModel.permissionStatus == .authorized {
+                            viewModel.syncContactToPhone = newValue
+                        }else {
+                            viewModel.alertConfig = .init(title: "Allow Vynk to access your contacts", message: "Tap Open Settings and turn on Contacts to allow access", actions: [
+                                .init(title: "Cancel"),
+                                .init(title: "Open Settings", action: AppSettingsOpener.open),
+                            ])
+                        }
+                    }))
                 }
                 
                 Section {
@@ -114,7 +128,7 @@ struct AddContactView: View {
                     if viewModel.phone.isNotEmptyString {
                         viewModel.isDiscardConfirmationDialogPresented.toggle()
                     }else {
-                        
+                        onClose()
                     }
                 }
                 
@@ -143,9 +157,11 @@ struct AddContactView: View {
             }
         }
         .confirmationDialog(.init(title: "Discard changes?", message: "Are you sure you want to discard this new contact?", actions: [
-            .init(title: "Discard changes", role: .destructive) {},
-            .init(title: "Keep editing", role: .cancel) {},
+            .init(title: "Discard changes", role: .destructive, action: onClose),
+            .init(title: "Keep editing") {},
         ]), isPresented: $viewModel.isDiscardConfirmationDialogPresented)
+        .alert($viewModel.alertConfig)
+
     }
     
     private enum Field {

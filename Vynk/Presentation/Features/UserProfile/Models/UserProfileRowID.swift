@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserProfileRowID: RowIDProtocol {
+enum UserProfileRowID: @MainActor RowIDProtocol {
     case media
     case storage
     case starred

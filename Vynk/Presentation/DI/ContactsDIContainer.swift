@@ -9,28 +9,33 @@ import SwiftUI
 
 final class ContactsDIContainer {
     private let database: AppDatabase
+    private let repository: ContactsRepository
     
-    init(database: AppDatabase) {
+    init(
+        database: AppDatabase,
+        repository: ContactsRepository
+    ) {
+        
         self.database = database
+        self.repository = repository
     }
     
     func makeContactsViewModel()->ContactsViewModel {
-        
-        let dataSource = DeviceContactsDataSource()
-        let localSource = LocalContactsDataSource(database: database)
-        let repository = DefaultContactsRepository(deviceDataSource: dataSource, localDataSource: localSource)
-        let contactsPermissionUseCase = ContactsPermissionUseCase(repository: repository)
         let fetchDeviceContactsUseCase = FetchDeviceContactsUseCase(repository: repository)
         let groupVynkContactsUseCase = GroupVynkContactsUseCase()
         let syncContactsUseCase = SyncContactsUseCase(repository: repository)
         return ContactsViewModel(
-            contactsPermissionUseCase: contactsPermissionUseCase,
+            contactsPermissionUseCase: makeContactsPermissionUseCase(),
             fetchDeviceContactsUseCase: fetchDeviceContactsUseCase,
             groupVynkContactsUseCase: groupVynkContactsUseCase,
             syncContactsUseCase: syncContactsUseCase
         )
     }
     
+    func makeContactsPermissionUseCase()->ContactsPermissionUseCase{
+        ContactsPermissionUseCase(repository: repository)
+    }
+
     @ViewBuilder
     func makeContactsView(onInviteTap: @escaping (DeviceContact)->()) -> ContactsView {
         ContactsView(

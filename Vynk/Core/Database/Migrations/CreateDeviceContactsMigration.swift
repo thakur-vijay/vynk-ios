@@ -11,7 +11,7 @@ struct CreateDeviceContactsMigration: DatabaseMigration {
     
     let identifier = "create_device_contacts"
 
-    func migrate(_ db: Database) throws {
+    nonisolated func migrate(_ db: Database) throws {
         try db.create(table: "device_contacts", ifNotExists: true) { table in
             table.column("id", .text).primaryKey()
             table.column("full_name", .text).notNull()

@@ -64,7 +64,7 @@ struct CustomContextMenu<Content: View, Preview: View>: UIViewRepresentable {
 
         private func targetedPreview(for interaction: UIContextMenuInteraction) -> UITargetedPreview? {
             guard let view = interaction.view else { return nil }
-            view.layer.cornerRadius = 0
+            
             let params = UIPreviewParameters()
             params.backgroundColor = .clear
             params.visiblePath = UIBezierPath(

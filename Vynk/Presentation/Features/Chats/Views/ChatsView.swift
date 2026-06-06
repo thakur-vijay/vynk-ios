@@ -19,6 +19,11 @@ struct ChatsView: View{
     var body: some View {
         NavigationStack(path: $viewModel.router.path) {
             List {
+                if !viewModel.isPermissionStatusCardHidden {
+                    ContactsPermissionCard {
+                        viewModel.hidePermissionStatusCard()
+                    }
+                }
                 ChatFilterBarView()
                     .listRowSeparator(.hidden)
                     .listRowInsets(.all, 0)
@@ -62,7 +67,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    viewModel.router.presentSheet(.newChat)
+                    viewModel.router.presentSheet(.mediaPicker)
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
@@ -77,15 +82,22 @@ struct ChatsView: View{
 
                 }
             }
-            .sheet(item: $viewModel.router.activeSheet) { sheet in
+            .sheet(item: $viewModel.router.activeSheet, onDismiss: {
+                viewModel.handlePermissionStatusCard()
+            }) { sheet in
                 switch sheet {
                 case .newChat:
                     appDiContainer.chatsDIContainer.makeNewChatBottomSheet {
                         viewModel.router.dismissSheet()
                     }
+                case .mediaPicker:
+                    appDiContainer.mediaPickerDIContainer.makeView()
                 }
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
+            .task {
+                viewModel.handlePermissionStatusCard()
+            }
         }
     }
     

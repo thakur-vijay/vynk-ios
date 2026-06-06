@@ -15,6 +15,6 @@ struct LoginUseCase {
     }
     
     func execute() async throws {
-        try await repository.login()
+        _ = try await repository.login()
     }
 }

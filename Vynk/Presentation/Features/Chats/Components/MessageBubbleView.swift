@@ -103,10 +103,11 @@ struct BubbleShape: Shape {
     }
     
     private func roundedPath(in rect: CGRect) -> Path {
-        Path(
+        let radius: CGFloat = 15
+       return Path(
             UIBezierPath(
                 roundedRect: rect,
-                cornerRadius: AppRadius.messageBubble
+                cornerRadius: radius
             ).cgPath
         )
     }

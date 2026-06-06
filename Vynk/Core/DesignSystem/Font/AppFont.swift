@@ -51,7 +51,7 @@ enum AppFont {
     // MARK: - Body
     
     static let body = Font.system(
-        size: 17,
+        size: 16,
         weight: .regular
     )
     

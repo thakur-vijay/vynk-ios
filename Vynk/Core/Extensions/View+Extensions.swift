@@ -32,7 +32,7 @@ extension View {
     @ViewBuilder
     func frame(_ size: CGSize)-> some View {
         self
-            .frame(width: size.width, height: size.height)
+            .frame(width: max(size.width, 0), height: max(size.height, 0))
     }
     
     func withoutAnimation(action: @escaping ()->()) {

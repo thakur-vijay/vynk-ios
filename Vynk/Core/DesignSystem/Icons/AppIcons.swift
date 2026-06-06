@@ -73,6 +73,7 @@ enum AppIcons {
     static let grid = "square.grid.2x2"
     static let rightChevron = "chevron.right"
     static let broadcast = "megaphone"
+    static let warning = "exclamationmark.triangle"
     
     enum ChatAction {
         static let pin = "pin.fill"

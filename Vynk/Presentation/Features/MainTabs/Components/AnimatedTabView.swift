@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct AnimatedTabView<Selection: AnimatedTabSelectionProtocol, Content: TabContent<Selection>>: View {
-    @Binding var selection: Selection
-    @TabContentBuilder<Selection> var content: ()->Content
-    var effects: (Selection)-> [any DiscreteSymbolEffect & SymbolEffect]
-    @State private var imageViews: [Selection: UIImageView] = [:]
+struct AnimatedTabView<Content: TabContent<AnimatedTab>>: View {
+    @Binding var selection: AnimatedTab
+    @TabContentBuilder<AnimatedTab> var content: ()->Content
+    var effects: (AnimatedTab)-> [any DiscreteSymbolEffect & SymbolEffect]
+    @State private var imageViews: [AnimatedTab: UIImageView] = [:]
     
     var body: some View {
         TabView(selection: $selection) {
@@ -35,8 +35,8 @@ struct AnimatedTabView<Selection: AnimatedTabSelectionProtocol, Content: TabCont
     }
 }
 
-fileprivate struct ExtractImageViewsFromTabView<Value: AnimatedTabSelectionProtocol>: UIViewRepresentable {
-    var result: ([Value: UIImageView])->()
+fileprivate struct ExtractImageViewsFromTabView: UIViewRepresentable {
+    var result: ([AnimatedTab: UIImageView])->()
     func makeUIView(context: Context) -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
@@ -61,8 +61,8 @@ fileprivate struct ExtractImageViewsFromTabView<Value: AnimatedTabSelectionProto
             .filter { $0.image?.isSymbolImage ?? false }
             .filter { isiOS26 ? ($0.tintColor == tabBar.tintColor) : true}
         
-        var dict: [Value: UIImageView] = [:]
-        for tab in Value.allCases {
+        var dict: [AnimatedTab: UIImageView] = [:]
+        for tab in AnimatedTab.allCases {
             if let imageView = imageViews.first(where: { $0.description.contains(tab.symbolImage)}){
                 dict[tab] = imageView
             }

@@ -16,10 +16,16 @@ struct DialogAction: Identifiable {
     let role: ButtonRole?
 
     let action: () -> Void
+    
+    init(title: String, role: ButtonRole? = nil, action: @escaping () -> Void = {}) {
+        self.title = title
+        self.role = role
+        self.action = action
+    }
 
 }
 
-struct ConfirmationDialogConfig {
+struct DialogConfig {
 
     let title: String
 

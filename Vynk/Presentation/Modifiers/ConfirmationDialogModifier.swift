@@ -10,7 +10,7 @@ import SwiftUI
 extension View {
     
     @ViewBuilder
-    func confirmationDialog(_ config: ConfirmationDialogConfig, isPresented: Binding<Bool>)-> some View {
+    func confirmationDialog(_ config: DialogConfig, isPresented: Binding<Bool>)-> some View {
         self
             .confirmationDialog(config.title, isPresented: isPresented) {
                 ForEach(config.actions) { action in

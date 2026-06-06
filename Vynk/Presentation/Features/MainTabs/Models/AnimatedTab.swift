@@ -7,12 +7,7 @@
 
 import Foundation
 
-protocol AnimatedTabSelectionProtocol: CaseIterable, Hashable{
-    var title: String { get }
-    var symbolImage: String { get }
-}
-
-enum AnimatedTab: AnimatedTabSelectionProtocol {
+enum AnimatedTab: String, CaseIterable, Hashable {
     case updates
     case calls
     case communities

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SettingsRowID: RowIDProtocol{
+enum SettingsRowID: @MainActor RowIDProtocol{
     case lists
     case broadcastMessages
     case starred

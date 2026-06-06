@@ -30,14 +30,15 @@ final class AppDIContainer {
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {
-        ContactsDIContainer(database: appDatabase)
+        ContactsDIContainer(database: appDatabase, repository: contactsRepository)
     }()
     
     lazy var chatsDIContainer: ChatsDIContainer = {
         ChatsDIContainer(
             contactsDIContainer: contactsDIContainer,
             addContactDIContainer: addContactDIContainer,
-            inviteDIContainer: inviteDIContainer
+            inviteDIContainer: inviteDIContainer,
+            appPreferences: appPreferences
         )
     }()
     
@@ -46,11 +47,37 @@ final class AppDIContainer {
     }()
     
     lazy var addContactDIContainer: AddContactDIContainer = {
-        AddContactDIContainer(countryPickerDIContainer: countryPickerDIContainer, database: appDatabase)
+        AddContactDIContainer(
+            countryPickerDIContainer: countryPickerDIContainer,
+            repository: contactsRepository,
+            database: appDatabase
+        )
     }()
 
     lazy var inviteDIContainer: InviteDIContainer = {
         InviteDIContainer()
     }()
     
+    lazy var appPreferences: AppPreferences = {
+        AppPreferences()
+    }()
+    
+    lazy var deviceContactsDataSource: DeviceContactsDataSource = {
+        DeviceContactsDataSource()
+    }()
+
+    lazy var localContactsDataSource: LocalContactsDataSource = {
+        LocalContactsDataSource(database: appDatabase)
+    }()
+
+    lazy var contactsRepository: ContactsRepository = {
+        DefaultContactsRepository(
+            deviceDataSource: deviceContactsDataSource,
+            localDataSource: localContactsDataSource
+        )
+    }()
+    
+    lazy var mediaPickerDIContainer: MediaPickerDIContainer = {
+        MediaPickerDIContainer()
+    }()
 }

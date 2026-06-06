@@ -33,9 +33,9 @@ final class NewChatDIContainer {
 
     }
 
-    func makeAddContactView() -> AddContactView {
+    func makeAddContactView(onClose: @escaping ()->()) -> AddContactView {
 
-        addContactDIContainer.makeAddContactView()
+        addContactDIContainer.makeAddContactView(onClose: onClose)
 
     }
 

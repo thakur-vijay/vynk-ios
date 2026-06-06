@@ -10,32 +10,34 @@ import SwiftUI
 final class AddContactDIContainer {
     
     private let countryPickerDIContainer: CountryPickerDIContainer
+    private let repository: ContactsRepository
     private let database: AppDatabase
     
     init(
         countryPickerDIContainer: CountryPickerDIContainer,
+        repository: ContactsRepository,
         database: AppDatabase
     ) {
         self.countryPickerDIContainer = countryPickerDIContainer
+        self.repository = repository
         self.database = database
     }
 
-    func makeViewModel() -> AddContactViewModel {
-        let dataSource = DeviceContactsDataSource()
-        let localSource = LocalContactsDataSource(database: database)
-        let repository = DefaultContactsRepository(deviceDataSource: dataSource, localDataSource: localSource)
+    func makeViewModel(permissionStatus: ContactsPermissionStatus) -> AddContactViewModel {
         let useCase = SaveContactUseCase(repository: repository)
 
         return AddContactViewModel(
             addContactUseCase: useCase,
-            getCurrentCountryUseCase: countryPickerDIContainer.makeGetCurrentCountryUseCase()
+            getCurrentCountryUseCase: countryPickerDIContainer.makeGetCurrentCountryUseCase(),
+            permissionStatus: permissionStatus
         )
     }
 
-    func makeAddContactView() -> AddContactView {
+    func makeAddContactView(onClose: @escaping ()->()) -> AddContactView {
         AddContactView(
-            viewModel: makeViewModel(),
-            diContainer: self
+            viewModel: makeViewModel(permissionStatus: repository.permissionStatus()),
+            diContainer: self,
+            onClose: onClose
         )
     }
     

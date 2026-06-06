@@ -50,4 +50,6 @@ enum AppSizes {
         height: 184
 
     )
+    
+    static let mediaSizeMd: CGSize = .init(width: 60, height: 60)
 }

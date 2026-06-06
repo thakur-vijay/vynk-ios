@@ -45,6 +45,7 @@ struct NewChatBottomSheet: View {
                     router.presentSheet(.invite(phone))
                 }
             }
+            .listSectionSpacing(.custom(0))
             .background(AppColors.backgroundSecondary)
             .navigationTitle("New chat")
             .navigationBarTitleDisplayMode(.inline)
@@ -61,10 +62,11 @@ struct NewChatBottomSheet: View {
             .sheet(item: $router.activeSheet) { sheet in
                 switch sheet{
                 case .addContact:
-                    diContainer.makeAddContactView()
+                    diContainer.makeAddContactView{
+                        router.dismissSheet()
+                    }
                 case .invite(let phone):
                     diContainer.makeInviteView(phone: phone) {
-//                        router.dismissSheet()
                     }
                 }
             }

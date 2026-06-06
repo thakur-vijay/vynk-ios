@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 final class AuthDIContainer {
     private let apiClient: APIClient
     
