@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 @MainActor
 @Observable
@@ -20,7 +21,7 @@ final class AlbumDetailViewModel {
         self.thumbnailCache = thumbnailCache
     }
     
-    var assets: [MediaAsset] = []
+    var assets: [MediaModel] = []
     var album: MediaAlbum
     
     func loadThumbnailIfNeeded(assetId: String, size: CGSize) async-> UIImage?{
@@ -51,6 +52,12 @@ final class AlbumDetailViewModel {
     
     func loadImage(assetId: String)async-> UIImage? {
        return try? await mediaLibraryUseCase.fetchImage(
+            assetId: assetId,
+        )
+    }
+    
+    func loadVideoPlayerItem(assetId: String)async-> AVPlayerItem? {
+       return await mediaLibraryUseCase.loadVideoPlayerItem(
             assetId: assetId,
         )
     }

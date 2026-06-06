@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 @MainActor
 @Observable
@@ -26,7 +27,7 @@ final class MediaPickerViewModel {
         self.thumbnailCache = thumbnailCache
     }
     
-    var assets: [MediaAsset] = []
+    var assets: [MediaModel] = []
     var albums: [MediaAlbum] = []
     var selectedType: MediaViewType = .photos
     
@@ -58,6 +59,12 @@ final class MediaPickerViewModel {
     
     func loadImage(assetId: String)async-> UIImage? {
        return try? await mediaLibraryUseCase.fetchImage(
+            assetId: assetId,
+        )
+    }
+    
+    func loadVideoPlayerItem(assetId: String)async-> AVPlayerItem? {
+       return await mediaLibraryUseCase.loadVideoPlayerItem(
             assetId: assetId,
         )
     }

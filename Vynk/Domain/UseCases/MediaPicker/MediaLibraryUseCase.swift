@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 final class MediaLibraryUseCase {
     private let repository: MediaLibraryRepository
@@ -19,12 +20,14 @@ final class MediaLibraryUseCase {
         return repository.fetchAlbums()
     }
     
-    func fetchMediaAssets()async throws ->[MediaAsset] {
-        return try await repository.fetchAssets()
+    func fetchMediaAssets()async throws ->[MediaModel] {
+        let assets = try await repository.fetchAssets()
+        return assets.compactMap { MediaAssetMapper.map($0)}
     }
     
-    func fetchAlbumAssets(albumId: String)async throws ->[MediaAsset] {
-        return try await repository.fetchAssets(albumId: albumId)
+    func fetchAlbumAssets(albumId: String)async throws ->[MediaModel] {
+        let assets = try await repository.fetchAssets(albumId: albumId)
+        return assets.compactMap { MediaAssetMapper.map($0) }
     }
     
     func fetchThumbnail(assetId: String, size: CGSize) async throws-> UIImage? {
@@ -33,5 +36,9 @@ final class MediaLibraryUseCase {
     
     func fetchImage(assetId: String) async throws-> UIImage? {
         return try await repository.loadImage(assetId: assetId)
+    }
+    
+    func loadVideoPlayerItem(assetId: String) async -> AVPlayerItem? {
+        return await repository.loadVideoPlayerItem(assetId: assetId)
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import Photos
+import AVFoundation
 
 final class PhotoLibraryDataSource {
     
@@ -52,7 +53,9 @@ final class PhotoLibraryDataSource {
                     id: asset.localIdentifier,
                     mediaType: mediaType,
                     duration: asset.mediaType == .video ? asset.duration : nil,
-                    creationDate: asset.creationDate
+                    creationDate: asset.creationDate,
+                    pixelWidth: asset.pixelWidth,
+                    pixelHeight: asset.pixelHeight
                 )
                 
             )
@@ -126,6 +129,32 @@ final class PhotoLibraryDataSource {
             
         }
         
+    }
+
+    func loadVideoPlayerItem(assetId: String) async -> AVPlayerItem? {
+        guard let asset = fetchAsset(id: assetId),
+              asset.mediaType == .video else {
+            return nil
+        }
+
+        return await withCheckedContinuation { continuation in
+            let options = PHVideoRequestOptions()
+            options.deliveryMode = .automatic
+            options.isNetworkAccessAllowed = true
+
+            imageManager.requestPlayerItem(
+                forVideo: asset,
+                options: options
+            ) { playerItem, info in
+                if let error = info?[PHImageErrorKey] as? Error {
+                    AppLogger.error(error.localizedDescription, tag: "VideoPreview")
+                    continuation.resume(returning: nil)
+                    return
+                }
+
+                continuation.resume(returning: playerItem)
+            }
+        }
     }
     
     func fetchAlbums() -> [MediaAlbum] {
@@ -227,7 +256,9 @@ final class PhotoLibraryDataSource {
                     id: asset.localIdentifier,
                     mediaType: mediaType,
                     duration: asset.mediaType == .video ? asset.duration : nil,
-                    creationDate: asset.creationDate
+                    creationDate: asset.creationDate,
+                    pixelWidth: asset.pixelWidth,
+                    pixelHeight: asset.pixelHeight
                 )
             )
         }

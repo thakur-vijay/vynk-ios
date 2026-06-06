@@ -32,6 +32,7 @@ enum AppIcons {
     static let rupee = "indianrupeesign.circle"
     static let phone = "phone"
     static let video = "video"
+    static let videoFill = "video.fill"
     static let send = "paperplane.fill"
     static let doubleTick = "double.tick"
     static let reply = "arrowshape.turn.up.left"

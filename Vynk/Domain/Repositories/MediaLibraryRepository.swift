@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol MediaLibraryRepository {
 
@@ -23,6 +24,10 @@ protocol MediaLibraryRepository {
     func loadImage(
         assetId: String,
     ) async throws -> UIImage?
+    
+    func loadVideoPlayerItem(
+        assetId: String,
+    ) async -> AVPlayerItem?
 
     func fetchAlbums() -> [MediaAlbum]
     

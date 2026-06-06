@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MediaCellView: View {
     let size: CGSize
+    var asset: MediaModel?
     var cornerRadius: CGFloat = 0
     let loadThumbnail: ()async-> UIImage?
     
@@ -24,6 +25,27 @@ struct MediaCellView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(size)
+                        .overlay(alignment: .bottom){
+                            if let asset, asset.mediaType == .video {
+                                HStack {
+                                    Image(systemName: AppIcons.videoFill)
+                                        Spacer()
+                                    Text(asset.duration)
+                                }
+                                .font(AppFont.captionSemibold)
+                                .foregroundStyle(AppColors.white)
+                                .padding(AppSpacing.sm)
+                                .vSpacing(.bottom)
+                                .background {
+                                    LinearGradient(colors: [
+                                        .black,
+                                        .black.opacity(0.5),
+                                        .black.opacity(0.3),
+                                        .black.opacity(0.1)
+                                    ], startPoint: .bottom, endPoint: .top)
+                                }
+                            }
+                        }
                         .clipShape(.rect(cornerRadius: cornerRadius, style: .continuous))
                         .contentShape(.rect)
                 }

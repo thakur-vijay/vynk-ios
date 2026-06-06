@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MediaGridView: View {
-    let assets: [MediaAsset]
+    let assets: [MediaModel]
     let loadThumbnailIfNeed: (_ assetId: String, _ size: CGSize)async -> UIImage?
     let loadImage: (_ assetId: String)async -> UIImage?
+    let loadVideoPlayerItem: (_ assetId: String)async -> AVPlayerItem?
     
     @Environment(\.displayScale) private var displayScale
     var body: some View {
@@ -28,18 +30,28 @@ struct MediaGridView: View {
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(spacing: 2), count: 4), spacing: 2) {
                     ForEach(assets) { asset in
-                        MediaCellView(size: pointSize) {
+                    
+                        MediaCellView(size: pointSize, asset: asset) {
                             await loadThumbnailIfNeed(asset.id, pixelSize)
                         }
-                        .contextMenu {
-                            Button("Select") {
-                                
-                            }
-                        } preview: {
-                            MediaPreview {
+                        .customContextMenu(actions: [], cornerRadius: 0) {
+                            MediaPreview(asset: asset){
                                 await loadImage(asset.id)
+                            } loadVideoPlayerItem: {
+                                await loadVideoPlayerItem(asset.id)
                             }
                         }
+//                        .contextMenu {
+//                            Button("Select") {
+//                                
+//                            }
+//                        } preview: {
+//                            MediaPreview(asset: asset){
+//                                await loadImage(asset.id)
+//                            } loadVideoPlayerItem: {
+//                                await loadVideoPlayerItem(asset.id)
+//                            }
+//                        }
 
                     }
                 }

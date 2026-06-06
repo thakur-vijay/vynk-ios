@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ChatsView: View{
     @State private var viewModel: ChatsViewModel
+    @State private var router: ChatsRouter
     
-    init(viewModel: ChatsViewModel) {
+    
+    init(viewModel: ChatsViewModel, router: ChatsRouter) {
         _viewModel = State(wrappedValue: viewModel)
+        _router = State(wrappedValue: router)
     }
     
     @Environment(\.appDIContainer) private var appDiContainer
     
     var body: some View {
-        NavigationStack(path: $viewModel.router.path) {
+        NavigationStack(path: $router.path) {
             List {
                 if !viewModel.isPermissionStatusCardHidden {
                     ContactsPermissionCard {
@@ -56,7 +59,7 @@ struct ChatsView: View{
                         .listRowInsets(.all, 0)
                         .contentShape(.rect)
                         .onTapGesture {
-                            viewModel.openChat(model)
+                            router.push(.detail(model))
                         }
                 }
                 
@@ -67,7 +70,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    viewModel.router.presentSheet(.mediaPicker)
+                    router.presentSheet(.mediaPicker)
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
@@ -75,23 +78,25 @@ struct ChatsView: View{
                 switch route {
                 case .detail(let model):
                     ChatDetailView(model: model, viewModel: .init()){
-                        viewModel.openUserDetail()
+                        router.push(.userDetail)
                     }
                 case .userDetail:
                     UserProfileView(viewModel: .init())
 
                 }
             }
-            .sheet(item: $viewModel.router.activeSheet, onDismiss: {
+            .sheet(item: $router.activeSheet, onDismiss: {
                 viewModel.handlePermissionStatusCard()
             }) { sheet in
                 switch sheet {
                 case .newChat:
                     appDiContainer.chatsDIContainer.makeNewChatBottomSheet {
-                        viewModel.router.dismissSheet()
+                        router.dismissSheet()
                     }
                 case .mediaPicker:
-                    appDiContainer.mediaPickerDIContainer.makeView()
+                    appDiContainer.mediaPickerDIContainer.makeView {
+                        router.dismissSheet()
+                    }
                 }
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
@@ -102,7 +107,7 @@ struct ChatsView: View{
     }
     
     var toolbarVisiblity: Visibility {
-        return viewModel.router.path.isEmpty ? .visible : .hidden
+        return router.path.isEmpty ? .visible : .hidden
     }
     
     @ViewBuilder

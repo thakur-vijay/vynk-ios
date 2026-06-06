@@ -19,6 +19,8 @@ struct AlbumDetailView: View {
             await viewModel.loadThumbnailIfNeeded(assetId: assetId, size: size)
         } loadImage: { assetId in
             await viewModel.loadImage(assetId: assetId)
+        } loadVideoPlayerItem: { assetId in
+            await viewModel.loadVideoPlayerItem(assetId: assetId)
         }
         .navigationTitle(viewModel.album.title)
         .navigationBarTitleDisplayMode(.inline)

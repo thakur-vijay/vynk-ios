@@ -25,11 +25,12 @@ final class MediaPickerDIContainer {
 
     private lazy var thumbnailCache = MediaThumbnailCache()
 
-    func makeView() -> MediaPicker {
+    func makeView(onClose: @escaping ()->()) -> MediaPicker {
         MediaPicker(
             viewModel: makeViewModel(),
             router: MediaRouter(),
-            diContaier: self
+            diContaier: self,
+            onClose: onClose
         )
     }
 

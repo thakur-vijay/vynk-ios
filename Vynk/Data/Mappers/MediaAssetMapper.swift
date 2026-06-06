@@ -8,5 +8,17 @@
 import Foundation
 
 enum MediaAssetMapper {
-    
+    static func map(
+        _ asset: MediaAsset
+    ) -> MediaModel {
+        MediaModel(
+            id: asset.id,
+            mediaType: asset.mediaType,
+            duration: DurationFormatter.formatDuration(duration: asset.duration),
+            creationDate: asset.creationDate ?? .now,
+            pixelWidth: asset.pixelWidth,
+            pixelHeight: asset.pixelHeight,
+            previewSize: asset.previewSize()
+        )
+    }
 }

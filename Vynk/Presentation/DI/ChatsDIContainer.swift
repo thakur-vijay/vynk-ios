@@ -30,12 +30,11 @@ final class ChatsDIContainer {
         let router = ChatsRouter()
 
         let viewModel = ChatsViewModel(
-            router: router,
             contactsPermissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
             appPreferences: appPreferences
         )
 
-        return ChatsView(viewModel: viewModel)
+        return ChatsView(viewModel: viewModel, router: router)
 
     }
 

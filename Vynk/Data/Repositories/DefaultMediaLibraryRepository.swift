@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 final class DefaultMediaLibraryRepository: MediaLibraryRepository {
     private let dataSource: PhotoLibraryDataSource
@@ -40,6 +41,10 @@ final class DefaultMediaLibraryRepository: MediaLibraryRepository {
     
     func loadImage(assetId: String) async throws -> UIImage? {
         return try await dataSource.loadImage(assetId: assetId)
+    }
+    
+    func loadVideoPlayerItem(assetId: String) async -> AVPlayerItem? {
+        return await dataSource.loadVideoPlayerItem(assetId: assetId)
     }
     
     func fetchAlbums() -> [MediaAlbum] {
