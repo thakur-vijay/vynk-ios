@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChatsToolbarContent: ToolbarContent {
     var onAddTap:()->()
+    var onCameraTap: ()->()
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
             Menu {
@@ -35,9 +36,7 @@ struct ChatsToolbarContent: ToolbarContent {
                 Image(systemName: AppIcons.rupeeFill)
             }
             
-            Button {
-                
-            } label: {
+            Button(action: onCameraTap){
                 Image(systemName: AppIcons.camera)
             }
         }

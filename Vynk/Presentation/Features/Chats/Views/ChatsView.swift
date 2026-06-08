@@ -70,7 +70,9 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    router.presentSheet(.mediaPicker)
+                    router.presentSheet(.newChat)
+                } onCameraTap: {
+                    router.presentFullScreenCover(.camera)
                 }
             }
             .searchable(text: $viewModel.searchText, isPresented: $viewModel.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
@@ -97,6 +99,13 @@ struct ChatsView: View{
                     appDiContainer.mediaPickerDIContainer.makeView {
                         router.dismissSheet()
                     }
+                }
+            }
+            .fullScreenCover(item: $router.activeFullScreenCover){ fullScreenCover in
+                switch fullScreenCover {
+                case .camera: appDiContainer.chatsDIContainer.makeCameraFullScreenCover {
+                    router.dismissFullScreenCover()
+                }
                 }
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)

@@ -38,6 +38,7 @@ final class AppDIContainer {
             contactsDIContainer: contactsDIContainer,
             addContactDIContainer: addContactDIContainer,
             inviteDIContainer: inviteDIContainer,
+            cameraDIContainer: cameraDIContainer,
             appPreferences: appPreferences
         )
     }()
@@ -93,5 +94,9 @@ final class AppDIContainer {
     
     lazy var appLockManager: AppLockManager = {
         AppLockManager(preferences: appPreferences)
+    }()
+    
+    lazy var cameraDIContainer: CameraDIContainer = {
+        CameraDIContainer()
     }()
 }

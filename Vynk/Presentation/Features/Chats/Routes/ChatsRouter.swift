@@ -12,6 +12,7 @@ import SwiftUI
 final class ChatsRouter {
     var path = NavigationPath()
     var activeSheet: ChatsSheet?
+    var activeFullScreenCover: ChatsFullScreenCover?
     
     func push(_ route: ChatsRoute) {
         path.append(route)
@@ -34,5 +35,13 @@ final class ChatsRouter {
     
     func dismissSheet() {
         activeSheet = nil
+    }
+    
+    func presentFullScreenCover(_ fullScreenCover: ChatsFullScreenCover) {
+        activeFullScreenCover = fullScreenCover
+    }
+    
+    func dismissFullScreenCover() {
+        activeFullScreenCover = nil
     }
 }

@@ -418,6 +418,7 @@
 				DEVELOPMENT_TEAM = 9BQY66D558;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Vynk wants to access your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Vynk want to access your contacts for chats";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock Vynk.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Vynk wants access to your photo library";
@@ -453,6 +454,7 @@
 				DEVELOPMENT_TEAM = 9BQY66D558;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Vynk wants to access your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Vynk want to access your contacts for chats";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock Vynk.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Vynk wants access to your photo library";

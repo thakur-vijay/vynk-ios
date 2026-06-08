@@ -5,23 +5,26 @@
 //  Created by Vijay Thakur on 31/05/26.
 //
 
-import SwiftUI
+import Foundation
 
 final class ChatsDIContainer {
     private let contactsDIContainer: ContactsDIContainer
     private let addContactDIContainer: AddContactDIContainer
     private let inviteDIContainer: InviteDIContainer
+    private let cameraDIContainer: CameraDIContainer
     private let appPreferences: AppPreferences
     
     init(
         contactsDIContainer: ContactsDIContainer,
         addContactDIContainer: AddContactDIContainer,
         inviteDIContainer: InviteDIContainer,
+        cameraDIContainer: CameraDIContainer,
         appPreferences: AppPreferences
     ) {
         self.contactsDIContainer = contactsDIContainer
         self.addContactDIContainer = addContactDIContainer
         self.inviteDIContainer = inviteDIContainer
+        self.cameraDIContainer = cameraDIContainer
         self.appPreferences = appPreferences
     }
 
@@ -38,8 +41,6 @@ final class ChatsDIContainer {
 
     }
 
-    
-
     func makeNewChatBottomSheet(
         onClose: @escaping () -> Void
     ) -> NewChatBottomSheet{
@@ -49,6 +50,10 @@ final class ChatsDIContainer {
             diContainer: newChatDIContainer,
             onClose: onClose
         )
+    }
+    
+    func makeCameraFullScreenCover(onClose: @escaping ()->())-> CameraView {
+        return cameraDIContainer.makeView(onClose: onClose)
     }
 
     lazy var newChatDIContainer: NewChatDIContainer = {
