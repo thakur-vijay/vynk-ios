@@ -43,7 +43,9 @@ final class AppDIContainer {
     }()
     
     lazy var settingsDIContainer: SettingsDIContainer = {
-        SettingsDIContainer()
+        SettingsDIContainer(
+            appLockManager: appLockManager
+        )
     }()
     
     lazy var countryPickerDIContainer: CountryPickerDIContainer = {
@@ -83,5 +85,13 @@ final class AppDIContainer {
     
     lazy var mediaPickerDIContainer: MediaPickerDIContainer = {
         MediaPickerDIContainer()
+    }()
+    
+    lazy var appLockDIContainer: AppLockDIContainer = {
+        AppLockDIContainer(appPreferences: appPreferences)
+    }()
+    
+    lazy var appLockManager: AppLockManager = {
+        AppLockManager(preferences: appPreferences)
     }()
 }

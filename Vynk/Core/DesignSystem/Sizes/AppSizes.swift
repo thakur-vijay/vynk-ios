@@ -52,4 +52,6 @@ enum AppSizes {
     )
     
     static let mediaSizeMd: CGSize = .init(width: 60, height: 60)
+    
+    static let buttonWidth: CGFloat = 220
 }

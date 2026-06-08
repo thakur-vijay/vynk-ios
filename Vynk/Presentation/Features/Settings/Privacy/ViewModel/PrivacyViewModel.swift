@@ -52,14 +52,14 @@ final class PrivacyViewModel {
             ]
         ),
         .init(
-            footer: "Require Face ID to unlock WhatsApp.",
+            footer: "Require Face ID to unlock Vynk.",
             rows: [
                 .init(id: .appLock, title: "App lock", kind: .navigation),
             ]
         ),
         .init(
             rows: [
-                .init(id: .appLock, title: "Chat lock", kind: .navigation),
+                .init(id: .chatLock, title: "Chat lock", kind: .navigation),
             ]
         ),
         .init(

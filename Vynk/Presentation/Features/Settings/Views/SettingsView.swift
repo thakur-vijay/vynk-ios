@@ -24,8 +24,10 @@ struct SettingsView: View {
             List {
                 userInfo
                 ForEach(viewModel.sections) { section in
-                    SectionView(section: section) { rowID in
-                        router.push(.row(rowID))
+                    SectionView(section: section) { rowID, kind in
+                        if kind == .navigation {
+                            router.push(.row(rowID))
+                        }
                     }
                 }
             }
@@ -48,6 +50,7 @@ struct SettingsView: View {
                 diContainer.makeDestination(for: route)
             }
         }
+        .environment(router)
     }
     
     var userInfo: some View {

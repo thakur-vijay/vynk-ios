@@ -10,4 +10,5 @@ import Foundation
 enum SettingsRoute: Hashable {
     case profile
     case row(SettingsRowID)
+    case privacy(PrivaceRowID)
 }

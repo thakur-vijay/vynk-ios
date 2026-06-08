@@ -9,4 +9,6 @@ import Foundation
 
 enum AppPreferenceKeys {
     static let isContactsPermissionStatusCardHidden = "isContactsPermissionStatusCardHidden"
+    static let isAppLockEnabled = "isAppLockEnabled"
+    static let appLockOption = "appLockOption"
 }

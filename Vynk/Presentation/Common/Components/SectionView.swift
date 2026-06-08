@@ -9,15 +9,18 @@ import SwiftUI
 
 struct SectionView<ID: RowIDProtocol>: View {
     let section: SectionModel<ID>
+    var selection: ID?
     let toggleBinding: ((ID) -> Binding<Bool>?)?
-    let onRowTap: (_ rowID: ID) -> Void
+    let onRowTap: (_ rowID: ID, _ kind: SectionRowKind) -> Void
     init(
         section: SectionModel<ID>,
+        selection: ID? = nil,
         toggleBinding: ((ID) -> Binding<Bool>?)? = nil,
-        onRowTap: @escaping (_ rowID: ID) -> Void
+        onRowTap: @escaping (_ rowID: ID, _ kind: SectionRowKind) -> Void
         
     ) {
         self.section = section
+        self.selection = selection
         self.toggleBinding = toggleBinding
         self.onRowTap = onRowTap
     }
@@ -25,8 +28,8 @@ struct SectionView<ID: RowIDProtocol>: View {
     var body: some View {
         Section {
             ForEach(section.rows) { row in
-                SectionRowView(row: row, toggleBinding: toggleBinding?(row.id)) {
-                    onRowTap(row.id)
+                SectionRowView(row: row, toggleBinding: toggleBinding?(row.id), selection: selection) {
+                    onRowTap(row.id, row.kind)
                 }
             }
         } header: {

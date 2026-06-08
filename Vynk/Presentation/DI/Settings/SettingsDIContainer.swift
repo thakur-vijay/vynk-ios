@@ -9,6 +9,11 @@ import Foundation
 import SwiftUI
 
 final class SettingsDIContainer {
+    private let appLockManager: AppLockManager
+    
+    init(appLockManager: AppLockManager) {
+        self.appLockManager = appLockManager
+    }
     
     func makeSettingsView()->SettingsView {
         let viewModel = SettingsViewModel()
@@ -20,10 +25,12 @@ final class SettingsDIContainer {
         )
     }
     
-    func makePrivacyView()->PrivacyView {
-        let viewModel = PrivacyViewModel()
-        return PrivacyView(viewModel: viewModel)
-    }
+    ///inner containers
+    private lazy var privacyDIContainer: PrivacyDIContainer = {
+        PrivacyDIContainer(
+            appLockManager: appLockManager
+        )
+    }()
     
     @ViewBuilder
     func makeDestination(for route: SettingsRoute)-> some View {
@@ -32,9 +39,11 @@ final class SettingsDIContainer {
             Text("Profile View")
         case .row(let rowId):
             switch rowId {
-            case .privacy: makePrivacyView()
+            case .privacy: privacyDIContainer.makePrivacyView()
             default: Text("Test")
             }
+        case .privacy(let rowId):
+            privacyDIContainer.makeDestination(for: rowId)
         }
     }
 }

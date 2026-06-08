@@ -10,6 +10,7 @@ import SwiftUI
 struct SectionRowView<ID: RowIDProtocol>: View {
     let row: SectionRowModel<ID>
     let toggleBinding: Binding<Bool>?
+    var selection: ID?
     let action: ()->()
     var body: some View {
         if row.kind == .toggle {
@@ -38,6 +39,11 @@ struct SectionRowView<ID: RowIDProtocol>: View {
                         if let trailingText = row.trailingText {
                             Text(trailingText)
                                 .foregroundStyle(AppColors.contentDeemphasized)
+                        }
+                        
+                        if let selection, selection == row.id {
+                            Image(systemName: AppIcons.checkmark)
+                                .foregroundStyle(AppColors.accent)
                         }
                     }
                 }
