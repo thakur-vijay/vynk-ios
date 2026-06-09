@@ -9,9 +9,9 @@ import SwiftUI
 @preconcurrency import AVFoundation
 
 actor CameraDataSource {
-
+    
     nonisolated let session = AVCaptureSession()
-
+    
     private var videoInput: AVCaptureDeviceInput?
     private let photoOutput = AVCapturePhotoOutput()
     private let movieOutput = AVCaptureMovieFileOutput()
@@ -19,46 +19,51 @@ actor CameraDataSource {
     private var isCapturingPhoto: Bool = false
     private var rotationCoordinator: AVCaptureDevice.RotationCoordinator?
     private var currentPosition: CameraPosition = .back
-
+    
+    private var videoDelegate: CameraVideoRecordingDelegate?
+    private var videoContinuation: CheckedContinuation<CameraOutput, Error>?
+    private var recordingURL: URL?
+    private var isRecordingVideo = false
+    
     func permissionStatus() -> CameraPermissionStatus {
         CameraPermissionMapper.map(
             AVCaptureDevice.authorizationStatus(for: .video)
         )
     }
-
+    
     func requestPermission() async -> CameraPermissionStatus {
         let granted = await AVCaptureDevice.requestAccess(for: .video)
         return granted ? .authorized : .denied
     }
-
+    
     func configureSession(
         mode: CameraMode,
         position: CameraPosition
     ) throws {
         session.beginConfiguration()
         defer { session.commitConfiguration() }
-
+        
         switch mode {
         case .photo:
             session.sessionPreset = .photo
         case .video:
             session.sessionPreset = .high
         }
-
+        
         session.inputs.forEach {
             session.removeInput($0)
         }
-
+        
         session.outputs.forEach {
             session.removeOutput($0)
         }
-
+        
         let input = try makeVideoInput(position: position)
-
+        
         guard session.canAddInput(input) else {
             throw CameraDataSourceError.unableToAddInput
         }
-
+        
         session.addInput(input)
         videoInput = input
         rotationCoordinator = AVCaptureDevice.RotationCoordinator(
@@ -69,100 +74,100 @@ actor CameraDataSource {
         guard session.canAddOutput(photoOutput) else {
             throw CameraDataSourceError.unableToAddOutput
         }
-
+        
         session.addOutput(photoOutput)
-
+        
         guard session.canAddOutput(movieOutput) else {
             throw CameraDataSourceError.unableToAddOutput
         }
-
+        
         session.addOutput(movieOutput)
     }
-
+    
     func switchCamera(to position: CameraPosition) throws {
         session.beginConfiguration()
         defer { session.commitConfiguration() }
-
+        
         if let videoInput {
             session.removeInput(videoInput)
         }
-
+        
         let input = try makeVideoInput(position: position)
-
+        
         guard session.canAddInput(input) else {
             throw CameraDataSourceError.unableToAddInput
         }
-
+        
         session.addInput(input)
         videoInput = input
         currentPosition = position
     }
-
+    
     func startSession() {
         guard !session.isRunning else { return }
         session.startRunning()
     }
-
+    
     func stopSession() {
         guard session.isRunning else { return }
         session.stopRunning()
     }
-
+    
     func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
-
+        
         guard !isCapturingPhoto else {
             throw CameraDataSourceError.captureInProgress
         }
-
+        
         isCapturingPhoto = true
-
+        
         return try await withCheckedThrowingContinuation {
             (
                 continuation: CheckedContinuation<CameraOutput, Error>
             ) in
-
+            
             let settings = AVCapturePhotoSettings()
             
             let avFlashMode = mapFlashMode(flashMode)
-
+            
             if photoOutput.supportedFlashModes.contains(avFlashMode) {
-
+                
                 settings.flashMode = avFlashMode
-
+                
             }
-        
+            
             let delegate = CameraPhotoCaptureDelegate { [weak self] result in
-
+                
                 Task {
                     guard let self else { return }
-
+                    
                     await self.clearPhotoDelegate()
                     await self.finishPhotoCapture()
                 }
-
+                
                 switch result {
-
+                    
                 case .success(let image):
-
+                    
                     continuation.resume(
                         returning: CameraOutput.photo(image)
                     )
-
+                    
                 case .failure(let error):
-
+                    
                     continuation.resume(
                         throwing: error
                     )
                 }
             }
-
+            
             photoDelegate = delegate
             if let connection = photoOutput.connection(with: .video),
                connection.isVideoRotationAngleSupported(
-                    rotationCoordinator?.videoRotationAngleForHorizonLevelCapture ?? 0
+                rotationCoordinator?.videoRotationAngleForHorizonLevelCapture ?? 0
                ) {
                 connection.videoRotationAngle =
-                    rotationCoordinator?.videoRotationAngleForHorizonLevelCapture ?? 0
+                rotationCoordinator?.videoRotationAngleForHorizonLevelCapture ?? 0
             }
             if let connection = photoOutput.connection(with: .video), connection.isVideoMirroringSupported {
                 switch currentPosition {
@@ -179,25 +184,63 @@ actor CameraDataSource {
         }
     }
     
-    func startRecording()async throws {
+    func startRecording() throws {
+        guard !isRecordingVideo else {
+            throw CameraDataSourceError.recordingInProgress
+        }
+
+        guard !movieOutput.isRecording else {
+            throw CameraDataSourceError.recordingInProgress
+        }
+
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+            .appendingPathExtension("mov")
+
+        let delegate = CameraVideoRecordingDelegate { [weak self] result in
+            Task {
+                await self?.finishVideoRecording(result)
+            }
+        }
+
+        videoDelegate = delegate
+        recordingURL = url
+        isRecordingVideo = true
+        movieOutput.startRecording(
+            to: url,
+            recordingDelegate: delegate
+        )
     }
     
     func stopRecording() async throws -> CameraOutput {
-        return .video(.init(string: "")!)
-    }
+        guard isRecordingVideo else {
+            throw CameraDataSourceError.notRecording
+        }
+        guard movieOutput.isRecording else {
+            throw CameraDataSourceError.notRecording
+        }
+        
+        return try await withCheckedThrowingContinuation {(
+            continuation: CheckedContinuation<CameraOutput, Error>
+        ) in
+            videoContinuation = continuation
+            movieOutput.stopRecording()
+        }
 
+    }
+    
     private func makeVideoInput(
         position: CameraPosition
     ) throws -> AVCaptureDeviceInput {
         let devicePosition: AVCaptureDevice.Position
-
+        
         switch position {
         case .front:
             devicePosition = .front
         case .back:
             devicePosition = .back
         }
-
+        
         guard let device = AVCaptureDevice.default(
             .builtInWideAngleCamera,
             for: .video,
@@ -205,7 +248,7 @@ actor CameraDataSource {
         ) else {
             throw CameraDataSourceError.cameraUnavailable
         }
-
+        
         return try AVCaptureDeviceInput(device: device)
     }
     
@@ -213,13 +256,15 @@ actor CameraDataSource {
         photoDelegate = nil
     }
     
+    private func clearVideoDelegate(){
+        videoDelegate = nil
+    }
+    
     private func finishPhotoCapture() {
         isCapturingPhoto = false
     }
     
-    private func mapFlashMode(
-        _ mode: CameraFlashMode
-    ) -> AVCaptureDevice.FlashMode {
+    private func mapFlashMode(_ mode: CameraFlashMode) -> AVCaptureDevice.FlashMode {
         switch mode {
         case .off:
             return .off
@@ -228,6 +273,28 @@ actor CameraDataSource {
         case .on:
             return .on
         }
+    }
+    
+    private func finishVideoRecording(_ result: Result<URL, Error>) {
+        let continuation = videoContinuation
+        videoContinuation = nil
+        videoDelegate = nil
+        recordingURL = nil
+        isRecordingVideo = false
+
+        switch result {
+        case .success(let url):
+            continuation?.resume(
+                returning: .video(url)
+            )
+
+        case .failure(let error):
+            continuation?.resume(
+                throwing: error
+            )
+
+        }
+
     }
 
     enum CameraDataSourceError: Error {
@@ -238,5 +305,7 @@ actor CameraDataSource {
         case photoDataMissing
         case invalidPhotoData
         case captureInProgress
+        case recordingInProgress
+        case notRecording
     }
 }

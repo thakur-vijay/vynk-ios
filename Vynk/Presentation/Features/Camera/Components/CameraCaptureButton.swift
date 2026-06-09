@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CameraCaptureButton: View {
     let mode: CameraMode
+    let isRecording: Bool
     let isDisabled: Bool
     let onCapture: ()->()
     var body: some View {
@@ -17,15 +18,41 @@ struct CameraCaptureButton: View {
                 .stroke(.white, lineWidth: 4.0)
                 .frame(AppSizes.captureButtonSize)
                 .overlay {
-                    Circle()
+                    RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(fillColor)
-                        .frame(width: AppSizes.captureButtonSize.width - 8, height: AppSizes.captureButtonSize.height - 8)
+                        .frame(frame)
                 }
         }
         .disabled(isDisabled)
+        .animation(.smooth, value: frame)
+        .animation(.smooth, value: cornerRadius)
     }
     
     var fillColor: Color {
         mode == .photo ? .white : .red
+    }
+    
+    var frame: CGSize {
+        if mode == .photo {
+            return .init(width: AppSizes.captureButtonSize.width - 8, height: AppSizes.captureButtonSize.height - 8)
+        }else {
+            if isRecording {
+                return .init(width: 34, height: 34)
+            }else {
+                return .init(width: AppSizes.captureButtonSize.width - 8, height: AppSizes.captureButtonSize.height - 8)
+            }
+        }
+    }
+    
+    var cornerRadius: CGFloat {
+        if mode == .photo {
+            return AppSizes.captureButtonSize.width - 8
+        }else {
+            if isRecording {
+                return 8
+            }else {
+                return AppSizes.captureButtonSize.width - 8
+            }
+        }
     }
 }

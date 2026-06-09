@@ -52,4 +52,13 @@ final class CameraSessionUseCase {
     func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
         try await repository.capturePhoto(flashMode: flashMode)
     }
+    
+    func startRecording() async throws {
+        try await repository.startRecording()
+    }
+
+    func stopRecording() async throws -> CameraOutput {
+        try await repository.stopRecording()
+
+    }
 }

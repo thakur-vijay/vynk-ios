@@ -25,7 +25,7 @@ struct GlassSegmentedControl: View {
                     ForEach($tabs) { $tab in
                         Text(tab.title)
                             .foregroundStyle(config.foregroundStyle)
-                            .font(.system(size: 18))
+                            .font(.system(size: 16))
                             .padding(.horizontal, (config.refractionDepth + 3))
                             .frame(height: containerSize.height)
                             .onGeometryChange(for: CGSize.self) {
@@ -45,7 +45,7 @@ struct GlassSegmentedControl: View {
                     HStack(spacing: 0) {
                         ForEach($tabs) { $tab in
                             Text(tab.title)
-                                .font(.system(size: 18))
+                                .font(.system(size: 16))
                                 .foregroundStyle(config.tint)
                                 .padding(.horizontal, (config.refractionDepth + 3))
                                 .frame(height: containerSize.height)

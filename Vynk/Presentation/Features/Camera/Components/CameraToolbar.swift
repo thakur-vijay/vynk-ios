@@ -9,11 +9,17 @@ import SwiftUI
 
 struct CameraToolbar: View {
     let flashMode: CameraFlashMode
+    let mode: CameraMode
+    let isRecording: Bool
+    let time: TimeInterval
     let onClose: ()->()
     let onFlashModeTap: ()->()
     var body: some View {
         HStack {
             CameraActionButton(icon: AppIcons.close, action: onClose)
+                .opacity(isRecording ? 0 : 1)
+                .allowsHitTesting(!isRecording)
+            
             Spacer()
             CameraActionButton(
                 icon: flashMode.symbol,
@@ -21,7 +27,14 @@ struct CameraToolbar: View {
                 background: flashMode.background,
                 action: onFlashModeTap
             )
+            .opacity(isRecording ? 0 : 1)
+            .allowsHitTesting(!isRecording)
         }
         .padding(.horizontal)
+        .overlay {
+            if mode == .video {
+                RecordingTimerView(time: time, isRecording: isRecording)
+            }
+        }
     }
 }

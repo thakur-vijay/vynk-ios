@@ -28,4 +28,5 @@ enum AppColors {
     static let accentLight = Color(.accentLight)
     static let yellow = Color.yellow
     static let secondarySurface = Color(.secondarySurface)
+    static let red = Color.red
 }

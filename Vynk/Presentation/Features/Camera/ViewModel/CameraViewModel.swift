@@ -20,6 +20,9 @@ final class CameraViewModel {
     private(set) var selectedPosition: CameraPosition
     private(set) var isCapturingPhoto: Bool = false
     private(set) var selectedFlashMode: CameraFlashMode = .off
+    private(set) var isRecordingVideo = false
+    private(set) var recordingDuration: TimeInterval = 0
+    private var recordingTask: Task<Void, Never>?
     var capturedOutput: CameraOutput?
 
     var activeIndex: Int = 1
@@ -88,8 +91,24 @@ final class CameraViewModel {
     func switchMode()async {
         selectedMode = activeIndex == 0 ? .video : .photo
     }
+    
+    func capture() async {
+        
+        switch selectedMode {
 
-    func capturePhoto() async{
+        case .photo:
+
+        await capturePhoto()
+
+        case .video:
+
+            await toggleRecording()
+
+        }
+
+    }
+
+    private func capturePhoto() async{
         guard !isCapturingPhoto else { return }
         isCapturingPhoto = true
         defer {
@@ -103,11 +122,70 @@ final class CameraViewModel {
             AppLogger.error(error.localizedDescription, tag: String(describing: self))
         }
     }
+    
+    private func toggleRecording() async {
+
+        do {
+
+            if isRecordingVideo {
+
+                let output = try await cameraSessionUseCase.stopRecording()
+
+                capturedOutput = output
+                
+                stopRecordingTimer()
+
+                isRecordingVideo = false
+
+            } else {
+
+                try await cameraSessionUseCase.startRecording()
+
+                isRecordingVideo = true
+                startRecordingTimer()
+            }
+
+        } catch {
+
+            stopRecordingTimer()
+            
+            isRecordingVideo = false
+
+            AppLogger.error(
+                error.localizedDescription,
+                tag: String(describing: self)
+            )
+        }
+    }
 
     private func startCameraSession() async throws {
         try await cameraSessionUseCase.configureSession(mode: selectedMode, position: selectedPosition)
         await cameraSessionUseCase.startSession()
         isSessionRunning = true
+    }
+    
+    private func startRecordingTimer() {
+
+        recordingTask?.cancel()
+
+        recordingDuration = 0
+
+        recordingTask = Task {
+
+            while !Task.isCancelled {
+
+                try? await Task.sleep(
+                    for: .seconds(1)
+                )
+
+                recordingDuration += 1
+            }
+        }
+    }
+    
+    private func stopRecordingTimer() {
+        recordingTask?.cancel()
+        recordingTask = nil
     }
     
     func toggleFlashMode() {

@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CameraActionsView: View {
     let mode: CameraMode
+    let position: CameraPosition
     let isCaptureDisabled: Bool
+    let isRecording: Bool
     let onCapture: ()->()
     let onSwitch: ()->()
     let onPhotosTap: ()->()
@@ -18,16 +20,29 @@ struct CameraActionsView: View {
     var body: some View {
         HStack {
             CameraActionButton(icon: AppIcons.photo, size: AppSizes.buttonHeightLG, action: onPhotosTap)
+                .opacity(isRecording ? 0 : 1)
+                .allowsHitTesting(!isRecording)
             Spacer(minLength: 0)
+            
             CameraActionButton(icon: AppIcons.filter, action: onFilterTap)
+                .opacity(isRecording ? 0 : 1)
+                .allowsHitTesting(!isRecording)
+            
             Spacer(minLength: 0)
+            
             CameraCaptureButton(
                 mode: mode,
+                isRecording: isRecording,
                 isDisabled: isCaptureDisabled,
                 onCapture: onCapture
             )
+            
             Spacer(minLength: 0)
+            
             CameraActionButton(label: "1x", action: onZoomTap)
+                .opacity((isRecording || position == .front) ? 0 : 1)
+                .allowsHitTesting(!isRecording && position == .back)
+
             Spacer(minLength: 0)
             CameraActionButton(icon: AppIcons.switchPath, size: AppSizes.buttonHeightLG, action: onSwitch)
         }
