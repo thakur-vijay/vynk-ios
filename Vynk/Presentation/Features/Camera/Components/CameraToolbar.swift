@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct CameraToolbar: View {
+    let flashMode: CameraFlashMode
     let onClose: ()->()
     let onFlashModeTap: ()->()
     var body: some View {
         HStack {
             CameraActionButton(icon: AppIcons.close, action: onClose)
             Spacer()
-            CameraActionButton(icon: AppIcons.close, action: onFlashModeTap)
+            CameraActionButton(
+                icon: flashMode.symbol,
+                iconTint: flashMode.iconTint,
+                background: flashMode.background,
+                action: onFlashModeTap
+            )
         }
         .padding(.horizontal)
     }

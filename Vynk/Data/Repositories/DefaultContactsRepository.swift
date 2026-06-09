@@ -20,8 +20,8 @@ final class DefaultContactsRepository: ContactsRepository {
         self.localDataSource = localDataSource
     }
     
-    func permissionStatus() -> ContactsPermissionStatus {
-        deviceDataSource.permissionStatus()
+    func permissionStatus()async -> ContactsPermissionStatus {
+        return await deviceDataSource.permissionStatus()
     }
     
     func requestPermission() async throws -> ContactsPermissionStatus {

@@ -8,7 +8,7 @@
 import UIKit
 import Foundation
 
-enum CameraOutput {
+enum CameraOutput: Hashable{
     case photo(UIImage)
     case video(URL)
 }

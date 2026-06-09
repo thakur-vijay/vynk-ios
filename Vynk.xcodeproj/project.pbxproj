@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		184398C42FD08D5000F2A38F /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 184398C32FD08D5000F2A38F /* GRDB */; };
-		18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 18ACE9B92FC238280098A584 /* NukeUI */; };
+		182DBE262FD7CF7A000F478C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE252FD7CF7A000F478C /* Nuke */; };
+		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
+		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18ACE9BA2FC238280098A584 /* NukeUI in Frameworks */,
-				184398C42FD08D5000F2A38F /* GRDB in Frameworks */,
+				189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */,
+				182DBE262FD7CF7A000F478C /* Nuke in Frameworks */,
+				182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +121,9 @@
 			);
 			name = Vynk;
 			packageProductDependencies = (
-				18ACE9B92FC238280098A584 /* NukeUI */,
-				184398C32FD08D5000F2A38F /* GRDB */,
+				182DBE252FD7CF7A000F478C /* Nuke */,
+				182DBE272FD7CF7A000F478C /* NukeUI */,
+				189611652FD7F4A3008AD5B8 /* GRDB */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -206,8 +209,8 @@
 			mainGroup = 1886967F2FB1AD3200A5BFA7;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */,
-				184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */,
+				182DBE242FD7CF7A000F478C /* XCRemoteSwiftPackageReference "Nuke" */,
+				189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 188696892FB1AD3200A5BFA7 /* Products */;
@@ -421,12 +424,14 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vynk wants to access your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Vynk want to access your contacts for chats";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock Vynk.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Vynk wants to access your microphone";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Vynk wants access to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,12 +462,14 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "Vynk wants to access your camera";
 				INFOPLIST_KEY_NSContactsUsageDescription = "Vynk want to access your contacts for chats";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Use Face ID to unlock Vynk.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Vynk wants to access your microphone";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Vynk wants access to your photo library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -609,15 +616,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/groue/GRDB.swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+		182DBE242FD7CF7A000F478C /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
@@ -625,18 +624,31 @@
 				minimumVersion = 13.0.6;
 			};
 		};
+		189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		184398C32FD08D5000F2A38F /* GRDB */ = {
+		182DBE252FD7CF7A000F478C /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 184398C22FD08D5000F2A38F /* XCRemoteSwiftPackageReference "GRDB" */;
-			productName = GRDB;
+			package = 182DBE242FD7CF7A000F478C /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
-		18ACE9B92FC238280098A584 /* NukeUI */ = {
+		182DBE272FD7CF7A000F478C /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 18ACE9B82FC238280098A584 /* XCRemoteSwiftPackageReference "Nuke" */;
+			package = 182DBE242FD7CF7A000F478C /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		189611652FD7F4A3008AD5B8 /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */;
+			productName = GRDB;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

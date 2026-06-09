@@ -27,11 +27,11 @@ struct ContactsView: View {
             VynkContactsGroupSection(sections: viewModel.contactsOnVynkSections)
                 .listSectionSpacing(.custom(10))
             
-            //            if viewModel.status != .authorized {
-            ContactPermissionText()
-                .listSectionSpacing(.custom(10))
+            if viewModel.status != .authorized {
+                ContactPermissionText()
+                    .listSectionSpacing(.custom(10))
+            }
             
-            //            }
             if viewModel.contacts.count > 0 {
                 InviteToVynkSection(contacts: viewModel.contacts, onInviteTap: onInviteTap)
                     .listSectionSpacing(.custom(10))

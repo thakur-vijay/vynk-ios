@@ -75,6 +75,11 @@ enum AppIcons {
     static let rightChevron = "chevron.right"
     static let broadcast = "megaphone"
     static let warning = "exclamationmark.triangle"
+    static let switchPath = "arrow.2.circlepath"
+    static let filter = "wand.and.sparkles"
+    static let flashOff = "bolt.slash.fill"
+    static let flashOn = "bolt.fill"
+    static let flashAuto = "bolt.badge.automatic.fill"
     
     enum ChatAction {
         static let pin = "pin.fill"

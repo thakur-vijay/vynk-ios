@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct CameraActionButton: View {
-    let icon: String
+    var icon: String?
+    var label: String?
     var size: CGFloat = AppSizes.buttonHeightMD
-    let action: ()->Void
+    var labelTint: Color = .yellow
+    var iconTint: Color = .white
+    var background: Color = AppColors.secondarySurface
+    var action: ()->Void
     var body: some View {
         Button(action: action) {
             Circle()
-                .fill(AppColors.contentDefault.opacity(0.7))
+                .fill(background)
                 .frame(width: size, height: size)
                 .overlay {
-                    Image(systemName: icon)
-                        .font(AppFont.title3)
-                        .fontWeight(.medium)
-                        .foregroundStyle(AppColors.white)
+                    if let icon {
+                        Image(systemName: icon)
+                            .font(AppFont.title3)
+                            .fontWeight(.medium)
+                            .foregroundStyle(iconTint)
+                    }else {
+                        Text(label ?? "")
+                            .font(AppFont.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundStyle(labelTint)
+                    }
                 }
         }
     }

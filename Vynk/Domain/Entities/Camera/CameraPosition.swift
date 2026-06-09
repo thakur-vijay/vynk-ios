@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum CameraPosition: Sendable {
-
-    case back
+enum CameraPosition: Sendable, Hashable {
 
     case front
+
+    case back
 
 }

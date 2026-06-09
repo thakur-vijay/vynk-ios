@@ -27,8 +27,8 @@ final class ChatsViewModel {
         self.appPreferences = appPreferences
     }
     
-    func handlePermissionStatusCard(){
-        let permissionStatus = contactsPermissionUseCase.status()
+    func handlePermissionStatusCard()async{
+        let permissionStatus = await contactsPermissionUseCase.status()
         let isCardAlreadyShownAndDismissed = appPreferences.isContactsPermissionStatusCardHidden
         AppLogger.info(permissionStatus, tag: String(describing: self))
         AppLogger.info(isCardAlreadyShownAndDismissed, tag: String(describing: self))

@@ -27,4 +27,5 @@ enum AppColors {
     static let statusDanger = Color(.statusDanger)
     static let accentLight = Color(.accentLight)
     static let yellow = Color.yellow
+    static let secondarySurface = Color(.secondarySurface)
 }

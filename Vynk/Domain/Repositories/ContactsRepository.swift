@@ -9,7 +9,7 @@ import Foundation
 
 protocol ContactsRepository {
     
-    func permissionStatus() -> ContactsPermissionStatus
+    func permissionStatus()async -> ContactsPermissionStatus
     
     func requestPermission() async throws -> ContactsPermissionStatus
     

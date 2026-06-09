@@ -57,6 +57,7 @@ final class AppDIContainer {
         AddContactDIContainer(
             countryPickerDIContainer: countryPickerDIContainer,
             repository: contactsRepository,
+            permissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
             database: appDatabase
         )
     }()

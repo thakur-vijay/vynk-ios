@@ -31,7 +31,7 @@ final class ContactsViewModel {
     var contactsOnVynkSections: [ContactSectionModel] = []
     
     func fetchContacts()async{
-        status = contactsPermissionUseCase.status()
+        status = await contactsPermissionUseCase.status()
           switch status {
           case .notDetermined:
               do {

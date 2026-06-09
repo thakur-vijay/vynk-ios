@@ -49,7 +49,7 @@ final class CameraSessionUseCase {
         await repository.stopSession()
     }
 
-    func capturePhoto() async throws -> CameraOutput {
-        try await repository.capturePhoto()
+    func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
+        try await repository.capturePhoto(flashMode: flashMode)
     }
 }

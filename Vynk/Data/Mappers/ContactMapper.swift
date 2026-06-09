@@ -10,7 +10,7 @@ import Contacts
 
 enum ContactMapper {
 
-    static func map(
+    nonisolated static func map(
         _ contact: CNContact
     ) -> DeviceContact {
 

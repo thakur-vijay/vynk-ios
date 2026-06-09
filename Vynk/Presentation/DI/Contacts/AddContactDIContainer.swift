@@ -11,31 +11,34 @@ final class AddContactDIContainer {
     
     private let countryPickerDIContainer: CountryPickerDIContainer
     private let repository: ContactsRepository
+    private let permissionUseCase: ContactsPermissionUseCase
     private let database: AppDatabase
     
     init(
         countryPickerDIContainer: CountryPickerDIContainer,
         repository: ContactsRepository,
+        permissionUseCase: ContactsPermissionUseCase,
         database: AppDatabase
     ) {
         self.countryPickerDIContainer = countryPickerDIContainer
         self.repository = repository
+        self.permissionUseCase = permissionUseCase
         self.database = database
     }
 
-    func makeViewModel(permissionStatus: ContactsPermissionStatus) -> AddContactViewModel {
+    func makeViewModel() -> AddContactViewModel {
         let useCase = SaveContactUseCase(repository: repository)
 
         return AddContactViewModel(
             addContactUseCase: useCase,
             getCurrentCountryUseCase: countryPickerDIContainer.makeGetCurrentCountryUseCase(),
-            permissionStatus: permissionStatus
+           permissionUseCase: permissionUseCase
         )
     }
 
     func makeAddContactView(onClose: @escaping ()->()) -> AddContactView {
         AddContactView(
-            viewModel: makeViewModel(permissionStatus: repository.permissionStatus()),
+            viewModel: makeViewModel(),
             diContainer: self,
             onClose: onClose
         )

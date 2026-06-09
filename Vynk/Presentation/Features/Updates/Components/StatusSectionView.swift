@@ -78,8 +78,24 @@ struct StatusSectionView: View {
                         UIAction(title: "Hide", image: UIImage(named: AppIcons.hide)){ _ in
                             
                         }
-                    ]
-                    )
+                    ], cornerRadius: 0) {
+                        StatusCardView(
+                            isCurrentUser: false,
+                            user: .init(
+                                id: UUID().uuidString,
+                                name: "Test User",
+                                avatarURL: MockDataFactory.chats.last?.avatarImage ?? ""
+                            ),
+                            statuses: [
+                                .init(
+                                    id: UUID().uuidString,
+                                    mediaURL: MockDataFactory.chats[2].avatarImage,
+                                    type: .image,
+                                    createdAt: .now
+                                )
+                            ]
+                        )
+                    }
                 }
             }
             .padding(.horizontal)

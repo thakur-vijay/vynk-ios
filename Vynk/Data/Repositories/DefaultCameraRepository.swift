@@ -9,7 +9,7 @@ import Foundation
 @preconcurrency import AVFoundation
 
 final class DefaultCameraRepository: CameraRepository {
-
+  
     private let dataSource: CameraDataSource
 
     init(dataSource: CameraDataSource) {
@@ -44,7 +44,16 @@ final class DefaultCameraRepository: CameraRepository {
        await dataSource.stopSession()
     }
 
-    func capturePhoto() async throws -> CameraOutput {
-        try await dataSource.capturePhoto()
+    func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
+        try await dataSource.capturePhoto(flashMode: flashMode)
     }
+    
+    func startRecording()async throws {
+        try await dataSource.startRecording()
+    }
+    
+    func stopRecording() async throws -> CameraOutput {
+        return try await dataSource.stopRecording()
+    }
+    
 }

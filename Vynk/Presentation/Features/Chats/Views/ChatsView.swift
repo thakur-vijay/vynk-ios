@@ -88,7 +88,9 @@ struct ChatsView: View{
                 }
             }
             .sheet(item: $router.activeSheet, onDismiss: {
-                viewModel.handlePermissionStatusCard()
+                Task {
+                    await viewModel.handlePermissionStatusCard()
+                }
             }) { sheet in
                 switch sheet {
                 case .newChat:
@@ -110,7 +112,7 @@ struct ChatsView: View{
             }
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
             .task {
-                viewModel.handlePermissionStatusCard()
+                await viewModel.handlePermissionStatusCard()
             }
         }
     }

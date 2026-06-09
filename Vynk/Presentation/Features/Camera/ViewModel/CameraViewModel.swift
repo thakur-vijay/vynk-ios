@@ -16,10 +16,18 @@ final class CameraViewModel {
 
     private(set) var permissionStatus: CameraPermissionStatus = .notDetermined
     private(set) var isSessionRunning = false
-    private(set) var capturedOutput: CameraOutput?
     private(set) var selectedMode: CameraMode
     private(set) var selectedPosition: CameraPosition
+    private(set) var isCapturingPhoto: Bool = false
+    private(set) var selectedFlashMode: CameraFlashMode = .off
+    var capturedOutput: CameraOutput?
 
+    var activeIndex: Int = 1
+    var tabs: [GlassSegmentedControl.Tab] = [
+        .init(title: "VIDEO"),
+        .init(title: "PHOTO"),
+    ]
+    
     init(
         cameraSessionUseCase: CameraSessionUseCase,
         initialMode: CameraMode = .photo,
@@ -76,11 +84,22 @@ final class CameraViewModel {
         }
 
     }
+    
+    func switchMode()async {
+        selectedMode = activeIndex == 0 ? .video : .photo
+    }
 
-    func capturePhoto() async {
+    func capturePhoto() async{
+        guard !isCapturingPhoto else { return }
+        isCapturingPhoto = true
+        defer {
+            isCapturingPhoto = false
+        }
         do {
-            capturedOutput = try await cameraSessionUseCase.capturePhoto()
+            capturedOutput = try await cameraSessionUseCase.capturePhoto(flashMode: selectedFlashMode)
+            
         } catch {
+            dump(error)
             AppLogger.error(error.localizedDescription, tag: String(describing: self))
         }
     }
@@ -91,5 +110,15 @@ final class CameraViewModel {
         isSessionRunning = true
     }
     
+    func toggleFlashMode() {
+        switch selectedFlashMode {
+        case .off:
+            selectedFlashMode = .auto
+        case .auto:
+            selectedFlashMode = .on
+        case .on:
+            selectedFlashMode = .off
+        }
+    }
     
 }

@@ -90,11 +90,11 @@ struct MessageBubbleView: View {
 }
 
 struct BubbleShape: Shape {
-    
+
     let myMessage: Bool
     let showsTail: Bool
     
-    func path(in rect: CGRect) -> Path {
+    nonisolated func path(in rect: CGRect) -> Path {
         if showsTail {
             return tailedPath(in: rect)
         } else {
@@ -102,7 +102,7 @@ struct BubbleShape: Shape {
         }
     }
     
-    private func roundedPath(in rect: CGRect) -> Path {
+    nonisolated private func roundedPath(in rect: CGRect) -> Path {
         let radius: CGFloat = 15
        return Path(
             UIBezierPath(
@@ -112,7 +112,7 @@ struct BubbleShape: Shape {
         )
     }
     
-    private func tailedPath(in rect: CGRect) -> Path {
+    nonisolated private func tailedPath(in rect: CGRect) -> Path {
         let width = rect.width
         let height = rect.height
         

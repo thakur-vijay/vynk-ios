@@ -13,8 +13,8 @@ final class ContactsPermissionUseCase {
         self.repository = repository
     }
 
-    func status() -> ContactsPermissionStatus {
-        return repository.permissionStatus()
+    func status()async -> ContactsPermissionStatus {
+        return await repository.permissionStatus()
     }
 
     func request() async throws -> Bool {

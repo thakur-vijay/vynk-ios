@@ -96,14 +96,7 @@ struct AddContactView: View {
                     Toggle("Sync contact to phone", isOn: .init(get: {
                         return viewModel.syncContactToPhone
                     }, set: { newValue in
-                        if viewModel.permissionStatus == .authorized {
-                            viewModel.syncContactToPhone = newValue
-                        }else {
-                            viewModel.alertConfig = .init(title: "Allow Vynk to access your contacts", message: "Tap Open Settings and turn on Contacts to allow access", actions: [
-                                .init(title: "Cancel"),
-                                .init(title: "Open Settings", action: AppSettingsOpener.open),
-                            ])
-                        }
+                        viewModel.handleSyncToPhone(newValue: newValue)
                     }))
                 }
                 
@@ -161,6 +154,9 @@ struct AddContactView: View {
             .init(title: "Keep editing") {},
         ]), isPresented: $viewModel.isDiscardConfirmationDialogPresented)
         .alert($viewModel.alertConfig)
+        .task {
+            await viewModel.prepareSyncToPhone()
+        }
 
     }
     
