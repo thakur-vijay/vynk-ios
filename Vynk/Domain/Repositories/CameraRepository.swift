@@ -29,4 +29,10 @@ protocol CameraRepository {
     
     var session: AVCaptureSession { get }
     
+    func supportedZoomLevels(position: CameraPosition) async -> [CameraZoomLevel]
+
+    func setZoomLevel(_ level: CameraZoomLevel) async throws
+    
+    func setZoomFactor(_ factor: CGFloat) async throws
+    
 }

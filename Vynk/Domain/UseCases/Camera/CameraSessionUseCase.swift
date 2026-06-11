@@ -61,4 +61,16 @@ final class CameraSessionUseCase {
         try await repository.stopRecording()
 
     }
+    
+    func supportedZoomLevels(position: CameraPosition) async -> [CameraZoomLevel] {
+        await repository.supportedZoomLevels(position: position)
+    }
+
+    func setZoomLevel(_ level: CameraZoomLevel) async throws {
+        try await repository.setZoomLevel(level)
+    }
+    
+    func setZoomFactor(_ factor: CGFloat) async throws {
+        try await repository.setZoomFactor(factor)
+    }
 }

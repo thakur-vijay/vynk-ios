@@ -12,6 +12,7 @@ struct CameraActionsView: View {
     let position: CameraPosition
     let isCaptureDisabled: Bool
     let isRecording: Bool
+    let zoomFactor: CGFloat
     let onCapture: ()->()
     let onSwitch: ()->()
     let onPhotosTap: ()->()
@@ -39,7 +40,7 @@ struct CameraActionsView: View {
             
             Spacer(minLength: 0)
             
-            CameraActionButton(label: "1x", action: onZoomTap)
+            CameraActionButton(label: "\(Int(zoomFactor))x", action: onZoomTap)
                 .opacity((isRecording || position == .front) ? 0 : 1)
                 .allowsHitTesting(!isRecording && position == .back)
 

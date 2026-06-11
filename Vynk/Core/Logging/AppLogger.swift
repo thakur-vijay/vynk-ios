@@ -10,9 +10,9 @@ import OSLog
 
 enum AppLogger {
 
-    private static let subsystem = Bundle.main.bundleIdentifier ?? "Vynk"
+    nonisolated private static let subsystem = Bundle.main.bundleIdentifier ?? "Vynk"
 
-    static func debug(
+    nonisolated static func debug(
         _ message: Any...,
         tag: String
     ) {

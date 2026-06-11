@@ -22,6 +22,12 @@ final class CameraViewModel {
     private(set) var selectedFlashMode: CameraFlashMode = .off
     private(set) var isRecordingVideo = false
     private(set) var recordingDuration: TimeInterval = 0
+    private(set) var zoomFactor: CGFloat = 1
+    private var zoomTask: Task<Void, Never>?
+    private var zoomGestureBase: CGFloat = 1
+    private var isZooming = false
+    private(set) var selectedZoomPreset: CameraZoomPreset = .one
+    
     private var recordingTask: Task<Void, Never>?
     var capturedOutput: CameraOutput?
 
@@ -40,6 +46,7 @@ final class CameraViewModel {
         self.cameraSessionUseCase = cameraSessionUseCase
         self.selectedMode = initialMode
         self.selectedPosition = initialPosition
+        self.zoomGestureBase = selectedZoomPreset.zoomFactor
     }
 
     var session: AVCaptureSession {
@@ -161,6 +168,11 @@ final class CameraViewModel {
     private func startCameraSession() async throws {
         try await cameraSessionUseCase.configureSession(mode: selectedMode, position: selectedPosition)
         await cameraSessionUseCase.startSession()
+        try await cameraSessionUseCase.setZoomFactor(
+
+            selectedZoomPreset.zoomFactor
+
+        )
         isSessionRunning = true
     }
     
@@ -199,4 +211,90 @@ final class CameraViewModel {
         }
     }
     
+    func beginZoomGesture() {
+
+        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
+
+        zoomTask?.cancel()
+
+    }
+
+    func updateZoomGesture(scale: CGFloat) {
+        
+        let targetZoom = min(
+            CameraConstants.maximumZoomFactor,
+            max(
+                CameraConstants.minimumZoomFactor,
+                zoomGestureBase * scale
+            )
+        )
+        
+        zoomTask?.cancel()
+
+        zoomTask = Task { [weak self] in
+
+            guard let self else { return }
+
+            try? await Task.sleep(for: .milliseconds(16))
+
+            await self.setZoomFactor(targetZoom)
+
+        }
+
+    }
+
+    func endZoomGesture() {
+
+        zoomTask?.cancel()
+
+        zoomTask = nil
+        
+        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
+
+    }
+    
+    func selectZoomPreset(
+
+        _ preset: CameraZoomPreset
+
+    ) async {
+
+        do {
+
+            let factor = preset.zoomFactor
+
+            try await cameraSessionUseCase
+
+                .setZoomFactor(factor)
+
+            selectedZoomPreset = preset
+
+            zoomFactor = factor
+
+            zoomGestureBase = factor   // <-- important
+
+        } catch {
+
+        }
+
+    }
+    
+    private func setZoomFactor(
+        _ factor: CGFloat
+    ) async {
+
+        do {
+
+            try await cameraSessionUseCase
+                .setZoomFactor(factor)
+
+            zoomFactor = factor
+        } catch {
+
+            AppLogger.error(
+                error.localizedDescription,
+                tag: String(describing: self)
+            )
+        }
+    }
 }

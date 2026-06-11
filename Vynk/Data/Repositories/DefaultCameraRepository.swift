@@ -56,4 +56,16 @@ final class DefaultCameraRepository: CameraRepository {
         return try await dataSource.stopRecording()
     }
     
+    func supportedZoomLevels(position: CameraPosition) async -> [CameraZoomLevel] {
+        return await dataSource.supportedZoomLevels(position: position)
+    }
+    
+    func setZoomLevel(_ level: CameraZoomLevel) async throws {
+        try await dataSource.setZoomLevel(level)
+    }
+    
+    func setZoomFactor(_ factor: CGFloat) async throws {
+        try await dataSource.setZoomFactor(factor)
+    }
+    
 }

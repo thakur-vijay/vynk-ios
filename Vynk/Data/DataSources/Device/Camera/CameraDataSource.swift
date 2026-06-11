@@ -24,6 +24,7 @@ actor CameraDataSource {
     private var videoContinuation: CheckedContinuation<CameraOutput, Error>?
     private var recordingURL: URL?
     private var isRecordingVideo = false
+    private var currentZoomLevel: CameraZoomLevel = .wide
     
     func permissionStatus() -> CameraPermissionStatus {
         CameraPermissionMapper.map(
@@ -57,8 +58,14 @@ actor CameraDataSource {
         session.outputs.forEach {
             session.removeOutput($0)
         }
-        
-        let input = try makeVideoInput(position: position)
+        var zoomLevel: CameraZoomLevel
+        switch position {
+        case .front:
+            zoomLevel = .wide
+        case .back:
+            zoomLevel = currentZoomLevel
+        }
+        let input = try makeVideoInput(position: position, zoomLevel: zoomLevel)
         
         guard session.canAddInput(input) else {
             throw CameraDataSourceError.unableToAddInput
@@ -91,8 +98,14 @@ actor CameraDataSource {
         if let videoInput {
             session.removeInput(videoInput)
         }
-        
-        let input = try makeVideoInput(position: position)
+        var zoomLevel: CameraZoomLevel
+        switch position {
+        case .front:
+            zoomLevel = .wide
+        case .back:
+            zoomLevel = currentZoomLevel
+        }
+        let input = try makeVideoInput(position: position, zoomLevel: zoomLevel)
         
         guard session.canAddInput(input) else {
             throw CameraDataSourceError.unableToAddInput
@@ -229,9 +242,10 @@ actor CameraDataSource {
 
     }
     
-    private func makeVideoInput(
+    private func preferredDevice(
         position: CameraPosition
-    ) throws -> AVCaptureDeviceInput {
+    ) -> AVCaptureDevice? {
+
         let devicePosition: AVCaptureDevice.Position
         
         switch position {
@@ -240,15 +254,26 @@ actor CameraDataSource {
         case .back:
             devicePosition = .back
         }
-        
-        guard let device = AVCaptureDevice.default(
-            .builtInWideAngleCamera,
-            for: .video,
-            position: devicePosition
-        ) else {
-            throw CameraDataSourceError.cameraUnavailable
+        switch position {
+        case .front:
+            return AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: devicePosition)
+        case .back:
+            return AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back)
+                ?? AVCaptureDevice.default(.builtInTripleCamera, for: .video, position: .back)
+                ?? AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         }
-        
+    }
+    
+    private func makeVideoInput(
+        position: CameraPosition,
+        zoomLevel: CameraZoomLevel
+    ) throws -> AVCaptureDeviceInput {
+        guard let device = preferredDevice(position: position) else {
+
+            throw CameraDataSourceError.cameraUnavailable
+
+        }
+
         return try AVCaptureDeviceInput(device: device)
     }
     
@@ -295,6 +320,90 @@ actor CameraDataSource {
 
         }
 
+    }
+    
+    func supportedZoomLevels(position: CameraPosition) -> [CameraZoomLevel] {
+        var levels: [CameraZoomLevel] = [.wide]
+        var cameraPosition: AVCaptureDevice.Position
+        switch position {
+        case .front:
+            cameraPosition = .front
+        case .back:
+            cameraPosition = .back
+        }
+        let ultraWide = AVCaptureDevice.default(
+            .builtInUltraWideCamera,
+            for: .video,
+            position: cameraPosition
+        )
+
+        if ultraWide != nil {
+            levels.insert(.ultraWide, at: 0)
+        }
+
+        return levels
+    }
+    
+    func setZoomLevel(_ level: CameraZoomLevel) throws {
+
+        session.beginConfiguration()
+
+        defer { session.commitConfiguration() }
+
+        if let videoInput {
+
+            session.removeInput(videoInput)
+
+        }
+
+        let input = try makeVideoInput(
+
+            position: currentPosition,
+
+            zoomLevel: level
+
+        )
+
+        guard session.canAddInput(input) else {
+
+            throw CameraDataSourceError.unableToAddInput
+
+        }
+
+        session.addInput(input)
+
+        videoInput = input
+
+        currentZoomLevel = level
+
+    }
+    
+    func setZoomFactor(
+        _ factor: CGFloat
+    ) throws {
+
+        guard let device = videoInput?.device else {
+            throw CameraDataSourceError.cameraUnavailable
+        }
+
+        try device.lockForConfiguration()
+
+        let maxZoom = min(
+            CameraConstants.maximumZoomFactor,
+            device.maxAvailableVideoZoomFactor
+        )
+
+        let zoomFactor = max(
+            CameraConstants.minimumZoomFactor,
+            min(
+                factor,
+                maxZoom
+            )
+        )
+
+        device.videoZoomFactor = zoomFactor
+
+        device.unlockForConfiguration()
     }
 
     enum CameraDataSourceError: Error {
