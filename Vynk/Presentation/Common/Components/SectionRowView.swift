@@ -14,7 +14,12 @@ struct SectionRowView<ID: RowIDProtocol>: View {
     let action: ()->()
     var body: some View {
         if row.kind == .toggle {
-            Toggle(row.title, isOn: toggleBinding ?? .constant(false))
+            HStack(spacing: AppSpacing.md) {
+                if let icon = row.id.symbol {
+                    Image(systemName: icon)
+                }
+                Toggle(row.title, isOn: toggleBinding ?? .constant(false))
+            }
         }else {
             Button(action: action) {
                 NavigationLink {
@@ -50,7 +55,7 @@ struct SectionRowView<ID: RowIDProtocol>: View {
                 .allowsHitTesting(false)
                 .navigationLinkIndicatorVisibility(row.showsChevron ? .visible : .hidden)
             }
-            .tint(AppColors.contentDefault)
+            .tint(.primary)
         }
       
     }
@@ -62,12 +67,12 @@ struct SectionRowView<ID: RowIDProtocol>: View {
         case .action(let style):
             switch style {
             case .normal:
-                return AppColors.contentDefault
+                return .primary
             case .accent:
                 return AppColors.accent
             }
         default:
-            return AppColors.contentDefault
+            return .primary
         }
     }
 }

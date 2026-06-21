@@ -10,6 +10,7 @@
 		182DBE262FD7CF7A000F478C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE252FD7CF7A000F478C /* Nuke */; };
 		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
 		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
+		189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		188696882FB1AD3200A5BFA7 /* Vynk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vynk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		188696952FB1AD3400A5BFA7 /* VynkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VynkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1886969F2FB1AD3400A5BFA7 /* VynkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VynkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		189A4F472FE7D9F600A0D885 /* VynkLifecycleMacros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VynkLifecycleMacros; path = ../VynkLifecycleMacros; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */,
 				189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */,
 				182DBE262FD7CF7A000F478C /* Nuke in Frameworks */,
 				182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */,
@@ -84,9 +87,11 @@
 		1886967F2FB1AD3200A5BFA7 = {
 			isa = PBXGroup;
 			children = (
+				189A4F472FE7D9F600A0D885 /* VynkLifecycleMacros */,
 				1886968A2FB1AD3200A5BFA7 /* Vynk */,
 				188696982FB1AD3400A5BFA7 /* VynkTests */,
 				188696A22FB1AD3400A5BFA7 /* VynkUITests */,
+				189A4F482FE7DE3600A0D885 /* Frameworks */,
 				188696892FB1AD3200A5BFA7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +104,13 @@
 				1886969F2FB1AD3400A5BFA7 /* VynkUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		189A4F482FE7DE3600A0D885 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,6 +136,7 @@
 				182DBE252FD7CF7A000F478C /* Nuke */,
 				182DBE272FD7CF7A000F478C /* NukeUI */,
 				189611652FD7F4A3008AD5B8 /* GRDB */,
+				189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -649,6 +662,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
+		};
+		189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkLifecycleMacros;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -11,28 +11,13 @@ import Foundation
 @Observable
 final class UserProfileViewModel {
     
-    var sections: [[SectionRowModel<UserProfileRowID>]] = [
-        [
-            .init(
-                id: .media,
-                title: "Media, links and docs",
-                trailingText: "2",
-                kind: .navigation
-            ),
-            .init(
-                id: .storage,
-                title: "Manage storage",
-                trailingText: "3 MB",
-                kind: .navigation
-            ),
-            .init(
-                id: .starred,
-                title: "Starred",
-                trailingText: "None",
-                kind: .navigation
-            )
-        ],
-        [
+    var sections: [SectionModel<UserProfileRowID>] = [
+        .init(rows: [
+            .init(id: .media, title: "Media, links and docs", trailingText: "2", kind: .navigation),
+            .init(id: .storage, title: "Manage storage", trailingText: "3 MB", kind: .navigation),
+            .init(id: .starred, title: "Starred", trailingText: "None", kind: .navigation),
+        ]),
+        .init(rows: [
             .init(
                 id: .notifications,
                 title: "Notifications",
@@ -49,8 +34,8 @@ final class UserProfileViewModel {
                 trailingText: "Default",
                 kind: .navigation
             )
-        ],
-        [
+        ]),
+        .init(rows: [
             .init(
                 id: .disappearingMessages,
                 title: "Disappearing messages",
@@ -75,24 +60,25 @@ final class UserProfileViewModel {
                 subtitle: "Messages and calls are end-to-end encrypted. Tap to verify",
                 kind: .navigation
             )
-        ],
-        [
+        ]),
+        .init(rows: [
             .init(
                 id: .contactDetails,
                 title: "Contact details",
                 kind: .navigation
             )
-        ],
-        [
+        ]),
+        .init(rows: [
             .init(id: .shareContact, title: "Share contact", kind: .action(style: .accent), showsChevron: false),
             .init(id: .addToFavourites, title: "Add to Favourites", kind: .action(style: .accent), showsChevron: false),
             .init(id: .addToList, title: "Add to list", kind: .action(style: .accent), showsChevron: false),
             .init(id: .exportChat, title: "Export chat", kind: .action(style: .accent), showsChevron: false),
             .init(id: .clearChat, title: "Clear chat", kind: .destructive, showsChevron: false),
-        ],
-        [
+        ]),
+        .init(rows:  [
             .init(id: .block, title: "Block Vijay Thakur", kind: .destructive, showsChevron: false),
             .init(id: .report, title: "Report Vijay Thakur", kind: .destructive, showsChevron: false),
-        ]
+        ])
     ]
+
 }

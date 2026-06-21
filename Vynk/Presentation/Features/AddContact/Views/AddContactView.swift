@@ -125,16 +125,9 @@ struct AddContactView: View {
                     }
                 }
                 
-                if viewModel.isSaveEnabled {
-                    ProminentToolbarButton(icon: AppIcons.checkmark, accent: AppColors.accent) {
-                        Task {
-                            await viewModel.addContact()
-                        }
-                    }
-                    
-                }else {
-                    ProminentToolbarButton(icon: AppIcons.checkmark, accent: AppColors.contentDeemphasized) {
-                       
+                CheckButton(isEnabled: viewModel.isSaveEnabled) {
+                    Task {
+                        await viewModel.addContact()
                     }
                 }
                 

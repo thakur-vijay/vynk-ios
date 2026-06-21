@@ -27,9 +27,15 @@ struct ChatsView: View{
                         viewModel.hidePermissionStatusCard()
                     }
                 }
-                ChatFilterBarView()
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(.all, 0)
+                
+                ChatFilterBarView(lists: viewModel.lists) { clickedID in
+                    AppLogger.debug("Clicked ID is", clickedID, tag: String(describing: self))
+                    if clickedID == "add"{
+                        router.activeSheet = .newList
+                    }
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(.all, 0)
 
                 ForEach(viewModel.chats) { model in
                     MessageThreadRowView(model: model)
@@ -89,6 +95,7 @@ struct ChatsView: View{
             }
             .sheet(item: $router.activeSheet, onDismiss: {
                 Task {
+                    router.dismissSheet()
                     await viewModel.handlePermissionStatusCard()
                 }
             }) { sheet in
@@ -101,9 +108,17 @@ struct ChatsView: View{
                     appDiContainer.mediaPickerDIContainer.makeView {
                         router.dismissSheet()
                     }
+                case .newList:
+                    appDiContainer.chatsDIContainer.makeListEditor(mode: .create) {
+                        router.dismissSheet()
+                    }
+                case .reorderList:
+                    appDiContainer.chatsDIContainer.makeReorderListSheet()
                 }
             }
-            .fullScreenCover(item: $router.activeFullScreenCover){ fullScreenCover in
+            .fullScreenCover(item: $router.activeFullScreenCover, onDismiss: {
+                router.dismissFullScreenCover()
+            }){ fullScreenCover in
                 switch fullScreenCover {
                 case .camera: appDiContainer.chatsDIContainer.makeCameraFullScreenCover {
                     router.dismissFullScreenCover()
@@ -113,6 +128,12 @@ struct ChatsView: View{
             .toolbarVisibility(toolbarVisiblity, for: .tabBar)
             .task {
                 await viewModel.handlePermissionStatusCard()
+            }
+            .task {
+                viewModel.startObserving()
+            }
+            .onDisappear {
+                viewModel.stopObserving()
             }
         }
     }

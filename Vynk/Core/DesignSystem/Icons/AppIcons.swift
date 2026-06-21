@@ -13,12 +13,14 @@ enum AppIcons {
     static let messageFill = "message.fill"
     static let message = "message"
     static let plus = "plus"
+    static let plusFill = "plus.circle.fill"
     static let checkmarkCircle = "checkmark.circle"
     static let checkmarkBubble = "checkmark.bubble"
     static let checkmark = "checkmark"
     static let bellSlash = "bell.slash"
     static let bell = "bell"
     static let heart = "heart"
+    static let heartFill = "heart.fill"
     static let trash = "trash"
     static let xmarkCircle = "xmark.circle"
     static let close = "xmark"
@@ -80,6 +82,7 @@ enum AppIcons {
     static let flashOff = "bolt.slash.fill"
     static let flashOn = "bolt.fill"
     static let flashAuto = "bolt.badge.automatic.fill"
+    static let bag = "gym.bag.fill"
     
     enum ChatAction {
         static let pin = "pin.fill"
@@ -88,5 +91,10 @@ enum AppIcons {
         static let archiveSwipe = "archivebox.fill"
         static let archiveMenu = "archivebox"
         static let addToListMenu = "person.crop.rectangle.stack"
+    }
+    
+    enum Heart {
+        static let heart = "heart"
+        static let heartFill = "heart.fill"
     }
 }

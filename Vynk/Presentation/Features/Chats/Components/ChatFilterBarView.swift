@@ -9,26 +9,27 @@ import SwiftUI
 
 
 struct ChatFilterBarView: View {
-    let list = [
-        ChatFilterChipModel(title: "All", isSelected: true),
-        ChatFilterChipModel(title: "Unread 4", isSelected: false),
-        ChatFilterChipModel(title: "Favourites", isSelected: false),
-        ChatFilterChipModel(title: "Groups 1", isSelected: false),
-        ChatFilterChipModel(title: "Communities", isSelected: false),
-    ]
+    let lists: [ChatListRowModel]
+    let onClick: (_ id: String)->()
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: AppSpacing.xs) {
-                ForEach(list) { value in
-                    ChatFilterChipView(model: value){
-                        
+                ChatFilterChipView(
+                    model: .init(id: "all", title: "All", kind: .custom, canDelete: false, canEdit: false)
+                ) {
+                    onClick("all")
+                }
+                
+                ForEach(lists) { list in
+                    ChatFilterChipView(model: list){
+                        onClick(list.id)
                     }
                     .customContextMenu(actions: [
                     
                     ])
                 }
-                ChatFilterChipView(model: .init(), icon: AppIcons.plus) {
-                    
+                ChatFilterChipView(icon: AppIcons.plus) {
+                    onClick("add")
                 }
             }
         }
@@ -37,8 +38,4 @@ struct ChatFilterBarView: View {
         .padding([.horizontal, .bottom], AppSpacing.md)
         .padding(.top, AppSpacing.sm)
     }
-}
-
-#Preview {
-    ChatFilterBarView()
 }

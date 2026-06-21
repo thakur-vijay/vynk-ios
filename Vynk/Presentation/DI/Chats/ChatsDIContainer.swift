@@ -12,6 +12,7 @@ final class ChatsDIContainer {
     private let addContactDIContainer: AddContactDIContainer
     private let inviteDIContainer: InviteDIContainer
     private let cameraDIContainer: CameraDIContainer
+    private let chatListsDIContainer: ChatListsDIContainer
     private let appPreferences: AppPreferences
     
     init(
@@ -19,12 +20,14 @@ final class ChatsDIContainer {
         addContactDIContainer: AddContactDIContainer,
         inviteDIContainer: InviteDIContainer,
         cameraDIContainer: CameraDIContainer,
+        chatListsDIContainer: ChatListsDIContainer,
         appPreferences: AppPreferences
     ) {
         self.contactsDIContainer = contactsDIContainer
         self.addContactDIContainer = addContactDIContainer
         self.inviteDIContainer = inviteDIContainer
         self.cameraDIContainer = cameraDIContainer
+        self.chatListsDIContainer = chatListsDIContainer
         self.appPreferences = appPreferences
     }
 
@@ -34,6 +37,7 @@ final class ChatsDIContainer {
 
         let viewModel = ChatsViewModel(
             contactsPermissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
+            observeVisibleListsUseCase: chatListsDIContainer.observeVisibleListsUseCase,
             appPreferences: appPreferences
         )
 
@@ -63,4 +67,12 @@ final class ChatsDIContainer {
             inviteDIContaier: inviteDIContainer
         )
     }()
+    
+    func makeReorderListSheet() -> ReorderListsView {
+        return chatListsDIContainer.makeReorderListSheet()
+    }
+    
+    func makeListEditor(mode: ListEditorMode, completion: @escaping ()->())-> ListEditor {
+        return chatListsDIContainer.makeListEditor(mode: mode, completion: completion)
+    }
 }

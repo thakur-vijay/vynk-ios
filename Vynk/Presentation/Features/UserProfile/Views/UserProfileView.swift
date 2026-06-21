@@ -13,36 +13,16 @@ struct UserProfileView: View {
         _viewModel = State(wrappedValue: viewModel)
     }
     var body: some View {
-        ScrollView {
-            VStack(spacing: AppSpacing.lg) {
-                UserProfileHeaderView()
-                UserQuickActionView()
-                ForEach(viewModel.sections.indices, id: \.self) { sectionIndex in
-                    SectionGroupContainer {
-                        ForEach(viewModel.sections[sectionIndex]) { row in
-                            SectionRow(
-                                model: row,
-                                showDivider: row.id != viewModel.sections[sectionIndex].last?.id,
-                                onTap: {
-                                    
-                                },
-                                leading: {
-                                    if let symbol = row.id.symbol {
-                                        Image(systemName: symbol)
-                                    }
-                                }
-                            )
-
-                        }
-                        
-                    }
+        List {
+            UserProfileHeaderView()
+            UserQuickActionView()
+            ForEach(viewModel.sections) { section in
+                SectionView(section: section) { id, kind in
                     
                 }
             }
-            .padding()
         }
-        .listSectionSpacing(AppSpacing.lg)
-        .listStyle(.insetGrouped)
+        .listSectionSpacing(.custom(AppSpacing.lg))
         .background(AppColors.backgroundSecondary)
         .navigationTitle("Contact info")
         .navigationBarTitleDisplayMode(.inline)

@@ -27,7 +27,13 @@ extension View {
     func alert(_ config: Binding<DialogConfig?>)-> some View {
         if let configResult = config.wrappedValue{
             self
-                .alert(configResult.title, isPresented: .constant(true)) {
+                .alert(configResult.title, isPresented: .init(get: {
+                    config.wrappedValue != nil
+                }, set: { newValue in
+                    if !newValue {
+                        config.wrappedValue = nil
+                    }
+                })) {
                     ForEach(configResult.actions) { action in
                         Button(role: action.role, action: {
                             config.wrappedValue = nil

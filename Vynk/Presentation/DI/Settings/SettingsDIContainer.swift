@@ -10,9 +10,14 @@ import SwiftUI
 
 final class SettingsDIContainer {
     private let appLockManager: AppLockManager
+    private let listsDIContainer: ListsDIContainer
     
-    init(appLockManager: AppLockManager) {
+    init(
+        appLockManager: AppLockManager,
+        listsDIContainer: ListsDIContainer
+    ) {
         self.appLockManager = appLockManager
+        self.listsDIContainer = listsDIContainer
     }
     
     func makeSettingsView()->SettingsView {
@@ -40,6 +45,7 @@ final class SettingsDIContainer {
         case .row(let rowId):
             switch rowId {
             case .privacy: privacyDIContainer.makePrivacyView()
+            case .lists: listsDIContainer.makeListsView()
             default: Text("Test")
             }
         case .privacy(let rowId):

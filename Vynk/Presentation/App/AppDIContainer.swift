@@ -39,13 +39,15 @@ final class AppDIContainer {
             addContactDIContainer: addContactDIContainer,
             inviteDIContainer: inviteDIContainer,
             cameraDIContainer: cameraDIContainer,
+            chatListsDIContainer: chatListsDIContainer,
             appPreferences: appPreferences
         )
     }()
     
     lazy var settingsDIContainer: SettingsDIContainer = {
         SettingsDIContainer(
-            appLockManager: appLockManager
+            appLockManager: appLockManager,
+            listsDIContainer: listsDIContainer
         )
     }()
     
@@ -61,7 +63,7 @@ final class AppDIContainer {
             database: appDatabase
         )
     }()
-
+    
     lazy var inviteDIContainer: InviteDIContainer = {
         InviteDIContainer()
     }()
@@ -73,11 +75,11 @@ final class AppDIContainer {
     lazy var deviceContactsDataSource: DeviceContactsDataSource = {
         DeviceContactsDataSource()
     }()
-
+    
     lazy var localContactsDataSource: LocalContactsDataSource = {
         LocalContactsDataSource(database: appDatabase)
     }()
-
+    
     lazy var contactsRepository: ContactsRepository = {
         DefaultContactsRepository(
             deviceDataSource: deviceContactsDataSource,
@@ -99,5 +101,13 @@ final class AppDIContainer {
     
     lazy var cameraDIContainer: CameraDIContainer = {
         CameraDIContainer()
+    }()
+    
+    lazy var listsDIContainer: ListsDIContainer = {
+        ListsDIContainer(chatListsDIContainer: chatListsDIContainer)
+    }()
+    
+    lazy var chatListsDIContainer: ChatListsDIContainer = {
+        ChatListsDIContainer(database: appDatabase)
     }()
 }

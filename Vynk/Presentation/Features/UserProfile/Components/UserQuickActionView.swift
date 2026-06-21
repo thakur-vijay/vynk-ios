@@ -15,6 +15,8 @@ struct UserQuickActionView: View {
             QuickAction("Pay", symbol: AppIcons.rupee)
             QuickAction("Search", symbol: AppIcons.search)
         }
+        .clearListRowStyle()
+        .padding(.vertical, AppSpacing.md)
     }
     
     @ViewBuilder

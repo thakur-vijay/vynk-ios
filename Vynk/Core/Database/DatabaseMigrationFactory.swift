@@ -15,7 +15,9 @@ enum DatabaseMigratorFactory {
 
         let migrations: [DatabaseMigration] = [
 
-            CreateDeviceContactsMigration()
+            CreateDeviceContactsMigration(),
+            CreateChatListsMigration(),
+            SeedDefaultChatListsMigration()
 
         ]
 
