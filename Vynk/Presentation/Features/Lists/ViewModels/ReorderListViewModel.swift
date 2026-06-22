@@ -23,17 +23,20 @@ final class ReorderListViewModel {
     private let observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase
     private let deleteChatListUseCase: DeleteChatListUseCase
     private let restorePresetUseCase: RestorePresetListUseCase
+    private let reorderChatListsUseCase: ReorderChatListsUseCase
     
     init(
         observeVisibleListsUseCase: ObserveVisibleListsUseCase,
         observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase,
         deleteChatListUseCase: DeleteChatListUseCase,
         restorePresetUseCase: RestorePresetListUseCase,
+        reorderChatListsUseCase: ReorderChatListsUseCase,
     ) {
         self.observeVisibleListsUseCase = observeVisibleListsUseCase
         self.observeAvailablePresetsUseCase = observeAvailablePresetsUseCase
         self.deleteChatListUseCase = deleteChatListUseCase
         self.restorePresetUseCase = restorePresetUseCase
+        self.reorderChatListsUseCase = reorderChatListsUseCase
     }
     
     private func startObservingVisibleLists() {
@@ -91,35 +94,17 @@ final class ReorderListViewModel {
     }
     
     func presentDeleteAlert(for list: ChatListRowModel) {
-
-        switch list.kind {
-
-        case .custom:
-            alertConfig = .init(title: "Delete \(list.title)", message: "Your chats with people and groups will not be deleted.", actions: [
-                .init(title: "Delete", role: .destructive){[weak self] in
-                    guard let self else { return }
-                    Task {
-                        await self.deleteCustomList(model: list)
-                    }
+        alertConfig = ChatListAlertFactory.makeDeleteAlert(
+            for: list,
+            onDelete: {[weak self] in
+                guard let self else { return }
+                Task {
+                    await self.deleteList(model: list)
                 }
-            ])
-
-        case .unread, .groups, .communities:
-            alertConfig = .init(title: "Delete \(list.title)", message: "Deleting this preset list will hide it from view. Your chats with people and groups won't be deleted. To add this list again, go to Lists in Settings.", actions: [
-                .init(title: "Delete", role: .destructive){[weak self] in
-                    guard let self else { return }
-                    Task {
-                        await self.deleteCustomList(model: list)
-                    }
-                }
-            ])
-
-        case .favorites:
-            return
-        }
+        })
     }
     
-    func deleteCustomList(model: ChatListRowModel) async{
+    func deleteList(model: ChatListRowModel) async{
         do {
             try await deleteChatListUseCase.execute(list: model)
             if model.kind == .custom {
@@ -137,6 +122,41 @@ final class ReorderListViewModel {
             try await restorePresetUseCase.execute(id: id)
         }catch {
             AppLogger.error(error.localizedDescription, tag: String(describing: self))
+        }
+    }
+    
+    func move(
+        from source: IndexSet,
+        to destination: Int
+    ) {
+        var reorderedLists = lists
+
+        reorderedLists.move(
+            fromOffsets: source,
+            toOffset: destination
+        )
+
+        lists = reorderedLists
+
+        let orderedIds = reorderedLists.map(\.id)
+
+        Task {
+            await updateSortOrder(orderedIds: orderedIds)
+        }
+    }
+
+    private func updateSortOrder(
+        orderedIds: [String]
+    ) async {
+        do {
+            try await reorderChatListsUseCase.execute(
+                ids: orderedIds
+            )
+        } catch {
+            AppLogger.error(
+                error.localizedDescription,
+                tag: String(describing: self)
+            )
         }
     }
 }

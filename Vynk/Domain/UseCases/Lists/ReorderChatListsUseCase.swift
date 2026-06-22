@@ -7,12 +7,15 @@
 
 import Foundation
 
-final class ReorderChatListsUseCase {
+struct ReorderChatListsUseCase {
+
     private let repository: ChatListRepository
-    
+
     init(repository: ChatListRepository) {
         self.repository = repository
     }
-    
-    
+
+    func execute(ids: [String]) async throws {
+        try await repository.reorderLists(ids: ids)
+    }
 }

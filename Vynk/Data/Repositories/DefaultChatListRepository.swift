@@ -88,8 +88,8 @@ final class DefaultChatListRepository: ChatListRepository {
         try await dataSource.deleteCustomList(id: id)
     }
     
-    func updateSortOrder(ids: [String]) async throws {
-        
+    func reorderLists(ids: [String]) async throws {
+        try await dataSource.reorderLists(ids: ids)
     }
     
     

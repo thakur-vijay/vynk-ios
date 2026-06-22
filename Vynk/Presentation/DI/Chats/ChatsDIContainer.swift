@@ -38,6 +38,7 @@ final class ChatsDIContainer {
         let viewModel = ChatsViewModel(
             contactsPermissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
             observeVisibleListsUseCase: chatListsDIContainer.observeVisibleListsUseCase,
+            deleteChatListUseCase: chatListsDIContainer.deleteChatListUseCase,
             appPreferences: appPreferences
         )
 

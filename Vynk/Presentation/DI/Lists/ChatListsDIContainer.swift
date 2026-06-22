@@ -53,12 +53,17 @@ final class ChatListsDIContainer {
         RestorePresetListUseCase(repository: repository)
     }()
     
+    lazy var reorderChatListsUseCase: ReorderChatListsUseCase = {
+        ReorderChatListsUseCase(repository: repository)
+    }()
+    
     func makeReorderListSheet() -> ReorderListsView {
         let viewModel = ReorderListViewModel(
             observeVisibleListsUseCase: observeVisibleListsUseCase,
             observeAvailablePresetsUseCase: observeAvailablePresetsUseCase,
             deleteChatListUseCase: deleteChatListUseCase,
-            restorePresetUseCase: restorePresetUseCase
+            restorePresetUseCase: restorePresetUseCase,
+            reorderChatListsUseCase: reorderChatListsUseCase
         )
 
         return ReorderListsView(viewModel: viewModel)

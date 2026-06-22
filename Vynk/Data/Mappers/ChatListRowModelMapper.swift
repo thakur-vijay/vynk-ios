@@ -18,7 +18,8 @@ enum ChatListMapper {
             title: list.title,
             kind: list.kind,
             canDelete: list.kind.canDelete,
-            canEdit: list.kind.canEdit
+            canEdit: list.kind.canEdit,
+            order: list.sortOrder
         )
     }
 }

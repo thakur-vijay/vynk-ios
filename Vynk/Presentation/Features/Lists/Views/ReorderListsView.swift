@@ -17,9 +17,12 @@ struct ReorderListsView: View {
     var body: some View {
         NavigationStack {
             List {
-                EditableListsSection(lists: viewModel.lists) { deletableRow in
-                    viewModel.presentDeleteAlert(for: deletableRow)
+                EditableListsSection(lists: viewModel.lists) { indexSet, destination in
+                    viewModel.move(from: indexSet, to: destination)
+                } onDeleteRequest: { model in
+                    viewModel.presentDeleteAlert(for: model)
                 }
+
                 AvailablePresetsSection(presets: viewModel.availablePresets){ preset in
                     Task {
                         await viewModel.restorePreset(id: preset.id)

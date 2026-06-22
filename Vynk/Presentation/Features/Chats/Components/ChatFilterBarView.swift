@@ -15,7 +15,7 @@ struct ChatFilterBarView: View {
         ScrollView(.horizontal) {
             HStack(spacing: AppSpacing.xs) {
                 ChatFilterChipView(
-                    model: .init(id: "all", title: "All", kind: .custom, canDelete: false, canEdit: false)
+                    model: .init(id: "all", title: "All", kind: .custom, canDelete: false, canEdit: false, order: 0)
                 ) {
                     onClick("all")
                 }

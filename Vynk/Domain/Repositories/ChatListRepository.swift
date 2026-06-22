@@ -32,7 +32,7 @@ protocol ChatListRepository {
         id: String
     ) async throws
 
-    func updateSortOrder(
+    func reorderLists(
         ids: [String]
     ) async throws
 }

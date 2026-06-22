@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditableListsSection: View {
     let lists: [ChatListRowModel]
+    let onMove: (_ source: IndexSet, _ destination: Int) -> Void
     let onDeleteRequest: (ChatListRowModel) -> Void
     var body: some View {
         Section {
@@ -16,11 +17,13 @@ struct EditableListsSection: View {
                 Text(list.title)
                     .foregroundStyle(.primary)
                     .deleteDisabled(!list.canDelete)
+                    .id("\(list.id)-\(list.canDelete)")
+                    .task {
+                        AppLogger.debug(list.id, list.canDelete, tag: list.title)
+                    }
             }
             .onMove { indexSet, destination in
-                indexSet.forEach { index in
-                    AppLogger.debug(index, "Index", destination.description, tag: destination.description)
-                }
+                onMove(indexSet, destination)
             }
             .onDelete { indexSet in
                 guard let index = indexSet.first else { return }

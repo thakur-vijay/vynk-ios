@@ -155,4 +155,27 @@ final class ChatListLocalDataSource {
             )
         }
     }
+    
+    func reorderLists(ids: [String]) async throws {
+        try await database.dbQueue.write { db in
+
+            for (index, id) in ids.enumerated() {
+
+                try db.execute(
+                    sql: """
+                    UPDATE chat_lists
+                    SET
+                        sort_order = ?,
+                        updated_at = ?
+                    WHERE id = ?
+                    """,
+                    arguments: [
+                        index,
+                        Date(),
+                        id
+                    ]
+                )
+            }
+        }
+    }
 }
