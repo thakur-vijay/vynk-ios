@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 @Observable
 final class ChatsRouter {
-    var path = NavigationPath()
+    var path: [ChatsRoute] = []
     var activeSheet: ChatsSheet?
     var activeFullScreenCover: ChatsFullScreenCover?
     
@@ -25,7 +25,7 @@ final class ChatsRouter {
     }
     
     func popToRoot() {
-        path = NavigationPath()
+        path = .init()
         
     }
     
@@ -44,4 +44,13 @@ final class ChatsRouter {
     func dismissFullScreenCover() {
         activeFullScreenCover = nil
     }
+    
+    private var isTabBarHidden: Bool {
+        !path.isEmpty
+    }
+    
+    var tabBarVisiblity: Visibility {
+        return isTabBarHidden ? .hidden : .visible
+    }
+    
 }

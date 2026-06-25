@@ -9,12 +9,12 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var viewModel: SettingsViewModel
-    @State private var router: SettingsRouter
+    @Bindable private var router: SettingsRouter
     private let diContainer: SettingsDIContainer
     
     init(viewModel: SettingsViewModel, router: SettingsRouter, diContainer: SettingsDIContainer) {
         _viewModel = State(wrappedValue: viewModel)
-        _router = State(wrappedValue: router)
+        _router = Bindable(wrappedValue: router)
         self.diContainer = diContainer
     }
     

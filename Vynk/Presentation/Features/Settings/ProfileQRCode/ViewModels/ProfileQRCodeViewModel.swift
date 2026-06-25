@@ -51,9 +51,9 @@ final class ProfileQRCodeViewModel {
         "https://www.apple.com"
     }
     
-    func didScanUser() {
+    func didScanUser() async{
 
-        chatNavigator.openChat()
+        await chatNavigator.openChat()
 
     }
 }

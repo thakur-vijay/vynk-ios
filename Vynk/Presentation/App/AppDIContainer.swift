@@ -41,7 +41,7 @@ final class AppDIContainer {
             cameraDIContainer: cameraDIContainer,
             chatListsDIContainer: chatListsDIContainer,
             appPreferences: appPreferences,
-            router: appRouter.chatsRouter
+            appRouter: appRouter
         )
     }()
     

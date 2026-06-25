@@ -14,7 +14,7 @@ final class ChatsDIContainer {
     private let cameraDIContainer: CameraDIContainer
     private let chatListsDIContainer: ChatListsDIContainer
     private let appPreferences: AppPreferences
-    private let router: ChatsRouter
+    private let appRouter: AppRouter
     
     init(
         contactsDIContainer: ContactsDIContainer,
@@ -23,7 +23,7 @@ final class ChatsDIContainer {
         cameraDIContainer: CameraDIContainer,
         chatListsDIContainer: ChatListsDIContainer,
         appPreferences: AppPreferences,
-        router: ChatsRouter
+        appRouter: AppRouter
     ) {
         self.contactsDIContainer = contactsDIContainer
         self.addContactDIContainer = addContactDIContainer
@@ -31,7 +31,7 @@ final class ChatsDIContainer {
         self.cameraDIContainer = cameraDIContainer
         self.chatListsDIContainer = chatListsDIContainer
         self.appPreferences = appPreferences
-        self.router = router
+        self.appRouter = appRouter
     }
 
     func makeChatsView() -> ChatsView {
@@ -43,7 +43,11 @@ final class ChatsDIContainer {
             appPreferences: appPreferences
         )
 
-        return ChatsView(viewModel: viewModel, router: router)
+        return ChatsView(
+            viewModel: viewModel,
+            router: appRouter.chatsRouter,
+            appRouter: appRouter
+        )
 
     }
 

@@ -7,6 +7,6 @@
 
 protocol ChatNavigator {
 
-    func openChat()
+    func openChat() async
 
 }

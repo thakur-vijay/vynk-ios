@@ -15,6 +15,8 @@ final class AppRouter: ChatNavigator{
 
     let settingsRouter: SettingsRouter
     
+    var navigationRequest: PendingNavigation?
+    
     init() {
         
         chatsRouter = .init()
@@ -45,11 +47,16 @@ final class AppRouter: ChatNavigator{
         
     }
      
-    func openChat() {
+    func openChat()async {
+
         settingsRouter.popToRoot()
-
+        
+        await Task.yield()
+        
         activeTab = .chats
+        
+        await Task.yield()
 
-        chatsRouter.push(.detail(MockDataFactory.chats.first!))
+        navigationRequest = .openChat
     }
 }

@@ -66,6 +66,9 @@ struct ProfileQRCodeView: View {
                             let isContactSaved = true
                             if isContactSaved {
                                 router.dismissSheet()
+                                Task {
+                                    await viewModel.didScanUser()
+                                }
                             }else {
                                 router.presentSheet(.addToContacts)
                             }

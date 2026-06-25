@@ -9,12 +9,17 @@ import SwiftUI
 
 struct ChatsView: View{
     @State private var viewModel: ChatsViewModel
-    @State private var router: ChatsRouter
+    @Bindable private var router: ChatsRouter
+    private let appRouter: AppRouter
     
-    
-    init(viewModel: ChatsViewModel, router: ChatsRouter) {
+    init(
+        viewModel: ChatsViewModel,
+        router: ChatsRouter,
+        appRouter: AppRouter
+    ) {
         _viewModel = State(wrappedValue: viewModel)
-        _router = State(wrappedValue: router)
+        _router = Bindable(wrappedValue: router)
+        self.appRouter = appRouter
     }
     
     @Environment(\.appDIContainer) private var appDiContainer
@@ -125,7 +130,7 @@ struct ChatsView: View{
                 }
                 }
             }
-            .toolbarVisibility(toolbarVisiblity, for: .tabBar)
+            .toolbarVisibility(router.tabBarVisiblity, for: .tabBar)
             .task {
                 await viewModel.handlePermissionStatusCard()
             }
@@ -135,11 +140,16 @@ struct ChatsView: View{
             .onDisappear {
                 viewModel.stopObserving()
             }
+            .onChange(of: appRouter.navigationRequest) { _, navigation in
+
+                guard case .openChat = navigation else { return }
+
+                router.push(.detail(MockDataFactory.chats.first!))
+
+                appRouter.navigationRequest = nil
+
+            }
         }
-    }
-    
-    var toolbarVisiblity: Visibility {
-        return router.path.isEmpty ? .visible : .hidden
     }
     
     @ViewBuilder
