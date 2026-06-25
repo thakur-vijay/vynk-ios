@@ -18,6 +18,14 @@ final class CameraSessionUseCase {
     var session: AVCaptureSession {
         repository.session
     }
+    
+    func prepareCamera(mode: CameraMode, position: CameraPosition, zoomFactor: CGFloat) async throws -> CameraPermissionStatus {
+        try await repository.prepareCamera(
+            mode: mode,
+            position: position,
+            zoomFactor: zoomFactor
+        )
+    }
 
     func permissionStatus() async -> CameraPermissionStatus {
         await repository.permissionStatus()

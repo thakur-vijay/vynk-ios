@@ -10,62 +10,70 @@ import Foundation
 
 final class DefaultCameraRepository: CameraRepository {
   
-    private let dataSource: CameraDataSource
+    private let engine: CameraEngine
 
-    init(dataSource: CameraDataSource) {
-        self.dataSource = dataSource
+    init(engine: CameraEngine) {
+        self.engine = engine
     }
 
     var session: AVCaptureSession {
-        dataSource.session
+        engine.session
+    }
+    
+    func prepareCamera(mode: CameraMode, position: CameraPosition, zoomFactor: CGFloat) async throws -> CameraPermissionStatus {
+        try await engine.prepareCamera(
+            mode: mode,
+            position: position,
+            zoomFactor: zoomFactor
+        )
     }
 
     func permissionStatus()async -> CameraPermissionStatus {
-        await dataSource.permissionStatus()
+        await engine.permissionStatus()
     }
 
     func requestPermission() async throws -> CameraPermissionStatus {
-        await dataSource.requestPermission()
+        try await engine.requestPermission()
     }
 
     func configureSession(mode: CameraMode, position: CameraPosition)async throws {
-        try await dataSource.configureSession(mode: mode, position: position)
+        try await engine.configureSession(mode: mode, position: position)
     }
     
     func switchCamera(to position: CameraPosition)async throws {
-        try await dataSource.switchCamera(to: position)
+        try await engine.switchCamera(to: position)
     }
 
     func startSession()async {
-        await dataSource.startSession()
+        await engine.startSession()
     }
 
     func stopSession()async {
-       await dataSource.stopSession()
+       await engine.stopSession()
     }
 
     func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
-        try await dataSource.capturePhoto(flashMode: flashMode)
+        try await engine.capturePhoto(flashMode: flashMode)
     }
     
     func startRecording()async throws {
-        try await dataSource.startRecording()
+        try await engine.startRecording()
     }
     
     func stopRecording() async throws -> CameraOutput {
-        return try await dataSource.stopRecording()
+        return try await engine.stopRecording()
     }
     
     func supportedZoomLevels(position: CameraPosition) async -> [CameraZoomLevel] {
-        return await dataSource.supportedZoomLevels(position: position)
+        return await engine.supportedZoomLevels(position: position)
     }
     
     func setZoomLevel(_ level: CameraZoomLevel) async throws {
-        try await dataSource.setZoomLevel(level)
+        try await engine.setZoomLevel(level)
     }
     
     func setZoomFactor(_ factor: CGFloat) async throws {
-        try await dataSource.setZoomFactor(factor)
+        try await engine.setZoomFactor(factor)
     }
     
 }

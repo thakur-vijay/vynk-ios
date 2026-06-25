@@ -55,26 +55,21 @@ final class CameraViewModel {
 
     func prepareCamera() async {
         do {
-            let status = await cameraSessionUseCase.permissionStatus()
-            permissionStatus = status
 
-            switch status {
-            case .authorized:
-                try await startCameraSession()
+            permissionStatus = try await cameraSessionUseCase.prepareCamera(
+                mode: selectedMode,
+                position: selectedPosition,
+                zoomFactor: selectedZoomPreset.zoomFactor
+            )
 
-            case .notDetermined:
-                let newStatus = try await cameraSessionUseCase.requestPermission()
-                permissionStatus = newStatus
+            isSessionRunning = permissionStatus == .authorized
 
-                if newStatus == .authorized {
-                    try await startCameraSession()
-                }
-
-            case .denied, .restricted:
-                break
-            }
         } catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+
+            AppLogger.error(
+                error.localizedDescription,
+                tag: String(describing: self)
+            )
         }
     }
 
@@ -110,7 +105,7 @@ final class CameraViewModel {
         case .video:
 
             await toggleRecording()
-
+        case .scanner: break
         }
 
     }
@@ -165,16 +160,6 @@ final class CameraViewModel {
         }
     }
 
-    private func startCameraSession() async throws {
-        try await cameraSessionUseCase.configureSession(mode: selectedMode, position: selectedPosition)
-        await cameraSessionUseCase.startSession()
-        try await cameraSessionUseCase.setZoomFactor(
-
-            selectedZoomPreset.zoomFactor
-
-        )
-        isSessionRunning = true
-    }
     
     private func startRecordingTimer() {
 

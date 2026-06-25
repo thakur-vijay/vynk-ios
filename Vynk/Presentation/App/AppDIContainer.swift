@@ -40,14 +40,19 @@ final class AppDIContainer {
             inviteDIContainer: inviteDIContainer,
             cameraDIContainer: cameraDIContainer,
             chatListsDIContainer: chatListsDIContainer,
-            appPreferences: appPreferences
+            appPreferences: appPreferences,
+            router: appRouter.chatsRouter
         )
     }()
     
     lazy var settingsDIContainer: SettingsDIContainer = {
         SettingsDIContainer(
             appLockManager: appLockManager,
-            listsDIContainer: listsDIContainer
+            brightnessManager: screenBrightnessManager,
+            listsDIContainer: listsDIContainer,
+            scannerDIContainer: scannerDIContainer,
+            router: appRouter.settingsRouter,
+            chatNavigator: appRouter
         )
     }()
     
@@ -100,7 +105,7 @@ final class AppDIContainer {
     }()
     
     lazy var cameraDIContainer: CameraDIContainer = {
-        CameraDIContainer()
+        CameraDIContainer(cameraEngine: cameraInfraDIContainer.cameraEngine)
     }()
     
     lazy var listsDIContainer: ListsDIContainer = {
@@ -109,5 +114,17 @@ final class AppDIContainer {
     
     lazy var chatListsDIContainer: ChatListsDIContainer = {
         ChatListsDIContainer(database: appDatabase)
+    }()
+    
+    lazy var screenBrightnessManager: ScreenBrightnessManaging = {
+        ScreenBrightnessManager()
+    }()
+    
+    lazy var scannerDIContainer: ScannerDIContainer = {
+        ScannerDIContainer(cameraEngine: cameraInfraDIContainer.cameraEngine)
+    }()
+    
+    lazy var cameraInfraDIContainer: CameraInfraDIContainer = {
+        CameraInfraDIContainer()
     }()
 }

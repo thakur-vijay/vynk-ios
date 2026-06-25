@@ -97,4 +97,8 @@ enum AppIcons {
         static let heart = "heart"
         static let heartFill = "heart.fill"
     }
+    
+    enum Share {
+        static let share = "square.and.arrow.up"
+    }
 }

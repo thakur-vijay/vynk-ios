@@ -33,6 +33,7 @@ struct SettingsView: View {
             }
             .background(AppColors.backgroundSecondary)
             .navigationTitle("Settings")
+            .toolbarVisibility(router.tabBarVisiblity, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("", systemImage: AppIcons.search){
@@ -42,7 +43,7 @@ struct SettingsView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("", systemImage: AppIcons.qrcode){
-                        
+                        router.push(.profileQRCode)
                     }
                 }
             }

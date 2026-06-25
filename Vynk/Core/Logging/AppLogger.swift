@@ -25,7 +25,7 @@ enum AppLogger {
     }
 
     static func info(
-        _ message: Any,
+        _ message: Any...,
         tag: String = "General"
     ) {
         let logger = Logger(

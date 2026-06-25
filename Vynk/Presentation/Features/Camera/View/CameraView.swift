@@ -21,7 +21,7 @@ struct CameraView: View {
     
     var body: some View {
         NavigationStack {
-            CameraPreviewView(session: viewModel.session)
+            CameraPreview(session: viewModel.session)
                 .ignoresSafeArea()
                 .gesture(
                     MagnifyGesture()

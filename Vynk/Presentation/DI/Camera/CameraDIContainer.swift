@@ -8,10 +8,14 @@
 import Foundation
 
 final class CameraDIContainer {
+    private let cameraEngine: CameraEngine
+    
+    init(cameraEngine: CameraEngine) {
+        self.cameraEngine = cameraEngine
+    }
     
     func makeView(onClose: @escaping ()->())-> CameraView {
-        let dataSource = CameraDataSource()
-        let repository = DefaultCameraRepository(dataSource: dataSource)
+        let repository = DefaultCameraRepository(engine: cameraEngine)
         let cameraSessionUseCase = CameraSessionUseCase(repository: repository)
         let viewModel = CameraViewModel(
             cameraSessionUseCase: cameraSessionUseCase,

@@ -9,6 +9,12 @@ import Foundation
 import AVFoundation
 
 protocol CameraRepository {
+    func prepareCamera(
+        mode: CameraMode,
+        position: CameraPosition,
+        zoomFactor: CGFloat
+    ) async throws -> CameraPermissionStatus
+    
     func permissionStatus() async -> CameraPermissionStatus
     
     func requestPermission() async throws -> CameraPermissionStatus

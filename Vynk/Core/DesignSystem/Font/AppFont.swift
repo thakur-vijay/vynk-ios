@@ -21,6 +21,11 @@ enum AppFont {
         weight: .bold
     )
     
+    static let title1Normal = Font.system(
+        size: 28,
+        weight: .regular
+    )
+    
     static let title2 = Font.system(
         size: 22,
         weight: .bold

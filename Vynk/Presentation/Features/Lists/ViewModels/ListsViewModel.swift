@@ -93,7 +93,7 @@ final class ListsViewModel {
     }
     
     var isCustomListsEmpty: Bool {
-        lists.first { $0.id == ChatListKind.custom.rawValue } != nil
+        lists.first { $0.kind == ChatListKind.custom } == nil
     }
     
     func restorePreset(id: String)async {

@@ -26,18 +26,11 @@ struct CreateCustomListSection: View {
     }
     
     var button: some View {
-        Button(action: action){
-            HStack {
-                Image(systemName: AppIcons.plus)
-                Text("Create a custom list")
-            }
-            .fontWeight(.medium)
-            .foregroundStyle(AppColors.accentEmphasized)
-            .hSpacing()
-            .padding(.vertical, AppSpacing.lg)
-            .background(AppColors.accentSoftLight, in: .capsule)
-        }
-        .glassEffect(.regular, in: .capsule)
+        AppButton(
+            text: "Create a custom list",
+            icon: AppIcons.plus,
+            action: action
+        )
     }
     
     var icons: some View {

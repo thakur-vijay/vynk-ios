@@ -14,6 +14,7 @@ final class ChatsDIContainer {
     private let cameraDIContainer: CameraDIContainer
     private let chatListsDIContainer: ChatListsDIContainer
     private let appPreferences: AppPreferences
+    private let router: ChatsRouter
     
     init(
         contactsDIContainer: ContactsDIContainer,
@@ -21,7 +22,8 @@ final class ChatsDIContainer {
         inviteDIContainer: InviteDIContainer,
         cameraDIContainer: CameraDIContainer,
         chatListsDIContainer: ChatListsDIContainer,
-        appPreferences: AppPreferences
+        appPreferences: AppPreferences,
+        router: ChatsRouter
     ) {
         self.contactsDIContainer = contactsDIContainer
         self.addContactDIContainer = addContactDIContainer
@@ -29,11 +31,10 @@ final class ChatsDIContainer {
         self.cameraDIContainer = cameraDIContainer
         self.chatListsDIContainer = chatListsDIContainer
         self.appPreferences = appPreferences
+        self.router = router
     }
 
     func makeChatsView() -> ChatsView {
-
-        let router = ChatsRouter()
 
         let viewModel = ChatsViewModel(
             contactsPermissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),

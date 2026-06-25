@@ -10,26 +10,22 @@ import SwiftUI
 @MainActor
 @Observable
 final class SettingsRouter {
-    var path = NavigationPath()
-    private var stack: [SettingsRoute] = []
+    var path : [SettingsRoute] = []
     var activeSheet: SettingsSheet?
     
     func push(_ route: SettingsRoute) {
         path.append(route)
-        stack.append(route)
     }
     
     func pop() {
         guard !path.isEmpty else { return }
         path.removeLast()
-        guard !stack.isEmpty else { return }
-        stack.removeLast()
         
     }
     
     func popToRoot() {
-        path = NavigationPath()
-        stack = .init()
+        path = .init()
+        
     }
     
     func presentSheet(_ sheet: SettingsSheet) {
@@ -40,7 +36,12 @@ final class SettingsRouter {
         activeSheet = nil
     }
     
-    var toolbarVisiblity: Visibility {
-        return stack.contains(.row(.lists)) ? .hidden : .visible
+    private var isTabBarHidden: Bool {
+        path.contains(.row(.lists)) || path.contains(.profileQRCode)
     }
+    
+    var tabBarVisiblity: Visibility {
+        return isTabBarHidden ? .hidden : .visible
+    }
+    
 }
