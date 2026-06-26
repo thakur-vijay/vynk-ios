@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import VynkCameraKit
 
 final class DefaultScannerRepository: ScannerRepository {
     private let cameraEngine: CameraEngine
@@ -31,11 +32,11 @@ final class DefaultScannerRepository: ScannerRepository {
         cameraEngine.observeQRCode()
     }
 
-    func stopScanner() async {
-        await cameraEngine.stopSession()
+    func stopScanner() {
+        cameraEngine.stopSession()
     }
     
-    func setTorch(enabled: Bool) async throws {
-        try await cameraEngine.setTorch(enabled: enabled)
+    func setTorch(enabled: Bool) throws {
+        try cameraEngine.setTorch(enabled: enabled)
     }
 }

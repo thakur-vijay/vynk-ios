@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkCameraKit
 
 struct ScannerView: View {
     let onDismiss: (ScannerResult)->()

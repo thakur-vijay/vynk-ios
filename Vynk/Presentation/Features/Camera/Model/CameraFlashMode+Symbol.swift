@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkCameraKit
 
 extension CameraFlashMode {
     var symbol: String {

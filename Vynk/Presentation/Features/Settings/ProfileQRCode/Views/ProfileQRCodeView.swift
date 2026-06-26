@@ -56,24 +56,24 @@ struct ProfileQRCodeView: View {
             switch fullScreenCover {
             case .scanner:
                 diContainer.makeScannerSheet { result in
-                    switch result {
-                    case .qrCode(let value):
-                        if value.isEmpty {
-                            ///present alert
-                        }else {
-                            ///look up for user
-                            ///if found, dismiss scanner
-                            let isContactSaved = true
-                            if isContactSaved {
-                                router.dismissSheet()
-                                Task {
-                                    await viewModel.didScanUser()
-                                }
-                            }else {
-                                router.presentSheet(.addToContacts)
-                            }
-                        }
-                    }
+//                    switch result {
+//                    case .qrCode(let value):
+//                        if value.isEmpty {
+//                            ///present alert
+//                        }else {
+//                            ///look up for user
+//                            ///if found, dismiss scanner
+//                            let isContactSaved = true
+//                            if isContactSaved {
+//                                router.dismissSheet()
+//                                Task {
+//                                    await viewModel.didScanUser()
+//                                }
+//                            }else {
+//                                router.presentSheet(.addToContacts)
+//                            }
+//                        }
+//                    }
                 }
                 .sheet(item: $router.activeSheet) { sheet in
                     switch sheet {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkCameraKit
 
 struct CameraToolbar: View {
     let flashMode: CameraFlashMode

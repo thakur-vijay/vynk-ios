@@ -8,6 +8,7 @@
 import SwiftUI
 import MusicKit
 import _AVKit_SwiftUI
+import VynkCameraKit
 
 struct CameraView: View {
     let onClose: ()->()

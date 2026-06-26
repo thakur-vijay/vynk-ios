@@ -11,6 +11,7 @@
 		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
 		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
 		189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */; };
+		18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18F4AA882FEE591D00C6898E /* VynkCameraKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,9 +38,22 @@
 		189A4F472FE7D9F600A0D885 /* VynkLifecycleMacros */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = VynkLifecycleMacros; path = ../VynkLifecycleMacros; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		18F4AA872FEE559200C6898E /* Exceptions for "Vynk" folder in "Vynk" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Packages/VynkCameraKit,
+			);
+			target = 188696872FB1AD3200A5BFA7 /* Vynk */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1886968A2FB1AD3200A5BFA7 /* Vynk */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				18F4AA872FEE559200C6898E /* Exceptions for "Vynk" folder in "Vynk" target */,
+			);
 			path = Vynk;
 			sourceTree = "<group>";
 		};
@@ -60,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */,
 				189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */,
 				189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */,
 				182DBE262FD7CF7A000F478C /* Nuke in Frameworks */,
@@ -137,6 +152,7 @@
 				182DBE272FD7CF7A000F478C /* NukeUI */,
 				189611652FD7F4A3008AD5B8 /* GRDB */,
 				189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */,
+				18F4AA882FEE591D00C6898E /* VynkCameraKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -666,6 +682,10 @@
 		189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkLifecycleMacros;
+		};
+		18F4AA882FEE591D00C6898E /* VynkCameraKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkCameraKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

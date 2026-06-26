@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import VynkCameraKit
+
 
 struct PrepareScannerUseCase {
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VynkCameraKit
 
 final class ScannerDIContainer {
     

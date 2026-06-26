@@ -5,6 +5,8 @@
 //  Created by Vijay Thakur on 24/06/26.
 //
 
+import VynkCameraKit
+
 final class ProfileQRCodeDIContainer {
     private let screenBrightnessManager: ScreenBrightnessManaging
     private let chatNavigator: ChatNavigator

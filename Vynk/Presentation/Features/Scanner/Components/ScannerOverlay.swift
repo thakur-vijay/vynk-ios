@@ -39,8 +39,8 @@ struct ScannerOverlay: View {
             }
         }
         .ignoresSafeArea()
-        .task {
-            withAnimation(.easeInOut(duration: 1.35).repeatForever(autoreverses: false)) {
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.35).repeatForever(autoreverses: true)) {
                 isAnimating = true
             }
         }

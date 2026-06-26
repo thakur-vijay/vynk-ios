@@ -5,7 +5,7 @@
 //  Created by Vijay Thakur on 25/06/26.
 //
 
-import SwiftUI
+import VynkCameraKit
 
 final class CameraInfraDIContainer {
 

@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import VynkCameraKit
 
 protocol CameraRepository {
     func prepareCamera(

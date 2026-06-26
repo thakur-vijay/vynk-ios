@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkCameraKit
 
 struct ScannerHeaderActions: View {
     let flashMode: CameraFlashMode

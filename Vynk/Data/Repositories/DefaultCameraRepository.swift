@@ -7,6 +7,7 @@
 
 import Foundation
 @preconcurrency import AVFoundation
+import VynkCameraKit
 
 final class DefaultCameraRepository: CameraRepository {
   
@@ -28,8 +29,8 @@ final class DefaultCameraRepository: CameraRepository {
         )
     }
 
-    func permissionStatus()async -> CameraPermissionStatus {
-        await engine.permissionStatus()
+    func permissionStatus() -> CameraPermissionStatus {
+        engine.permissionStatus()
     }
 
     func requestPermission() async throws -> CameraPermissionStatus {
@@ -40,40 +41,40 @@ final class DefaultCameraRepository: CameraRepository {
         try await engine.configureSession(mode: mode, position: position)
     }
     
-    func switchCamera(to position: CameraPosition)async throws {
-        try await engine.switchCamera(to: position)
+    func switchCamera(to position: CameraPosition) throws {
+        try engine.switchCamera(to: position)
     }
 
     func startSession()async {
-        await engine.startSession()
+        engine.startSession()
     }
 
     func stopSession()async {
-       await engine.stopSession()
+        engine.stopSession()
     }
 
     func capturePhoto(flashMode: CameraFlashMode) async throws -> CameraOutput {
         try await engine.capturePhoto(flashMode: flashMode)
     }
     
-    func startRecording()async throws {
-        try await engine.startRecording()
+    func startRecording() throws {
+        try engine.startRecording()
     }
     
     func stopRecording() async throws -> CameraOutput {
         return try await engine.stopRecording()
     }
     
-    func supportedZoomLevels(position: CameraPosition) async -> [CameraZoomLevel] {
-        return await engine.supportedZoomLevels(position: position)
+    func supportedZoomLevels(position: CameraPosition) -> [CameraZoomLevel] {
+        return engine.supportedZoomLevels(position: position)
     }
     
-    func setZoomLevel(_ level: CameraZoomLevel) async throws {
-        try await engine.setZoomLevel(level)
+    func setZoomLevel(_ level: CameraZoomLevel) throws {
+        try engine.setZoomLevel(level)
     }
     
-    func setZoomFactor(_ factor: CGFloat) async throws {
-        try await engine.setZoomFactor(factor)
+    func setZoomFactor(_ factor: CGFloat) throws {
+        try engine.setZoomFactor(factor)
     }
     
 }

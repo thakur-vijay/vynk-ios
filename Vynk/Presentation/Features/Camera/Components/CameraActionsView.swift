@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import VynkCameraKit
+
 
 struct CameraActionsView: View {
     let mode: CameraMode
