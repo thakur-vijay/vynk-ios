@@ -5,6 +5,7 @@
 //  Created by Vijay Thakur on 03/06/26.
 //
 
+import VynkDatabaseKit
 import GRDB
 
 struct CreateDeviceContactsMigration: DatabaseMigration {

@@ -7,6 +7,7 @@
 
 import Foundation
 import VynkLifecycleMacros
+import VynkDatabaseKit
 
 @LifecycleLogged
 final class ChatListsDIContainer {

@@ -6,6 +6,7 @@
 //
 
 import GRDB
+import VynkDatabaseKit
 
 struct CreateChatListsMigration: DatabaseMigration {
 

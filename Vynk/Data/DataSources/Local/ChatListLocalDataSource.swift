@@ -7,6 +7,7 @@
 
 import Foundation
 import GRDB
+import VynkDatabaseKit
 
 final class ChatListLocalDataSource {
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DatabaseError: Error {
+public enum DatabaseError: Error {
 
     case documentsDirectoryNotFound
 

@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct DatabaseConfiguration {
+public struct DatabaseConfiguration : Sendable{
 
     let filename: String
 
-    static let live = DatabaseConfiguration(
+    public static let live = DatabaseConfiguration(
 
         filename: "vynk.sqlite"
 

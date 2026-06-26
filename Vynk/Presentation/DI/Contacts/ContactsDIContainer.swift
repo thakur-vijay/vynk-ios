@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkDatabaseKit
 
 final class ContactsDIContainer {
     private let database: AppDatabase

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VynkDatabaseKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -17,12 +18,8 @@ final class AppDIContainer {
         URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
     }()
     
-    lazy var appDatabase: AppDatabase = {
-        do {
-            return try AppDatabase()
-        } catch {
-            fatalError("Failed to initialize database: \(error)")
-        }
+    lazy var databaseInfraDIContainer: DatabaseInfraDIContainer = {
+        DatabaseInfraDIContainer()
     }()
     
     lazy var authDIContainer: AuthDIContainer = {
@@ -30,7 +27,10 @@ final class AppDIContainer {
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {
-        ContactsDIContainer(database: appDatabase, repository: contactsRepository)
+        ContactsDIContainer(
+            database: databaseInfraDIContainer.appDatabase,
+            repository: contactsRepository
+        )
     }()
     
     lazy var chatsDIContainer: ChatsDIContainer = {
@@ -65,7 +65,7 @@ final class AppDIContainer {
             countryPickerDIContainer: countryPickerDIContainer,
             repository: contactsRepository,
             permissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
-            database: appDatabase
+            database: databaseInfraDIContainer.appDatabase
         )
     }()
     
@@ -82,7 +82,9 @@ final class AppDIContainer {
     }()
     
     lazy var localContactsDataSource: LocalContactsDataSource = {
-        LocalContactsDataSource(database: appDatabase)
+        LocalContactsDataSource(
+            database: databaseInfraDIContainer.appDatabase
+        )
     }()
     
     lazy var contactsRepository: ContactsRepository = {
@@ -113,7 +115,9 @@ final class AppDIContainer {
     }()
     
     lazy var chatListsDIContainer: ChatListsDIContainer = {
-        ChatListsDIContainer(database: appDatabase)
+        ChatListsDIContainer(
+            database: databaseInfraDIContainer.appDatabase
+        )
     }()
     
     lazy var screenBrightnessManager: ScreenBrightnessManaging = {

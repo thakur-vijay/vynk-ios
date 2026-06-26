@@ -7,7 +7,7 @@
 
 import GRDB
 
-protocol DatabaseMigration: Sendable{
+public protocol DatabaseMigration: Sendable{
 
     nonisolated var identifier: String { get }
 

@@ -8,11 +8,14 @@
 import Foundation
 import GRDB
 
-final class AppDatabase {
+public final class AppDatabase {
 
-    let dbQueue: DatabaseQueue
+    public let dbQueue: DatabaseQueue
 
-    init(configuration: DatabaseConfiguration = .live) throws {
+    public init(
+        configuration: DatabaseConfiguration = .live,
+        migrations: [DatabaseMigration]
+    ) throws {
         let databaseURL = try Self.databaseURL(
             filename: configuration.filename
         )
@@ -28,9 +31,8 @@ final class AppDatabase {
         )
 
         try DatabaseMigratorFactory
-            .makeMigrator()
+            .makeMigrator(migrations: migrations)
             .migrate(dbQueue)
-        AppLogger.debug(databaseURL, tag: String(describing: self))
     }
 
     private static func databaseURL(

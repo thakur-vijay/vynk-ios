@@ -7,32 +7,20 @@
 
 import GRDB
 
-enum DatabaseMigratorFactory {
+public enum DatabaseMigratorFactory {
 
-    static func makeMigrator() -> DatabaseMigrator {
+    public static func makeMigrator(
+        migrations: [DatabaseMigration]
+    ) -> DatabaseMigrator {
 
         var migrator = DatabaseMigrator()
 
-        let migrations: [DatabaseMigration] = [
-
-            CreateDeviceContactsMigration(),
-            CreateChatListsMigration(),
-            SeedDefaultChatListsMigration()
-
-        ]
-
         migrations.forEach { migration in
-
             migrator.registerMigration(migration.identifier) { db in
-
                 try migration.migrate(db)
-
             }
-
         }
 
         return migrator
-
     }
-
 }
