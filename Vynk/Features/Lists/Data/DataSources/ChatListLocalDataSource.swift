@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GRDB
 import VynkDatabaseKit
 
 final class ChatListLocalDataSource {
@@ -17,79 +16,63 @@ final class ChatListLocalDataSource {
         self.database = database
     }
     
-    func fetchVisibleLists() async throws -> [ChatListRecord] {
-        try await database.dbQueue.read { db in
-            try ChatListRecord
-                .filter(Column("is_visible") == true)
-                .order(Column("sort_order").asc)
-                .fetchAll(db)
-        }
-    }
-    
-    func observeVisibleLists(
-        onChange: @escaping @Sendable ([ChatListRecord]) -> Void,
-        onError: @escaping @Sendable (Error) -> Void
-    ) -> DatabaseCancellable {
-
-        let observation = ValueObservation.tracking { db in
-            try ChatListRecord
-                .filter(Column("is_visible") == true)
-                .order(Column("sort_order").asc)
-                .fetchAll(db)
-        }
-
-        return observation.start(
-            in: database.dbQueue,
-            scheduling: .mainActor,
-            onError: onError,
-            onChange: onChange
+    func observeVisibleLists() -> AsyncThrowingStream<[ChatListRecord], Error> {
+        
+        return database.observeAll(
+            ChatListRecord.self,
+            filters: [
+                .equals(ChatListRecord.ColumnNames.isVisible, .bool(true))
+            ],
+            sorting: [
+                .ascending(ChatListRecord.ColumnNames.sortOrder)
+            ]
         )
     }
     
-    func observeAvailablePresets(
-        onChange: @escaping @Sendable ([ChatListRecord]) -> Void,
-        onError: @escaping @Sendable (Error) -> Void
-    ) -> DatabaseCancellable {
+    func observeAvailablePresets() -> AsyncThrowingStream<[ChatListRecord], Error> {
 
-        let presetKinds = ChatListKind.presetKinds.map(\.rawValue)
-
-        let observation = ValueObservation.tracking { db in
-            try ChatListRecord
-                .filter(Column("is_visible") == false)
-                .filter(
-                    presetKinds.contains(Column("kind"))
-                )
-                .order(Column("sort_order").asc)
-                .fetchAll(db)
-        }
-
-        return observation.start(
-            in: database.dbQueue,
-            scheduling: .mainActor,
-            onError: onError,
-            onChange: onChange
+        let presetKinds = ChatListKind.presetKinds.map { VynkDatabaseValue.text($0.rawValue) }
+        return database.observeAll(
+            ChatListRecord.self,
+            filters: [
+                .equals(ChatListRecord.ColumnNames.isVisible, .bool(false)),
+                .in(ChatListRecord.ColumnNames.kind, presetKinds)
+            ],
+            sorting: [
+                .ascending(ChatListRecord.ColumnNames.sortOrder)
+            ]
         )
     }
     
     func fetchAvailablePresets() async throws -> [ChatListRecord] {
-        try await database.dbQueue.read { db in
-            let presetKinds = ChatListKind.presetKinds.map(\.rawValue)
-            return try ChatListRecord
-                .filter(Column("is_visible") == false)
-                .filter(presetKinds.contains(Column("kind")))
-                .order(Column("sort_order").asc)
-                .fetchAll(db)
+        try await database.read { db in
+            let presetKinds = ChatListKind.presetKinds.map { VynkDatabaseValue.text($0.rawValue) }
+            return try db.fetchAll(
+                ChatListRecord.self,
+                filters: [
+                    .equals(ChatListRecord.ColumnNames.isVisible, .bool(false)),
+                    .in(ChatListRecord.ColumnNames.kind, presetKinds)
+                ],
+                sorting: [.ascending(ChatListRecord.ColumnNames.sortOrder)]
+            )
         }
     }
     
     func createCustomList(title: String) async throws {
-        try await database.dbQueue.write { db in
+        try await database.write { db in
 
             let now = Date()
 
-            let maxSortOrder = try Int.fetchOne(
-                db,
-                sql: "SELECT MAX(sort_order) FROM chat_lists WHERE is_visible = 1"
+            let maxSortOrder = try db.fetchMax(
+                Int.self,
+                column: ChatListRecord.ColumnNames.sortOrder,
+                from: ChatListRecord.databaseTableName,
+                filters: [
+                    .equals(
+                        ChatListRecord.ColumnNames.isVisible,
+                        .bool(true)
+                    )
+                ]
             ) ?? -1
 
             let record = ChatListRecord(
@@ -102,79 +85,58 @@ final class ChatListLocalDataSource {
                 updatedAt: now
             )
 
-            try record.insert(db)
+            try db.insert(record)
         }
     }
     
     func hidePresetList(id: String) async throws {
-        try await database.dbQueue.write { db in
-
-            try db.execute(
-                sql: """
-                UPDATE chat_lists
-                SET
-                    is_visible = 0,
-                    updated_at = ?
-                WHERE id = ?
-                """,
-                arguments: [
-                    Date(),
-                    id
-                ]
+        try await database.write { db in
+            try db.update(
+                table: ChatListRecord.databaseTableName,
+                values: [
+                    ChatListRecord.ColumnNames.isVisible: .bool(false),
+                    ChatListRecord.ColumnNames.updatedAt: .date(Date())
+                ],
+                whereColumn: ChatListRecord.ColumnNames.id,
+                equals: .text(id)
             )
         }
     }
     
     func restorePresetList(id: String) async throws {
-        try await database.dbQueue.write { db in
-
-            try db.execute(
-                sql: """
-                UPDATE chat_lists
-                SET
-                    is_visible = 1,
-                    updated_at = ?
-                WHERE id = ?
-                """,
-                arguments: [
-                    Date(),
-                    id
-                ]
+        try await database.write { db in
+            try db.update(
+                table: ChatListRecord.databaseTableName,
+                values: [
+                    ChatListRecord.ColumnNames.isVisible: .bool(true),
+                    ChatListRecord.ColumnNames.updatedAt: .date(Date())
+                ],
+                whereColumn: ChatListRecord.ColumnNames.id,
+                equals: .text(id)
             )
         }
     }
     
     func deleteCustomList(id: String) async throws {
-        try await database.dbQueue.write { db in
-
-            try db.execute(
-                sql: """
-                DELETE FROM chat_lists
-                WHERE id = ?
-                """,
-                arguments: [id]
-            )
+    
+        try await database.write { db in
+            try db.delete(ChatListRecord.self, key: id)
         }
     }
     
     func reorderLists(ids: [String]) async throws {
-        try await database.dbQueue.write { db in
+        try await database.write { db in
+            let now = Date()
 
             for (index, id) in ids.enumerated() {
-
-                try db.execute(
-                    sql: """
-                    UPDATE chat_lists
-                    SET
-                        sort_order = ?,
-                        updated_at = ?
-                    WHERE id = ?
-                    """,
-                    arguments: [
-                        index,
-                        Date(),
-                        id
-                    ]
+                try db.update(
+                    table: ChatListRecord.databaseTableName,
+                    values: [
+                        ChatListRecord.ColumnNames.sortOrder: .integer(index),
+                        ChatListRecord.ColumnNames.updatedAt: .date(now)
+                    ],
+                    whereColumn: ChatListRecord.ColumnNames.id,
+                    equals: .text(id)
                 )
             }
         }

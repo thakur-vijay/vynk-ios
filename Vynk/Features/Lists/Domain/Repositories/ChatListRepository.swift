@@ -8,8 +8,6 @@
 import Foundation
 
 protocol ChatListRepository {
-
-    func fetchVisibleLists() async throws -> [ChatList]
     
     func observeVisibleLists() -> AsyncThrowingStream<[ChatList], Error>
     

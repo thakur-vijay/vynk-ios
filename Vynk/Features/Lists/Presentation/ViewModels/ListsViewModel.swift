@@ -18,21 +18,15 @@ final class ListsViewModel {
     private var observeListsTask: Task<Void, Never>?
     private var observePresetsTask: Task<Void, Never>?
     
-    private let fetchChatListsUseCase: FetchVisibleListsUseCase
-    private let fetchAvailablePresetsUseCase: FetchAvailablePresetsUseCase
     private let observeVisibleListsUseCase: ObserveVisibleListsUseCase
     private let observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase
     private let restorePresetListUseCase: RestorePresetListUseCase
     
     init(
-        fetchChatListsUseCase: FetchVisibleListsUseCase,
-        fetchAvailablePresetsUseCase: FetchAvailablePresetsUseCase,
         observeVisibleListsUseCase: ObserveVisibleListsUseCase,
         observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase,
         restorePresetListUseCase: RestorePresetListUseCase,
     ) {
-        self.fetchChatListsUseCase = fetchChatListsUseCase
-        self.fetchAvailablePresetsUseCase = fetchAvailablePresetsUseCase
         self.observeVisibleListsUseCase = observeVisibleListsUseCase
         self.observeAvailablePresetsUseCase = observeAvailablePresetsUseCase
         self.restorePresetListUseCase = restorePresetListUseCase

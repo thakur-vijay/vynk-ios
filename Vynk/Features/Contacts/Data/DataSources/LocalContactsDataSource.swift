@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GRDB
 import VynkDatabaseKit
 
 final class LocalContactsDataSource {
@@ -18,62 +17,42 @@ final class LocalContactsDataSource {
     }
     
     func fetchContacts() async throws -> [DeviceContact] {
-        try await database.dbQueue.read { db in
-            
-            let records = try ContactRecord
-                .order(ContactRecord.Columns.fullName)
-                .fetchAll(db)
-            
+        try await database.read { db in
+//            let records = try ContactRecord
+//                .order(ContactRecord.Columns.fullName)
+//                .fetchAll(db)
+            let records = try db.fetchAll(
+                ContactRecord.self,
+                sorting: [.ascending(ContactRecord.ColumnNames.fullName)]
+            )
             return records.map {
-                
                 ContactRecordMapper.toEntity($0)
-                
             }
-            
         }
     }
     
     func saveContacts(_ contacts: [DeviceContact]) async throws {
 
         let records = contacts.map {
-
             ContactRecordMapper.toRecord($0)
-
         }
 
-        try await database.dbQueue.write { db in
+        try await database.write { db in
 
-            for record in records {
-
-                try record.insert(db, onConflict: .ignore)
-
-            }
-
+            try db.insertIgnoringConflict(records)
         }
 
     }
 
     func fetchSavedNormalizedPhoneNumbers() async throws -> Set<String> {
-
-        try await database.dbQueue.read { db in
-
-            let numbers = try String.fetchAll(
-
-                db,
-
-                sql: """
-
-                SELECT normalized_primary_phone
-
-                FROM device_contacts
-
-                """
-
+        try await database.read { db in
+            let numbers = try db.fetchValues(
+                of: String.self,
+                from: ContactRecord.self,
+                column: ContactRecord.ColumnNames.normalizedPrimaryPhone
             )
-
             return Set(numbers)
-
         }
-
     }
 }
+

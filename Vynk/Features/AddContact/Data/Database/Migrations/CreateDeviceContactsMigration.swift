@@ -6,19 +6,18 @@
 //
 
 import VynkDatabaseKit
-import GRDB
 
 struct CreateDeviceContactsMigration: DatabaseMigration {
     
     let identifier = "create_device_contacts"
 
-    nonisolated func migrate(_ db: Database) throws {
-        try db.create(table: "device_contacts", ifNotExists: true) { table in
-            table.column("id", .text).primaryKey()
-            table.column("full_name", .text).notNull()
-            table.column("phone_numbers_json", .blob).notNull()
-            table.column("normalized_primary_phone", .text).notNull().unique()
-            table.column("thumbnail_image_data", .blob)
+    nonisolated func migrate(_ db: VynkDatabase) throws {
+        try db.createTable("device_contacts", ifNotExists: true) { table in
+            table.text("id").primaryKey()
+            table.text("full_name").notNull()
+            table.blob("phone_numbers_json").notNull()
+            table.text("normalized_primary_phone").notNull().unique()
+            table.blob("thumbnail_image_data")
         }
     }
 }

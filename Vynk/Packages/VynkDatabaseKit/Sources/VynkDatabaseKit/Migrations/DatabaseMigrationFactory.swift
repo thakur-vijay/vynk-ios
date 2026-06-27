@@ -17,7 +17,7 @@ public enum DatabaseMigratorFactory {
 
         migrations.forEach { migration in
             migrator.registerMigration(migration.identifier) { db in
-                try migration.migrate(db)
+                try migration.migrate(VynkDatabase(db: db))
             }
         }
 

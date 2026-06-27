@@ -25,14 +25,6 @@ final class ChatListsDIContainer {
     private lazy var repository: ChatListRepository = {
         DefaultChatListRepository(dataSource: dataSource)
     }()
-
-    lazy var fetchVisibleListsUseCase: FetchVisibleListsUseCase = {
-        FetchVisibleListsUseCase(repository: repository)
-    }()
-
-    lazy var fetchAvailablePresetsUseCase: FetchAvailablePresetsUseCase = {
-        FetchAvailablePresetsUseCase(repository: repository)
-    }()
     
     lazy var saveChatListUseCase: SaveChatListUseCase = {
         SaveChatListUseCase(repository: repository)

@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import GRDB
+import VynkDatabaseKit
 
-struct ChatListRecord: Codable, FetchableRecord, PersistableRecord{
+struct ChatListRecord: Codable, VynkFetchableRecord, VynkPersistableRecord{
     
     static let databaseTableName: String = "chat_lists"
 
@@ -43,22 +43,34 @@ struct ChatListRecord: Codable, FetchableRecord, PersistableRecord{
 }
 
 extension ChatListRecord {
+    enum ColumnNames {
+        static let id = VynkColumnName("id")
+        static let sortOrder = VynkColumnName("sort_order")
+        static let isVisible = VynkColumnName("is_visible")
+        static let kind = VynkColumnName("kind")
+        static let updatedAt = VynkColumnName("updated_at")
+    }
+}
+
+extension ChatListRecord {
+    
     nonisolated  enum Columns {
 
-        static let id = Column("id")
+        static let id = VynkColumn("id")
 
-        static let kind = Column("kind")
+        static let kind = VynkColumn("kind")
 
-        static let title = Column("title")
+        static let title = VynkColumn("title")
 
-        static let sortOrder = Column("sort_order")
+        static let sortOrder = VynkColumn("sort_order")
 
-        static let isVisible = Column("is_visible")
+        static let isVisible = VynkColumn("is_visible")
         
-        static let createdAt = Column("created_at")
+        static let createdAt = VynkColumn("created_at")
         
-        static let updatedAt = Column("updated_at")
+        static let updatedAt = VynkColumn("updated_at")
 
     }
 
 }
+

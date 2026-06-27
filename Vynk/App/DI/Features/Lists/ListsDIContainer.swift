@@ -16,8 +16,6 @@ final class ListsDIContainer {
 
     func makeListsView() -> ListsView {
         let viewModel = ListsViewModel(
-            fetchChatListsUseCase: chatListsDIContainer.fetchVisibleListsUseCase,
-            fetchAvailablePresetsUseCase: chatListsDIContainer.fetchAvailablePresetsUseCase,
             observeVisibleListsUseCase: chatListsDIContainer.observeVisibleListsUseCase,
             observeAvailablePresetsUseCase: chatListsDIContainer.observeAvailablePresetsUseCase,
             restorePresetListUseCase: chatListsDIContainer.restorePresetUseCase

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GRDB
 
 final class DefaultChatListRepository: ChatListRepository {
     
@@ -16,53 +15,42 @@ final class DefaultChatListRepository: ChatListRepository {
         self.dataSource = dataSource
     }
     
-    func fetchVisibleLists() async throws -> [ChatList] {
-        let records = try await dataSource.fetchVisibleLists()
-        return records.compactMap { ChatListRecordMapper.map($0) }
-    }
-    
-    func observeVisibleLists() -> AsyncThrowingStream<[ChatList], any Error> {
+    func observeVisibleLists() -> AsyncThrowingStream<[ChatList], Error> {
         AsyncThrowingStream { continuation in
 
-            let cancellable = dataSource.observeVisibleLists(
-                onChange: { records in
-                    let lists = records.compactMap {
-                        ChatListRecordMapper.map($0)
+            Task {
+                do {
+                    for try await records in dataSource.observeVisibleLists() {
+                        continuation.yield(
+                            records.compactMap(ChatListRecordMapper.map)
+                        )
                     }
 
-                    continuation.yield(lists)
-                },
-                onError: { error in
+                    continuation.finish()
+
+                } catch {
                     continuation.finish(throwing: error)
                 }
-            )
-
-            continuation.onTermination = { _ in
-                cancellable.cancel()
             }
         }
     }
     
     func observeAvailablePresets()-> AsyncThrowingStream<[ChatList], Error> {
-
         AsyncThrowingStream { continuation in
 
-            let cancellable = dataSource.observeAvailablePresets(
-                onChange: { records in
-
-                    let lists = records.compactMap {
-                        ChatListRecordMapper.map($0)
+            Task {
+                do {
+                    for try await records in dataSource.observeAvailablePresets() {
+                        continuation.yield(
+                            records.compactMap(ChatListRecordMapper.map)
+                        )
                     }
 
-                    continuation.yield(lists)
-                },
-                onError: { error in
+                    continuation.finish()
+
+                } catch {
                     continuation.finish(throwing: error)
                 }
-            )
-
-            continuation.onTermination = { _ in
-                cancellable.cancel()
             }
         }
     }

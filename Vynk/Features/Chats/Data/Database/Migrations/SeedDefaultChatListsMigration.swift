@@ -5,17 +5,16 @@
 //  Created by Vijay Thakur on 21/06/26.
 //
 
+import Foundation
 import VynkDatabaseKit
-import GRDB
 
 struct SeedDefaultChatListsMigration: DatabaseMigration {
-    
+
     let identifier = "seed_default_chat_lists"
-    
-    nonisolated func migrate(_ db: Database) throws {
-        
+
+    func migrate(_ db: VynkDatabase) throws {
         let now = Date()
-        
+
         try db.execute(
             sql: """
             INSERT INTO chat_lists (
@@ -34,37 +33,37 @@ struct SeedDefaultChatListsMigration: DatabaseMigration {
             (?, ?, ?, ?, ?, ?, ?)
             """,
             arguments: [
-                DefaultChatListID.favorites,
-                ChatListKind.favorites.rawValue,
-                "Favorites",
-                0,
-                true,
-                now,
-                now,
-                
-                DefaultChatListID.unread,
-                ChatListKind.unread.rawValue,
-                "Unread",
-                1,
-                true,
-                now,
-                now,
-                
-                DefaultChatListID.groups,
-                ChatListKind.groups.rawValue,
-                "Groups",
-                2,
-                true,
-                now,
-                now,
-                
-                DefaultChatListID.communities,
-                ChatListKind.communities.rawValue,
-                "Communities",
-                3,
-                true,
-                now,
-                now
+                .text(DefaultChatListID.favorites),
+                .text(ChatListKind.favorites.rawValue),
+                .text("Favorites"),
+                .integer(0),
+                .bool(true),
+                .date(now),
+                .date(now),
+
+                .text(DefaultChatListID.unread),
+                .text(ChatListKind.unread.rawValue),
+                .text("Unread"),
+                .integer(1),
+                .bool(true),
+                .date(now),
+                .date(now),
+
+                .text(DefaultChatListID.groups),
+                .text(ChatListKind.groups.rawValue),
+                .text("Groups"),
+                .integer(2),
+                .bool(true),
+                .date(now),
+                .date(now),
+
+                .text(DefaultChatListID.communities),
+                .text(ChatListKind.communities.rawValue),
+                .text("Communities"),
+                .integer(3),
+                .bool(true),
+                .date(now),
+                .date(now)
             ]
         )
     }
