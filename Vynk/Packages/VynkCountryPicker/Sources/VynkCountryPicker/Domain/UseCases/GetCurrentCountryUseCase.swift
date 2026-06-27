@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 16, *)
 final class GetCurrentCountryUseCase {
 
     private let repository: CountryRepository

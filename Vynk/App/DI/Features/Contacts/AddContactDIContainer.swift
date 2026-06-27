@@ -6,6 +6,7 @@
 //
 
 import VynkDatabaseKit
+import VynkCountryPicker
 
 final class AddContactDIContainer {
     
@@ -31,7 +32,6 @@ final class AddContactDIContainer {
 
         return AddContactViewModel(
             addContactUseCase: useCase,
-            getCurrentCountryUseCase: countryPickerDIContainer.makeGetCurrentCountryUseCase(),
            permissionUseCase: permissionUseCase
         )
     }

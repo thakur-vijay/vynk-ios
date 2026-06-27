@@ -7,6 +7,7 @@
 
 import Foundation
 
+@available(iOS 17.0, *)
 @MainActor
 @Observable
 final class CountryPickerViewModel {
@@ -23,7 +24,7 @@ final class CountryPickerViewModel {
     }
 
     var filteredCountries: [CountryModel] {
-        guard searchText.isNotEmptyString else { return countries }
+        guard !searchText.replacingOccurrences(of: " ", with: "").isEmpty else { return countries }
 
         return countries.filter {
             $0.name.localizedCaseInsensitiveContains(searchText)
@@ -36,7 +37,7 @@ final class CountryPickerViewModel {
         do {
             countries = try fetchCountriesUseCase.execute()
         } catch {
-            AppLogger.error(error.localizedDescription, tag: "CountryPickerViewModel")
+            print(error.localizedDescription)
         }
     }
     

@@ -6,34 +6,11 @@
 //
 
 import Foundation
+import VynkCountryPicker
 
 final class CountryPickerDIContainer {
-
-    func makeViewModel(selectedCountry: CountryModel?) -> CountryPickerViewModel {
-        let dataSource = LocalCountryDataSource()
-        let repository = DefaultCountryRepository(dataSource: dataSource)
-        let useCase = FetchCountriesUseCase(repository: repository)
-
-        return CountryPickerViewModel(
-            fetchCountriesUseCase: useCase,
-            selectedCountry: selectedCountry
-        )
-    }
-
     func makeCountryPickerView(selectedCountry: CountryModel?, onClose: @escaping (CountryModel?)->()) -> CountryPickerView {
-        CountryPickerView(
-            viewModel: makeViewModel(selectedCountry: selectedCountry),
-            onClose: onClose
-        )
+        CountryPickerView(selectedCountry: selectedCountry, onClose: onClose)
     }
     
-    func makeGetCurrentCountryUseCase() -> GetCurrentCountryUseCase {
-
-        let dataSource = LocalCountryDataSource()
-
-        let repository = DefaultCountryRepository(dataSource: dataSource)
-
-        return GetCurrentCountryUseCase(repository: repository)
-
-    }
 }

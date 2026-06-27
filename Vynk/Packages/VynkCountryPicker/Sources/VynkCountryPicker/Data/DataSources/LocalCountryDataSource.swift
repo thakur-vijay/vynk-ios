@@ -10,7 +10,7 @@ import Foundation
 final class LocalCountryDataSource {
 
     func fetchCountries() throws -> [CountryModel] {
-        guard let url = Bundle.main.url(
+        guard let url = Bundle.module.url(
             forResource: "countries",
             withExtension: "json"
         ) else {

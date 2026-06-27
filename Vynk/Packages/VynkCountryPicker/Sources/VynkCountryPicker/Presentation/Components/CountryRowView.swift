@@ -15,10 +15,10 @@ struct CountryRowView: View {
             Text(model.name)
             Spacer()
             Text(model.dialCode)
-                .foregroundStyle(AppColors.contentDeemphasized)
+                .foregroundStyle(Color.primary.opacity(0.6))
             if isSelected {
-                Image(systemName: AppIcons.checkmark)
-                    .foregroundStyle(AppColors.accent)
+                Image(systemName: "checkmark")
+                    .foregroundStyle(.green)
             }
         }
     }

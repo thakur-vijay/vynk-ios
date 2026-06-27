@@ -7,16 +7,29 @@
 
 import SwiftUI
 
-struct CountryPickerView: View {
+@available(iOS 17.0, *)
+public struct CountryPickerView: View {
+    let selectedCountry: CountryModel?
     let onClose: (CountryModel?)->()
     @State private var viewModel: CountryPickerViewModel
     
-    init(viewModel: CountryPickerViewModel, onClose: @escaping (CountryModel?)->()) {
-        _viewModel = State(wrappedValue: viewModel)
+    public init(
+        selectedCountry: CountryModel?,
+        onClose: @escaping (CountryModel?)->()
+    ) {
         self.onClose = onClose
+        self.selectedCountry = selectedCountry
+        let dataSource = LocalCountryDataSource()
+        let repository = DefaultCountryRepository(dataSource: dataSource)
+        _viewModel = State(
+            wrappedValue: CountryPickerViewModel(
+                fetchCountriesUseCase: FetchCountriesUseCase(repository: repository),
+                selectedCountry: selectedCountry
+            )
+        )
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             ScrollViewReader { proxy in
                 List {
@@ -27,7 +40,7 @@ struct CountryPickerView: View {
                         } label: {
                             CountryRowView(model: country, isSelected: country.id == viewModel.selectedCountry?.id)
                         }
-                        .tint(AppColors.contentDefault)
+                        .tint(.primary)
                     }
                 }
                 .task {
@@ -50,8 +63,10 @@ struct CountryPickerView: View {
             .navigationTitle("Country")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarCloseButton {
-                    onClose(viewModel.selectedCountry)
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("", systemImage: "xmark"){
+                        onClose(viewModel.selectedCountry)
+                    }
                 }
             }
             .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search"))

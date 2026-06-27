@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VynkCountryPicker
 
 @MainActor
 @Observable
@@ -26,12 +27,11 @@ final class AddContactViewModel {
     
     init(
         addContactUseCase: SaveContactUseCase,
-        getCurrentCountryUseCase: GetCurrentCountryUseCase,
         permissionUseCase: ContactsPermissionUseCase
     ) {
         self.addContactUseCase = addContactUseCase
         self.permissionUseCase = permissionUseCase
-        self.selectedCountry = try? getCurrentCountryUseCase.execute()
+        self.selectedCountry = try? CountryPickerService.currentCountry()
     }
     
     func prepareSyncToPhone() async {

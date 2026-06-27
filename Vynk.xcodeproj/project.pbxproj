@@ -11,6 +11,7 @@
 		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
 		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
 		189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */; };
+		18B83B6F2FEFFBDF00EC01CE /* VynkCountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */; };
 		18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18F4AA882FEE591D00C6898E /* VynkCameraKit */; };
 		18F4B11D2FEE8AA700C6898E /* VynkDatabaseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18F4B11C2FEE8AA700C6898E /* VynkDatabaseKit */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Packages/VynkCameraKit,
+				Packages/VynkCountryPicker,
 				Packages/VynkDatabaseKit,
 			);
 			target = 188696872FB1AD3200A5BFA7 /* Vynk */;
@@ -80,6 +82,7 @@
 				18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */,
 				189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */,
 				189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */,
+				18B83B6F2FEFFBDF00EC01CE /* VynkCountryPicker in Frameworks */,
 				182DBE262FD7CF7A000F478C /* Nuke in Frameworks */,
 				182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */,
 			);
@@ -157,6 +160,7 @@
 				189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */,
 				18F4AA882FEE591D00C6898E /* VynkCameraKit */,
 				18F4B11C2FEE8AA700C6898E /* VynkDatabaseKit */,
+				18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -686,6 +690,10 @@
 		189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkLifecycleMacros;
+		};
+		18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkCountryPicker;
 		};
 		18F4AA882FEE591D00C6898E /* VynkCameraKit */ = {
 			isa = XCSwiftPackageProductDependency;
