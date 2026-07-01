@@ -8,14 +8,14 @@
 import Foundation
 import AVFoundation
 import VynkCameraKit
-
+import VynkMediaKit
 
 @MainActor
 @Observable
 final class CameraViewModel {
 
+    let mediaProvider: MediaProviding
     private let cameraSessionUseCase: CameraSessionUseCase
-
     private(set) var permissionStatus: CameraPermissionStatus = .notDetermined
     private(set) var isSessionRunning = false
     private(set) var selectedMode: CameraMode
@@ -39,15 +39,20 @@ final class CameraViewModel {
         .init(title: "PHOTO"),
     ]
     
+    var mediaActionSheet: CameraSheet?
+    private(set) var isMediaPermissionGiven: Bool = false
+    
     init(
         cameraSessionUseCase: CameraSessionUseCase,
         initialMode: CameraMode = .photo,
-        initialPosition: CameraPosition = .back
+        initialPosition: CameraPosition = .back,
+        mediaProvider: MediaProviding
     ) {
 
         self.cameraSessionUseCase = cameraSessionUseCase
         self.selectedMode = initialMode
         self.selectedPosition = initialPosition
+        self.mediaProvider = mediaProvider
         self.zoomGestureBase = selectedZoomPreset.zoomFactor
     }
 
@@ -282,6 +287,23 @@ final class CameraViewModel {
                 error.localizedDescription,
                 tag: String(describing: self)
             )
+        }
+    }
+    
+    func isMediaPermissionGiven() async {
+        do {
+            isMediaPermissionGiven = try await mediaProvider.isPhotoLibraryPermissionGiven()
+        }catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    ///handle media
+    func handleMediaAction() {
+        if isMediaPermissionGiven {
+            mediaActionSheet = .mediaPicker
+        }else {
+            mediaActionSheet = .mediaPermissionDenied
         }
     }
 }

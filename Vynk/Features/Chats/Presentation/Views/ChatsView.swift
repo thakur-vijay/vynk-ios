@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkMediaKit
 
 struct ChatsView: View{
     @State private var viewModel: ChatsViewModel
@@ -81,7 +82,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    router.presentSheet(.newChat)
+                    router.presentSheet(.mediaPicker)
                 } onCameraTap: {
                     router.presentFullScreenCover(.camera)
                 }
@@ -110,9 +111,10 @@ struct ChatsView: View{
                         router.dismissSheet()
                     }
                 case .mediaPicker:
-                    appDiContainer.mediaPickerDIContainer.makeView {
-                        router.dismissSheet()
-                    }
+                    appDiContainer.mediaPickerDIContainer
+                        .mediaPicker { selectedMedia in
+                            router.dismissSheet()
+                        }
                 case .newList:
                     appDiContainer.chatsDIContainer.makeListEditor(mode: .create) {
                         router.dismissSheet()

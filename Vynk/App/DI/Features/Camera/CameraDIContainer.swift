@@ -7,12 +7,18 @@
 
 import Foundation
 import VynkCameraKit
+import VynkMediaKit
 
 final class CameraDIContainer {
     private let cameraEngine: CameraEngine
+    private let media: MediaPickerDIContainer
     
-    init(cameraEngine: CameraEngine) {
+    init(
+        cameraEngine: CameraEngine,
+        media: MediaPickerDIContainer
+    ) {
         self.cameraEngine = cameraEngine
+        self.media = media
     }
     
     func makeView(onClose: @escaping ()->())-> CameraView {
@@ -21,8 +27,31 @@ final class CameraDIContainer {
         let viewModel = CameraViewModel(
             cameraSessionUseCase: cameraSessionUseCase,
             initialMode: .photo,
-            initialPosition: .back
+            initialPosition: .back,
+            mediaProvider: media
         )
-        return CameraView(viewModel: viewModel, onClose: onClose)
+        return CameraView(
+            viewModel: viewModel,
+            diContainer: self,
+            onClose: onClose
+        )
+    }
+    
+    func mediaPicker(result: @escaping (MediaModel?)->())-> MediaPicker {
+        media.mediaPicker(result: result)
+    }
+    
+    func mediaPermissionDeniedSheet(
+        openSettings: @escaping ()->(),
+        onClose: @escaping ()->()
+    )-> MediaPermissionDeniedSheet {
+        media.mediaPermissionDeniedSheet(
+            openSettings: openSettings,
+            onClose: onClose
+        )
+    }
+    
+    func mediaHorizontalListView(result: @escaping (MediaModel?)->())-> MediaHorizontalListView {
+        media.mediaHorizontalListView(result: result)
     }
 }

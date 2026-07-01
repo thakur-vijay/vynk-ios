@@ -7,6 +7,7 @@
 
 import Foundation
 import VynkDatabaseKit
+import VynkMediaKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -107,7 +108,10 @@ final class AppDIContainer {
     }()
     
     lazy var cameraDIContainer: CameraDIContainer = {
-        CameraDIContainer(cameraEngine: cameraInfraDIContainer.cameraEngine)
+        CameraDIContainer(
+            cameraEngine: cameraInfraDIContainer.cameraEngine,
+            media: mediaPickerDIContainer
+        )
     }()
     
     lazy var listsDIContainer: ListsDIContainer = {

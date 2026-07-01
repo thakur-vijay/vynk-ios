@@ -9,14 +9,17 @@ import SwiftUI
 import MusicKit
 import _AVKit_SwiftUI
 import VynkCameraKit
+import VynkMediaKit
 
 struct CameraView: View {
     let onClose: ()->()
     @State private var viewModel: CameraViewModel
+    private let diContainer: CameraDIContainer
     
     @State private var player: AVPlayer = .init()
-    init(viewModel: CameraViewModel, onClose: @escaping ()->()) {
+    init(viewModel: CameraViewModel, diContainer: CameraDIContainer, onClose: @escaping ()->()) {
         _viewModel = State(wrappedValue: viewModel)
+        self.diContainer = diContainer
         self.onClose = onClose
     }
     
@@ -68,7 +71,7 @@ struct CameraView: View {
                                     .switchCamera()
                             }
                         } onPhotosTap: {
-                            ///open media picker
+                            viewModel.handleMediaAction()
                         } onFilterTap: {
                             
                         } onZoomTap: {
@@ -111,6 +114,21 @@ struct CameraView: View {
                         player = .init(url: url)
                         player.play()
                     }
+                    }
+                }
+                .sheet(item: $viewModel.mediaActionSheet) { sheet in
+                    switch sheet {
+                    case .mediaPicker:
+                        diContainer.mediaPicker { selectedMedia in
+                            
+                        }
+                    case .mediaPermissionDenied:
+                        diContainer.mediaPermissionDeniedSheet {
+                            //open settings
+                        } onClose: {
+                            viewModel.mediaActionSheet = nil
+                        }
+
                     }
                 }
         }
