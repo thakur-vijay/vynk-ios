@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct RecordingTimerView: View {
     let time: TimeInterval
     let isRecording: Bool
     var body: some View {
-        Text(DurationFormatter.formatDuration(duration: time))
+        Text(time.formatDuration())
             .font(AppFont.caption)
             .fontWeight(.medium)
             .foregroundStyle(AppColors.white)

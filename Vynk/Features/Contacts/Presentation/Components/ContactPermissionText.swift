@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct ContactPermissionText: View {
     var body: some View {
@@ -20,7 +21,7 @@ struct ContactPermissionText: View {
                 ],
                 linkColor: AppColors.accentSoft
             )) { _ in
-                AppSettingsOpener.open()
+                AppSettings.open()
             }
             .font(AppFont.body)
             .fillWidth()

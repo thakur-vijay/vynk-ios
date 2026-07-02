@@ -8,13 +8,14 @@
 import Foundation
 
 final class AuthRemoteDataSource {
-    private let apiClient: APIClient
+//    private let apiClient: APIClient
     
-    init(apiClient: APIClient) {
-        self.apiClient = apiClient
-    }
+//    init(apiClient: APIClient) {
+//        self.apiClient = apiClient
+//    }
     
     func login() async throws -> LoginResponseDTO {
-        try await apiClient.request(AuthEndpoint.login, as: LoginResponseDTO.self)
+        return .init(token: "")
+//        try await apiClient.request(AuthEndpoint.login, as: LoginResponseDTO.self)
     }
 }

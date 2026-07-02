@@ -59,7 +59,7 @@ final class AddContactViewModel {
         }else {
             alertConfig = .init(title: "Allow Vynk to access your contacts", message: "Tap Open Settings and turn on Contacts to allow access", actions: [
                 .init(title: "Cancel"),
-                .init(title: "Open Settings", action: AppSettingsOpener.open),
+                .init(title: "Open Settings", action: AppSettings.open),
             ])
         }
     }

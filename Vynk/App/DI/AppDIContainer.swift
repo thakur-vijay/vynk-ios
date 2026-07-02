@@ -16,16 +16,16 @@ final class AppDIContainer {
         AppRouter()
     }()
     
-    lazy var apiClient: APIClient = {
-        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
-    }()
+//    lazy var apiClient: APIClient = {
+//        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
+//    }()
     
     lazy var databaseInfraDIContainer: DatabaseInfraDIContainer = {
         DatabaseInfraDIContainer()
     }()
     
     lazy var authDIContainer: AuthDIContainer = {
-        AuthDIContainer(apiClient: apiClient)
+        AuthDIContainer()
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {

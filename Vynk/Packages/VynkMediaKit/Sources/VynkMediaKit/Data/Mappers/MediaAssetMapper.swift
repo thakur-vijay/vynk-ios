@@ -14,7 +14,7 @@ enum MediaAssetMapper {
         MediaModel(
             id: asset.id,
             mediaType: asset.mediaType,
-            duration: DurationFormatter.formatDuration(duration: asset.duration),
+            duration: asset.duration?.formatDuration() ?? "",
             creationDate: asset.creationDate ?? .now,
             pixelWidth: asset.pixelWidth,
             pixelHeight: asset.pixelHeight,

@@ -8,11 +8,11 @@
 import Foundation
 
 final class AuthDIContainer {
-    private let apiClient: APIClient
-    
-    init(apiClient: APIClient) {
-        self.apiClient = apiClient
-    }
+//    private let apiClient: APIClient
+//    
+//    init(apiClient: APIClient) {
+//        self.apiClient = apiClient
+//    }
     
     func makeAuthView()-> AuthView {
         AuthView(viewModel: makeAuthViewModel())
@@ -31,6 +31,6 @@ final class AuthDIContainer {
     }
     
     private func makeAuthRemoteDataSource()->AuthRemoteDataSource {
-        AuthRemoteDataSource(apiClient: apiClient)
+        AuthRemoteDataSource()
     }
 }
