@@ -13,7 +13,7 @@ final class ChatsDIContainer {
     private let inviteDIContainer: InviteDIContainer
     private let cameraDIContainer: CameraDIContainer
     private let chatListsDIContainer: ChatListsDIContainer
-    private let appPreferences: AppPreferences
+    private let appPreferences: AppPreferencesManaging
     private let appRouter: AppRouter
     
     init(
@@ -22,7 +22,7 @@ final class ChatsDIContainer {
         inviteDIContainer: InviteDIContainer,
         cameraDIContainer: CameraDIContainer,
         chatListsDIContainer: ChatListsDIContainer,
-        appPreferences: AppPreferences,
+        appPreferences: AppPreferencesManaging,
         appRouter: AppRouter
     ) {
         self.contactsDIContainer = contactsDIContainer

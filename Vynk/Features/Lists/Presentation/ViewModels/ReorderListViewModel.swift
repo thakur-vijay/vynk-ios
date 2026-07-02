@@ -52,7 +52,7 @@ final class ReorderListViewModel {
                     }
                 }
             } catch {
-                AppLogger.error(error.localizedDescription, tag: String(describing: self))
+                Log.error(error.localizedDescription, String(describing: self))
             }
         }
     }
@@ -121,7 +121,7 @@ final class ReorderListViewModel {
         do {
             try await restorePresetUseCase.execute(id: id)
         }catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
     
@@ -153,10 +153,7 @@ final class ReorderListViewModel {
                 ids: orderedIds
             )
         } catch {
-            AppLogger.error(
-                error.localizedDescription,
-                tag: String(describing: self)
-            )
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
 }

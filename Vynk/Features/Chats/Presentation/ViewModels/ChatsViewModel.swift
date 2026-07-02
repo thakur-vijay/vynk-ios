@@ -23,14 +23,14 @@ final class ChatsViewModel {
     private let contactsPermissionUseCase: ContactsPermissionUseCase
     private let observeVisibleListsUseCase: ObserveVisibleListsUseCase
     private let deleteChatListUseCase: DeleteChatListUseCase
-    private let appPreferences: AppPreferences
+    private var appPreferences: AppPreferencesManaging
     
     
     init(
         contactsPermissionUseCase: ContactsPermissionUseCase,
         observeVisibleListsUseCase: ObserveVisibleListsUseCase,
         deleteChatListUseCase: DeleteChatListUseCase,
-        appPreferences: AppPreferences
+        appPreferences: AppPreferencesManaging
     ) {
         self.contactsPermissionUseCase = contactsPermissionUseCase
         self.observeVisibleListsUseCase = observeVisibleListsUseCase
@@ -41,8 +41,8 @@ final class ChatsViewModel {
     func handlePermissionStatusCard()async{
         let permissionStatus = await contactsPermissionUseCase.status()
         let isCardAlreadyShownAndDismissed = appPreferences.isContactsPermissionStatusCardHidden
-        AppLogger.info(permissionStatus, tag: String(describing: self))
-        AppLogger.info(isCardAlreadyShownAndDismissed, tag: String(describing: self))
+        Log.info(permissionStatus, String(describing: self))
+        Log.info(isCardAlreadyShownAndDismissed, String(describing: self))
         isPermissionStatusCardHidden = permissionStatus == .authorized || permissionStatus == .notDetermined || isCardAlreadyShownAndDismissed
     }
     
@@ -64,7 +64,9 @@ final class ChatsViewModel {
                     }
                 }
             } catch {
-                AppLogger.error(error.localizedDescription, tag: String(describing: self))
+                
+                Log.error(error.localizedDescription, String(describing: self))
+                
             }
         }
     }
@@ -89,7 +91,8 @@ final class ChatsViewModel {
         do {
             try await deleteChatListUseCase.execute(list: model)
         }catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
+
         }
     }
 }

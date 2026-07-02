@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class AppPreferences {
+final class AppPreferences: AppPreferencesManaging{
     
     @UserDefault(key: AppPreferenceKeys.isContactsPermissionStatusCardHidden, defaultValue: false)
     var isContactsPermissionStatusCardHidden: Bool

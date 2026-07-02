@@ -6,57 +6,57 @@
 //
 
 
-import OSLog
-
-enum AppLogger {
-
-    nonisolated private static let subsystem = Bundle.main.bundleIdentifier ?? "Vynk"
-
-    nonisolated static func debug(
-        _ message: Any...,
-        tag: String
-    ) {
-        let logger = Logger(
-            subsystem: subsystem,
-            category: tag
-        )
-
-        logger.debug("\(String(describing: message))")
-    }
-
-    static func info(
-        _ message: Any...,
-        tag: String = "General"
-    ) {
-        let logger = Logger(
-            subsystem: subsystem,
-            category: tag
-        )
-
-        logger.info("\(String(describing: message))")
-    }
-
-    static func error(
-        _ message: Any,
-        tag: String = "General"
-    ) {
-        let logger = Logger(
-            subsystem: subsystem,
-            category: tag
-        )
-
-        logger.error("\(String(describing: message))")
-    }
-
-    static func fault(
-        _ message: Any,
-        tag: String = "General"
-    ) {
-        let logger = Logger(
-            subsystem: subsystem,
-            category: tag
-        )
-
-        logger.fault("\(String(describing: message))")
-    }
-}
+//import OSLog
+//
+//enum AppLogger {
+//
+//    nonisolated private static let subsystem = Bundle.main.bundleIdentifier ?? "Vynk"
+//
+//    nonisolated static func debug(
+//        _ message: Any...,
+//        tag: String
+//    ) {
+//        let logger = Logger(
+//            subsystem: subsystem,
+//            category: tag
+//        )
+//
+//        logger.debug("\(String(describing: message))")
+//    }
+//
+//    static func info(
+//        _ message: Any...,
+//        tag: String = "General"
+//    ) {
+//        let logger = Logger(
+//            subsystem: subsystem,
+//            category: tag
+//        )
+//
+//        logger.info("\(String(describing: message))")
+//    }
+//
+//    static func error(
+//        _ message: Any,
+//        tag: String = "General"
+//    ) {
+//        let logger = Logger(
+//            subsystem: subsystem,
+//            category: tag
+//        )
+//
+//        logger.error("\(String(describing: message))")
+//    }
+//
+//    static func fault(
+//        _ message: Any,
+//        tag: String = "General"
+//    ) {
+//        let logger = Logger(
+//            subsystem: subsystem,
+//            category: tag
+//        )
+//
+//        logger.fault("\(String(describing: message))")
+//    }
+//}

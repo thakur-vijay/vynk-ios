@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import VynkFoundation
 
 final class SettingsDIContainer {
     private let appLockManager: AppLockManager

@@ -45,7 +45,7 @@ final class ListsViewModel {
                     }
                 }
             } catch {
-                AppLogger.error(error.localizedDescription, tag: String(describing: self))
+                Log.error(error.localizedDescription, String(describing: self))
             }
         }
     }
@@ -94,7 +94,7 @@ final class ListsViewModel {
         do {
             try await restorePresetListUseCase.execute(id: id)
         }catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
 }

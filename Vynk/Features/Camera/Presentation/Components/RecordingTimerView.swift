@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VynkFoundation
 
 struct RecordingTimerView: View {
     let time: TimeInterval

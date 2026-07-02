@@ -9,7 +9,6 @@ import Foundation
 import AVFoundation
 import VynkCameraKit
 
-
 @LifecycleLogged
 @MainActor
 @Observable
@@ -43,7 +42,7 @@ final class ScannerViewModel {
             guard status == .authorized else { return }
             startObservingQRCode()
         }catch {
-            AppLogger.error(error.localizedDescription)
+            Log.error(error.localizedDescription)
         }
     }
     
@@ -74,8 +73,7 @@ final class ScannerViewModel {
             guard let self else { return }
 
             for await result in observeQRCodeUseCase.execute() {
-                AppLogger.info(result, "QRCode")
-                
+                Log.info(result, "QRCode")
                 observeQRCodeTask?.cancel()
                 
                 observeQRCodeTask = nil

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VynkFoundation
 
 struct DeviceContactRow: View {
     let model: DeviceContact

@@ -9,11 +9,11 @@
 final class DefaultAppLockRepository: AppLockRepository {
 
     private let authService: LocalAuthenticationService
-    private let store: AppPreferences
+    private var store: AppPreferencesManaging
 
     init(
         authService: LocalAuthenticationService,
-        store: AppPreferences
+        store: AppPreferencesManaging
     ) {
         self.authService = authService
         self.store = store

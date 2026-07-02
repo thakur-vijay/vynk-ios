@@ -44,7 +44,7 @@ final class ContactsViewModel {
                   }
 
               } catch {
-                  AppLogger.error(error.localizedDescription, tag: String(describing: self))
+                  Log.error(error.localizedDescription, String(describing: self))
                   await loadLocalContactsSafely()
               }
 
@@ -68,9 +68,7 @@ final class ContactsViewModel {
             await syncLocalCacheSafely(deviceContacts)
 
         } catch {
-
-            AppLogger.error(error.localizedDescription, tag: "DeviceContactsFetch")
-
+            Log.error(error.localizedDescription, String(describing: self))
             await loadLocalContactsSafely()
 
         }
@@ -88,11 +86,11 @@ final class ContactsViewModel {
                 }
 
             } catch {
-                AppLogger.error(error.localizedDescription, tag: "LocalContactsFetchAfterSync")
+                Log.error(error.localizedDescription, String(describing: self))
             }
 
         } catch {
-            AppLogger.error(error.localizedDescription, tag: "ContactsSync")
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
     
@@ -105,7 +103,7 @@ final class ContactsViewModel {
 
             contacts = []
 
-            AppLogger.error(error.localizedDescription, tag: "LocalContactsFallback")
+            Log.error(error.localizedDescription, String(describing: self))
 
         }
 

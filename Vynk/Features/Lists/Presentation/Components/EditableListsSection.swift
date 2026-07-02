@@ -19,7 +19,7 @@ struct EditableListsSection: View {
                     .deleteDisabled(!list.canDelete)
                     .id("\(list.id)-\(list.canDelete)")
                     .task {
-                        AppLogger.debug(list.id, list.canDelete, tag: list.title)
+                        Log.debug(list.id, list.canDelete)
                     }
             }
             .onMove { indexSet, destination in

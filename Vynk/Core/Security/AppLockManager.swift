@@ -11,13 +11,13 @@ import Foundation
 @Observable
 final class AppLockManager {
 
-    private let preferences: AppPreferences
+    private var preferences: AppPreferencesManaging
 
     private(set) var isLocked = false
 
     private(set) var backgroundDate: Date?
 
-    init(preferences: AppPreferences) {
+    init(preferences: AppPreferencesManaging) {
         self.preferences = preferences
         prepareInitialLockState()
     }

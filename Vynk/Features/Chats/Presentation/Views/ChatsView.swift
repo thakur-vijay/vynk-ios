@@ -35,7 +35,7 @@ struct ChatsView: View{
                 }
                 
                 ChatFilterBarView(lists: viewModel.lists) { clickedID in
-                    AppLogger.debug("Clicked ID is", clickedID, tag: String(describing: self))
+                    Log.error("Clicked ID is", clickedID, String(describing: self))
                     if clickedID == "add"{
                         router.activeSheet = .newList
                     }

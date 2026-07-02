@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VynkFoundation
 
 struct ContactPermissionText: View {
     var body: some View {

@@ -129,8 +129,7 @@ private extension MessageListCoordinator {
 
         let newOverlap = max(0, screenHeight - keyboardFrame.minY)
 
-        let delta = newOverlap - currentKeyboardOverlap
-        AppLogger.info(delta, tag: "Delta")
+        let delta = newOverlap - currentKeyboardOverlap        
         guard abs(delta) > 20 else {
 
             currentKeyboardOverlap = newOverlap
@@ -148,7 +147,7 @@ private extension MessageListCoordinator {
         let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt ?? 7
 
         let options = UIView.AnimationOptions(rawValue: curveRaw << 16)
-        AppLogger.info(wasAtBottom, tag: String(describing: self))
+        Log.info(wasAtBottom, String(describing: self))
         let inputBarHeight: CGFloat = 30
         let correctedDelta = delta - inputBarHeight
         UIView.animate(

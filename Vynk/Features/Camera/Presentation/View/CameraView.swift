@@ -30,7 +30,8 @@ struct CameraView: View {
                 .gesture(
                     MagnifyGesture()
                         .onChanged { value in
-                            AppLogger.debug(value.magnification, "Magnification", tag: String(describing: self))
+                            Log.debug(value.magnification, "Magnification", String(describing: self))
+
                             viewModel.updateZoomGesture(
                                 scale: value.magnification
                             )

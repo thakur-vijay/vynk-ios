@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VynkFoundation
 
 struct ChatInputBar: View {
     @Binding var message: String

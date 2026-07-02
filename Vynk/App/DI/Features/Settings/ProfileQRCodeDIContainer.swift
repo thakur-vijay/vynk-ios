@@ -6,7 +6,6 @@
 //
 
 import VynkCameraKit
-import VynkFoundation
 
 final class ProfileQRCodeDIContainer {
     private let screenBrightnessManager: ScreenBrightnessManaging

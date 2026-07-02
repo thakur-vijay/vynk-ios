@@ -7,7 +7,6 @@
 
 import Foundation
 import VynkLifecycleMacros
-import VynkFoundation
 
 @LifecycleLogged
 @MainActor
@@ -42,7 +41,7 @@ final class ListEditorViewModel {
             try await saveChatListUseCase.execute(title: title)
             onClose()
         }catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription)
         }
     }
     

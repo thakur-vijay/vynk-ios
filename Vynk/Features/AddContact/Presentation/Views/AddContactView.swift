@@ -7,7 +7,6 @@
 
 import SwiftUI
 import VynkCountryPicker
-import VynkFoundation
 
 struct AddContactView: View {
     @State private var viewModel: AddContactViewModel

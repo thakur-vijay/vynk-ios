@@ -8,7 +8,6 @@
 import Foundation
 import VynkDatabaseKit
 import VynkMediaKit
-import VynkFoundation
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -75,7 +74,7 @@ final class AppDIContainer {
         InviteDIContainer()
     }()
     
-    lazy var appPreferences: AppPreferences = {
+    lazy var appPreferences: AppPreferencesManaging = {
         AppPreferences()
     }()
     

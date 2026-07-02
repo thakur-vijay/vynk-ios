@@ -9,9 +9,9 @@ import Foundation
 
 final class AppLockDIContainer {
 
-    private let appPreferences: AppPreferences
+    private let appPreferences: AppPreferencesManaging
 
-    init(appPreferences: AppPreferences) {
+    init(appPreferences: AppPreferencesManaging) {
         self.appPreferences = appPreferences
     }
     

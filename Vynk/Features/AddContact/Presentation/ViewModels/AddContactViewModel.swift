@@ -8,7 +8,6 @@
 import Foundation
 import VynkCountryPicker
 import SwiftUI
-import VynkFoundation
 
 @MainActor
 @Observable
@@ -76,7 +75,7 @@ final class AddContactViewModel {
             let payload = CreateContactPayload(firstName: firstName, lastName: lastName, phoneNumber: phone)
             try await addContactUseCase.execute(payload: payload)
         }catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
     

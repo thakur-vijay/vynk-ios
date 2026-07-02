@@ -72,11 +72,8 @@ final class CameraViewModel {
             isSessionRunning = permissionStatus == .authorized
 
         } catch {
+            Log.error(error.localizedDescription, String(describing: self))
 
-            AppLogger.error(
-                error.localizedDescription,
-                tag: String(describing: self)
-            )
         }
     }
 
@@ -92,7 +89,7 @@ final class CameraViewModel {
             try await cameraSessionUseCase.switchCamera(to: newPosition)
             selectedPosition = newPosition
         } catch {
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
         }
 
     }
@@ -127,8 +124,7 @@ final class CameraViewModel {
             capturedOutput = try await cameraSessionUseCase.capturePhoto(flashMode: selectedFlashMode)
             
         } catch {
-            dump(error)
-            AppLogger.error(error.localizedDescription, tag: String(describing: self))
+            Log.error(error.localizedDescription, String(describing: self))
         }
     }
     
@@ -160,10 +156,8 @@ final class CameraViewModel {
             
             isRecordingVideo = false
 
-            AppLogger.error(
-                error.localizedDescription,
-                tag: String(describing: self)
-            )
+            Log.error(error.localizedDescription, String(describing: self))
+
         }
     }
 
@@ -283,10 +277,8 @@ final class CameraViewModel {
             zoomFactor = factor
         } catch {
 
-            AppLogger.error(
-                error.localizedDescription,
-                tag: String(describing: self)
-            )
+            Log.error(error.localizedDescription, String(describing: self))
+
         }
     }
     
