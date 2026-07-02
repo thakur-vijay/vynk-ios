@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VynkCountryPicker
+import VynkFoundation
 
 struct AddContactView: View {
     @State private var viewModel: AddContactViewModel
@@ -33,7 +34,7 @@ struct AddContactView: View {
                         .focused($focusedField, equals: .firstName)
                         .submitLabel(.next)
                         .onSubmit {
-                            withoutAnimation {
+                            performWithoutAnimation{
                                 focusedField = .lastName
                             }
                         }
@@ -42,7 +43,7 @@ struct AddContactView: View {
                         .focused($focusedField, equals: .lastName)
                         .submitLabel(.next)
                         .onSubmit {
-                            withoutAnimation {
+                            performWithoutAnimation {
                                 focusedField = .phone
                             }
                         }
@@ -56,11 +57,11 @@ struct AddContactView: View {
                             Text("Phone")
                                 .font(AppFont.bodySemibold)
                                 .foregroundStyle(AppColors.contentDefault)
-                                .hSpacing(.leading)
+                                .fillWidth(.leading)
                                 .frame(width: 100)
                             
                             Text(viewModel.selectedCountry?.name ?? "")
-                                .hSpacing(.leading)
+                                .fillWidth(.leading)
                             
                             AppSymbols.rightChevron.image
                                 .font(AppFont.caption)
@@ -79,7 +80,7 @@ struct AddContactView: View {
                         Text("Mobile")
                             .font(AppFont.bodySemibold)
                             .foregroundStyle(AppColors.contentDefault)
-                            .hSpacing(.leading)
+                            .fillWidth(.leading)
                             .frame(width: 100)
                         HStack {
                             Text(viewModel.selectedCountry?.dialCode ?? "")
@@ -106,7 +107,7 @@ struct AddContactView: View {
                             .font(AppFont.title1)
                         Text("Add via QR code")
                     }
-                    .hSpacing()
+                    .fillWidth()
                     .foregroundStyle(AppColors.accentSoft)
                     .listRowBackground(EmptyView())
                     .listRowInsets(.top, 0)
@@ -118,8 +119,8 @@ struct AddContactView: View {
             .toolbar {
                 ToolbarCloseButton(placement: .topBarLeading) {
                     focusedField = nil
-                    if viewModel.phone.isNotEmptyString {
-                        viewModel.isDiscardConfirmationDialogPresented.toggle()
+                    if viewModel.phone.isNotBlank {
+                        viewModel.presentDiscardConfirmationDialog(onClose: onClose)
                     }else {
                         onClose()
                     }
@@ -142,11 +143,8 @@ struct AddContactView: View {
                 }
             }
         }
-        .confirmationDialog(.init(title: "Discard changes?", message: "Are you sure you want to discard this new contact?", actions: [
-            .init(title: "Discard changes", role: .destructive, action: onClose),
-            .init(title: "Keep editing") {},
-        ]), isPresented: $viewModel.isDiscardConfirmationDialogPresented)
-        .alert($viewModel.alertConfig)
+        .appConfirmationDialog($viewModel.confirmationDialogConfig)
+        .appAlert($viewModel.alertConfig)
         .task {
             await viewModel.prepareSyncToPhone()
         }

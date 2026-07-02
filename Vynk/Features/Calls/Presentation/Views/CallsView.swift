@@ -19,7 +19,7 @@ struct CallsView: View {
             List {
                 CallQuickActionRowView()
                     .clearListRowStyle()
-                    .padding(.top, AppSpacing.smd)
+                    .padding(.top, AppSpacing.md)
                recentTextView
                 RecentCallsSectionView()
                     .clearListRowStyle(separator: .visible)
@@ -59,7 +59,7 @@ struct CallsView: View {
         Text("Recent")
             .font(AppFont.title3)
             .padding(.horizontal)
-            .padding(.top, AppSpacing.xlg)
+            .padding(.top, AppSpacing.xl)
             .padding(.bottom, AppSpacing.md)
             .clearListRowStyle()
     }

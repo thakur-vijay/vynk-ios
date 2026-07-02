@@ -38,7 +38,7 @@ struct ReorderListsView: View {
                 }
             }
         }
-        .alert($viewModel.alertConfig)
+        .appAlert($viewModel.alertConfig)
         .task(viewModel.startObserving)
         .onDisappear(perform: viewModel.stopObserving)
     }

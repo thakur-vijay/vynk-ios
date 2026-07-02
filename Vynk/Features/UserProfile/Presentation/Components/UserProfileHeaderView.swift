@@ -15,8 +15,8 @@ struct UserProfileHeaderView: View {
                 url: .init(
                     string: user?.avatarImage ?? ""
                 ),
-                width: AppSizes.userProfileImageXL,
-                height: AppSizes.userProfileImageXL,
+                width: Constants.profileImageSize,
+                height: Constants.profileImageSize,
                 shape: .circle
             )
              
@@ -30,8 +30,14 @@ struct UserProfileHeaderView: View {
             }
         }
         .clearListRowStyle()
-        .hSpacing()
+        .fillWidth()
         .padding(.bottom, AppSpacing.sm)
+    }
+    
+    private enum Constants {
+
+        static let profileImageSize: CGFloat = 120
+
     }
 }
 

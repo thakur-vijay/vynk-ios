@@ -1,13 +1,13 @@
 //
-//  UIScreen+Extensions.swift
-//  Vynk
+//  File.swift
+//  VynkFoundation
 //
-//  Created by Vijay Thakur on 24/06/26.
+//  Created by Vijay Thakur on 02/07/26.
 //
 
-import SwiftUI
+import UIKit
 
-extension UIScreen {
+public extension UIScreen {
 
     static var current: UIScreen? {
         UIApplication.shared

@@ -23,7 +23,7 @@ struct AppButton: View {
             }
             .font(AppFont.headline)
             .foregroundStyle(foreground)
-            .hSpacing()
+            .fillWidth()
             .padding(.vertical, AppSpacing.lg)
             .background(background, in: .capsule)
         }

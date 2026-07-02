@@ -34,13 +34,13 @@ struct StatusCardView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: AppRadius.lg)
             .fill(AppColors.backgroundSecondary)
-            .frame(AppSizes.statusCardSize)
+            .frame(statusCardSize)
             .overlay {
                 if let previewURL {
                     VynkRemoteImage(
                         url: .init(string: previewURL),
-                        width: AppSizes.statusCardSize.width,
-                        height: AppSizes.statusCardSize.height,
+                        width: statusCardSize.width,
+                        height: statusCardSize.height,
                         shape: .rect(cornerRadius: AppRadius.lg, style: .continuous)
                     )
                 }
@@ -76,9 +76,9 @@ struct StatusCardView: View {
                     Text(title)
                         .font(AppFont.captionSemibold)
                         .foregroundStyle(hasStatus ? AppColors.white : AppColors.contentDefault)
-                        .hSpacing(hasStatus ? .leading : .center)
+                        .fillWidth(hasStatus ? .leading : .center)
                 }
-                .padding(AppSpacing.smd)
+                .padding(AppSpacing.md)
                 .padding(.top, isCurrentUser && !hasStatus ? AppSpacing.lg : 0)
             }
             .contentShape(
@@ -92,15 +92,15 @@ struct StatusCardView: View {
         Circle()
             .stroke(hasStatus ? AppColors.accentLight : .clear, lineWidth: 2.5)
             .frame(
-                width: isCurrentUser && !hasStatus ? AppSizes.avatarXL : AppSizes.avatarLG,
-                height: isCurrentUser && !hasStatus ? AppSizes.avatarXL : AppSizes.avatarLG
+                width: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg,
+                height: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg
             )
             .overlay {
                 if let avatarURL{
                     VynkRemoteImage(
                         url: .init(string: avatarURL),
-                        width: isCurrentUser && !hasStatus ? AppSizes.avatarXL : AppSizes.avatarLG - 7,
-                        height: isCurrentUser && !hasStatus ? AppSizes.avatarXL : AppSizes.avatarLG - 7,
+                        width: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
+                        height: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
                         shape: .circle
                     )
                 }
@@ -120,4 +120,12 @@ struct StatusCardView: View {
                 }
             }
     }
+    
+    let statusCardSize = CGSize(
+
+        width: 112,
+
+        height: 184
+
+    )
 }

@@ -1,33 +1,19 @@
 //
-//  AlertModifer.swift
-//  Vynk
+//  SwiftUIView.swift
+//  VynkDesignSystem
 //
-//  Created by Vijay Thakur on 04/06/26.
+//  Created by Vijay Thakur on 02/07/26.
 //
 
 import SwiftUI
 
-extension View {
+public extension View {
     
     @ViewBuilder
-    func alert(_ config: DialogConfig, isPresented: Binding<Bool>)-> some View {
-        self
-            .alert(config.title, isPresented: isPresented) {
-                ForEach(config.actions) { action in
-                    Button(role: action.role, action: action.action) {
-                        Text(action.title)
-                    }
-                }
-            } message: {
-                Text(config.message ?? "")
-            }
-    }
-    
-    @ViewBuilder
-    func alert(_ config: Binding<DialogConfig?>)-> some View {
+    func appConfirmationDialog(_ config: Binding<DialogConfiguration?>)-> some View {
         if let configResult = config.wrappedValue{
             self
-                .alert(configResult.title, isPresented: .init(get: {
+                .confirmationDialog(configResult.title, isPresented: .init(get: {
                     config.wrappedValue != nil
                 }, set: { newValue in
                     if !newValue {
@@ -43,7 +29,9 @@ extension View {
                         }
                     }
                 } message: {
-                    Text(configResult.message ?? "")
+                    if let message = configResult.message{
+                        Text(message)
+                    }
                 }
         }else {
             self

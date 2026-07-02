@@ -18,14 +18,22 @@ struct ContactsPermissionCard: View {
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
                 Text("Allow full contact access")
                     .font(AppFont.headline)
-                RichTextView(message: "Make sure you can start new chats with your contacts. Settings", metadata: [
-                    "Settings": "/settings"
-                ], attributionColor: AppColors.accentSoft) { _ in
-                    AppSettingsOpener.open()
-                }
-                .font(AppFont.body)
+                RichTextView(
+                    configuration: .init(
+                        text: "Make sure you can start new chats with your contacts. Settings",
+                        links: [
+                            .init(
+                                text: "Settings",
+                                link: "/settings"
+                            )
+                        ],
+                        linkColor: AppColors.accentSoft
+                    )) { _ in
+                        
+                    }
+                    .font(AppFont.body)
             }
-            .hSpacing(.leading)
+            .fillWidth(.leading)
             
             Button(action: onClose){
                 AppSymbols.close.image

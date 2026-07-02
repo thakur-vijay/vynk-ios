@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct DeviceContactRow: View {
     let model: DeviceContact
@@ -19,12 +20,12 @@ struct DeviceContactRow: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                        .frame(width: AppAvatarSize.md, height: AppAvatarSize.md)
                         .clipShape(.circle)
                 }else {
                     Circle()
                         .fill(AppColors.neutralSubtle)
-                        .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                        .frame(width: AppAvatarSize.md, height: AppAvatarSize.md)
                         .overlay {
                             AppSymbols.person.image
                                 .foregroundStyle(AppColors.neutralMuted)
@@ -32,17 +33,17 @@ struct DeviceContactRow: View {
                 }
                 
                 VStack(alignment: .leading){
-                    if model.fullName.isNotEmptyString {
+                    if model.fullName.isNotBlank {
                         Text(model.fullName)
                             .font(AppFont.bodySemibold)
                     }
                     if !model.phoneNumbers.isEmpty{
                         Text(model.phoneNumbers.joined(separator: ", "))
-                            .font(model.fullName.isEmptyString ? AppFont.bodySemibold : AppFont.caption)
-                            .foregroundStyle(model.fullName.isEmptyString ? AppColors.contentDefault : AppColors.contentDeemphasized)
+                            .font(model.fullName.isBlank ? AppFont.bodySemibold : AppFont.caption)
+                            .foregroundStyle(model.fullName.isBlank ? AppColors.contentDefault : AppColors.contentDeemphasized)
                     }
                 }
-                .hSpacing(.leading)
+                .fillWidth(.leading)
                 
                 Text("Invite")
                     .font(AppFont.captionMedium)

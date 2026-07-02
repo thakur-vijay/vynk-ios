@@ -22,7 +22,7 @@ struct CameraActionsView: View {
     let onZoomTap: ()->()
     var body: some View {
         HStack {
-            CameraActionButton(icon: AppSymbols.photo.name, size: AppSizes.buttonHeightLG, action: onPhotosTap)
+            CameraActionButton(icon: AppSymbols.photo.name, size: AppButtonSize.lg, action: onPhotosTap)
                 .opacity(isRecording ? 0 : 1)
                 .allowsHitTesting(!isRecording)
             Spacer(minLength: 0)
@@ -47,7 +47,7 @@ struct CameraActionsView: View {
                 .allowsHitTesting(!isRecording && position == .back)
 
             Spacer(minLength: 0)
-            CameraActionButton(icon: AppSymbols.switchPath.name, size: AppSizes.buttonHeightLG, action: onSwitch)
+            CameraActionButton(icon: AppSymbols.switchPath.name, size: AppButtonSize.lg, action: onSwitch)
         }
         .padding(.horizontal)
     }

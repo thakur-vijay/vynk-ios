@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 @LifecycleLogged
 @MainActor
@@ -23,7 +24,7 @@ final class ProfileQRCodeViewModel {
     }
     
     func setFullBrightness(){
-        brightnessManager.setFullBrightness()
+        brightnessManager.setBrightness(.maximum)
     }
     
     func restoreBrightness(){

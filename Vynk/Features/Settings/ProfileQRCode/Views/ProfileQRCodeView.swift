@@ -36,10 +36,10 @@ struct ProfileQRCodeView: View {
             }
 
         }
-        .hSpacing()
-        .vSpacing()
-        .padding(.horizontal, AppSpacing.xxxlg)
-        .padding(.vertical, AppSpacing.xlg)
+        .fillWidth()
+        .fillHeight()
+        .padding(.horizontal, AppSpacing.xxxl)
+        .padding(.vertical, AppSpacing.xl)
         .background(AppColors.backgroundSecondary)
         .navigationTitle("QR Code")
         .navigationBarTitleDisplayMode(.inline)

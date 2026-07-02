@@ -15,8 +15,8 @@ struct MessageThreadRowView: View{
                 url: .init(
                     string: model.avatarImage
                 ),
-                width: AppSizes.avatarLG,
-                height: AppSizes.avatarLG,
+                width:  AppAvatarSize.lg,
+                height: AppAvatarSize.lg,
                 shape: .circle
             )
     
@@ -24,12 +24,12 @@ struct MessageThreadRowView: View{
                 HStack {
                     Text(model.title + (model.isYou ? "(You)" : ""))
                         .font(AppFont.headline)
-                        .hSpacing(.leading)
+                        .fillWidth(.leading)
                     Text(model.timestampText)
                         .font(AppFont.subheadline)
                         .foregroundStyle(AppColors.contentDeemphasized)
                 }
-                .padding(.top, AppSpacing.smd)
+                .padding(.top, AppSpacing.md)
 
                 HStack(alignment: .top, spacing: AppSpacing.sm) {
                     Text(model.lastMessage)
@@ -37,7 +37,7 @@ struct MessageThreadRowView: View{
                         .foregroundStyle(AppColors.contentDeemphasized)
                         .lineLimit(2)
                         .lineSpacing(1.4)
-                        .hSpacing(.leading)
+                        .fillWidth(.leading)
                     if model.unreadCount > 0 {
                         Text("\(model.unreadCount)")
                             .font(AppFont.footnoteMedium)
@@ -47,15 +47,15 @@ struct MessageThreadRowView: View{
                             .background(AppColors.accent, in: .capsule)
                     }
                 }
-                .vSpacing(.top)
+                .fillWidth(.top)
 
                 Rectangle()
                     .fill(AppColors.neutralSubtle)
                     .frame(height: 0.5)
             }
-            .hSpacing(.leading)
+            .fillWidth(.leading)
         }
-        .frame(height: AppSizes.chatRowHeight)
+        .frame(height: chatRowHeight)
         .padding(.horizontal, AppSpacing.md)
     }
     
@@ -73,4 +73,5 @@ struct MessageThreadRowView: View{
 
     }
     
+    let chatRowHeight: CGFloat = 84
 }

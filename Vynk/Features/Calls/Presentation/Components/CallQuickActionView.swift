@@ -15,7 +15,7 @@ struct CallQuickActionView: View {
         Button(action: action) {
             VStack {
                 Image(systemName: icon)
-                    .frame(width: AppSizes.avatarLG, height: AppSizes.avatarLG)
+                    .frame(width: AppAvatarSize.lg, height: AppAvatarSize.lg)
                     .background(AppColors.backgroundSecondary, in: .circle)
                 Text(label)
                     .font(AppFont.caption)
@@ -23,6 +23,6 @@ struct CallQuickActionView: View {
             }
             .contentShape(.rect)
         }
-        .hSpacing()
+        .fillWidth()
     }
 }

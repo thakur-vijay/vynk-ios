@@ -39,7 +39,7 @@ struct SectionRowView<ID: RowIDProtocol>: View {
                                     .foregroundStyle(AppColors.contentDeemphasized)
                             }
                         }
-                        .hSpacing(.leading)
+                        .fillWidth(.leading)
                         
                         if let trailingText = row.trailingText {
                             Text(trailingText)

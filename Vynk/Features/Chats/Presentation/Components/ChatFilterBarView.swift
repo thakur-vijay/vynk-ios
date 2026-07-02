@@ -24,9 +24,9 @@ struct ChatFilterBarView: View {
                     ChatFilterChipView(model: list){
                         onClick(list.id)
                     }
-                    .customContextMenu(actions: [
-                    
-                    ])
+//                    .customContextMenu(actions: [
+//                    
+//                    ])
                 }
                 ChatFilterChipView(icon: AppSymbols.plus.name) {
                     onClick("add")

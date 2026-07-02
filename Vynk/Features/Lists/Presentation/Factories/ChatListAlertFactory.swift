@@ -12,7 +12,7 @@ enum ChatListAlertFactory {
     static func makeDeleteAlert(
         for list: ChatListRowModel,
         onDelete: @escaping () -> Void
-    ) -> DialogConfig? {
+    ) -> DialogConfiguration? {
 
         return .init(
             title: "Delete \(list.title)",

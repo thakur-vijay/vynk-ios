@@ -29,7 +29,7 @@ struct UserQuickActionView: View {
                 .foregroundStyle(AppColors.contentDefault)
         }
         .padding(.vertical, AppSpacing.md)
-        .hSpacing()
+        .fillWidth()
         .background(AppColors.white, in: .rect(cornerRadius: AppRadius.xl, style: .continuous))
     }
 }

@@ -17,7 +17,7 @@ struct CameraCaptureButton: View {
         Button(action: onCapture) {
             Circle()
                 .stroke(.white, lineWidth: 4.0)
-                .frame(AppSizes.captureButtonSize)
+                .frame(captureButtonSize)
                 .overlay {
                     RoundedRectangle(cornerRadius: cornerRadius)
                         .fill(fillColor)
@@ -35,25 +35,27 @@ struct CameraCaptureButton: View {
     
     var frame: CGSize {
         if mode == .photo {
-            return .init(width: AppSizes.captureButtonSize.width - 8, height: AppSizes.captureButtonSize.height - 8)
+            return .init(width: captureButtonSize.width - 8, height: captureButtonSize.height - 8)
         }else {
             if isRecording {
                 return .init(width: 34, height: 34)
             }else {
-                return .init(width: AppSizes.captureButtonSize.width - 8, height: AppSizes.captureButtonSize.height - 8)
+                return .init(width: captureButtonSize.width - 8, height: captureButtonSize.height - 8)
             }
         }
     }
     
     var cornerRadius: CGFloat {
         if mode == .photo {
-            return AppSizes.captureButtonSize.width - 8
+            return captureButtonSize.width - 8
         }else {
             if isRecording {
                 return 8
             }else {
-                return AppSizes.captureButtonSize.width - 8
+                return captureButtonSize.width - 8
             }
         }
     }
+    
+    let captureButtonSize: CGSize = .init(width: 80, height: 80)
 }

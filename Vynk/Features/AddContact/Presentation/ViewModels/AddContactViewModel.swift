@@ -7,6 +7,8 @@
 
 import Foundation
 import VynkCountryPicker
+import SwiftUI
+import VynkFoundation
 
 @MainActor
 @Observable
@@ -18,7 +20,8 @@ final class AddContactViewModel {
     var isCountryPickerPresented: Bool = false
     var isDiscardConfirmationDialogPresented: Bool = false
     var selectedCountry: CountryModel?
-    var alertConfig: DialogConfig?
+    var alertConfig: DialogConfiguration?
+    var confirmationDialogConfig: DialogConfiguration?
     var permissionStatus: ContactsPermissionStatus = .notDetermined
     
     private let addContactUseCase: SaveContactUseCase
@@ -37,6 +40,17 @@ final class AddContactViewModel {
     func prepareSyncToPhone() async {
         permissionStatus = await permissionUseCase.status()
         syncContactToPhone = permissionStatus == .authorized
+    }
+    
+    func presentDiscardConfirmationDialog(onClose: @escaping ()->()){
+        confirmationDialogConfig = .init(
+            title: "Discard changes?",
+            message: "Are you sure you want to discard this new contact?",
+            actions: [
+                .init(title: "Discard changes", role: .destructive, action: onClose),
+                .init(title: "Keep editing") {},
+            ]
+        )
     }
     
     func handleSyncToPhone(newValue: Bool) {
@@ -67,6 +81,6 @@ final class AddContactViewModel {
     }
     
     var isSaveEnabled: Bool {
-        return phone.isNotEmptyString
+        return phone.isNotBlank
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct VynkContactRow: View {
     let model: VynkContactModel
@@ -14,14 +15,14 @@ struct VynkContactRow: View {
             if let url = model.avatar{
                 VynkRemoteImage(
                     url: .init(string: url),
-                    width: AppSizes.avatarMD,
-                    height: AppSizes.avatarMD,
+                    width: AppAvatarSize.md,
+                    height:  AppAvatarSize.md,
                     shape: .circle
                 )
             }else {
                 Circle()
                     .fill(AppColors.neutralSubtle)
-                    .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                    .frame(width: AppAvatarSize.md, height: AppAvatarSize.md)
                     .overlay {
                         AppSymbols.person.image
                             .foregroundStyle(AppColors.neutralMuted)
@@ -29,17 +30,17 @@ struct VynkContactRow: View {
             }
             
             VStack(alignment: .leading){
-                if let name = model.name, name.isNotEmptyString {
+                if let name = model.name, name.isNotBlank {
                     Text(name)
                         .font(AppFont.bodySemibold)
                 }
-                if let about = model.about, about.isNotEmptyString{
+                if let about = model.about, about.isNotBlank{
                     Text(about)
                         .font(AppFont.caption)
                         .foregroundStyle(AppColors.contentDeemphasized)
                 }
             }
-            .hSpacing(.leading)
+            .fillWidth(.leading)
             
         }
     }

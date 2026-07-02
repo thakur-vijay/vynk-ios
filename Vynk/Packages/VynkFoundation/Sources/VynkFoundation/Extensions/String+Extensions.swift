@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-extension String {
-    var isEmptyString: Bool {
+public extension String {
+    var isBlank: Bool {
         return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
     
-    var isNotEmptyString: Bool {
-        !self.isEmptyString
+    var isNotBlank: Bool {
+        !self.isBlank
     }
     
     func width(usingFont font: UIFont) -> CGFloat {

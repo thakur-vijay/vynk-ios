@@ -15,7 +15,7 @@ import SwiftUI
 final class ReorderListViewModel {
     var lists: [ChatListRowModel] = []
     var availablePresets: [ChatListRowModel] = []
-    var alertConfig: DialogConfig?
+    var alertConfig: DialogConfiguration?
     private var observeListsTask: Task<Void, Never>?
     private var observePresetsTask: Task<Void, Never>?
     

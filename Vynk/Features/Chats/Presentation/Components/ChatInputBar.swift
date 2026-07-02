@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct ChatInputBar: View {
     @Binding var message: String
@@ -14,8 +15,8 @@ struct ChatInputBar: View {
         HStack(alignment: .bottom) {
             TextField("", text: $message, axis: .vertical)
                 .lineLimit(5)
-                .padding(.horizontal, AppSpacing.smd)
-                .frame(minHeight: AppSizes.buttonHeightMD)
+                .padding(.horizontal, AppSpacing.md)
+                .frame(minHeight: AppButtonSize.md)
                 .tint(AppColors.accent)
                 .background(.background, in: .rect(cornerRadius: AppRadius.lg))
                 .overlay {
@@ -23,10 +24,10 @@ struct ChatInputBar: View {
                         .stroke(AppColors.linesOutlineDeemphasized, lineWidth: 0.7)
                 }
             
-            if message.isNotEmptyString {
+            if message.isNotBlank {
                 Button(action: onSend){
                     AppSymbols.send.image
-                        .frame(width: AppSizes.buttonHeightMD, height: AppSizes.buttonHeightMD)
+                        .frame(width: AppButtonSize.md, height: AppButtonSize.md)
                         .background(AppColors.accent, in: .circle)
                 }
                 .tint(AppColors.white)

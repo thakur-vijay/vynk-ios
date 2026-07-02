@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 struct QuickActionsSection<ID: Hashable>: View {
     
@@ -20,12 +21,12 @@ struct QuickActionsSection<ID: Hashable>: View {
                 } label: {
                     HStack {
                         Image(systemName: action.symbol)
-                            .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
+                            .frame(width: AppAvatarSize.md, height:  AppAvatarSize.md)
                             .foregroundStyle(AppColors.accent)
                         VStack(alignment: .leading) {
                             Text(action.title)
                                 .font(AppFont.subheadline)
-                            if let subtitle = action.subtitle, subtitle.isNotEmptyString{
+                            if let subtitle = action.subtitle, subtitle.isNotBlank{
                                 Text(subtitle)
                                     .font(AppFont.caption)
                                     .foregroundStyle(AppColors.contentDeemphasized)

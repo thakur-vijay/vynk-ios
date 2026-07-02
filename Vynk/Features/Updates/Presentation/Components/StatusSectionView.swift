@@ -35,7 +35,7 @@ struct StatusSectionView: View {
     func actionButton(_ icon: String, action: ()->())-> some View {
         Circle()
             .fill(AppColors.backgroundSecondary)
-            .frame(width: AppSizes.iconXL, height: AppSizes.iconXL)
+            .frame(width: AppIconSize.xl, height: AppIconSize.xl)
             .overlay {
                 Image(systemName: icon)
                     .font(AppFont.captionSemibold)
@@ -74,28 +74,28 @@ struct StatusSectionView: View {
                             )
                         ]
                     )
-                    .customContextMenu(actions: [
-                        UIAction(title: "Hide", image: UIImage(named: AppSymbols.hide.name)){ _ in
-                            
-                        }
-                    ], cornerRadius: 0) {
-                        StatusCardView(
-                            isCurrentUser: false,
-                            user: .init(
-                                id: UUID().uuidString,
-                                name: "Test User",
-                                avatarURL: MockDataFactory.chats.last?.avatarImage ?? ""
-                            ),
-                            statuses: [
-                                .init(
-                                    id: UUID().uuidString,
-                                    mediaURL: MockDataFactory.chats[2].avatarImage,
-                                    type: .image,
-                                    createdAt: .now
-                                )
-                            ]
-                        )
-                    }
+//                    .customContextMenu(actions: [
+//                        UIAction(title: "Hide", image: UIImage(named: AppSymbols.hide.name)){ _ in
+//                            
+//                        }
+//                    ], cornerRadius: 0) {
+//                        StatusCardView(
+//                            isCurrentUser: false,
+//                            user: .init(
+//                                id: UUID().uuidString,
+//                                name: "Test User",
+//                                avatarURL: MockDataFactory.chats.last?.avatarImage ?? ""
+//                            ),
+//                            statuses: [
+//                                .init(
+//                                    id: UUID().uuidString,
+//                                    mediaURL: MockDataFactory.chats[2].avatarImage,
+//                                    type: .image,
+//                                    createdAt: .now
+//                                )
+//                            ]
+//                        )
+//                    }
                 }
             }
             .padding(.horizontal)

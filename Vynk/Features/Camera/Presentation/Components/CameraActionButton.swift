@@ -10,7 +10,7 @@ import SwiftUI
 struct CameraActionButton: View {
     var icon: String?
     var label: String?
-    var size: CGFloat = AppSizes.buttonHeightMD
+    var size: CGFloat = AppButtonSize.md
     var labelTint: Color = .yellow
     var iconTint: Color = .white
     var background: Color = AppColors.secondarySurface

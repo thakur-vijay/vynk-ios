@@ -8,6 +8,7 @@
 import Foundation
 import VynkDatabaseKit
 import VynkMediaKit
+import VynkFoundation
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared

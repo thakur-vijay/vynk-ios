@@ -1,13 +1,13 @@
 //
-//  CGSize+Extensions.swift
-//  Vynk
+//  File.swift
+//  VynkFoundation
 //
-//  Created by Vijay Thakur on 06/06/26.
+//  Created by Vijay Thakur on 02/07/26.
 //
 
 import Foundation
 
-extension CGSize {
+public extension CGSize {
 
     func scaled(
 

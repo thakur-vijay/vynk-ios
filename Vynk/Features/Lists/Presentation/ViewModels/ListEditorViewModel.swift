@@ -7,6 +7,7 @@
 
 import Foundation
 import VynkLifecycleMacros
+import VynkFoundation
 
 @LifecycleLogged
 @MainActor
@@ -46,7 +47,7 @@ final class ListEditorViewModel {
     }
     
     var isEnabled: Bool {
-        return title.isNotEmptyString
+        return title.isBlank
     }
     
     func clear(){

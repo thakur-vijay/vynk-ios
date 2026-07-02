@@ -52,7 +52,7 @@ struct ChannelsSectionView: View {
         }
         .font(AppFont.bodySemibold)
         .foregroundStyle(AppColors.contentDefault)
-        .hSpacing()
+        .fillWidth()
         .padding(.vertical)
         .background(AppColors.backgroundSecondary, in: .capsule)
     }

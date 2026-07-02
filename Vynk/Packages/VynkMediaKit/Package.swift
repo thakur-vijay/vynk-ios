@@ -13,7 +13,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../VynkDesignSystem")
+        .package(path: "../VynkDesignSystem"),
+        .package(path: "../VynkFoundation")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -21,7 +22,8 @@ let package = Package(
         .target(
             name: "VynkMediaKit",
             dependencies: [
-                .product(name: "VynkDesignSystem", package: "VynkDesignSystem")
+                .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
+                .product(name: "VynkFoundation", package: "VynkFoundation")
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),

@@ -15,15 +15,15 @@ struct RecentCallRowView: View {
                 url: .init(
                     string: model.avatarURL ?? ""
                 ),
-                width: AppSizes.avatarMD,
-                height: AppSizes.avatarMD,
+                width: AppAvatarSize.md,
+                height: AppAvatarSize.md,
                 shape: .circle
             )
             
             VStack(alignment: .leading, spacing: AppSpacing.xxxs) {
                 Text(model.name)
                     .font(AppFont.subheadline)
-                    .hSpacing(.leading)
+                    .fillWidth(.leading)
                     .foregroundStyle(model.type.color)
                 HStack(spacing:AppSpacing.xs){
                     model.statusSymbol
@@ -32,14 +32,14 @@ struct RecentCallRowView: View {
                 .font(AppFont.caption)
                 .foregroundStyle(AppColors.contentDeemphasized)
             }
-            .hSpacing(.leading)
+            .fillWidth(.leading)
             Text(model.timestamp)
                 .font(AppFont.subheadline)
                 .foregroundStyle(AppColors.contentDeemphasized)
             AppSymbols.info.image
         }
         .padding(.horizontal)
-        .padding(.vertical, AppSpacing.smd)
+        .padding(.vertical, AppSpacing.md)
         .swipeActions(edge: .trailing) {
             swipeButton(AppSymbols.trash.name, tint: AppColors.statusDanger) {
                 

@@ -37,8 +37,8 @@ struct ChatDetailView: View {
                     HStack {
                         VynkRemoteImage(
                             url: .init(string: model.avatarImage),
-                            width: AppSizes.avatarMD,
-                            height: AppSizes.avatarMD,
+                            width: AppAvatarSize.md,
+                            height: AppAvatarSize.md,
                             shape: .circle
                         )
                         VStack(alignment: .leading){

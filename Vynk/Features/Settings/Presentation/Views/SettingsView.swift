@@ -61,7 +61,7 @@ struct SettingsView: View {
                 
             } label: {
                 HStack {
-                    VynkRemoteImage(url: .init(string: user?.avatarImage ?? ""), width: AppSizes.avatarLG, height: AppSizes.avatarLG, shape: .circle)
+                    VynkRemoteImage(url: .init(string: user?.avatarImage ?? ""), width: AppAvatarSize.lg, height:  AppAvatarSize.lg, shape: .circle)
                     VStack(alignment: .leading, spacing: AppSpacing.xs){
                         Text("Vijay Thakur")
                             .font(AppFont.title2Regular)
@@ -73,7 +73,7 @@ struct SettingsView: View {
                                     .stroke(AppColors.linesOutlineDeemphasized, lineWidth: 1.0)
                             }
                     }
-                    .hSpacing(.leading)
+                    .fillWidth(.leading)
                 }
             }
             .tint(AppColors.contentDefault)

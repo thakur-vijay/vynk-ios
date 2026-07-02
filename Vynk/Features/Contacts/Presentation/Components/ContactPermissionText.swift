@@ -9,14 +9,22 @@ import SwiftUI
 
 struct ContactPermissionText: View {
     var body: some View {
-        RichTextView(message: "Some names may not appear because Vynk doesn't have full contact access. Allow access", metadata: [
-            "Allow access": "/settings"
-        ], attributionColor: AppColors.accentSoft) { _ in
-            AppSettingsOpener.open()
-        }
-        .font(AppFont.body)
-        .hSpacing()
-        .clearListRowStyle()
+        RichTextView(
+            configuration: .init(
+                text: "Some names may not appear because Vynk doesn't have full contact access. Allow access",
+                links: [
+                    .init(
+                        text: "Allow access",
+                        link: "/settings"
+                    )
+                ],
+                linkColor: AppColors.accentSoft
+            )) { _ in
+                AppSettingsOpener.open()
+            }
+            .font(AppFont.body)
+            .fillWidth()
+            .clearListRowStyle()
     }
 }
 

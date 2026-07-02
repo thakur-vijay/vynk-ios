@@ -25,28 +25,17 @@ struct AppLockView: View {
             Text("Vynk Locked")
                 .font(AppFont.largeTitle.bold())
             
-            Button {
-                Task {
-                    await unlockApp()
-                }
-            } label: {
-                Text("Unlock with Face ID")
-                    .font(AppFont.headline)
-                    .foregroundStyle(AppColors.contentDefault)
-                    .frame(maxWidth: AppSizes.buttonWidth)
-                    .padding(.vertical, AppSpacing.md)
-                    .background(AppColors.backgroundSecondary, in: .capsule)
-                    .overlay {
-                        Capsule()
-                            .stroke(AppColors.white, lineWidth: 1.0)
+            AppButton(
+                text: "Unlock with Face ID",
+                foreground: AppColors.contentDefault,
+                background: AppColors.backgroundSecondary) {
+                    Task {
+                        await unlockApp()
                     }
-                    .clipShape(.capsule)
-                    .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 0)
-            }
-
+                }
         }
-        .hSpacing()
-        .vSpacing()
+        .fillWidth()
+        .fillHeight()
         .background(.background)
         .task {
             await unlockApp()

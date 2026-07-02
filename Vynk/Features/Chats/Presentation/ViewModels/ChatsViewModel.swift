@@ -16,7 +16,7 @@ final class ChatsViewModel {
     var chats: [MessageThreadRowModel] = MockDataFactory.chats
     var isPermissionStatusCardHidden: Bool = false
     var lists: [ChatListRowModel] = []
-    var alertConfig: DialogConfig?
+    var alertConfig: DialogConfiguration?
     private var observeListsTask: Task<Void, Never>?
 
     

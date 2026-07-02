@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkFoundation
 
 let mediaSizeMd: CGSize = .init(width: 60, height: 60)
 
