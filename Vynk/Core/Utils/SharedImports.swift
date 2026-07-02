@@ -7,3 +7,4 @@
 
 @_exported import Foundation
 @_exported import VynkLifecycleMacros
+@_exported import VynkDesignSystem

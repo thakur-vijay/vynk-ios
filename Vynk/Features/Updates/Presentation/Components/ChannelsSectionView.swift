@@ -59,11 +59,11 @@ struct ChannelsSectionView: View {
     
     var actions: some View {
         VStack(spacing: AppSpacing.md){
-            actionButton(icon: AppIcons.grid, label: "Explore more") {
+            actionButton(icon: AppSymbols.grid.name, label: "Explore more") {
                 
             }
             
-            actionButton(icon: AppIcons.plus, label: "Create channel") {
+            actionButton(icon: AppSymbols.plus.name, label: "Create channel") {
                 
             }
         }

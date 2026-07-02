@@ -28,13 +28,13 @@ struct CreateCustomListSection: View {
     var button: some View {
         AppButton(
             text: "Create a custom list",
-            icon: AppIcons.plus,
+            icon: AppSymbols.plus.name,
             action: action
         )
     }
     
     var icons: some View {
-        let icons = [AppIcons.Heart.heartFill, AppIcons.bag, AppIcons.plus]
+        let icons = [AppSymbols.Heart.heartFill.name, AppSymbols.bag.name, AppSymbols.plus.name]
         return HStack(spacing: -15){
             ForEach(icons.indices, id: \.self) { index in
                 let icon = icons[index]

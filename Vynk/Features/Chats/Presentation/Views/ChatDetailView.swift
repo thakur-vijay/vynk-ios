@@ -55,11 +55,11 @@ struct ChatDetailView: View {
             ToolbarSpacer()
             
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Button("", systemImage: AppIcons.video) {
+                Button("", systemImage: AppSymbols.video.name) {
                     
                 }
                 
-                Button("", systemImage: AppIcons.phone) {
+                Button("", systemImage: AppSymbols.phone.name) {
                     
                 }
             }

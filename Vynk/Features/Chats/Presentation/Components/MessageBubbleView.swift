@@ -34,7 +34,7 @@ struct MessageBubbleView: View {
                     .font(AppFont.footnote)
                     .foregroundStyle(AppColors.contentDeemphasized)
                 if model.isCurrentUser{
-                    Image(AppIcons.doubleTick)
+                    AppSymbols.doubleTick.image
                         .font(AppFont.footnote)
                         .foregroundStyle(.contentRead)
                 }
@@ -51,33 +51,33 @@ struct MessageBubbleView: View {
         .contentShape(.contextMenuPreview, BubbleShape(myMessage: model.isCurrentUser, showsTail: isLast))
         .compositingGroup()
         .contextMenu {
-            Button("Reply", systemImage: AppIcons.reply) {
+            Button("Reply", systemImage: AppSymbols.reply.name) {
                 
             }
-            Button("Forward", systemImage: AppIcons.forward) {
+            Button("Forward", systemImage: AppSymbols.forward.name) {
                 
             }
-            Button("Copy", systemImage: AppIcons.copy) {
-                
-            }
-            
-            Button("Info", systemImage: AppIcons.info) {
+            Button("Copy", systemImage: AppSymbols.copy.name) {
                 
             }
             
-            Button("Star", systemImage: AppIcons.star) {
+            Button("Info", systemImage: AppSymbols.info.name) {
                 
             }
             
-            Button("Pin", systemImage: AppIcons.pin) {
+            Button("Star", systemImage: AppSymbols.star.name) {
                 
             }
             
-            Button("Translate", systemImage: AppIcons.translate) {
+            Button("Pin", systemImage: AppSymbols.pin.name) {
                 
             }
             
-            Button("Delete", systemImage: AppIcons.trash, role: .destructive) {
+            Button("Translate", systemImage: AppSymbols.translate.name) {
+                
+            }
+            
+            Button("Delete", systemImage: AppSymbols.trash.name, role: .destructive) {
                 
             }
         }

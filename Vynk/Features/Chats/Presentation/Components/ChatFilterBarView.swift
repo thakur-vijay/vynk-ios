@@ -28,7 +28,7 @@ struct ChatFilterBarView: View {
                     
                     ])
                 }
-                ChatFilterChipView(icon: AppIcons.plus) {
+                ChatFilterChipView(icon: AppSymbols.plus.name) {
                     onClick("add")
                 }
             }

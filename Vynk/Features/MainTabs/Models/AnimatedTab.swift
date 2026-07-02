@@ -27,11 +27,11 @@ enum AnimatedTab: String, CaseIterable, Hashable {
     
     var symbolImage: String {
         switch self {
-        case .updates: AppIcons.dashedCircle
-        case .calls: AppIcons.calls
-        case .communities: AppIcons.group
-        case .chats: AppIcons.messageFill
-        case .settings: AppIcons.settings
+        case .updates: AppSymbols.dashedCircle.name
+        case .calls: AppSymbols.calls.name
+        case .communities: AppSymbols.group.name
+        case .chats: AppSymbols.messageFill.name
+        case .settings: AppSymbols.settings.name
         }
     }
 }

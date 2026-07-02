@@ -155,20 +155,20 @@ struct CallRowModel: Identifiable {
         )
     ]
     
-    var statusSymbol: String {
+    var statusSymbol: Image {
         switch (type, mode) {
         case (.incoming, .audio):
-            return AppIcons.missedPhoneCall
+            return AppSymbols.missedPhoneCall.image
         case (.outgoing, .audio):
-            return AppIcons.outgoingPhoneCall
+            return AppSymbols.outgoingPhoneCall.image
         case (.missed, .audio):
-            return AppIcons.missedPhoneCall
+            return AppSymbols.missedPhoneCall.image
         case (.incoming, .video):
-            return AppIcons.missedVideoCall
+            return AppSymbols.missedVideoCall.image
         case (.outgoing, .video):
-            return AppIcons.outgoingVideoCall
+            return AppSymbols.outgoingVideoCall.image
         case (.missed, .video):
-            return AppIcons.missedVideoCall
+            return AppSymbols.missedVideoCall.image
             
         }
         

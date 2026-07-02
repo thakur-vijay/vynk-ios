@@ -36,13 +36,13 @@ struct SettingsView: View {
             .toolbarVisibility(router.tabBarVisiblity, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("", systemImage: AppIcons.search){
+                    Button("", systemImage: AppSymbols.search.name){
                         
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("", systemImage: AppIcons.qrcode){
+                    Button("", systemImage: AppSymbols.qrcode.name){
                         router.push(.profileQRCode)
                     }
                 }

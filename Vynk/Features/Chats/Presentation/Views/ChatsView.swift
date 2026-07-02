@@ -46,15 +46,27 @@ struct ChatsView: View{
                 ForEach(viewModel.chats) { model in
                     MessageThreadRowView(model: model)
                         .swipeActions(edge: .leading) {
-                            swipeButton(AppIcons.ChatAction.markUnreadSwipe, label: "Unread", tint: AppColors.accentEmphasized) {
+                            swipeButton(
+                                AppSymbols.ChatAction.markUnreadSwipe.name,
+                                label: "Unread",
+                                tint: AppColors.accentEmphasized
+                            ) {
                                 
                             }
-                            swipeButton(AppIcons.pinSlash, label: "Pin", tint: AppColors.neutralMuted) {
+                            swipeButton(
+                                AppSymbols.pinSlash.name,
+                                label: "Pin",
+                                tint: AppColors.neutralMuted
+                            ) {
                                 
                             }
                         }
                         .swipeActions(edge: .trailing) {
-                            swipeButton(AppIcons.ChatAction.archiveSwipe, label: "Archive", tint: AppColors.accentEmphasized) {
+                            swipeButton(
+                                AppSymbols.ChatAction.archiveSwipe.name,
+                                label: "Archive",
+                                tint: AppColors.accentEmphasized
+                            ) {
                                 
                             }
                             

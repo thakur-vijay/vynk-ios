@@ -47,7 +47,7 @@ struct SectionRowView<ID: RowIDProtocol>: View {
                         }
                         
                         if let selection, selection == row.id {
-                            Image(systemName: AppIcons.checkmark)
+                            AppSymbols.checkmark.image
                                 .foregroundStyle(AppColors.accent)
                         }
                     }

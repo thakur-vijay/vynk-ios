@@ -34,13 +34,13 @@ struct CallsView: View {
                         Button {
                             
                         } label: {
-                            Label("Edit", systemImage: AppIcons.edit)
+                            Label("Edit", systemImage: AppSymbols.edit.name)
                         }
                         
                         Button {
                             
                         } label: {
-                            Label("Scheduled calls", systemImage: AppIcons.calendar)
+                            Label("Scheduled calls", systemImage: AppSymbols.calendar.name)
                         }
 
                     } label: {

@@ -21,7 +21,7 @@ struct AvailablePresetsSection: View {
             }else{
                 ForEach(presets) { preset in
                     HStack {
-                        Button("", systemImage: AppIcons.plusFill) {
+                        Button("", systemImage: AppSymbols.plusFill.name) {
                             action(preset)
                         }
                         .font(AppFont.subheadline)

@@ -8,94 +8,50 @@
 import SwiftUI
 
 public enum AppFont {
-    
-    // MARK: - Large Titles
-    
-    public static let largeTitle = Font.system(
-        size: 34,
-        weight: .bold
-    )
-    
-    public static let title1 = Font.system(
-        size: 28,
-        weight: .bold
-    )
-    
-    public static let title1Normal = Font.system(
-        size: 28,
-        weight: .regular
-    )
-    
-    public static let title2 = Font.system(
-        size: 22,
-        weight: .bold
-    )
-    
-    public static let title2Normal = Font.system(
-        size: 22,
-    )
 
-    
-    public static let title3 = Font.system(
-        size: 20,
-        weight: .semibold
-    )
-    
+    // MARK: - Large Titles
+
+    public static let largeTitle = Font.largeTitle.weight(.bold)
+
+    public static let title1 = Font.title.weight(.bold)
+    public static let title1Regular = Font.title.weight(.regular)
+
+    public static let title2 = Font.title2.weight(.bold)
+    public static let title2Regular = Font.title2.weight(.regular)
+
+    public static let title3 = Font.title3.weight(.semibold)
+
     // MARK: - Headlines
-    
-    public static let headline = Font.system(
-        size: 17,
-        weight: .semibold
-    )
-    
-    public static let subheadline = Font.system(
-        size: 15,
-        weight: .regular
-    )
-    
+
+    public static let headline = Font.headline.weight(.semibold)
+
+    public static let subheadline = Font.subheadline
+
     // MARK: - Body
-    
-    public static let body = Font.system(
-        size: 16,
-        weight: .regular
-    )
-    
-    public static let bodyMedium = Font.system(
-        size: 16,
-        weight: .medium
-    )
-    
-    public static let bodySemibold = Font.system(
-        size: 16,
-        weight: .semibold
-    )
-    
+
+    public static let body = Font.body
+
+    public static let bodyMedium = Font.body.weight(.medium)
+
+    public static let bodySemibold = Font.body.weight(.semibold)
+
     // MARK: - Caption
-    
-    public static let caption = Font.system(
-        size: 13,
-        weight: .regular
-    )
-    
-    public static let captionMedium = Font.system(
-        size: 13,
-        weight: .medium
-    )
-    
-    public static let captionSemibold = Font.system(
-        size: 13,
-        weight: .semibold
-    )
-    
+
+    public static let caption = Font.caption
+
+    public static let captionMedium = Font.caption.weight(.medium)
+
+    public static let captionSemibold = Font.caption.weight(.semibold)
+
     // MARK: - Footnote
+
+    public static let footnote = Font.footnote
+
+    public static let footnoteMedium = Font.footnote.weight(.medium)
     
-    public static let footnote = Font.system(
-        size: 12,
-        weight: .regular
-    )
-    
-    public static let footnoteMedium = Font.system(
-        size: 12,
-        weight: .medium
-    )
+    public static let callout = Font.callout
+
+    public static let calloutMedium = Font.callout.weight(.medium)
+
+    public static let caption2 = Font.caption2
 }

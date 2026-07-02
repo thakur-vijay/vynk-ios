@@ -11,9 +11,9 @@ import VynkCameraKit
 extension CameraFlashMode {
     var symbol: String {
         switch self {
-        case .off: AppIcons.flashOff
-        case .auto: AppIcons.flashAuto
-        case .on: AppIcons.flashOn
+        case .off: AppSymbols.flashOff.name
+        case .auto: AppSymbols.flashAuto.name
+        case .on: AppSymbols.flashOn.name
         }
     }
     

@@ -14,7 +14,7 @@ struct CheckButton: ToolbarContent {
     var body: some ToolbarContent {
         if isEnabled {
             ProminentToolbarButton(
-                icon: AppIcons.checkmark,
+                icon: AppSymbols.checkmark.name,
                 accent: AppColors.accent,
                 placement: placement,
                 action: action
@@ -22,7 +22,7 @@ struct CheckButton: ToolbarContent {
             
         }else {
             ProminentToolbarButton(
-                icon: AppIcons.checkmark,
+                icon: AppSymbols.checkmark.name,
                 accent: AppColors.contentDeemphasized,
                 placement: placement
             ) {

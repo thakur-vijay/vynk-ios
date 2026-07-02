@@ -24,29 +24,29 @@ enum SettingsRowID: @MainActor RowIDProtocol{
     var symbol: String? {
         switch self {
         case .lists:
-            AppIcons.ChatAction.addToListMenu
+            AppSymbols.ChatAction.addToListMenu.name
         case .broadcastMessages:
-            AppIcons.broadcast
+            AppSymbols.broadcast.name
         case .starred:
-            AppIcons.star
+            AppSymbols.star.name
         case .linkedDevices:
-            AppIcons.laptop
+            AppSymbols.laptop.name
         case .account:
-            AppIcons.key
+            AppSymbols.key.name
         case .privacy:
-            AppIcons.lock
+            AppSymbols.lock.name
         case .chats:
-            AppIcons.message
+            AppSymbols.message.name
         case .notifications:
-            AppIcons.appBadge
+            AppSymbols.appBadge.name
         case .payments:
-            AppIcons.rupee
+            AppSymbols.rupee.name
         case .storageAndData:
-            AppIcons.storage
+            AppSymbols.storage.name
         case .helpAndFeedback:
-            AppIcons.questionmarkCircle
+            AppSymbols.questionmarkCircle.name
         case .inviteAFriend:
-            AppIcons.heart
+            AppSymbols.heart.name
         }
     }
     

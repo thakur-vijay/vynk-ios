@@ -10,10 +10,10 @@ import SwiftUI
 struct UserQuickActionView: View {
     var body: some View {
         HStack {
-            QuickAction("Audio", symbol: AppIcons.phone)
-            QuickAction("Video", symbol: AppIcons.video)
-            QuickAction("Pay", symbol: AppIcons.rupee)
-            QuickAction("Search", symbol: AppIcons.search)
+            QuickAction("Audio", symbol: AppSymbols.phone.name)
+            QuickAction("Video", symbol: AppSymbols.video.name)
+            QuickAction("Pay", symbol: AppSymbols.rupee.name)
+            QuickAction("Search", symbol: AppSymbols.search.name)
         }
         .clearListRowStyle()
         .padding(.vertical, AppSpacing.md)

@@ -10,19 +10,19 @@ import SwiftUI
 struct CallQuickActionRowView: View {
     var body: some View {
         HStack {
-            CallQuickActionView(icon: AppIcons.phone, label: "Call") {
+            CallQuickActionView(icon: AppSymbols.phone.name, label: "Call") {
                 
             }
             
-            CallQuickActionView(icon: AppIcons.calendar, label: "Schedule") {
+            CallQuickActionView(icon: AppSymbols.calendar.name, label: "Schedule") {
                 
             }
             
-            CallQuickActionView(icon: AppIcons.calendar, label: "Keypad") {
+            CallQuickActionView(icon: AppSymbols.calendar.name, label: "Keypad") {
                 
             }
             
-            CallQuickActionView(icon: AppIcons.heart, label: "Favourites") {
+            CallQuickActionView(icon: AppSymbols.heart.name, label: "Favourites") {
                 
             }
         }

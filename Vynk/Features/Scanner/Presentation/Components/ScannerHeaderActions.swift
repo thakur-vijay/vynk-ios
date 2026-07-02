@@ -14,7 +14,7 @@ struct ScannerHeaderActions: View {
     let onFlashModeTap: ()->()
     var body: some View {
         HStack {
-            actionButton(AppIcons.close, action: onClose)
+            actionButton(AppSymbols.close.name, action: onClose)
             Spacer()
             actionButton(flashMode.symbol, action: onFlashModeTap)
         }

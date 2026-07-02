@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import VynkDesignSystem
 
 struct ProminentToolbarButton: ToolbarContent {
     
-    var icon: String = AppIcons.plus
+    var icon: String = AppSymbols.plus.name
     var accent: Color = AppColors.accent
     var placement: ToolbarItemPlacement = .topBarTrailing
     let action: () -> Void

@@ -12,7 +12,7 @@ struct ContactsPermissionCard: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: AppSpacing.md) {
-            Image(systemName: AppIcons.warning)
+            AppSymbols.warning.image
                 .font(AppFont.title1)
                 .foregroundStyle(AppColors.yellow)
             VStack(alignment: .leading, spacing: AppSpacing.xs) {
@@ -28,7 +28,7 @@ struct ContactsPermissionCard: View {
             .hSpacing(.leading)
             
             Button(action: onClose){
-                Image(systemName: AppIcons.close)
+                AppSymbols.close.image
             }
 
         }

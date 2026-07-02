@@ -33,7 +33,7 @@ struct ReorderListsView: View {
             .navigationTitle("Reorder lists")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ProminentToolbarButton(icon: AppIcons.checkmark, accent: AppColors.contentDefault) {
+                ProminentToolbarButton(icon: AppSymbols.checkmark.name, accent: AppColors.contentDefault) {
                     
                 }
             }

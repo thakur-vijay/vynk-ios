@@ -37,15 +37,15 @@ enum ChatContextAction: Identifiable{
     
     var symbol: String {
         switch self {
-        case .unread: AppIcons.ChatAction.markUnreadMenu
-        case .archive: AppIcons.ChatAction.archiveMenu
-        case .mute: AppIcons.bellSlash
-        case .lock: AppIcons.message
-        case .favourite: AppIcons.heart
-        case .addToList: AppIcons.ChatAction.addToListMenu
-        case .block: AppIcons.nosign
-        case .clear: AppIcons.xmarkCircle
-        case .delete: AppIcons.trash
+        case .unread: AppSymbols.ChatAction.markUnreadMenu.name
+        case .archive: AppSymbols.ChatAction.archiveMenu.name
+        case .mute: AppSymbols.bellSlash.name
+        case .lock: AppSymbols.message.name
+        case .favourite: AppSymbols.heart.name
+        case .addToList: AppSymbols.ChatAction.addToListMenu.name
+        case .block: AppSymbols.nosign.name
+        case .clear: AppSymbols.xmarkCircle.name
+        case .delete: AppSymbols.trash.name
         }
     }
     

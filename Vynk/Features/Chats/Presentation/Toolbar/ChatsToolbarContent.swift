@@ -16,13 +16,13 @@ struct ChatsToolbarContent: ToolbarContent {
                 Button {
                     
                 } label: {
-                    Label("Select chats", systemImage: AppIcons.checkmarkCircle)
+                    Label("Select chats", systemImage: AppSymbols.checkmarkCircle.name)
                 }
                 
                 Button {
                     
                 } label: {
-                    Label("Read all", systemImage: AppIcons.checkmarkBubble)
+                    Label("Read all", systemImage: AppSymbols.checkmarkBubble.name)
                 }
             } label: {
                 Image(systemName: "ellipsis")
@@ -33,11 +33,11 @@ struct ChatsToolbarContent: ToolbarContent {
             Button {
                 
             } label: {
-                Image(systemName: AppIcons.rupeeFill)
+                AppSymbols.rupeeFill.image
             }
             
             Button(action: onCameraTap){
-                Image(systemName: AppIcons.camera)
+                AppSymbols.camera.image
             }
         }
         

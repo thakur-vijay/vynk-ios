@@ -26,7 +26,7 @@ struct DeviceContactRow: View {
                         .fill(AppColors.neutralSubtle)
                         .frame(width: AppSizes.avatarMD, height: AppSizes.avatarMD)
                         .overlay {
-                            Image(systemName: AppIcons.person)
+                            AppSymbols.person.image
                                 .foregroundStyle(AppColors.neutralMuted)
                         }
                 }

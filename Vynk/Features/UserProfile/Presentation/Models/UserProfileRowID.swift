@@ -29,17 +29,17 @@ enum UserProfileRowID: @MainActor RowIDProtocol {
     
     var symbol: String? {
         switch self {
-        case .media: AppIcons.photo
-        case .storage: AppIcons.storage
-        case .starred: AppIcons.star
-        case .notifications: AppIcons.bell
-        case .chatTheme: AppIcons.palette
-        case .saveToPhotos: AppIcons.download
-        case .disappearingMessages: AppIcons.timer
-        case .lockChat: AppIcons.lockOpen
-        case .advancedChatPrivacy: AppIcons.shield
-        case .encryption: AppIcons.lock
-        case .contactDetails: AppIcons.personCircle
+        case .media: AppSymbols.photo.name
+        case .storage: AppSymbols.storage.name
+        case .starred: AppSymbols.star.name
+        case .notifications: AppSymbols.bell.name
+        case .chatTheme: AppSymbols.palette.name
+        case .saveToPhotos: AppSymbols.download.name
+        case .disappearingMessages: AppSymbols.timer.name
+        case .lockChat: AppSymbols.lockOpen.name
+        case .advancedChatPrivacy: AppSymbols.shield.name
+        case .encryption: AppSymbols.lock.name
+        case .contactDetails: AppSymbols.personCircle.name
         default: nil
         }
     }

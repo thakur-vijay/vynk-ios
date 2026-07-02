@@ -11,7 +11,7 @@ struct ShareQRToolbar: ToolbarContent {
     let action: ()->()
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarTrailing) {
-            Button("", systemImage: AppIcons.Share.share, action: action)
+            Button("", systemImage: AppSymbols.Share.share.name, action: action)
         }
     }
 }

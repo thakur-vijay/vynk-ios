@@ -62,8 +62,7 @@ struct AddContactView: View {
                             Text(viewModel.selectedCountry?.name ?? "")
                                 .hSpacing(.leading)
                             
-                            Image(systemName: AppIcons.rightChevron)
-                            
+                            AppSymbols.rightChevron.image
                                 .font(AppFont.caption)
                             
                                 .foregroundStyle(AppColors.contentDeemphasized)
@@ -103,7 +102,7 @@ struct AddContactView: View {
                 
                 Section {
                     HStack {
-                        Image(systemName: AppIcons.qrcode)
+                        AppSymbols.qrcode.image
                             .font(AppFont.title1)
                         Text("Add via QR code")
                     }

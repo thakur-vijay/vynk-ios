@@ -26,7 +26,7 @@ struct RecentCallRowView: View {
                     .hSpacing(.leading)
                     .foregroundStyle(model.type.color)
                 HStack(spacing:AppSpacing.xs){
-                    Image(systemName: model.statusSymbol)
+                    model.statusSymbol
                     Text(model.type.rawValue)
                 }
                 .font(AppFont.caption)
@@ -36,12 +36,12 @@ struct RecentCallRowView: View {
             Text(model.timestamp)
                 .font(AppFont.subheadline)
                 .foregroundStyle(AppColors.contentDeemphasized)
-            Image(systemName: AppIcons.info)
+            AppSymbols.info.image
         }
         .padding(.horizontal)
         .padding(.vertical, AppSpacing.smd)
         .swipeActions(edge: .trailing) {
-            swipeButton(AppIcons.trash, tint: AppColors.statusDanger) {
+            swipeButton(AppSymbols.trash.name, tint: AppColors.statusDanger) {
                 
             }
             
@@ -53,35 +53,35 @@ struct RecentCallRowView: View {
             Button {
                 
             } label: {
-                Label("Voice call", systemImage: AppIcons.phone)
+                Label("Voice call", systemImage: AppSymbols.phone.name)
             }
             
             Button {
                 
             } label: {
-                Label("Video call", systemImage: AppIcons.video)
+                Label("Video call", systemImage: AppSymbols.video.name)
             }
             
             Menu {
                 Button {
                     
                 } label: {
-                    Label("Add to Favourites", systemImage: AppIcons.heart)
+                    Label("Add to Favourites", systemImage: AppSymbols.heart.name)
                 }
                 
                 Button {
                     
                 } label: {
-                    Label("Block Vijay", systemImage: AppIcons.nosign)
+                    Label("Block Vijay", systemImage: AppSymbols.nosign.name)
                 }
                 
                 Button(role: .destructive){
                     
                 } label: {
-                    Label("Delete call", systemImage: AppIcons.trash)
+                    Label("Delete call", systemImage: AppSymbols.trash.name)
                 }
             } label: {
-                Label("More", systemImage: AppIcons.ellipsisCircle)
+                Label("More", systemImage: AppSymbols.ellipsisCircle.name)
             }
            
             

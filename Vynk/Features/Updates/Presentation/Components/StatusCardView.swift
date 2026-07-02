@@ -111,7 +111,7 @@ struct StatusCardView: View {
                         .fill(AppColors.white)
                         .frame(width: 22, height: 22)
                         .overlay {
-                            Image(systemName: AppIcons.plus)
+                            AppSymbols.plus.image
                                 .font(AppFont.caption)
                                 .foregroundStyle(AppColors.white)
                                 .frame(width: 17, height: 17)

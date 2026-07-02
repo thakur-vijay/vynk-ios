@@ -51,7 +51,7 @@ public struct MediaHorizontalListView: View {
                         .fill(AppColors.secondarySurface)
                         .frame(width: size.height, height: size.height)
                         .overlay {
-                            Image(systemName: AppIcons.photo)
+                            AppSymbols.photo.image
                                 .font(AppFont.title3)
                                 .foregroundStyle(.white)
                         }

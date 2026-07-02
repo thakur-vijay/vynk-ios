@@ -12,7 +12,7 @@ struct ToolbarCloseButton: ToolbarContent {
     let onClose: ()->()
     var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
-            Button("", systemImage: AppIcons.close, role: .close, action: onClose)
+            Button("", systemImage: AppSymbols.close.name, role: .close, action: onClose)
         }
     }
 }

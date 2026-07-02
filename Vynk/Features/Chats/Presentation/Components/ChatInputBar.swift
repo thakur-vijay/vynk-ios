@@ -25,7 +25,7 @@ struct ChatInputBar: View {
             
             if message.isNotEmptyString {
                 Button(action: onSend){
-                    Image(systemName: AppIcons.send)
+                    AppSymbols.send.image
                         .frame(width: AppSizes.buttonHeightMD, height: AppSizes.buttonHeightMD)
                         .background(AppColors.accent, in: .circle)
                 }

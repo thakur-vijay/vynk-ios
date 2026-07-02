@@ -19,7 +19,7 @@ struct AppLockView: View {
     
     var body: some View {
         VStack(spacing: AppSpacing.lg) {
-            Image(systemName: AppIcons.lock)
+            AppSymbols.lock.image
                 .font(AppFont.largeTitle.bold())
                 .foregroundStyle(AppColors.accent)
             Text("Vynk Locked")

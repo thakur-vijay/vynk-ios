@@ -17,7 +17,7 @@ struct CameraToolbar: View {
     let onFlashModeTap: ()->()
     var body: some View {
         HStack {
-            CameraActionButton(icon: AppIcons.close, action: onClose)
+            CameraActionButton(icon: AppSymbols.close.name, action: onClose)
                 .opacity(isRecording ? 0 : 1)
                 .allowsHitTesting(!isRecording)
             

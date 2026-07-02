@@ -20,11 +20,11 @@ struct StatusSectionView: View {
             Text("Status")
                 .font(AppFont.title3)
             Spacer(minLength: 0)
-            actionButton(AppIcons.camera) {
+            actionButton(AppSymbols.camera.name) {
                 
             }
             
-            actionButton(AppIcons.pencil) {
+            actionButton(AppSymbols.pencil.name) {
                 
             }
         }
@@ -75,7 +75,7 @@ struct StatusSectionView: View {
                         ]
                     )
                     .customContextMenu(actions: [
-                        UIAction(title: "Hide", image: UIImage(named: AppIcons.hide)){ _ in
+                        UIAction(title: "Hide", image: UIImage(named: AppSymbols.hide.name)){ _ in
                             
                         }
                     ], cornerRadius: 0) {

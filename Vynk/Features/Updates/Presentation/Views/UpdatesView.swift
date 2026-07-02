@@ -37,19 +37,19 @@ struct UpdatesView: View {
                         Button {
                             
                         } label: {
-                            Label("Select channels", systemImage: AppIcons.checkmarkCircle)
+                            Label("Select channels", systemImage: AppSymbols.checkmarkCircle.name)
                         }
                         
                         Button {
                             
                         } label: {
-                            Label("Create channel", systemImage: AppIcons.create)
+                            Label("Create channel", systemImage: AppSymbols.create.name)
                         }
                         
                         Button {
                             
                         } label: {
-                            Label("Status privacy", systemImage: AppIcons.lock)
+                            Label("Status privacy", systemImage: AppSymbols.lock.name)
                         }
 
 
