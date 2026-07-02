@@ -20,8 +20,8 @@ final class MediaLibraryUseCase {
         return repository.fetchAlbums()
     }
     
-    func fetchMediaAssets()async throws ->[MediaModel] {
-        let assets = try await repository.fetchAssets()
+    func fetchMediaAssets(limit: Int?)async throws ->[MediaModel] {
+        let assets = try await repository.fetchAssets(limit: limit)
         return assets.compactMap { MediaAssetMapper.map($0)}
     }
     

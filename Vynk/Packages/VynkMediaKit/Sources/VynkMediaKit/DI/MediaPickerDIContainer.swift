@@ -63,12 +63,14 @@ public final class MediaPickerDIContainer {
 @available(iOS 18.0, *)
 extension MediaPickerDIContainer: MediaProviding {
     @MainActor public func mediaHorizontalListView(
-        result: @escaping (MediaModel?)->()
+        result: @escaping (MediaModel?)->(),
+        openMediaPicker: @escaping ()->()
     ) -> MediaHorizontalListView {
         MediaHorizontalListView(
             viewModel: makeViewModel(),
             diContaier: self,
-            result: result
+            result: result,
+            openMediaPicker: openMediaPicker
         )
     }
     
@@ -94,6 +96,7 @@ extension MediaPickerDIContainer: MediaProviding {
     
     public func isPhotoLibraryPermissionGiven()async throws-> Bool {
         let status = permissionUseCase.status()
+        print(status)
         if status == .notDetermined {
             let newStatus = try await permissionUseCase.request()
             return newStatus == .authorized

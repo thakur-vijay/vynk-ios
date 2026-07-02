@@ -51,7 +51,13 @@ final class CameraDIContainer {
         )
     }
     
-    func mediaHorizontalListView(result: @escaping (MediaModel?)->())-> MediaHorizontalListView {
-        media.mediaHorizontalListView(result: result)
+    func mediaHorizontalListView(
+        result: @escaping (MediaModel?)->(),
+        openMediaPicker: @escaping ()->()
+    )-> MediaHorizontalListView {
+        media.mediaHorizontalListView(
+            result: result,
+            openMediaPicker: openMediaPicker
+        )
     }
 }

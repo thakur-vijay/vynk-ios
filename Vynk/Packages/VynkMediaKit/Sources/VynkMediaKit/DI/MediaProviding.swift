@@ -23,6 +23,7 @@ public protocol MediaProviding {
 
     @MainActor
     func mediaHorizontalListView(
-        result: @escaping (MediaModel?)->()
+        result: @escaping (MediaModel?)->(),
+        openMediaPicker: @escaping ()->()
     ) -> MediaHorizontalListView
 }

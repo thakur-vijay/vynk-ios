@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-struct SheetModifier: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension View {
+    @ViewBuilder
+    func fixedSheet()-> some View {
+        self
+            .modifier(SheetModifier())
     }
 }
 
-#Preview {
-    SheetModifier()
+struct SheetModifier: ViewModifier {
+    @State private var sheetHeight: CGFloat = 0
+    func body(content: Content) -> some View {
+        content
+            .presentationDetents([.medium])
+            .presentationBackground(.white)
+    }
 }

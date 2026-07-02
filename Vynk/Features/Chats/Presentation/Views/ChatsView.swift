@@ -82,7 +82,7 @@ struct ChatsView: View{
             .navigationTitle("Chats")
             .toolbar {
                 ChatsToolbarContent {
-                    router.presentSheet(.mediaPicker)
+                    router.presentSheet(.newChat)
                 } onCameraTap: {
                     router.presentFullScreenCover(.camera)
                 }

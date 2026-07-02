@@ -292,6 +292,7 @@ final class CameraViewModel {
     
     func isMediaPermissionGiven() async {
         do {
+            print("isMediaPermissionGiven", "called")
             isMediaPermissionGiven = try await mediaProvider.isPhotoLibraryPermissionGiven()
         }catch {
             print(error.localizedDescription)

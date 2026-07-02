@@ -24,8 +24,8 @@ final class DefaultMediaLibraryRepository: MediaLibraryRepository {
         return try await dataSource.requestPermission()
     }
 
-    func fetchAssets() async throws -> [MediaAsset] {
-        return try await dataSource.fetchAssets()
+    func fetchAssets(limit: Int?) async throws -> [MediaAsset] {
+        return try await dataSource.fetchAssets(limit: limit)
     }
     
     func fetchAssets(albumId: String) async throws -> [MediaAsset] {

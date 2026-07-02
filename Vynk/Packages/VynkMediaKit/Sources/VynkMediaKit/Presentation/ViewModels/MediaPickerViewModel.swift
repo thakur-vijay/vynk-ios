@@ -70,7 +70,7 @@ final class MediaPickerViewModel {
         )
     }
     
-    func loadMedia() async {
+    func loadMedia(limit: Int? = nil) async {
         do {
             
             let status = permissionUseCase.status()
@@ -79,14 +79,14 @@ final class MediaPickerViewModel {
                 let newStatus = try await permissionUseCase.request()
                 if newStatus == .authorized || newStatus == .limited {
                     ///fetch
-                    assets = try await mediaLibraryUseCase.fetchMediaAssets()
+                    assets = try await mediaLibraryUseCase.fetchMediaAssets(limit: limit)
                 }
             case .denied:
                 print("Denied")
             case .restricted:
                 print("restricted")
             case .authorized, .limited:
-                assets = try await mediaLibraryUseCase.fetchMediaAssets()
+                assets = try await mediaLibraryUseCase.fetchMediaAssets(limit: limit)
             }
         }catch {
             print(error.localizedDescription)

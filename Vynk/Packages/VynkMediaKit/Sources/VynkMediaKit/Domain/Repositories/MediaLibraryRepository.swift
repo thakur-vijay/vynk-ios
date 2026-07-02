@@ -14,7 +14,7 @@ protocol MediaLibraryRepository {
 
     func requestPermission() async throws -> MediaLibraryPermissionStatus
 
-    func fetchAssets() async throws -> [MediaAsset]
+    func fetchAssets(limit: Int?) async throws -> [MediaAsset]
 
     func loadThumbnail(
         assetId: String,

@@ -28,7 +28,7 @@ final class PhotoLibraryDataSource {
         }
     }
 
-    func fetchAssets() async throws -> [MediaAsset] {
+    func fetchAssets(limit: Int? = nil) async throws -> [MediaAsset] {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [
             NSSortDescriptor(
@@ -36,18 +36,21 @@ final class PhotoLibraryDataSource {
                 ascending: false
             )
         ]
-        
-        let result = PHAsset.fetchAssets(
-            with: fetchOptions
-        )
-        
+
+        let result = PHAsset.fetchAssets(with: fetchOptions)
+
+        let count = min(limit ?? result.count, result.count)
+
         var assets: [MediaAsset] = []
-        
-        result.enumerateObjects { asset, _, _ in
+        assets.reserveCapacity(count)
+
+        for index in 0..<count {
+            let asset = result.object(at: index)
+
             guard let mediaType = Self.mapMediaType(asset.mediaType) else {
-                return
+                continue
             }
-            
+
             assets.append(
                 MediaAsset(
                     id: asset.localIdentifier,
@@ -57,13 +60,10 @@ final class PhotoLibraryDataSource {
                     pixelWidth: asset.pixelWidth,
                     pixelHeight: asset.pixelHeight
                 )
-                
             )
-            
         }
-        
+
         return assets
-        
     }
 
     func loadThumbnail(

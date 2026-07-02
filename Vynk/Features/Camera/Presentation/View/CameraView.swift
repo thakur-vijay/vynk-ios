@@ -55,6 +55,15 @@ struct CameraView: View {
                 }
                 .overlay(alignment: .bottom) {
                     VStack(spacing: AppSpacing.lg){
+                        MediaDrawerView(isMediaHidden: !viewModel.isMediaPermissionGiven){
+                            diContainer.mediaHorizontalListView { selectedMedia in
+                                
+                            } openMediaPicker: {
+                                viewModel.mediaActionSheet = .mediaPicker
+                            }
+                        } presentSheet: {
+                            viewModel.mediaActionSheet = .mediaPermissionDenied
+                        }
                         CameraActionsView(
                             mode: viewModel.selectedMode,
                             position: viewModel.selectedPosition,
@@ -95,6 +104,7 @@ struct CameraView: View {
                 .animation(.smooth, value: viewModel.isRecordingVideo)
                 .task {
                     await viewModel.prepareCamera()
+                    await viewModel.isMediaPermissionGiven()
                 }
                 .navigationDestination(item: $viewModel.capturedOutput) { output in
                     switch output {
@@ -128,88 +138,10 @@ struct CameraView: View {
                         } onClose: {
                             viewModel.mediaActionSheet = nil
                         }
-
+                        .fixedSheet()
                     }
                 }
         }
     }
 }
 
-struct PanGesture: UIGestureRecognizerRepresentable {
-
-    var onChanged: (CGPoint) -> Void
-    var onEnded: () -> Void
-
-    func makeCoordinator(
-        converter: CoordinateSpaceConverter
-    ) -> Coordinator {
-        Coordinator(
-            onChanged: onChanged,
-            onEnded: onEnded
-        )
-    }
-
-    func makeUIGestureRecognizer(
-        context: Context
-    ) -> UIPanGestureRecognizer {
-
-        let recognizer = UIPanGestureRecognizer(
-            target: context.coordinator,
-            action: #selector(
-                Coordinator.handlePan(_:))
-        )
-
-        return recognizer
-    }
-
-    func updateUIGestureRecognizer(
-        _ recognizer: UIPanGestureRecognizer,
-        context: Context
-    ) {
-
-    }
-}
-
-extension PanGesture {
-
-    final class Coordinator: NSObject {
-
-        private let onChanged: (CGPoint) -> Void
-        private let onEnded: () -> Void
-
-        init(
-            onChanged: @escaping (CGPoint) -> Void,
-            onEnded: @escaping () -> Void
-        ) {
-            self.onChanged = onChanged
-            self.onEnded = onEnded
-        }
-
-        @objc
-        func handlePan(
-            _ gesture: UIPanGestureRecognizer
-        ) {
-
-            let translation =
-                gesture.translation(
-                    in: gesture.view
-                )
-
-            switch gesture.state {
-
-            case .changed:
-
-                onChanged(translation)
-
-            case .ended,
-                 .cancelled,
-                 .failed:
-
-                onEnded()
-
-            default:
-                break
-            }
-        }
-    }
-}
