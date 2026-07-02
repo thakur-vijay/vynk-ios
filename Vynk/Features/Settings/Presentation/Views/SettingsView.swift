@@ -64,7 +64,7 @@ struct SettingsView: View {
                     VynkRemoteImage(url: .init(string: user?.avatarImage ?? ""), width: AppSizes.avatarLG, height: AppSizes.avatarLG, shape: .circle)
                     VStack(alignment: .leading, spacing: AppSpacing.xs){
                         Text("Vijay Thakur")
-                            .font(AppFont.title2Normal)
+                            .font(AppFont.title2Regular)
                         
                         Text("This is about")
                             .padding(AppSpacing.sm)

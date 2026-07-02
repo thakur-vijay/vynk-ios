@@ -24,7 +24,7 @@ struct ScannerHeaderActions: View {
     @ViewBuilder
     func actionButton(_ icon: String, action: @escaping ()-> ())-> some View {
         Button("", systemImage: icon, action: action)
-            .font(AppFont.title1Normal)
+            .font(AppFont.title1Regular)
             .tint(AppColors.white)
     }
 }
