@@ -55,12 +55,9 @@ struct UserQRCardView: View {
             .overlay {
                 GeometryReader{
                     let size = $0.size
-                    VynkRemoteImage(
-                        url: .init(
-                            string: MockImages.avatar
-                        ),
-                        width: size.width,
-                        height: size.height,
+                    RemoteImage(
+                        url: .init(string: MockImages.avatar),
+                        size: size,
                         shape: .circle
                     )
                 }

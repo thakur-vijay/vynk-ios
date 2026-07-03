@@ -11,12 +11,9 @@ struct RecentCallRowView: View {
     let model: CallRowModel
     var body: some View {
         HStack(spacing: AppSpacing.md){
-            VynkRemoteImage(
-                url: .init(
-                    string: model.avatarURL ?? ""
-                ),
-                width: AppAvatarSize.md,
-                height: AppAvatarSize.md,
+            RemoteImage(
+                url: .init(string: model.avatarURL ?? ""),
+                size: .init(width: AppAvatarSize.md, height: AppAvatarSize.md),
                 shape: .circle
             )
             

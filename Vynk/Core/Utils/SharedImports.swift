@@ -9,3 +9,4 @@
 @_exported import VynkLifecycleMacros
 @_exported import VynkDesignSystem
 @_exported import VynkFoundation
+@_exported import VynkImage

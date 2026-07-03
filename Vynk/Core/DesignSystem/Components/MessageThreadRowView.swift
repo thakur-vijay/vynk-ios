@@ -11,12 +11,9 @@ struct MessageThreadRowView: View{
     let model: MessageThreadRowModel
     var body: some View {
         HStack {
-            VynkRemoteImage(
-                url: .init(
-                    string: model.avatarImage
-                ),
-                width:  AppAvatarSize.lg,
-                height: AppAvatarSize.lg,
+            RemoteImage(
+                url: .init(string: model.avatarImage),
+                size: .init(width: AppAvatarSize.lg, height: AppAvatarSize.lg),
                 shape: .circle
             )
     

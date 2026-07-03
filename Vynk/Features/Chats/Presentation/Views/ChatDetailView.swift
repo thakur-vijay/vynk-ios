@@ -35,12 +35,15 @@ struct ChatDetailView: View {
             ToolbarItem(placement: .principal) {
                 Button(action: openUserDetail){
                     HStack {
-                        VynkRemoteImage(
+                        RemoteImage(
                             url: .init(string: model.avatarImage),
-                            width: AppAvatarSize.md,
-                            height: AppAvatarSize.md,
+                            size: .init(
+                                width: AppAvatarSize.md,
+                                height: AppAvatarSize.md
+                            ),
                             shape: .circle
                         )
+                        
                         VStack(alignment: .leading){
                             Text(model.title)
                             Text("tab here for contact info")

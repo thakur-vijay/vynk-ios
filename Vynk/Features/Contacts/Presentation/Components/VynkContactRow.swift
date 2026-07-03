@@ -12,10 +12,12 @@ struct VynkContactRow: View {
     var body: some View {
         HStack {
             if let url = model.avatar{
-                VynkRemoteImage(
+                RemoteImage(
                     url: .init(string: url),
-                    width: AppAvatarSize.md,
-                    height:  AppAvatarSize.md,
+                    size: .init(
+                        width: AppAvatarSize.md,
+                        height: AppAvatarSize.md
+                    ),
                     shape: .circle
                 )
             }else {

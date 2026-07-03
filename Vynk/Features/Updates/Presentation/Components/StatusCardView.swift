@@ -37,10 +37,9 @@ struct StatusCardView: View {
             .frame(statusCardSize)
             .overlay {
                 if let previewURL {
-                    VynkRemoteImage(
+                    RemoteImage(
                         url: .init(string: previewURL),
-                        width: statusCardSize.width,
-                        height: statusCardSize.height,
+                        size: statusCardSize,
                         shape: .rect(cornerRadius: AppRadius.lg, style: .continuous)
                     )
                 }
@@ -97,10 +96,12 @@ struct StatusCardView: View {
             )
             .overlay {
                 if let avatarURL{
-                    VynkRemoteImage(
+                    RemoteImage(
                         url: .init(string: avatarURL),
-                        width: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
-                        height: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
+                        size: .init(
+                            width: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
+                            height: isCurrentUser && !hasStatus ? AppAvatarSize.xl : AppAvatarSize.lg - 7,
+                        ),
                         shape: .circle
                     )
                 }

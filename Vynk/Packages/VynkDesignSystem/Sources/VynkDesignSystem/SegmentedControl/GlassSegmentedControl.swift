@@ -7,15 +7,29 @@
 
 import SwiftUI
 
-struct GlassSegmentedControl: View {
-    var config: Config = .init()
+@available(iOS 18.4, *)
+public struct GlassSegmentedControl: View {
+    var config: Config
     @Binding var selection: Int
     @Binding var tabs: [Self.Tab]
+    
+    public init(
+        config: Config = .init(),
+        selection: Binding<Int>,
+        tabs: Binding<[Self.Tab]>,
+    ) {
+        self.config = config
+        _selection = selection
+        _tabs = tabs
+        self.activeIndex = activeIndex
+        self.scrollPosition = scrollPosition
+        self.scrollPhase = scrollPhase
+    }
     
     @State private var activeIndex: Int?
     @State private var scrollPosition: ScrollPosition = .init()
     @State private var scrollPhase: ScrollPhase = .idle
-    var body: some View {
+    public var body: some View {
         GeometryReader {
             let containerSize = $0.size
             let activeSize = tabs[activeIndex ?? 0].viewSize
@@ -150,87 +164,4 @@ struct GlassSegmentedControl: View {
 
         }
     }
-    
-    struct Config {
-        var foregroundStyle: Color = .white
-        var tint: Color = .yellow
-        var refractionAmount: CGFloat = 10
-        var refractionDepth: CGFloat = 17
-    }
-    
-    struct Tab: Identifiable {
-        var title: String
-        fileprivate var viewSize: CGSize = .zero
-        
-        init(title: String) {
-            self.title = title
-        }
-        
-        var id: String { title }
-    }
 }
-
-fileprivate extension [GlassSegmentedControl.Tab] {
-    var snapPoints: [CGFloat] {
-        var snapPoints: [CGFloat] = []
-        var x: CGFloat = 0
-        for tab in self {
-            snapPoints.append(x + tab.viewSize.width / 2)
-            x += tab.viewSize.width
-        }
-        
-        return snapPoints
-    }
-    
-    func closestSnapPoint(_ offset: CGFloat)-> CGFloat {
-        snapPoints.min {
-            abs($0 - offset) < abs($1 - offset)
-        } ?? offset
-    }
-    
-    func closestSnapPointIndex(_ offset: CGFloat)-> Int? {
-        if let (index, _) = snapPoints.enumerated().min(by: {
-            abs($0.element - offset) < abs($1.element - offset)
-        }) {
-            return index
-        }
-        
-        return nil
-    }
-}
-
-fileprivate struct CustomScrollTarget: ScrollTargetBehavior {
-    @Binding var tabs: [GlassSegmentedControl.Tab]
-    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
-        let offset = target.rect.origin.x
-        target.rect.origin.x = tabs.closestSnapPoint(offset)
-    }
-    
-    func properties(context: PropertiesContext) -> Properties {
-        var properties = Properties()
-        properties.limitsScrolls = true
-        return properties
-    }
-}
-
-#Preview {
-    @Previewable @State var selection: Int = 0
-    @Previewable @State var tabs: [GlassSegmentedControl.Tab] = [
-        .init(title: "Portrait"),
-        .init(title: "Photo"),
-        .init(title: "Video"),
-        .init(title: "Panorama"),
-        .init(title: "Cinematic"),
-        .init(title: "Dolby Vision"),
-    ]
-    
-    GlassSegmentedControl(selection: $selection, tabs: $tabs)
-        .preferredColorScheme(.dark)
-        .task {
-            selection = 0
-        }
-        .onChange(of: selection) { oldValue, newValue in
-            print(newValue)
-        }
-}
-  

@@ -11,12 +11,12 @@ struct UserProfileHeaderView: View {
     var body: some View {
         let user = MockDataFactory.chats.first
         VStack(spacing: AppSpacing.md){
-            VynkRemoteImage(
-                url: .init(
-                    string: user?.avatarImage ?? ""
+            RemoteImage(
+                url: .init(string: user?.avatarImage ?? ""),
+                size: .init(
+                    width: Constants.profileImageSize,
+                    height: Constants.profileImageSize
                 ),
-                width: Constants.profileImageSize,
-                height: Constants.profileImageSize,
                 shape: .circle
             )
              

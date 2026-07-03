@@ -1,17 +1,29 @@
 //
 //  CheckButton.swift
-//  Vynk
+//  VynkDesignSystem
 //
-//  Created by Vijay Thakur on 20/06/26.
+//  Created by Vijay Thakur on 03/07/26.
 //
 
 import SwiftUI
 
-struct CheckButton: ToolbarContent {
+@available(iOS 26.0, *)
+public struct CheckButton: ToolbarContent {
     let isEnabled: Bool
-    var placement: ToolbarItemPlacement = .topBarTrailing
+    var placement: ToolbarItemPlacement
     let action: ()->()
-    var body: some ToolbarContent {
+    
+    public init(
+        isEnabled: Bool,
+        placement: ToolbarItemPlacement = .topBarTrailing,
+        action: @escaping () -> Void
+    ) {
+        self.isEnabled = isEnabled
+        self.placement = placement
+        self.action = action
+    }
+    
+    public var body: some ToolbarContent {
         if isEnabled {
             ProminentToolbarButton(
                 icon: AppSymbols.checkmark.name,
