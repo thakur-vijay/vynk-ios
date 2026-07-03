@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkSecurity
 
 struct RootView: View {
     private let appDIContainer: AppDIContainer

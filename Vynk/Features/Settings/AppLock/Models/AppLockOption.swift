@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum AppLockOption: String, @MainActor RowIDProtocol {
-    case immediately
-    case afterOneMinute
-    case afterFifteenMinutes
-    case afterOneHour
-    
-    var symbol: String? {
-         nil
-    }
-}
+//enum AppLockOption: String, @MainActor RowIDProtocol {
+//    case immediately
+//    case afterOneMinute
+//    case afterFifteenMinutes
+//    case afterOneHour
+//    
+//    var symbol: String? {
+//         nil
+//    }
+//}

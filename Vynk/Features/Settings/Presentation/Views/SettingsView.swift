@@ -56,7 +56,7 @@ struct SettingsView: View {
     
     var userInfo: some View {
         let user = MockDataFactory.chats.first
-        return SectionGroupContainer {
+        return Section {
             Button {
                 
             } label: {

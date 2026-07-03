@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VynkSecurity
 
 final class AppLockDIContainer {
 
@@ -16,7 +17,7 @@ final class AppLockDIContainer {
     }
     
     func makeView()-> AppLockView {
-        let service = LocalAuthenticationService()
+        let service = DefaultLocalAuthenticator()
         let repository = DefaultAppLockRepository(authService: service, store: appPreferences)
         let authenticateUseCase = AuthenticateAppLockUseCase(repository: repository)
         let viewModel = AppLockViewModel(authenticateUseCase: authenticateUseCase)

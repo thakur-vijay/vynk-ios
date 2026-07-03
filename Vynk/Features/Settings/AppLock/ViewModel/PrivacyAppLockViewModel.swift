@@ -7,6 +7,13 @@
 
 import Foundation
 import SwiftUI
+import VynkSecurity
+
+extension AppLockOption: RowIDProtocol {
+    var symbol: String? {
+        nil
+    }
+}
 
 @MainActor
 @Observable

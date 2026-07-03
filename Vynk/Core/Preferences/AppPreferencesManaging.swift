@@ -6,14 +6,11 @@
 //
 
 import Foundation
+import VynkSecurity
 
 @MainActor
-protocol AppPreferencesManaging {
+protocol AppPreferencesManaging: AppLockPreferences{
 
     var isContactsPermissionStatusCardHidden: Bool { get set }
-    
-    var isAppLockEnabled: Bool { get set }
-
-    var appLockOption: String { get set }
 
 }

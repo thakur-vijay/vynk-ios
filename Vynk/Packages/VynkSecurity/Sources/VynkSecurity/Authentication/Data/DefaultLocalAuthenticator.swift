@@ -1,15 +1,20 @@
 //
 //  LocalAuthenticationService.swift
-//  Vynk
+//  VynkSecurity
 //
-//  Created by Vijay Thakur on 07/06/26.
+//  Created by Vijay Thakur on 03/07/26.
 //
+
 
 import LocalAuthentication
 
-final class LocalAuthenticationService {
+public final class DefaultLocalAuthenticator: LocalAuthenticating {
+    
+    public init(){
+        
+    }
 
-    func authenticate(reason: String = "Unlock Vynk") async throws -> Bool {
+    public func authenticate(reason: String) async throws -> Bool {
         let context = LAContext()
         context.localizedCancelTitle = "Cancel"
 

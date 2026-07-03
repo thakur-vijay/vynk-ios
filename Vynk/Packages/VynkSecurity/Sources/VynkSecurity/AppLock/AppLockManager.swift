@@ -1,40 +1,42 @@
 //
 //  AppLockManager.swift
-//  Vynk
+//  VynkSecurity
 //
-//  Created by Vijay Thakur on 07/06/26.
+//  Created by Vijay Thakur on 03/07/26.
 //
+
 
 import Foundation
 
+@available(iOS 17.0, *)
 @MainActor
 @Observable
-final class AppLockManager {
+public final class AppLockManager {
 
-    private var preferences: AppPreferencesManaging
+    private var preferences: AppLockPreferences
 
     private(set) var isLocked = false
 
     private(set) var backgroundDate: Date?
 
-    init(preferences: AppPreferencesManaging) {
+    public init(preferences: AppLockPreferences) {
         self.preferences = preferences
         prepareInitialLockState()
     }
 
-    var isEnabled: Bool {
+    public var isEnabled: Bool {
         preferences.isAppLockEnabled
     }
     
-    var lockOption: AppLockOption {
+    public var lockOption: AppLockOption {
         AppLockOption(rawValue: preferences.appLockOption) ?? .immediately
     }
 
-    func setLockOption(_ option: AppLockOption) {
+    public func setLockOption(_ option: AppLockOption) {
         preferences.appLockOption = option.rawValue
     }
 
-    func setEnabled(_ enabled: Bool) {
+    public func setEnabled(_ enabled: Bool) {
         preferences.isAppLockEnabled = enabled
 
         if !enabled {
@@ -42,22 +44,22 @@ final class AppLockManager {
         }
     }
 
-    func lock() {
+    public func lock() {
         guard isEnabled else { return }
         isLocked = true
     }
 
-    func unlock() {
+    public func unlock() {
         backgroundDate = nil
         isLocked = false
     }
 
-    func didEnterBackground() {
+    public func didEnterBackground() {
         guard isEnabled else { return }
         backgroundDate = Date()
     }
 
-    func didBecomeActive() {
+    public func didBecomeActive() {
         guard let backgroundDate, isEnabled else {
             return
         }
@@ -70,7 +72,7 @@ final class AppLockManager {
         
     }
     
-    var shouldShowLockScreen: Bool {
+    public var shouldShowLockScreen: Bool {
         return isEnabled && isLocked
     }
     

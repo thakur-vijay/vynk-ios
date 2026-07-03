@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkSecurity
 
 struct AppLockView: View {
     @State private var viewModel: AppLockViewModel

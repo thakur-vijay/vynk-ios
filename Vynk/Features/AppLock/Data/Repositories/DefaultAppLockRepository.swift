@@ -6,13 +6,15 @@
 //
 
 
+import VynkSecurity
+
 final class DefaultAppLockRepository: AppLockRepository {
 
-    private let authService: LocalAuthenticationService
+    private let authService: LocalAuthenticating
     private var store: AppPreferencesManaging
 
     init(
-        authService: LocalAuthenticationService,
+        authService: LocalAuthenticating,
         store: AppPreferencesManaging
     ) {
         self.authService = authService
@@ -20,7 +22,7 @@ final class DefaultAppLockRepository: AppLockRepository {
     }
 
     func authenticate() async throws -> Bool {
-        try await authService.authenticate()
+        try await authService.authenticate(reason: "Unlock Vynk")
     }
 
     func isAppLockEnabled() -> Bool {

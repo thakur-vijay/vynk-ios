@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkSecurity
 
 final class PrivacyDIContainer {
     private let appLockManager: AppLockManager
