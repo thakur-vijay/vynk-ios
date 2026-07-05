@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VynkMediaKit
+import VynkChatLists
 
 struct ChatsView: View{
     @State private var viewModel: ChatsViewModel
@@ -35,13 +36,15 @@ struct ChatsView: View{
                 }
                 
                 ChatFilterBarView(lists: viewModel.lists) { clickedID in
-                    Log.error("Clicked ID is", clickedID, String(describing: self))
-                    if clickedID == "add"{
-                        router.activeSheet = .newList
+                    switch clickedID {
+                    case .add: router.activeSheet = .newList
+                    case .all:
+                        break
+                    case .list(_):
+                        break
                     }
                 }
-                .listRowSeparator(.hidden)
-                .listRowInsets(.all, 0)
+                .clearListRowStyle()
 
                 ForEach(viewModel.chats) { model in
                     MessageThreadRowView(model: model)
@@ -79,8 +82,7 @@ struct ChatsView: View{
                                 
                             }
                         }
-                        .listRowSeparator(.hidden)
-                        .listRowInsets(.all, 0)
+                        .clearListRowStyle()
                         .contentShape(.rect)
                         .onTapGesture {
                             router.push(.detail(model))
@@ -132,7 +134,9 @@ struct ChatsView: View{
                         router.dismissSheet()
                     }
                 case .reorderList:
-                    appDiContainer.chatsDIContainer.makeReorderListSheet()
+                    appDiContainer.chatsDIContainer.makeReorderListSheet {
+                        router.dismissSheet()
+                    }
                 }
             }
             .fullScreenCover(item: $router.activeFullScreenCover, onDismiss: {

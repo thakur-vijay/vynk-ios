@@ -34,7 +34,6 @@ public extension AppDatabase {
 
 public extension AppDatabase {
 
-    @MainActor
     func observeAll<Record: VynkFetchableRecord & VynkTableRecord & Sendable>(
         _ record: Record.Type,
         filters: [VynkDatabaseFilter] = [],
@@ -42,34 +41,36 @@ public extension AppDatabase {
     ) -> AsyncThrowingStream<[Record], Error> {
 
         AsyncThrowingStream { continuation in
+            let dbQueue = self.dbQueue
+            Task { @MainActor in
+                let observation = ValueObservation.tracking { db in
+                    var request = record.all()
 
-            let observation = ValueObservation.tracking { db in
-                var request = record.all()
+                    for filter in filters {
+                        request = request.filter(filter.expression)
+                    }
 
-                for filter in filters {
-                    request = request.filter(filter.expression)
+                    for sort in sorting {
+                        request = request.order(sort.ordering)
+                    }
+
+                    return try request.fetchAll(db)
                 }
 
-                for sort in sorting {
-                    request = request.order(sort.ordering)
+                let cancellable = observation.start(
+                    in: dbQueue,
+                    scheduling: .mainActor,
+                    onError: { error in
+                        continuation.finish(throwing: error)
+                    },
+                    onChange: { records in
+                        continuation.yield(records)
+                    }
+                )
+
+                continuation.onTermination = { _ in
+                    cancellable.cancel()
                 }
-
-                return try request.fetchAll(db)
-            }
-
-            let cancellable = observation.start(
-                in: dbQueue,
-                scheduling: .mainActor,
-                onError: { error in
-                    continuation.finish(throwing: error)
-                },
-                onChange: { records in
-                    continuation.yield(records)
-                }
-            )
-
-            continuation.onTermination = { _ in
-                cancellable.cancel()
             }
         }
     }

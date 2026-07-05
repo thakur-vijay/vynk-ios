@@ -40,7 +40,6 @@ struct NewChatBottomSheet: View {
                         break
                     }
                 }
-                .listSectionMargins(.top, 5)
                 diContainer.makeContactsView { phone in
                     router.presentSheet(.invite(phone))
                 }

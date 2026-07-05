@@ -109,6 +109,7 @@ public enum AppSymbols {
     public static let flashOn = AppSymbol("bolt.fill")
     public static let flashAuto = AppSymbol("bolt.badge.automatic.fill")
     public static let bag = AppSymbol("gym.bag.fill")
+    public static let delete = AppSymbol("minus.circle.fill")
 
     public enum ChatAction {
         public static let pin = AppSymbol("pin.fill")

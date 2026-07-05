@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 26.0, *)
+@available(iOS 17.0, *)
 public struct ToolbarCloseButton: ToolbarContent {
     var placement: ToolbarItemPlacement
     let onClose: ()->()
@@ -22,7 +22,7 @@ public struct ToolbarCloseButton: ToolbarContent {
     
     public var body: some ToolbarContent {
         ToolbarItem(placement: placement) {
-            Button("", systemImage: AppSymbols.close.name, role: .close, action: onClose)
+            Button("", systemImage: AppSymbols.close.name, action: onClose)
         }
     }
 }

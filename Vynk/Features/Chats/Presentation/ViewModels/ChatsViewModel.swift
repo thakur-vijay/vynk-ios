@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import VynkChatLists
 
 @MainActor
 @Observable
@@ -59,9 +60,9 @@ final class ChatsViewModel {
             
             do {
                 for try await result in observeVisibleListsUseCase.execute() {
-                    lists = result.map {
-                        ChatListMapper.map($0)
-                    }
+                    lists = result.map({ model in
+                        ChatListRowModel(model)
+                    })
                 }
             } catch {
                 

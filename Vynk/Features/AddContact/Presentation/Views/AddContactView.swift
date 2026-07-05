@@ -108,8 +108,7 @@ struct AddContactView: View {
                     }
                     .fillWidth()
                     .foregroundStyle(AppColors.accentSoft)
-                    .listRowBackground(EmptyView())
-                    .listRowInsets(.top, 0)
+                    .clearListRowStyle()
                 }
 
             }

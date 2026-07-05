@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VynkChatLists
 
 struct ChatFilterChipView: View {
     var model: ChatListRowModel?

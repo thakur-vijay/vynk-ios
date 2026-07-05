@@ -55,8 +55,6 @@ struct ChatDetailView: View {
 
             }
             
-            ToolbarSpacer()
-            
             ToolbarItemGroup(placement: .topBarTrailing) {
                 Button("", systemImage: AppSymbols.video.name) {
                     

@@ -49,10 +49,10 @@ enum ChatContextAction: Identifiable{
         }
     }
     
-    var role: ButtonRole {
+    var role: ButtonRole? {
         switch self {
         case .delete: return .destructive
-        default: return .confirm
+        default: return nil
         }
     }
     

@@ -9,6 +9,7 @@ import Foundation
 import VynkDatabaseKit
 import VynkMediaKit
 import VynkSecurity
+import VynkChatLists
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -41,7 +42,7 @@ final class AppDIContainer {
             addContactDIContainer: addContactDIContainer,
             inviteDIContainer: inviteDIContainer,
             cameraDIContainer: cameraDIContainer,
-            chatListsDIContainer: chatListsDIContainer,
+            listsRouting: listsDIContainer,
             appPreferences: appPreferences,
             appRouter: appRouter
         )
@@ -116,13 +117,7 @@ final class AppDIContainer {
     }()
     
     lazy var listsDIContainer: ListsDIContainer = {
-        ListsDIContainer(chatListsDIContainer: chatListsDIContainer)
-    }()
-    
-    lazy var chatListsDIContainer: ChatListsDIContainer = {
-        ChatListsDIContainer(
-            database: databaseInfraDIContainer.appDatabase
-        )
+        ListsDIContainer(database: databaseInfraDIContainer.appDatabase)
     }()
     
     lazy var screenBrightnessManager: ScreenBrightnessManaging = {

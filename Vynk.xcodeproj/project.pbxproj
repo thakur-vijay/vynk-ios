@@ -10,6 +10,7 @@
 		182DBE262FD7CF7A000F478C /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE252FD7CF7A000F478C /* Nuke */; };
 		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
 		18386A022FF7FC650043AB06 /* VynkSecurity in Frameworks */ = {isa = PBXBuildFile; productRef = 18386A012FF7FC650043AB06 /* VynkSecurity */; };
+		183D990F2FF8278600F27048 /* VynkChatLists in Frameworks */ = {isa = PBXBuildFile; productRef = 183D990E2FF8278600F27048 /* VynkChatLists */; };
 		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
 		189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */; };
 		18B83B6F2FEFFBDF00EC01CE /* VynkCountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */; };
@@ -49,6 +50,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Packages/VynkCameraKit,
+				Packages/VynkChatLists,
 				Packages/VynkCountryPicker,
 				Packages/VynkDatabaseKit,
 				Packages/VynkDesignSystem,
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183D990F2FF8278600F27048 /* VynkChatLists in Frameworks */,
 				18F4B11D2FEE8AA700C6898E /* VynkDatabaseKit in Frameworks */,
 				18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */,
 				189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */,
@@ -178,6 +181,7 @@
 				18E96FF82FF6D1F400477953 /* VynkFoundation */,
 				18C5197A2FF7B4AA0082EDFF /* VynkImage */,
 				18386A012FF7FC650043AB06 /* VynkSecurity */,
+				183D990E2FF8278600F27048 /* VynkChatLists */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -486,6 +490,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -524,6 +529,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -702,6 +708,10 @@
 		18386A012FF7FC650043AB06 /* VynkSecurity */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkSecurity;
+		};
+		183D990E2FF8278600F27048 /* VynkChatLists */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkChatLists;
 		};
 		189611652FD7F4A3008AD5B8 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 26.0, *)
+@available(iOS 17.0, *)
 public struct CheckButton: ToolbarContent {
     let isEnabled: Bool
     var placement: ToolbarItemPlacement

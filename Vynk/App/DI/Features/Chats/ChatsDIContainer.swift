@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import VynkChatLists
+import SwiftUI
 
 final class ChatsDIContainer {
     private let contactsDIContainer: ContactsDIContainer
     private let addContactDIContainer: AddContactDIContainer
     private let inviteDIContainer: InviteDIContainer
     private let cameraDIContainer: CameraDIContainer
-    private let chatListsDIContainer: ChatListsDIContainer
+    private let listsRouting: ChatListsRouting
     private let appPreferences: AppPreferencesManaging
     private let appRouter: AppRouter
     
@@ -21,7 +23,7 @@ final class ChatsDIContainer {
         addContactDIContainer: AddContactDIContainer,
         inviteDIContainer: InviteDIContainer,
         cameraDIContainer: CameraDIContainer,
-        chatListsDIContainer: ChatListsDIContainer,
+        listsRouting: ChatListsRouting,
         appPreferences: AppPreferencesManaging,
         appRouter: AppRouter
     ) {
@@ -29,7 +31,7 @@ final class ChatsDIContainer {
         self.addContactDIContainer = addContactDIContainer
         self.inviteDIContainer = inviteDIContainer
         self.cameraDIContainer = cameraDIContainer
-        self.chatListsDIContainer = chatListsDIContainer
+        self.listsRouting = listsRouting
         self.appPreferences = appPreferences
         self.appRouter = appRouter
     }
@@ -38,8 +40,8 @@ final class ChatsDIContainer {
 
         let viewModel = ChatsViewModel(
             contactsPermissionUseCase: contactsDIContainer.makeContactsPermissionUseCase(),
-            observeVisibleListsUseCase: chatListsDIContainer.observeVisibleListsUseCase,
-            deleteChatListUseCase: chatListsDIContainer.deleteChatListUseCase,
+            observeVisibleListsUseCase: listsRouting.makeObserveVisibleListsUseCase(),
+            deleteChatListUseCase: listsRouting.makeDeleteListsUseCase(),
             appPreferences: appPreferences
         )
 
@@ -74,11 +76,11 @@ final class ChatsDIContainer {
         )
     }()
     
-    func makeReorderListSheet() -> ReorderListsView {
-        return chatListsDIContainer.makeReorderListSheet()
+    func makeReorderListSheet(onClose: @escaping ()->()) -> AnyView {
+        return AnyView(Text("TODO"))
     }
     
-    func makeListEditor(mode: ListEditorMode, completion: @escaping ()->())-> ListEditor {
-        return chatListsDIContainer.makeListEditor(mode: mode, completion: completion)
+    func makeListEditor(mode: ListEditorMode, completion: @escaping ()->())-> AnyView {
+        return AnyView(Text("TODO"))
     }
 }

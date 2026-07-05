@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DialogAction: Identifiable {
+public struct DialogAction: Identifiable{
 
     public let id = UUID()
 

@@ -18,4 +18,14 @@ public extension View {
                 .background(.ultraThinMaterial, in: shape)
         }
     }
+    
+    @ViewBuilder
+    func glassProminentButton()-> some View {
+        if #available(iOS 26, *){
+            self
+                .buttonStyle(.glassProminent)
+        }else {
+            self
+        }
+    }
 }

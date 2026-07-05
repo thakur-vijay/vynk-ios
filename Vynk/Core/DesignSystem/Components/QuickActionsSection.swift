@@ -33,7 +33,7 @@ struct QuickActionsSection<ID: Hashable>: View {
                         }
                     }
                 }
-                .listRowInsets(.vertical, 0)
+                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 .tint(AppColors.contentDefault)
             }
         }

@@ -14,7 +14,7 @@ struct VynkContactsGroupSection: View {
             Section {
                 ForEach(section.contacts) { contact in
                     VynkContactRow(model: contact)
-                        .listRowInsets(.vertical, 0)
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             } header: {
                 Text(section.title)

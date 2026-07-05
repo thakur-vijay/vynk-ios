@@ -11,9 +11,9 @@ public enum DatabaseMigratorFactory {
 
     public static func makeMigrator(
         migrations: [DatabaseMigration]
-    ) -> DatabaseMigrator {
+    ) -> GRDB.DatabaseMigrator {
 
-        var migrator = DatabaseMigrator()
+        var migrator = GRDB.DatabaseMigrator()
 
         migrations.forEach { migration in
             migrator.registerMigration(migration.identifier) { db in

@@ -7,13 +7,23 @@
 
 import SwiftUI
 
-@available(iOS 26.0, *)
+@available(iOS 17.0, *)
 public extension View {
+
     @ViewBuilder
-    func clearListRowStyle(separator: Visibility = .hidden) -> some View {
+    func clearListRowStyle(
+        separator: Visibility = .hidden
+    ) -> some View {
         self
             .listRowSeparator(separator)
-            .listRowInsets(.all, 0)
+            .listRowInsets(
+                EdgeInsets(
+                    top: 0,
+                    leading: 0,
+                    bottom: 0,
+                    trailing: 0
+                )
+            )
             .listRowBackground(EmptyView())
     }
 }

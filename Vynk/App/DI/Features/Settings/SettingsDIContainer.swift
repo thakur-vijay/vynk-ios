@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import VynkSecurity
+import VynkChatLists
 
 final class SettingsDIContainer {
     private let appLockManager: AppLockManager

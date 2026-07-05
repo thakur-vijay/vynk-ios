@@ -14,7 +14,7 @@ struct InviteToVynkSection: View {
         Section {
             ForEach(contacts) { contact in
                 DeviceContactRow(model: contact, onInviteTap: onInviteTap)
-                    .listRowInsets(.vertical, 0)
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
         } header: {
             Text("Invite to Vynk")

@@ -8,30 +8,32 @@
 import Foundation
 @_exported import GRDB
 
-public final class AppDatabase {
+public final class AppDatabase: @unchecked Sendable {
 
     public let dbQueue: DatabaseQueue
 
     public init(
         configuration: DatabaseConfiguration = .live,
-        migrations: [DatabaseMigration]
+        migrator: DatabaseMigrator
     ) throws {
+
         let databaseURL = try Self.databaseURL(
             filename: configuration.filename
         )
 
         var config = GRDB.Configuration()
+
         config.prepareDatabase { db in
             try db.execute(sql: "PRAGMA foreign_keys = ON")
         }
 
-        self.dbQueue = try DatabaseQueue(
+        dbQueue = try DatabaseQueue(
             path: databaseURL.path,
             configuration: config
         )
 
-        try DatabaseMigratorFactory
-            .makeMigrator(migrations: migrations)
+        try migrator
+            .build()
             .migrate(dbQueue)
     }
 
@@ -65,40 +67,41 @@ public final class AppDatabase {
         }
     }
     
-    @MainActor
     public func observeAll<Record: VynkFetchableRecord & VynkTableRecord & Sendable>(
         _ record: Record.Type,
         where predicate: VynkSQLExpression? = nil,
         orderedBy column: VynkColumn? = nil
     ) -> AsyncThrowingStream<[Record], Error> {
         AsyncThrowingStream { continuation in
+            let dbQueue = dbQueue
+            Task { @MainActor in
+                let observation = ValueObservation.tracking { db in
+                    var request = record.all()
 
-            let observation = ValueObservation.tracking { db in
-                var request = record.all()
+                    if let predicate {
+                        request = request.filter(predicate)
+                    }
 
-                if let predicate {
-                    request = request.filter(predicate)
+                    if let column {
+                        request = request.order(column)
+                    }
+
+                    return try request.fetchAll(db)
                 }
 
-                if let column {
-                    request = request.order(column)
+                let cancellable = observation.start(
+                    in: dbQueue,
+                    onError: { error in
+                        continuation.finish(throwing: error)
+                    },
+                    onChange: { records in
+                        continuation.yield(records)
+                    }
+                )
+
+                continuation.onTermination = { _ in
+                    cancellable.cancel()
                 }
-
-                return try request.fetchAll(db)
-            }
-
-            let cancellable = observation.start(
-                in: dbQueue,
-                onError: { error in
-                    continuation.finish(throwing: error)
-                },
-                onChange: { records in
-                    continuation.yield(records)
-                }
-            )
-
-            continuation.onTermination = { _ in
-                cancellable.cancel()
             }
         }
     }

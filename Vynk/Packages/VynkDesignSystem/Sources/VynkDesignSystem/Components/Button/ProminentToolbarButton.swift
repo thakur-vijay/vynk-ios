@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 26.0, *)
+@available(iOS 17.0, *)
 public struct ProminentToolbarButton: ToolbarContent {
     
     var icon: String
@@ -33,7 +33,7 @@ public struct ProminentToolbarButton: ToolbarContent {
                 Image(systemName: icon)
             }
             .tint(accent)
-            .buttonStyle(.glassProminent)
+            .glassProminentButton()
         }
     }
 }
