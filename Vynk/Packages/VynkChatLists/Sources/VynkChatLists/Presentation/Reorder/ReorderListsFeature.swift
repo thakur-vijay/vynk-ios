@@ -45,7 +45,7 @@ public struct ReorderListsFeature {
         case deleteButtonTapped(ChatListRowModel)
         case alert(PresentationAction<Alert>)
         
-        public enum Alert: Equatable {
+        public enum Alert: Equatable, Sendable {
             case confirmDelete
         }
     }
@@ -105,23 +105,7 @@ public struct ReorderListsFeature {
             case let .deleteButtonTapped(model):
                 state.deletingList = model
 
-                state.alert = AlertState(
-                    title: {
-                        TextState("Delete list?")
-                    },
-                    actions: {
-                        ButtonState(role: .destructive, action: .confirmDelete) {
-                            TextState("Delete")
-                        }
-
-                        ButtonState(role: .cancel) {
-                            TextState("Cancel")
-                        }
-                    },
-                    message: {
-                        TextState("This action cannot be undone.")
-                    }
-                )
+                state.alert = .deleteConfirmation
 
                 return .none
             case .closeButtonTapped:
@@ -145,4 +129,24 @@ public struct ReorderListsFeature {
         }
         .ifLet(\.$alert, action: \.alert)
     }
+}
+
+extension AlertState where Action == ReorderListsFeature.Action.Alert {
+    static let deleteConfirmation = AlertState(
+        title: {
+            TextState("Delete list?")
+        },
+        actions: {
+            ButtonState(role: .destructive, action: .confirmDelete) {
+                TextState("Delete")
+            }
+
+            ButtonState(role: .cancel) {
+                TextState("Cancel")
+            }
+        },
+        message: {
+            TextState("This action cannot be undone.")
+        }
+    )
 }

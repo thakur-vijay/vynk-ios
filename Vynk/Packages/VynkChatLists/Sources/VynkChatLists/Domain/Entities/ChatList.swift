@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ChatList: Identifiable, Sendable{
+public struct ChatList: Identifiable, Sendable, Hashable{
     public let id: String
     public let kind: ChatListKind
     public let title: String

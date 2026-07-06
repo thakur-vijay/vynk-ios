@@ -94,6 +94,27 @@ extension ChatListsClient: DependencyKey {
             fatalError("Unimplemented")
         }
     )
+    
+}
+
+extension ChatListsClient: TestDependencyKey {
+
+    static let testValue = Self(
+        observeVisibleLists: {
+            AsyncThrowingStream { continuation in
+                continuation.finish()
+            }
+        },
+        observeAvailablePresets: {
+            AsyncThrowingStream { continuation in
+                continuation.finish()
+            }
+        },
+        save: { _ in },
+        restorePreset: { _ in },
+        delete: { _ in },
+        reorder: { _ in }
+    )
 }
 
 extension DependencyValues {
