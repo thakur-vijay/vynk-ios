@@ -21,15 +21,17 @@ jobs:
         with:
           xcode-version: latest
 
-      - name: Resolve Swift Packages
+      - name: Show Xcode Version
+        run: xcodebuild -version
+
+      - name: Trust Swift Macros
         run: |
-          xcodebuild \
-            -resolvePackageDependencies \
-            -project Vynk.xcodeproj
+          defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 
       - name: Run VynkChatLists Tests
         run: |
           xcodebuild test \
             -project Vynk.xcodeproj \
             -scheme VynkChatLists \
-            -destination "platform=iOS Simulator,name=iPhone 16 Plus"
+            -destination "platform=iOS Simulator,name=iPhone 16 Plus" \
+            -skipMacroValidation
