@@ -1,0 +1,35 @@
+name: VynkChatLists Tests
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+jobs:
+  test:
+    name: Run VynkChatLists Tests
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+
+      - name: Resolve Swift Packages
+        run: |
+          xcodebuild \
+            -resolvePackageDependencies \
+            -project Vynk.xcodeproj
+
+      - name: Run VynkChatLists Tests
+        run: |
+          xcodebuild test \
+            -project Vynk.xcodeproj \
+            -scheme VynkChatLists \
+            -destination "platform=iOS Simulator,name=iPhone 14 Plus"
