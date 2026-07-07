@@ -32,4 +32,4 @@ jobs:
           xcodebuild test \
             -project Vynk.xcodeproj \
             -scheme VynkChatLists \
-            -destination "platform=iOS Simulator,name=iPhone 14 Plus"
+            -destination "platform=iOS Simulator,name=Any iOS Simulator Device"
