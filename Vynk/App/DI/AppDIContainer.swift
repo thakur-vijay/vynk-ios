@@ -10,6 +10,8 @@ import VynkDatabaseKit
 import VynkMediaKit
 import VynkSecurity
 import VynkChatLists
+import VynkCameraKit
+import VynkAuthKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -111,7 +113,7 @@ final class AppDIContainer {
     
     lazy var cameraDIContainer: CameraDIContainer = {
         CameraDIContainer(
-            cameraEngine: cameraInfraDIContainer.cameraEngine,
+            cameraEngine: cameraEngine,
             media: mediaPickerDIContainer
         )
     }()
@@ -125,10 +127,10 @@ final class AppDIContainer {
     }()
     
     lazy var scannerDIContainer: ScannerDIContainer = {
-        ScannerDIContainer(cameraEngine: cameraInfraDIContainer.cameraEngine)
+        ScannerDIContainer(cameraEngine: cameraEngine)
     }()
     
-    lazy var cameraInfraDIContainer: CameraInfraDIContainer = {
-        CameraInfraDIContainer()
+    lazy var cameraEngine: CameraEngine = {
+        CameraEngine()
     }()
 }

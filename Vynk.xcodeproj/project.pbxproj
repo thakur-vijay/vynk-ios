@@ -11,13 +11,14 @@
 		182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 182DBE272FD7CF7A000F478C /* NukeUI */; };
 		18386A022FF7FC650043AB06 /* VynkSecurity in Frameworks */ = {isa = PBXBuildFile; productRef = 18386A012FF7FC650043AB06 /* VynkSecurity */; };
 		183D990F2FF8278600F27048 /* VynkChatLists in Frameworks */ = {isa = PBXBuildFile; productRef = 183D990E2FF8278600F27048 /* VynkChatLists */; };
+		1850EBC02FFFCF9F009B28C1 /* VynkCameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1850EBBF2FFFCF9F009B28C1 /* VynkCameraKit */; };
 		189611662FD7F4A3008AD5B8 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = 189611652FD7F4A3008AD5B8 /* GRDB */; };
 		189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */ = {isa = PBXBuildFile; productRef = 189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */; };
+		18AC3C0C300013DF00FFE1ED /* VynkAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18AC3C0B300013DF00FFE1ED /* VynkAuthKit */; };
 		18B83B6F2FEFFBDF00EC01CE /* VynkCountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */; };
 		18C5197B2FF7B4AA0082EDFF /* VynkImage in Frameworks */ = {isa = PBXBuildFile; productRef = 18C5197A2FF7B4AA0082EDFF /* VynkImage */; };
 		18E738A62FF5108500BBC8C6 /* VynkMediaKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18E738A52FF5108500BBC8C6 /* VynkMediaKit */; };
 		18E96FF92FF6D1F400477953 /* VynkFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 18E96FF82FF6D1F400477953 /* VynkFoundation */; };
-		18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18F4AA882FEE591D00C6898E /* VynkCameraKit */; };
 		18F4B11D2FEE8AA700C6898E /* VynkDatabaseKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18F4B11C2FEE8AA700C6898E /* VynkDatabaseKit */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +50,7 @@
 		18F4AA872FEE559200C6898E /* Exceptions for "Vynk" folder in "Vynk" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Packages/VynkCameraKit,
+				Packages/VynkAuthKit,
 				Packages/VynkChatLists,
 				Packages/VynkCountryPicker,
 				Packages/VynkDatabaseKit,
@@ -91,8 +92,8 @@
 			files = (
 				183D990F2FF8278600F27048 /* VynkChatLists in Frameworks */,
 				18F4B11D2FEE8AA700C6898E /* VynkDatabaseKit in Frameworks */,
-				18F4AA892FEE591D00C6898E /* VynkCameraKit in Frameworks */,
 				189A4F4A2FE7DE3600A0D885 /* VynkLifecycleMacros in Frameworks */,
+				18AC3C0C300013DF00FFE1ED /* VynkAuthKit in Frameworks */,
 				18386A022FF7FC650043AB06 /* VynkSecurity in Frameworks */,
 				18E96FF92FF6D1F400477953 /* VynkFoundation in Frameworks */,
 				18C5197B2FF7B4AA0082EDFF /* VynkImage in Frameworks */,
@@ -100,6 +101,7 @@
 				18E738A62FF5108500BBC8C6 /* VynkMediaKit in Frameworks */,
 				18B83B6F2FEFFBDF00EC01CE /* VynkCountryPicker in Frameworks */,
 				182DBE262FD7CF7A000F478C /* Nuke in Frameworks */,
+				1850EBC02FFFCF9F009B28C1 /* VynkCameraKit in Frameworks */,
 				182DBE282FD7CF7A000F478C /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,7 +176,6 @@
 				182DBE272FD7CF7A000F478C /* NukeUI */,
 				189611652FD7F4A3008AD5B8 /* GRDB */,
 				189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */,
-				18F4AA882FEE591D00C6898E /* VynkCameraKit */,
 				18F4B11C2FEE8AA700C6898E /* VynkDatabaseKit */,
 				18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */,
 				18E738A52FF5108500BBC8C6 /* VynkMediaKit */,
@@ -182,6 +183,8 @@
 				18C5197A2FF7B4AA0082EDFF /* VynkImage */,
 				18386A012FF7FC650043AB06 /* VynkSecurity */,
 				183D990E2FF8278600F27048 /* VynkChatLists */,
+				1850EBBF2FFFCF9F009B28C1 /* VynkCameraKit */,
+				18AC3C0B300013DF00FFE1ED /* VynkAuthKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -269,6 +272,7 @@
 			packageReferences = (
 				182DBE242FD7CF7A000F478C /* XCRemoteSwiftPackageReference "Nuke" */,
 				189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */,
+				1850EBBE2FFFCF9F009B28C1 /* XCRemoteSwiftPackageReference "VynkCameraKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 188696892FB1AD3200A5BFA7 /* Products */;
@@ -684,6 +688,14 @@
 				minimumVersion = 13.0.6;
 			};
 		};
+		1850EBBE2FFFCF9F009B28C1 /* XCRemoteSwiftPackageReference "VynkCameraKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/thakur-vijay/VynkCameraKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
 		189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
@@ -713,6 +725,11 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkChatLists;
 		};
+		1850EBBF2FFFCF9F009B28C1 /* VynkCameraKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1850EBBE2FFFCF9F009B28C1 /* XCRemoteSwiftPackageReference "VynkCameraKit" */;
+			productName = VynkCameraKit;
+		};
 		189611652FD7F4A3008AD5B8 /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 189611642FD7F4A3008AD5B8 /* XCRemoteSwiftPackageReference "GRDB" */;
@@ -721,6 +738,10 @@
 		189A4F492FE7DE3600A0D885 /* VynkLifecycleMacros */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkLifecycleMacros;
+		};
+		18AC3C0B300013DF00FFE1ED /* VynkAuthKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkAuthKit;
 		};
 		18B83B6E2FEFFBDF00EC01CE /* VynkCountryPicker */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -737,10 +758,6 @@
 		18E96FF82FF6D1F400477953 /* VynkFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkFoundation;
-		};
-		18F4AA882FEE591D00C6898E /* VynkCameraKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = VynkCameraKit;
 		};
 		18F4B11C2FEE8AA700C6898E /* VynkDatabaseKit */ = {
 			isa = XCSwiftPackageProductDependency;

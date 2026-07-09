@@ -125,6 +125,8 @@ struct CameraView: View {
                         player = .init(url: url)
                         player.play()
                     }
+                    @unknown default:
+                        Text("")
                     }
                 }
                 .sheet(item: $viewModel.mediaActionSheet) { sheet in

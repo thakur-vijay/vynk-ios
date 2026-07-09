@@ -8,7 +8,7 @@
 import ComposableArchitecture
 
 @Reducer
-public struct ListEditorFeature {
+internal struct ListEditorFeature {
     @Dependency(\.chatListsClient)
     private var client
     
@@ -16,7 +16,7 @@ public struct ListEditorFeature {
     private var dismiss
     
     @ObservableState
-    public struct State: Equatable {
+    struct State: Equatable {
 
         public let mode: ListEditorMode
 
@@ -27,18 +27,18 @@ public struct ListEditorFeature {
         }
     }
     
-    public enum Action: BindableAction{
+    enum Action: BindableAction{
         case binding(BindingAction<State>)
         case saveButtonTapped
         case saveCompleted
         case closeButtonTapped
     }
     
-    public init(){
+    init(){
         
     }
     
-    public var body: some ReducerOf<Self>{
+    var body: some ReducerOf<Self>{
         BindingReducer()
         Reduce { state, action in
             switch action {

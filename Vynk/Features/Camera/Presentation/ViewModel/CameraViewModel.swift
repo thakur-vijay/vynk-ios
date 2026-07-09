@@ -110,6 +110,8 @@ final class CameraViewModel {
 
             await toggleRecording()
         case .scanner: break
+        @unknown default:
+            break
         }
 
     }
@@ -194,38 +196,40 @@ final class CameraViewModel {
             selectedFlashMode = .on
         case .on:
             selectedFlashMode = .off
+        @unknown default:
+            break
         }
     }
     
     func beginZoomGesture() {
 
-        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
+//        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
 
         zoomTask?.cancel()
 
     }
 
     func updateZoomGesture(scale: CGFloat) {
-        
-        let targetZoom = min(
-            CameraConstants.maximumZoomFactor,
-            max(
-                CameraConstants.minimumZoomFactor,
-                zoomGestureBase * scale
-            )
-        )
-        
-        zoomTask?.cancel()
-
-        zoomTask = Task { [weak self] in
-
-            guard let self else { return }
-
-            try? await Task.sleep(for: .milliseconds(16))
-
-            await self.setZoomFactor(targetZoom)
-
-        }
+//        
+//        let targetZoom = min(
+//            CameraConstants.maximumZoomFactor,
+//            max(
+//                CameraConstants.minimumZoomFactor,
+//                zoomGestureBase * scale
+//            )
+//        )
+//        
+//        zoomTask?.cancel()
+//
+//        zoomTask = Task { [weak self] in
+//
+//            guard let self else { return }
+//
+//            try? await Task.sleep(for: .milliseconds(16))
+//
+//            await self.setZoomFactor(targetZoom)
+//
+//        }
 
     }
 
@@ -235,7 +239,7 @@ final class CameraViewModel {
 
         zoomTask = nil
         
-        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
+//        zoomGestureBase = max(min(zoomFactor, CameraConstants.maximumZoomFactor), 1)
 
     }
     

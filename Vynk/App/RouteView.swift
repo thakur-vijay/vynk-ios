@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VynkSecurity
+import VynkAuthKit
 
 struct RootView: View {
     private let appDIContainer: AppDIContainer
@@ -22,11 +23,11 @@ struct RootView: View {
         case .splash:
             Text("Splash")
                 .onAppear {
-                    appDIContainer.appRouter.showMain()
+                    appDIContainer.appRouter.showAuth()
                 }
             
         case .auth:
-            appDIContainer.authDIContainer.makeAuthView()
+            appDIContainer.authDIContainer.makeView()
         case .main:
             ZStack {
                 MainTabView()

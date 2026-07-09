@@ -74,6 +74,8 @@ struct ProfileQRCodeView: View {
                                 router.presentSheet(.addToContacts)
                             }
                         }
+                    @unknown default:
+                        break
                     }
                 }
                 .sheet(item: $router.activeSheet) { sheet in

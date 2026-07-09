@@ -8,27 +8,27 @@
 import ComposableArchitecture
 
 @Reducer
-public struct ListsFeature{
+internal struct ListsFeature{
     
     @Dependency(\.chatListsClient)
     private var chatListsClient
     
     @ObservableState
-    public struct State: Equatable {
-        public var lists: [ChatListRowModel] = []
-        public var availablePresets: [ChatListRowModel] = []
-        public var isCustomListsEmpty: Bool {
+    struct State: Equatable {
+        var lists: [ChatListRowModel] = []
+        var availablePresets: [ChatListRowModel] = []
+        var isCustomListsEmpty: Bool {
             lists.first { $0.kind == .custom } == nil
         }
-        public init() {
+        init() {
             
         }
         
         @Presents
-        public var destination: Destination.State?
+        var destination: Destination.State?
     }
     
-    public enum Action {
+    enum Action {
         case onTask
         case onDisappear
         case visibleListsResponse([ChatList])
@@ -39,7 +39,7 @@ public struct ListsFeature{
         case reorderButtonTapped
     }
     
-    public init(){
+    init(){
         
     }
     
@@ -47,7 +47,7 @@ public struct ListsFeature{
         case observations
     }
     
-    public var body: some ReducerOf<Self> {
+    var body: some ReducerOf<Self> {
         Reduce { state, action in
             let client = chatListsClient
             switch action {

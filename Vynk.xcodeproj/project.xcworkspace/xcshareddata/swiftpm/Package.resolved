@@ -1,5 +1,5 @@
 {
-  "originHash" : "bc908ecab96ef0b14837c89259342cb69e469c63dc66f9281d25a9910505a16d",
+  "originHash" : "a2e6272b22706a6b0e7ab6536e9748aaf50efbc14d13817ef8a42bea6d2a9b6b",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/GRDB.swift",
       "state" : {
-        "revision" : "9ed8c8457e00ff9c7aedb3bf213f20a2cfdf509e",
-        "version" : "7.11.0"
+        "revision" : "b83108d10f42680d78f23fe4d4d80fc88dab3212",
+        "version" : "7.11.1"
       }
     },
     {
@@ -130,10 +130,19 @@
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax",
       "state" : {
         "revision" : "b90056de69eed23b3fb39ab69cf1780071dfb664",
         "version" : "604.0.0-prerelease-2026-06-05"
+      }
+    },
+    {
+      "identity" : "vynkcamerakit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/thakur-vijay/VynkCameraKit.git",
+      "state" : {
+        "revision" : "962e2b1a148d24c0430e8232f94585687734b181",
+        "version" : "1.1.4"
       }
     },
     {
@@ -141,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "401bf70d95bfe8db2a1dc619f9e175a85c089321",
-        "version" : "1.10.1"
+        "revision" : "8f6abcf4c8950e2679d5b2fee4ca284fd7c34886",
+        "version" : "1.11.0"
       }
     }
   ],
