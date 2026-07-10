@@ -1,5 +1,5 @@
 {
-  "originHash" : "a2e6272b22706a6b0e7ab6536e9748aaf50efbc14d13817ef8a42bea6d2a9b6b",
+  "originHash" : "3aa5ece66825e7cdb74e428f2a397226cdda94d27dfa37c7811d7d42b95b1c64",
   "pins" : [
     {
       "identity" : "combine-schedulers",
@@ -141,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/thakur-vijay/VynkCameraKit.git",
       "state" : {
-        "revision" : "962e2b1a148d24c0430e8232f94585687734b181",
-        "version" : "1.1.4"
+        "revision" : "be37deb4907a94e5ddabc8133fa70fa634125913",
+        "version" : "1.1.5"
       }
     },
     {
