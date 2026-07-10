@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class LocalCountryDataSource {
+final class LocalCountryDataSource: Sendable{
 
     func fetchCountries() throws -> [CountryModel] {
         guard let url = Bundle.module.url(
@@ -26,6 +26,6 @@ final class LocalCountryDataSource {
     }
 }
 
-private enum CountryPickerError: Error {
+private enum CountryPickerError: Error , Sendable{
     case fileNotFound
 }

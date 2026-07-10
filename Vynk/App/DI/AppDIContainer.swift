@@ -12,6 +12,7 @@ import VynkSecurity
 import VynkChatLists
 import VynkCameraKit
 import VynkAuthKit
+import VynkCountryPicker
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -28,7 +29,7 @@ final class AppDIContainer {
     }()
     
     lazy var authDIContainer: AuthDIContainer = {
-        AuthDIContainer()
+        AuthDIContainer(countryPickerClient: countryPickerDIContainer.makeClient())
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {

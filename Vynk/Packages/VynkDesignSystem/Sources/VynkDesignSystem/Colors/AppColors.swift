@@ -31,4 +31,5 @@ public enum AppColors {
     public static let secondarySurface = Color(.secondarySurface)
     public static let red = Color.red
     public static let black = Color.black
+    public static let gray = Color.gray
 }

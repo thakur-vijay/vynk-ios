@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class FetchCountriesUseCase {
+final class FetchCountriesUseCase: Sendable{
 
     private let repository: CountryRepository
 

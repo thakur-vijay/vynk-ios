@@ -8,7 +8,7 @@
 import Foundation
 
 @available(iOS 16, *)
-final class GetCurrentCountryUseCase {
+final class FetchCurrentCountryUseCase: Sendable{
 
     private let repository: CountryRepository
 

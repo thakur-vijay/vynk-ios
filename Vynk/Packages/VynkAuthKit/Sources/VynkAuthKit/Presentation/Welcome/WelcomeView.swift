@@ -13,6 +13,7 @@ struct WelcomeView: View {
     @Bindable var store: StoreOf<WelcomeFeature>
     init(store: StoreOf<WelcomeFeature>) {
         self.store = store
+        print("Welcome store created")
     }
     
     var body: some View {
@@ -57,14 +58,11 @@ Read our Privacy Policies. Tap "Agree and continue" to accept our Terms of Servi
             }
             .padding(AppSpacing.xxl)
         } destination: { store in
-            switch store.state {
-            case .phoneNumber:
-                if let store = store.scope(
-                    state: \.phoneNumber,
-                    action: \.phoneNumber
-                ) {
-                    PhoneNumberView(store: store)
-                }
+            switch store.case {
+            case .phoneNumber(let store):
+                PhoneNumberView(store: store)
+            case .verifyOPT(let store):
+                VerifyOTPView(store: store)
             }
         }
     }

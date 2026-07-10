@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultCountryRepository: CountryRepository {
+final class DefaultCountryRepository: CountryRepository, Sendable{
 
     private let dataSource: LocalCountryDataSource
 

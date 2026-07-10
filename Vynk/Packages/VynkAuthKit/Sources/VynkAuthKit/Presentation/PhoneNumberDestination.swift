@@ -8,18 +8,18 @@
 
 import Foundation
 import ComposableArchitecture
+import VynkCountryPicker
 
 @Reducer
-internal struct Destination {
+internal struct PhoneNumberDestination {
 
     @ObservableState
     enum State: Equatable {
-        case phoneNumber(PhoneNumberFeature.State)
         case countryPicker(CountryPickerFeature.State)
     }
 
     enum Action {
-        case phoneNumber(PhoneNumberFeature.Action)
+        case countryPicker(CountryPickerFeature.Action)
     }
 
     init() {}
@@ -29,8 +29,8 @@ internal struct Destination {
         Reduce { state, action in
             .none
         }
-        .ifCaseLet(\.phoneNumber, action: \.phoneNumber) {
-            PhoneNumberFeature()
+        .ifCaseLet(\.countryPicker, action: \.countryPicker) {
+            CountryPickerFeature()
         }
     }
 }

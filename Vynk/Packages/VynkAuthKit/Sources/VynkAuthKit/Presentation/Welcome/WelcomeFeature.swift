@@ -11,10 +11,7 @@ import ComposableArchitecture
 struct WelcomeFeature {
     
     @ObservableState
-    struct State: Equatable {
-        @Presents
-        var destination: Destination.State?
-        
+    struct State: Equatable{
         var path = StackState<Path.State>()
         init(){
             
@@ -24,28 +21,47 @@ struct WelcomeFeature {
     enum Action {
         case continueButtonTapped
         case linkTapped(String)
-        case path(StackAction<Path.State, Path.Action>)
+        case path(StackActionOf<Path>)
     }
     
     init() {
         
     }
     
+    @Reducer
+    enum Path {
+        case phoneNumber(PhoneNumberFeature)
+        case verifyOPT(VerifyOTPFeature)
+    }
+    
     var body: some ReducerOf<Self> {
-        Reduce { state, action in
+        Reduce {
+            state,
+            action in
             switch action {
             case .continueButtonTapped:
                 state.path.append(.phoneNumber(PhoneNumberFeature.State()))
+                print(state.path)
                 return .none
+                
             case .linkTapped(let link):
                 print(link)
                 return .none
-            case .path(_):
+            case .path(.element(_, action: .phoneNumber(.delegate(.continueWithPhone(let country, let phoneNumber))))):
+                state.path.append(
+                    .verifyOPT(
+                        VerifyOTPFeature.State(
+                            country: country,
+                            phoneNumber: phoneNumber,
+                        )
+                    )
+                )
                 return .none
+            case .path: return .none
             }
         }
-        .forEach(\.path, action: \.path) {
-            Path()
-        }
+        .forEach(\.path, action: \.path)
     }
 }
+
+extension WelcomeFeature.Path.State: Equatable {}

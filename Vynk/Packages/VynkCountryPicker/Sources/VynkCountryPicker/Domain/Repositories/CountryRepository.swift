@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CountryRepository {
+protocol CountryRepository: Sendable{
     func fetchCountries() throws -> [CountryModel]
 }
