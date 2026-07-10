@@ -15,6 +15,7 @@ internal struct Destination {
     @ObservableState
     enum State: Equatable {
         case phoneNumber(PhoneNumberFeature.State)
+        case countryPicker(CountryPickerFeature.State)
     }
 
     enum Action {

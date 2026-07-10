@@ -18,11 +18,11 @@ struct ContactPermissionText: View {
                         link: "/settings"
                     )
                 ],
-                linkColor: AppColors.accentSoft
+                linkColor: AppColors.accentSoft,
+                font: AppFont.body
             )) { _ in
                 AppSettings.open()
             }
-            .font(AppFont.body)
             .fillWidth()
             .clearListRowStyle()
     }

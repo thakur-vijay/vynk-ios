@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "VynkAuthKit",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v18)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -16,7 +16,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0")
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
+        .package(path: "../VynkDesignSystem")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -24,13 +25,19 @@ let package = Package(
         .target(
             name: "VynkAuthKit",
             dependencies: [
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
         ),
-
+        .testTarget(
+            name: "VynkAuthKitTests",
+            dependencies: [
+                "VynkAuthKit"
+            ]
+        )
     ],
     swiftLanguageModes: [.v6]
 )

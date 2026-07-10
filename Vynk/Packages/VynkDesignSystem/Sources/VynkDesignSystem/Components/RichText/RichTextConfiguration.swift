@@ -14,14 +14,22 @@ public struct RichTextConfiguration {
     public let links: [RichTextLink]
 
     public let linkColor: Color
+    
+    public let font: Font
+    
+    public let linkFont: Font
 
     public init(
         text: String,
         links: [RichTextLink],
-        linkColor: Color
+        linkColor: Color,
+        font: Font,
+        linkFont: Font? = nil
     ) {
         self.text = text
         self.links = links
         self.linkColor = linkColor
+        self.font = font
+        self.linkFont = linkFont ?? font
     }
 }

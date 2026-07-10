@@ -26,27 +26,27 @@ public final class ListsDIContainer: @MainActor ChatListsRouting{
         DefaultChatListRepository(dataSource: dataSource)
     }()
     
-    lazy var saveChatListUseCase: SaveChatListUseCase = {
+    private lazy var saveChatListUseCase: SaveChatListUseCase = {
         SaveChatListUseCase(repository: repository)
     }()
     
-    lazy var observeVisibleListsUseCase: ObserveVisibleListsUseCase = {
+    private lazy var observeVisibleListsUseCase: ObserveVisibleListsUseCase = {
         ObserveVisibleListsUseCase(repository: repository)
     }()
     
-    lazy var observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase = {
+    private lazy var observeAvailablePresetsUseCase: ObserveAvailablePresetsUseCase = {
         ObserveAvailablePresetsUseCase(repository: repository)
     }()
     
-    lazy var deleteChatListUseCase: DeleteChatListUseCase = {
+    private lazy var deleteChatListUseCase: DeleteChatListUseCase = {
         DeleteChatListUseCase(repository: repository)
     }()
     
-    lazy var restorePresetUseCase: RestorePresetListUseCase = {
+    private lazy var restorePresetUseCase: RestorePresetListUseCase = {
         RestorePresetListUseCase(repository: repository)
     }()
     
-    lazy var reorderChatListsUseCase: ReorderChatListsUseCase = {
+    private lazy var reorderChatListsUseCase: ReorderChatListsUseCase = {
         ReorderChatListsUseCase(repository: repository)
     }()
     
@@ -57,8 +57,6 @@ public final class ListsDIContainer: @MainActor ChatListsRouting{
     public func makeDeleteListsUseCase() -> DeleteChatListUseCase {
         deleteChatListUseCase
     }
-    
-    
     
     @MainActor public func makeListsView() -> AnyView {
         let client = ChatListsClient.live(

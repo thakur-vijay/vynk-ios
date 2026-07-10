@@ -42,6 +42,7 @@ public struct AppButton: View {
             .padding(.vertical, AppSpacing.lg)
             .background(background, in: .capsule)
         }
+        .buttonStyle(.plain)
         .glassEffect(.capsule)
     }
 }

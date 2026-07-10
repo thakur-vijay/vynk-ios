@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import VynkDesignSystem
 
 struct WelcomeView: View {
     @Bindable var store: StoreOf<WelcomeFeature>
@@ -16,9 +17,45 @@ struct WelcomeView: View {
     
     var body: some View {
         NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
-            Button("Continue"){
-                store.send(.continueButtonTapped)
+            VStack(spacing: AppSpacing.xl){
+                Text("Welcome to Vynk")
+                    .font(AppFont.title1.bold())
+                
+                RichTextView(
+                    configuration: .init(
+                        text: """
+Read our Privacy Policies. Tap "Agree and continue" to accept our Terms of Service.
+""",
+                        links: [
+                            .init(
+                                text: "Privacy Policies",
+                                link: "/privacyPolicy"
+                            ),
+                            .init(
+                                text: "Terms of Service",
+                                link: "/termsOfService"
+                            )
+                        ],
+                        linkColor: AppColors.accentEmphasized,
+                        font: AppFont.caption,
+                        linkFont: AppFont.captionMedium
+                    )
+                ) { clickedLink in
+                    store.send(.linkTapped(clickedLink))
+                }
+                .multilineTextAlignment(.center)
+                .foregroundStyle(
+                    AppColors.contentDeemphasized
+                )
+                AppButton(
+                    text: "Agree and continue",
+                    foreground: AppColors.white,
+                    background: AppColors.accent
+                ) {
+                    store.send(.continueButtonTapped)
+                }
             }
+            .padding(AppSpacing.xxl)
         } destination: { store in
             switch store.state {
             case .phoneNumber:
@@ -26,7 +63,7 @@ struct WelcomeView: View {
                     state: \.phoneNumber,
                     action: \.phoneNumber
                 ) {
-                    Text("Test View")
+                    PhoneNumberView(store: store)
                 }
             }
         }

@@ -12,6 +12,8 @@ struct PhoneNumberFeature {
     
     @ObservableState
     struct State: Equatable {
+        @Presents
+        var destination: Destination.State?
         
         init() {
             

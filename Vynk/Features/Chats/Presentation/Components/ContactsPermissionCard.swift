@@ -27,11 +27,12 @@ struct ContactsPermissionCard: View {
                                 link: "/settings"
                             )
                         ],
-                        linkColor: AppColors.accentSoft
+                        linkColor: AppColors.accentSoft,
+                        font: AppFont.body
+
                     )) { _ in
                         
                     }
-                    .font(AppFont.body)
             }
             .fillWidth(.leading)
             

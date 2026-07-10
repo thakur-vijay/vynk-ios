@@ -23,6 +23,7 @@ struct WelcomeFeature {
     
     enum Action {
         case continueButtonTapped
+        case linkTapped(String)
         case path(StackAction<Path.State, Path.Action>)
     }
     
@@ -35,6 +36,9 @@ struct WelcomeFeature {
             switch action {
             case .continueButtonTapped:
                 state.path.append(.phoneNumber(PhoneNumberFeature.State()))
+                return .none
+            case .linkTapped(let link):
+                print(link)
                 return .none
             case .path(_):
                 return .none

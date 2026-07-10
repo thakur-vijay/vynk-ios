@@ -38,7 +38,8 @@ struct UserQRCardView: View {
                             link: "/learnMore"
                         )
                     ],
-                    linkColor: AppColors.accentSoft
+                    linkColor: AppColors.accentSoft,
+                    font: AppFont.caption
                 )) { _ in
                     
                 }

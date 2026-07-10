@@ -19,6 +19,7 @@ public struct RichTextView: View {
     
     public var body: some View {
         Text(attributedText)
+            .font(configuration.font)
             .environment(\.openURL, OpenURLAction { url in
                 action(url.absoluteString)
                 return .handled
@@ -40,7 +41,7 @@ public struct RichTextView: View {
             }
 
             attributedString[range].link = url
-            attributedString[range].font = AppFont.bodyMedium
+            attributedString[range].font = configuration.linkFont
             attributedString[range].foregroundColor = configuration.linkColor
             attributedString[range].underlineStyle = .none
         }
