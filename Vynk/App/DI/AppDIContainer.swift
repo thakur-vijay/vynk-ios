@@ -13,6 +13,7 @@ import VynkChatLists
 import VynkCameraKit
 import VynkAuthKit
 import VynkCountryPicker
+import VynkRootKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -24,12 +25,18 @@ final class AppDIContainer {
 //        URLSessionAPIClient(configuration: NetworkConfiguration(baseURL: configuration.baseURL))
 //    }()
     
-    lazy var databaseInfraDIContainer: DatabaseInfraDIContainer = {
-        DatabaseInfraDIContainer()
+    lazy var rootDIContainer: RootDIContainer = {
+        RootDIContainer(countryDIContainer: countryPickerDIContainer)
     }()
     
-    lazy var authDIContainer: AuthDIContainer = {
-        AuthDIContainer(countryPickerClient: countryPickerDIContainer.makeClient())
+    lazy var countryPickerDIContainer: CountryPickerDIContainer = {
+        CountryPickerDIContainer()
+    }()
+    
+    
+    
+    lazy var databaseInfraDIContainer: DatabaseInfraDIContainer = {
+        DatabaseInfraDIContainer()
     }()
     
     lazy var contactsDIContainer: ContactsDIContainer = {
@@ -62,10 +69,7 @@ final class AppDIContainer {
         )
     }()
     
-    lazy var countryPickerDIContainer: CountryPickerDIContainer = {
-        CountryPickerDIContainer()
-    }()
-    
+   
     lazy var addContactDIContainer: AddContactDIContainer = {
         AddContactDIContainer(
             countryPickerDIContainer: countryPickerDIContainer,

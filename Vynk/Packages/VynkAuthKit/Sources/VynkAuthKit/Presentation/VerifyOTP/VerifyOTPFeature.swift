@@ -9,32 +9,41 @@ import ComposableArchitecture
 import VynkCountryPicker
 
 @Reducer
-struct VerifyOTPFeature {
+public struct VerifyOTPFeature {
     
     @ObservableState
-    struct State: Equatable{
-        var country: CountryModel?
-        var phoneNumber: String
-        var otp: String = ""
+    public struct State: Equatable{
+        public var country: CountryModel?
+        public var phoneNumber: String
+        public var otp: String = ""
         
-        init(country: CountryModel? = nil, phoneNumber: String) {
+        public init(country: CountryModel? = nil, phoneNumber: String) {
             self.country = country
             self.phoneNumber = phoneNumber
         }
     }
     
-    enum Action: BindableAction{
+    public enum Action: BindableAction{
         case binding(BindingAction<State>)
         case didNotReceiveCodeTapped
+        case delegate(Delegate)
+
+        public enum Delegate: Equatable {
+            case loginSucceeded
+        }
     }
     
-    var body: some ReducerOf<Self> {
+    public init(){
+        
+    }
+    
+    public var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             switch action {
             case .binding: return .none
             case .didNotReceiveCodeTapped: return .none
-                
+            case .delegate: return .none
             }
         }
     }

@@ -10,28 +10,28 @@ import VynkCountryPicker
 import VynkFoundation
 
 @Reducer
-struct PhoneNumberFeature {
+public struct PhoneNumberFeature {
     
     @Dependency(\.countryPickerClient)
     private var countryClient
     
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
 
-        var selectedCountry: CountryModel?
-        var phoneNumber: String = ""
+        public var selectedCountry: CountryModel?
+        public var phoneNumber: String = ""
 
         @Presents
-        var destination: PhoneNumberDestination.State?
+        public var destination: PhoneNumberDestination.State?
 
-        init(
+        public init(
             selectedCountry: CountryModel? = nil
         ) {
             self.selectedCountry = selectedCountry
         }
     }
     
-    enum Action: BindableAction{
+    public enum Action: BindableAction{
         case binding(BindingAction<State>)
         case onTask
         case currentCountryLoaded(CountryModel?)
@@ -40,7 +40,7 @@ struct PhoneNumberFeature {
         case nextButtonTapped
         case delegate(Delegate)
 
-        enum Delegate {
+        public enum Delegate {
             case continueWithPhone(
                 country: CountryModel,
                 phoneNumber: String
@@ -52,7 +52,7 @@ struct PhoneNumberFeature {
         
     }
     
-    var body: some ReducerOf<Self> {
+    public  var body: some ReducerOf<Self> {
         BindingReducer()
         Reduce { state, action in
             let client = countryClient

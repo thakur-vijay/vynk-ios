@@ -34,6 +34,11 @@ struct VerifyOTPView: View {
                 subtitleView("Enter the 6-digit code we sent to Vynk on your other phone.")
                 
                 OTPTextField(value: $store.otp)
+                    .onChange(of: store.otp) { _, newValue in
+                        if newValue.count == 6 {
+                            store.send(.delegate(.loginSucceeded))
+                        }
+                    }
                 
                 Button("Didn't receive a verification code?") {
                     

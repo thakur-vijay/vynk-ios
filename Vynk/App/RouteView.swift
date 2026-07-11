@@ -4,63 +4,58 @@
 //
 //  Created by Vijay Thakur on 11/05/26.
 //
+//
+//import SwiftUI
+//import VynkSecurity
+//import VynkAuthKit
 
-import SwiftUI
-import VynkSecurity
-import VynkAuthKit
-
-struct RootView: View {
-    private let appDIContainer: AppDIContainer
-    init(appDIContainer: AppDIContainer) {
-        self.appDIContainer = appDIContainer
-    }
-    
-    @Environment(\.scenePhase)
-    private var scenePhase
-    
-    var body: some View {
-        switch appDIContainer.appRouter.root {
-        case .splash:
-            Text("Splash")
-                .onAppear {
-                    appDIContainer.appRouter.showAuth()
-                }
-            
-        case .auth:
-            appDIContainer.authDIContainer.makeView()
-        case .main:
-            ZStack {
-                MainTabView()
-                
-                if appDIContainer.appLockManager.shouldShowLockScreen {
-                    appDIContainer.appLockDIContainer.makeView()
-                }
-            }
-            .environment(appDIContainer.appLockManager)
-            .onChange(of: scenePhase) { oldValue, newValue in
-                handleScenePhase(newValue)
-            }
-        }
-    }
-}
-
-private extension RootView {
-
-    func handleScenePhase(_ phase: ScenePhase) {
-
-        switch phase {
-
-        case .background:
-            appDIContainer.appLockManager.didEnterBackground()
-
-        case .active:
-            appDIContainer.appLockManager.didBecomeActive()
-
-        case .inactive:
-            appDIContainer.appLockManager.didEnterBackground()
-
-        @unknown default:
-            break
-        }
-    }
-}
+//
+//struct RootView: View {
+//    private let appDIContainer: AppDIContainer
+//    init(appDIContainer: AppDIContainer) {
+//        self.appDIContainer = appDIContainer
+//    }
+//    
+//    @Environment(\.scenePhase)
+//    private var scenePhase
+//    
+//    var body: some View {
+//        switch appDIContainer.appRouter.root {
+//        case .auth:
+//            appDIContainer.authDIContainer.makeView()
+//        case .main:
+//            ZStack {
+//                MainTabView()
+//                
+//                if appDIContainer.appLockManager.shouldShowLockScreen {
+//                    appDIContainer.appLockDIContainer.makeView()
+//                }
+//            }
+//            .environment(appDIContainer.appLockManager)
+//            .onChange(of: scenePhase) { oldValue, newValue in
+//                handleScenePhase(newValue)
+//            }
+//        }
+//    }
+//}
+//
+//private extension RootView {
+//
+//    func handleScenePhase(_ phase: ScenePhase) {
+//
+//        switch phase {
+//
+//        case .background:
+//            appDIContainer.appLockManager.didEnterBackground()
+//
+//        case .active:
+//            appDIContainer.appLockManager.didBecomeActive()
+//
+//        case .inactive:
+//            appDIContainer.appLockManager.didEnterBackground()
+//
+//        @unknown default:
+//            break
+//        }
+//    }
+//}

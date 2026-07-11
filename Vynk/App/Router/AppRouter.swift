@@ -26,12 +26,11 @@ final class AppRouter: ChatNavigator{
     }
     
     enum Root {
-        case splash
         case auth
         case main
     }
     
-    var root: Root = .splash
+    var root: Root = .auth
     var activeTab: AnimatedTab = .chats
     
     func showAuth(){

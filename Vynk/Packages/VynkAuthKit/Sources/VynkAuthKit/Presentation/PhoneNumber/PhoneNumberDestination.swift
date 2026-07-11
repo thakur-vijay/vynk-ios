@@ -11,20 +11,20 @@ import ComposableArchitecture
 import VynkCountryPicker
 
 @Reducer
-internal struct PhoneNumberDestination {
+public struct PhoneNumberDestination {
 
     @ObservableState
-    enum State: Equatable {
+    public enum State: Equatable {
         case countryPicker(CountryPickerFeature.State)
     }
 
-    enum Action {
+    public enum Action {
         case countryPicker(CountryPickerFeature.Action)
     }
 
     init() {}
 
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
 
         Reduce { state, action in
             .none

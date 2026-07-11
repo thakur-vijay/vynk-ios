@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import VynkRootKit
 
 @main
 struct VynkApp: App {
     @State private var appDIContainer = AppDIContainer()
     var body: some Scene {
         WindowGroup {
-            RootView(appDIContainer: appDIContainer)
+            appDIContainer.rootDIContainer.makeView()
                 .environment(\.appDIContainer, appDIContainer)
         }
     }
