@@ -36,7 +36,7 @@ struct VerifyOTPView: View {
                 OTPTextField(value: $store.otp)
                     .onChange(of: store.otp) { _, newValue in
                         if newValue.count == 6 {
-                            store.send(.delegate(.loginSucceeded))
+                            store.send(.otpCompleted)
                         }
                     }
                 

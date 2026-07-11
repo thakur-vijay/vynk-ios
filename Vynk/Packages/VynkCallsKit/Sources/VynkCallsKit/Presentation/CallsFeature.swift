@@ -12,19 +12,22 @@ public struct CallsFeature {
     
     @ObservableState
     public struct State: Equatable {
-        
+        public var search: String = ""
         public init(){}
     }
     
-    public enum Action {
-        
+    public enum Action: BindableAction {
+        case binding(BindingAction<State>)
     }
     
     public init(){}
     
     public var body: some ReducerOf<Self> {
+        BindingReducer()
         Reduce { state, action in
-            return .none
+            switch action {
+            case .binding: return .none
+            }
         }
     }
 }

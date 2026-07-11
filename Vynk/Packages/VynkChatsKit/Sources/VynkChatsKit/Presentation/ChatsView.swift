@@ -16,6 +16,20 @@ public struct ChatsView: View {
     }
     
     public var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVStack {
+                ForEach(0..<1000, id: \.self) { i in
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                }
+            }
+        }
+        .task {
+            store.send(.allocateMemory)
+        }
+        .onDisappear {
+            store.send(.releaseMemory)
+        }
     }
 }

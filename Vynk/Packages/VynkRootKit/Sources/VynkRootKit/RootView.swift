@@ -14,10 +14,15 @@ struct RootView: View {
 
     let store: StoreOf<RootFeature>
     var body: some View {
-        if let store = store.scope(\.auth, action: \.auth){
-            AuthView(store: store)
-        }else if let store = store.scope(\.main, action: \.main){
-            MainView(store: store)
+        switch store.state {
+        case .auth:
+            if let store = store.scope(\.auth, action: \.auth) {
+                AuthView(store: store)
+            }
+        case .main:
+            if let store = store.scope(\.main, action: \.main) {
+                MainView(store: store)
+            }
         }
     }
 }

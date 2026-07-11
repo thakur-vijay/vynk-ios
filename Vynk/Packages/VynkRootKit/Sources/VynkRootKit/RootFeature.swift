@@ -13,14 +13,9 @@ import VynkMainKit
 public struct RootFeature {
 
     @ObservableState
-    public struct State: Equatable {
-        public var auth: AuthFeature.State?
-        public var main: MainFeature.State?
-
-        public init() {
-            auth = AuthFeature.State()
-            main = nil
-        }
+    public enum State: Equatable {
+        case auth(AuthFeature.State)
+        case main(MainFeature.State)
     }
 
     public enum Action {
@@ -33,15 +28,12 @@ public struct RootFeature {
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-
             case .auth(.delegate(.loginSucceeded)):
-                state.auth = nil
-                state.main = MainFeature.State()
+                state = .main(MainFeature.State())
                 return .none
 
             case .main(.delegate(.logoutSucceeded)):
-                state.main = nil
-                state.auth = AuthFeature.State()
+                state = .auth(AuthFeature.State())
                 return .none
 
             case .auth:
@@ -51,10 +43,10 @@ public struct RootFeature {
                 return .none
             }
         }
-        .ifLet(\.auth, action: \.auth){
+        .ifCaseLet(\.auth, action: \.auth) {
             AuthFeature()
         }
-        .ifLet(\.main, action: \.main){
+        .ifCaseLet(\.main, action: \.main) {
             MainFeature()
         }
     }

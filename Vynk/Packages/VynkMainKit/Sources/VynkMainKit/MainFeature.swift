@@ -74,9 +74,21 @@ public struct MainFeature {
         
         Reduce { state, action in
             switch action {
-            case .binding(_):
+
+            case .settings(.logoutTapped):
+                return .send(.delegate(.logoutSucceeded))
+
+            case .binding:
                 return .none
-            case .delegate(_):
+
+            case .delegate:
+                return .none
+
+            case .updates,
+                 .calls,
+                 .communities,
+                 .chats,
+                 .settings:
                 return .none
             }
         }

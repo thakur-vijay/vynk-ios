@@ -26,6 +26,7 @@ public struct VerifyOTPFeature {
     public enum Action: BindableAction{
         case binding(BindingAction<State>)
         case didNotReceiveCodeTapped
+        case otpCompleted
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
@@ -43,6 +44,10 @@ public struct VerifyOTPFeature {
             switch action {
             case .binding: return .none
             case .didNotReceiveCodeTapped: return .none
+            case .otpCompleted: return .run { send in
+                await Task.yield()
+                await send(.delegate(.loginSucceeded))
+            }
             case .delegate: return .none
             }
         }

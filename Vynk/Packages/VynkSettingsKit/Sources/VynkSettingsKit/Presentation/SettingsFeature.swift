@@ -19,7 +19,7 @@ public struct SettingsFeature {
     }
     
     public enum Action {
-        
+        case logoutTapped
     }
     
     public init(){
@@ -28,7 +28,9 @@ public struct SettingsFeature {
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
-            return .none
+            switch action {
+            case .logoutTapped: return .none
+            }
         }
     }
 }
