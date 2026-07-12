@@ -11,12 +11,8 @@ import ComposableArchitecture
 public final class CountryPickerDIContainer {
 
     public init() {}
-    
-    public func makeClient()->CountryPickerClient {
-        client
-    }
 
-    private lazy var client: CountryPickerClient = {
+    public lazy var client: CountryPickerClient = {
         let dataSource = LocalCountryDataSource()
         let repository = DefaultCountryRepository(dataSource: dataSource)
         let fetchCountriesUseCase = FetchCountriesUseCase(repository: repository)

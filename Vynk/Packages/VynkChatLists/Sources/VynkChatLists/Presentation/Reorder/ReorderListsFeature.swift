@@ -20,11 +20,11 @@ internal struct ReorderListsFeature {
 
     @ObservableState
     struct State: Equatable {
-        public var lists: [ChatListRowModel] = []
-        public var availablePresets: [ChatListRowModel] = []
+        public var lists: [ChatList] = []
+        public var availablePresets: [ChatList] = []
         @Presents
         public var alert: AlertState<Action.Alert>?
-        public var deletingList: ChatListRowModel?
+        public var deletingList: ChatList?
 
         public init() {}
     }
@@ -42,7 +42,7 @@ internal struct ReorderListsFeature {
 
         case closeButtonTapped
         
-        case deleteButtonTapped(ChatListRowModel)
+        case deleteButtonTapped(String)
         case alert(PresentationAction<Alert>)
         
         public enum Alert: Equatable, Sendable {
@@ -81,10 +81,10 @@ internal struct ReorderListsFeature {
                     .cancel(id: CancelID.availablePresets)
                 )
             case .visibleListsResponse(let lists):
-                state.lists = lists.map(ChatListRowModel.init)
+                state.lists = lists
                 return .none
             case .availablePresetsResponse(let presets):
-                state.availablePresets = presets.map(ChatListRowModel.init)
+                state.availablePresets = presets
                 return .none
             case let .move(source, destination):
 
@@ -102,8 +102,11 @@ internal struct ReorderListsFeature {
                 return .run { _ in
                     try await client.restorePreset(id)
                 }
-            case let .deleteButtonTapped(model):
-                state.deletingList = model
+            case let .deleteButtonTapped(id):
+                guard let list = state.lists.first(where: { $0.id == id}) else {
+                    return .none
+                }
+                state.deletingList = list
 
                 state.alert = .deleteConfirmation
 

@@ -31,7 +31,7 @@ final class AppRouter: ChatNavigator{
     }
     
     var root: Root = .auth
-    var activeTab: AnimatedTab = .chats
+//    var activeTab: AnimatedTab = .chats
     
     func showAuth(){
         root = .auth
@@ -41,10 +41,10 @@ final class AppRouter: ChatNavigator{
         root = .main
     }
     
-    func selectTab(_ tab: AnimatedTab) {
-        activeTab = tab
-        
-    }
+//    func selectTab(_ tab: AnimatedTab) {
+//        activeTab = tab
+//        
+//    }
      
     func openChat()async {
 
@@ -52,7 +52,7 @@ final class AppRouter: ChatNavigator{
         
         await Task.yield()
         
-        activeTab = .chats
+//        activeTab = .chats
         
         await Task.yield()
 

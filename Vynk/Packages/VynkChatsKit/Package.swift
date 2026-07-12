@@ -17,6 +17,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
+        .package(path: "../VynkChatLists"),
+        .package(path: "../VynkDesignSystem"),
+        .package(path: "../VynkImage"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -25,6 +28,9 @@ let package = Package(
             name: "VynkChatsKit",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "VynkChatLists", package: "VynkChatLists"),
+                .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
+                .product(name: "VynkImage", package: "VynkImage"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),

@@ -69,7 +69,8 @@ struct ListsView: View {
                     ReorderListsView(store: store)
                 }
             }
-        }        .task {
+        }
+        .task {
             await store.send(.onTask).finish()
         }
         .onDisappear {

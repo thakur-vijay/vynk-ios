@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ContactsPermissionStatus {
+public enum ContactsPermissionStatus {
     case notDetermined
     case denied
     case restricted

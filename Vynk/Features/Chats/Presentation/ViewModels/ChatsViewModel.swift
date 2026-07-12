@@ -89,11 +89,11 @@ final class ChatsViewModel {
     }
     
     func deleteList(model: ChatListRowModel) async{
-        do {
-            try await deleteChatListUseCase.execute(list: model)
-        }catch {
-            Log.error(error.localizedDescription, String(describing: self))
-
-        }
+//        do {
+//            try await deleteChatListUseCase.execute(list: model)
+//        }catch {
+//            Log.error(error.localizedDescription, String(describing: self))
+//
+//        }
     }
 }

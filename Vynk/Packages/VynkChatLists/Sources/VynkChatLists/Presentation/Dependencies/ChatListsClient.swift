@@ -22,7 +22,7 @@ struct ChatListsClient {
         @Sendable (String) async throws -> Void
 
     var delete:
-        @Sendable (ChatListRowModel) async throws -> Void
+        @Sendable (ChatList) async throws -> Void
 
     var reorder:
         @Sendable ([String]) async throws -> Void

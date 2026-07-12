@@ -20,13 +20,13 @@ struct ReorderListsView: View {
     var body: some View {
         NavigationStack {
             List {
-                EditableListsSection(lists: store.lists) { indexSet, destination in
+                EditableListsSection(lists: store.lists.map { ChatListRowModel($0)}) { indexSet, destination in
                     store.send(.move(indexSet, destination))
                 } onDeleteRequest: { model in
-                    store.send(.deleteButtonTapped(model))
+                    store.send(.deleteButtonTapped(model.id))
                 }
 
-                AvailablePresetsSection(presets: store.availablePresets){ preset in
+                AvailablePresetsSection(presets: store.availablePresets.map { ChatListRowModel($0) }){ preset in
                     store.send(.restorePresetTapped(preset.id))
                 }
             }

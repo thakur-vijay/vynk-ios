@@ -14,7 +14,7 @@ public struct DeleteChatListUseCase: Sendable{
         self.repository = repository
     }
 
-    public func execute(list: ChatListRowModel) async throws {
+    public func execute(list: ChatList) async throws {
         switch list.kind {
         case .favorites:
             return

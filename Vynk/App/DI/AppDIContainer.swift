@@ -14,6 +14,7 @@ import VynkCameraKit
 import VynkAuthKit
 import VynkCountryPicker
 import VynkRootKit
+import VynkChatsKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -26,7 +27,10 @@ final class AppDIContainer {
 //    }()
     
     lazy var rootDIContainer: RootDIContainer = {
-        RootDIContainer(countryDIContainer: countryPickerDIContainer)
+        RootDIContainer(
+            countryDIContainer: countryPickerDIContainer,
+            chatsDIContainer: chatsDIContainer
+        )
     }()
     
     lazy var countryPickerDIContainer: CountryPickerDIContainer = {
@@ -47,15 +51,7 @@ final class AppDIContainer {
     }()
     
     lazy var chatsDIContainer: ChatsDIContainer = {
-        ChatsDIContainer(
-            contactsDIContainer: contactsDIContainer,
-            addContactDIContainer: addContactDIContainer,
-            inviteDIContainer: inviteDIContainer,
-            cameraDIContainer: cameraDIContainer,
-            listsRouting: listsDIContainer,
-            appPreferences: appPreferences,
-            appRouter: appRouter
-        )
+        ChatsDIContainer(chatListsRouting: listsDIContainer)
     }()
     
     lazy var settingsDIContainer: SettingsDIContainer = {
