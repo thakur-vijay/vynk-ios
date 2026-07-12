@@ -1,11 +1,13 @@
 //
 //  MessageBubbleView.swift
-//  Vynk
+//  VynkChatsKit
 //
-//  Created by Vijay Thakur on 24/05/26.
+//  Created by Vijay Thakur on 12/07/26.
 //
 
+
 import SwiftUI
+import VynkDesignSystem
 
 struct MessageBubbleView: View {
     let model: MessageModel
@@ -36,7 +38,7 @@ struct MessageBubbleView: View {
                 if model.isCurrentUser{
                     AppSymbols.doubleTick.image
                         .font(AppFont.footnote)
-                        .foregroundStyle(.contentRead)
+                        .foregroundStyle(AppColors.contentRead)
                 }
             }
         }

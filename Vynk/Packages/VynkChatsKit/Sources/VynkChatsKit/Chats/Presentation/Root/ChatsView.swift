@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import VynkDesignSystem
 import VynkChatLists
+import VynkUserProfileKit
 
 public struct ChatsView: View{
     @Bindable var store: StoreOf<ChatsFeature>
@@ -90,7 +91,12 @@ public struct ChatsView: View{
             .searchable(text: $store.search, isPresented: $store.isSearchPresented, prompt: Text("Ask Meta Al or Search"))
 
         } destination: { store in
-            
+            switch store.case {
+            case .conversation(let store):
+                ConversationView(store: store)
+            case .userProfile(let store):
+                UserProfileView(store: store)
+            }
         }
         .task {
             await store.send(.onTask).finish()

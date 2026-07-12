@@ -79,6 +79,7 @@ public struct MainView: View {
                          action: \.chats
                     )
                 )
+                .toolbarVisibility(store.chats.prefersTabBarHidden ? .hidden : .visible, for: .tabBar)
             }
             Tab.init(
                 AnimatedTab.settings.title,

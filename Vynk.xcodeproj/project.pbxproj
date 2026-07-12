@@ -25,6 +25,7 @@
 		187237583002756000CBC763 /* VynkCallsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 187237573002756000CBC763 /* VynkCallsKit */; };
 		1872375A3002757200CBC763 /* VynkCommunitiesKit in Frameworks */ = {isa = PBXBuildFile; productRef = 187237593002757200CBC763 /* VynkCommunitiesKit */; };
 		1872375D300275A400CBC763 /* VynkSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872375C300275A400CBC763 /* VynkSettingsKit */; };
+		18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */; };
 		18FDB0E63002806200DFC4B6 /* VynkChatsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18FDB0E53002806200DFC4B6 /* VynkChatsKit */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 				Packages/VynkSecurity,
 				Packages/VynkSettingsKit,
 				Packages/VynkUpdatesKit,
+				Packages/VynkUserProfileKit,
 			);
 			target = 188696872FB1AD3200A5BFA7 /* Vynk */;
 		};
@@ -117,6 +119,7 @@
 				1872371730022B2300CBC763 /* VynkLifecycleMacrosClient in Frameworks */,
 				1872371F30022B2300CBC763 /* VynkSecurity in Frameworks */,
 				1872372530022EBE00CBC763 /* VynkCameraKit in Frameworks */,
+				18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */,
 				187237583002756000CBC763 /* VynkCallsKit in Frameworks */,
 				1872371330022B2300CBC763 /* VynkImage in Frameworks */,
 				1872370930022B2300CBC763 /* VynkChatLists in Frameworks */,
@@ -210,6 +213,7 @@
 				187237593002757200CBC763 /* VynkCommunitiesKit */,
 				1872375C300275A400CBC763 /* VynkSettingsKit */,
 				18FDB0E53002806200DFC4B6 /* VynkChatsKit */,
+				18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -796,6 +800,10 @@
 		1872375C300275A400CBC763 /* VynkSettingsKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkSettingsKit;
+		};
+		18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkUserProfileKit;
 		};
 		18FDB0E53002806200DFC4B6 /* VynkChatsKit */ = {
 			isa = XCSwiftPackageProductDependency;

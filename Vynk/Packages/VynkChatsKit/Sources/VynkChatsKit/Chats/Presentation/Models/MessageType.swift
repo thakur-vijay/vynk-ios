@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MessageType: Hashable {
+public enum MessageType: Hashable {
 
     case text
 

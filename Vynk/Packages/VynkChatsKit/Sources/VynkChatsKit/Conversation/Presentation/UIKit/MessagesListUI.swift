@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import VynkDesignSystem
 
 struct MessagesListUI: UIViewRepresentable {
     let sections: [MessageSection]

@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import VynkChatLists
+import VynkUserProfileKit
 
 @Reducer
 public struct ChatsFeature {
@@ -27,6 +28,15 @@ public struct ChatsFeature {
 
         public init(){
             
+        }
+        
+        public var prefersTabBarHidden: Bool {
+            switch path.last {
+            case .conversation?:
+                return true
+            default:
+                return false
+            }
         }
     }
     
@@ -51,6 +61,8 @@ public struct ChatsFeature {
     
     @Reducer
     public enum Path {
+        case conversation(ConversationFeature)
+        case userProfile(UserProfileFeature)
     }
     
     public init(){
@@ -75,8 +87,6 @@ public struct ChatsFeature {
                 .cancellable(id: CancelID.observations)
             case .binding(_):
                 return .none
-            case .path(_):
-                return .none
             case .onDisappear:
                 return .cancel(id: CancelID.observations)
             case .visibleListsResponse(let lists):
@@ -88,9 +98,17 @@ public struct ChatsFeature {
                 return .none
             case .cameraTapped:
                 return .none
-            case .chats(let action):
+            case .chats(.element(_, action: .delegate(.openConversation(let model)))):
+                state.path.append(.conversation(ConversationFeature.State(model: model)))
+                return .none
+            case .chats:
                 return .none
             case .delegate(_):
+                return .none
+            case .path(.element(_, action: .conversation(.delegate(.openUserProfile)))):
+                state.path.append(.userProfile(UserProfileFeature.State()))
+                return .none
+            case .path(_):
                 return .none
             }
         }

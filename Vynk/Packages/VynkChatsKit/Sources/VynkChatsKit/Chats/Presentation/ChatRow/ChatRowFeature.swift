@@ -33,6 +33,14 @@ public struct ChatRowFeature {
         case moreTapped
 
         case contextMenu(ChatContextAction)
+        
+        case delegate(Delegate)
+        
+        public enum Delegate: Equatable {
+            
+            case openConversation(MessageThreadRowModel)
+            
+        }
     }
 
     public init() {}
@@ -42,7 +50,7 @@ public struct ChatRowFeature {
             switch action {
 
             case .tapped:
-                return .none
+                return .send(.delegate(.openConversation(state.model)))
 
             case .markUnreadTapped:
                 return .none
@@ -57,6 +65,8 @@ public struct ChatRowFeature {
                 return .none
 
             case .contextMenu:
+                return .none
+            case .delegate:
                 return .none
             }
         }

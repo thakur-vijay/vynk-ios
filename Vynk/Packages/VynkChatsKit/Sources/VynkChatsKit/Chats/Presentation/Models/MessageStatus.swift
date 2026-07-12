@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MessageStatus: Hashable {
+public enum MessageStatus: Hashable {
 
     case sending
 

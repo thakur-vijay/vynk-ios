@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import VynkDesignSystem
 
 final class MessageListCoordinator: NSObject, UITableViewDelegate, UITableViewDataSource {
   
@@ -147,7 +148,6 @@ private extension MessageListCoordinator {
         let curveRaw = userInfo[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt ?? 7
 
         let options = UIView.AnimationOptions(rawValue: curveRaw << 16)
-        Log.info(wasAtBottom, String(describing: self))
         let inputBarHeight: CGFloat = 30
         let correctedDelta = delta - inputBarHeight
         UIView.animate(

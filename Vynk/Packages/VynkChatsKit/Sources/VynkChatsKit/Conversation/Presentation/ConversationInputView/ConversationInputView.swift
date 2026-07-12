@@ -1,18 +1,25 @@
 //
 //  ChatInputBar.swift
-//  Vynk
+//  VynkChatsKit
 //
-//  Created by Vijay Thakur on 24/05/26.
+//  Created by Vijay Thakur on 12/07/26.
 //
+
 
 import SwiftUI
+import ComposableArchitecture
+import VynkDesignSystem
 
-struct ChatInputBar: View {
-    @Binding var message: String
-    var onSend: ()->()
+struct ConversationInputView: View {
+    @Bindable var store: StoreOf<ConversationInputFeature>
+    
+    init(store: StoreOf<ConversationInputFeature>) {
+        self.store = store
+    }
+    
     var body: some View {
         HStack(alignment: .bottom) {
-            TextField("", text: $message, axis: .vertical)
+            TextField("", text: $store.message, axis: .vertical)
                 .lineLimit(5)
                 .padding(.horizontal, AppSpacing.md)
                 .frame(minHeight: AppButtonSize.md)
@@ -23,8 +30,10 @@ struct ChatInputBar: View {
                         .stroke(AppColors.linesOutlineDeemphasized, lineWidth: 0.7)
                 }
             
-            if message.isNotBlank {
-                Button(action: onSend){
+            if store.message.isNotBlank {
+                Button {
+                    store.send(.sendMessage)
+                } label: {
                     AppSymbols.send.image
                         .frame(width: AppButtonSize.md, height: AppButtonSize.md)
                         .background(AppColors.accent, in: .circle)

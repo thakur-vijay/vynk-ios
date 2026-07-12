@@ -1,15 +1,16 @@
 //
 //  MessageGroupingHelper.swift
-//  Vynk
+//  VynkChatsKit
 //
-//  Created by Vijay Thakur on 25/05/26.
+//  Created by Vijay Thakur on 12/07/26.
 //
+
 
 import Foundation
 
-enum MessageGroupingHelper {
+public enum MessageGroupingHelper {
     
-    static func groupMessagesByDay(
+    public static func groupMessagesByDay(
         _ messages: [MessageModel]
     ) -> [MessageSection] {
         
@@ -31,4 +32,19 @@ enum MessageGroupingHelper {
             }
             .sorted { $0.id < $1.id }
     }
+}
+
+extension Date {
+    var sectionTitle: String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(self) {
+            return "Today"
+        }
+        if calendar.isDateInYesterday(self) {
+            return "Yesterday"
+        }
+        
+        return formatted(.dateTime.weekday(.wide).day().month(.abbreviated))
+    }
+    
 }

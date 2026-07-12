@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct MessageRowModel: Identifiable, Hashable {
-    let id: String
-    let message: MessageModel
-    let isFirstInGroup: Bool
-    let isLastInGroup: Bool
+public struct MessageRowModel: Identifiable, Hashable {
+    public let id: String
+    public let message: MessageModel
+    public let isFirstInGroup: Bool
+    public let isLastInGroup: Bool
 }
 
-struct MockChats {
+public struct MockChats {
     
-    nonisolated(unsafe) static let list: [MessageThreadRowModel] = [
+    public nonisolated(unsafe) static let list: [MessageThreadRowModel] = [
         .init(
             avatarImage: "https://images.pexels.com/photos/13473569/pexels-photo-13473569.jpeg",
             title: "Vijay Thakur",
