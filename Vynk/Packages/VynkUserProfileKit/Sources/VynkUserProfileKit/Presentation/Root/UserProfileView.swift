@@ -30,13 +30,46 @@ public struct UserProfileView: View {
                      action: \.quickActions
                 )
             )
-//            UserProfileHeaderView()
-//            UserQuickActionView()
-//            ForEach(viewModel.sections) { section in
-//                SectionView(section: section) { id, kind in
-//                    
-//                }
-//            }
+            SharedMediaView(
+                store: store.scope(
+                    \.sharedMedia,
+                     action: \.sharedMedia
+                )
+            )
+            ChatCustomizationView(
+                store: store.scope(
+                    \.chatCustomization,
+                     action: \.chatCustomization
+                )
+            )
+            
+            ChatPrivacyView(
+                store: store.scope(
+                    \.chatPrivacy,
+                     action: \.chatPrivacy
+                )
+            )
+            
+            ContactDetailsView(
+                store: store.scope(
+                    \.contactDetails,
+                     action: \.contactDetails
+                )
+            )
+            
+            ContactActionsView(
+                store: store.scope(
+                    \.contactActions,
+                     action: \.contactActions
+                )
+            )
+            
+            SafetyView(
+                store: store.scope(
+                    \.safety,
+                     action: \.safety
+                )
+            )
         }
         .listSectionSpacing(.custom(AppSpacing.lg))
         .background(AppColors.backgroundSecondary)

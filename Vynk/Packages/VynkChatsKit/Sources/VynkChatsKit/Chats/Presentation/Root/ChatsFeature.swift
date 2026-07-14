@@ -31,12 +31,7 @@ public struct ChatsFeature {
         }
         
         public var prefersTabBarHidden: Bool {
-            switch path.last {
-            case .conversation?:
-                return true
-            default:
-                return false
-            }
+            !path.isEmpty
         }
     }
     

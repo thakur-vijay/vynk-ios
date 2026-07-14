@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AdAttributionKit
 
 @MainActor
 @Observable
@@ -65,7 +66,7 @@ final class UserProfileViewModel {
             .init(
                 id: .contactDetails,
                 title: "Contact details",
-                kind: .navigation
+                kind: .navigation,
             )
         ]),
         .init(rows: [
