@@ -33,49 +33,6 @@ public struct ChatsView: View{
                 ) { store in
                     ChatRowView(store: store)
                 }
-//                ForEach(store.chats) { model in
-//                    MessageThreadRowView(model: model)
-//                        .swipeActions(edge: .leading) {
-//                            swipeButton(
-//                                AppSymbols.ChatAction.markUnreadSwipe.name,
-//                                label: "Unread",
-//                                tint: AppColors.accentEmphasized
-//                            ) {
-//                                
-//                            }
-//                            swipeButton(
-//                                AppSymbols.pinSlash.name,
-//                                label: "Pin",
-//                                tint: AppColors.neutralMuted
-//                            ) {
-//                                
-//                            }
-//                        }
-//                        .swipeActions(edge: .trailing) {
-//                            swipeButton(
-//                                AppSymbols.ChatAction.archiveSwipe.name,
-//                                label: "Archive",
-//                                tint: AppColors.accentEmphasized
-//                            ) {
-//                                
-//                            }
-//                            
-//                            swipeButton("ellipsis", label: "More", tint: AppColors.neutralMuted) {
-//                                
-//                            }
-//                        }
-//                        .contextMenu {
-//                            ChatContextMenu(userName: model.title) { action in
-//                                store.send(.chatAction(action))
-//                            }
-//                        }
-//                        .clearListRowStyle()
-//                        .contentShape(.rect)
-//                        .onTapGesture {
-//                            store.send(.chatTapped)
-//                        }
-//                }
-                
             }
             .listStyle(.plain)
             .listRowSpacing(0)
@@ -96,6 +53,14 @@ public struct ChatsView: View{
                 ConversationView(store: store)
             case .userProfile(let store):
                 UserProfileView(store: store)
+            }
+        }
+        .sheet(item: $store.scope(state: \.destination, action: \.destination)) { store in
+            switch store.case {
+            case .listEditor(let store):
+                ListEditor(store: store)
+            case .reorderLists(let store):
+                ReorderListsView(store: store)
             }
         }
         .task {

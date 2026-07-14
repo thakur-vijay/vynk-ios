@@ -10,14 +10,14 @@ import VynkDesignSystem
 import ComposableArchitecture
 
 @available(iOS 17.0, *)
-struct ReorderListsView: View {
+public struct ReorderListsView: View {
     @Bindable var store: StoreOf<ReorderListsFeature>
     
-    init(store: StoreOf<ReorderListsFeature>) {
+    public init(store: StoreOf<ReorderListsFeature>) {
         self.store = store
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             List {
                 EditableListsSection(lists: store.lists.map { ChatListRowModel($0)}) { indexSet, destination in

@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-struct ChatListsClient {
+public struct ChatListsClient: Sendable{
 
     var observeVisibleLists:
         @Sendable () -> AsyncThrowingStream<[ChatList], Error>
@@ -69,7 +69,7 @@ extension ChatListsClient {
 
 extension ChatListsClient: DependencyKey {
 
-    static let liveValue = Self(
+    public static let liveValue = Self(
         observeVisibleLists: {
             fatalError("Unimplemented")
         },
@@ -99,7 +99,7 @@ extension ChatListsClient: DependencyKey {
 
 extension ChatListsClient: TestDependencyKey {
 
-    static let testValue = Self(
+    public static let testValue = Self(
         observeVisibleLists: {
             AsyncThrowingStream { continuation in
                 continuation.finish()
@@ -117,7 +117,7 @@ extension ChatListsClient: TestDependencyKey {
     )
 }
 
-extension DependencyValues {
+public extension DependencyValues {
 
     var chatListsClient: ChatListsClient {
         get { self[ChatListsClient.self] }

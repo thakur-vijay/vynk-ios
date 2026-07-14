@@ -9,22 +9,22 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-internal struct Destination {
+public struct Destination {
 
     @ObservableState
-    enum State: Equatable {
+    public enum State: Equatable {
         case listEditor(ListEditorFeature.State)
         case reorderLists(ReorderListsFeature.State)
     }
 
-    enum Action {
+    public enum Action {
         case listEditor(ListEditorFeature.Action)
         case reorderLists(ReorderListsFeature.Action)
     }
 
-    init() {}
+    public init() {}
 
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
 
         Reduce { state, action in
             .none

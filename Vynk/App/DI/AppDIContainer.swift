@@ -29,7 +29,8 @@ final class AppDIContainer {
     lazy var rootDIContainer: RootDIContainer = {
         RootDIContainer(
             countryDIContainer: countryPickerDIContainer,
-            chatsDIContainer: chatsDIContainer
+            chatsDIContainer: chatsDIContainer,
+            listsDIContainer: listsDIContainer
         )
     }()
     

@@ -58,8 +58,8 @@ public final class ListsDIContainer: @MainActor ChatListsRouting{
         deleteChatListUseCase
     }
     
-    @MainActor public func makeListsView() -> AnyView {
-        let client = ChatListsClient.live(
+    private lazy var client: ChatListsClient = {
+        ChatListsClient.live(
             observeVisibleListsUseCase: observeVisibleListsUseCase,
             observeAvailablePresetsUseCase: observeAvailablePresetsUseCase,
             saveChatListUseCase: saveChatListUseCase,
@@ -67,13 +67,17 @@ public final class ListsDIContainer: @MainActor ChatListsRouting{
             restorePresetUseCase: restorePresetUseCase,
             reorderChatListsUseCase: reorderChatListsUseCase
         )
-
+    }()
+    
+    public func register(_ values: inout DependencyValues) {
+        values.chatListsClient = client
+    }
+    
+    
+    @MainActor public func makeListsView() -> AnyView {
         let store = Store(initialState: ListsFeature.State()) {
             ListsFeature()
-        } withDependencies: {
-            $0.chatListsClient = client
         }
-
         return AnyView(ListsView(
             store: store,
         ))

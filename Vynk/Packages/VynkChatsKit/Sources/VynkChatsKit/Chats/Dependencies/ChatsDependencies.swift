@@ -16,7 +16,11 @@ public final class ChatsDIContainer {
         self.chatListsRouting = chatListsRouting
     }
     
-    public lazy var client: ChatsClient = {
+    public func register(_ values: inout DependencyValues) {
+        values.chatsClient = client
+    }
+    
+    private lazy var client: ChatsClient = {
         return ChatsClient(
             observeVisibleLists: chatListsRouting.makeObserveVisibleListsUseCase().execute,
             deleteList: chatListsRouting.makeDeleteListsUseCase().execute(list:)

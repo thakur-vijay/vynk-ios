@@ -25,6 +25,8 @@ public struct ChatsFeature {
         var chats: IdentifiedArrayOf<ChatRowFeature.State> =
             .init(uniqueElements: MockChats.list.map(ChatRowFeature.State.init))
         public var path = StackState<Path.State>()
+        @Presents
+        public var destination: Destination.State?
 
         public init(){
             
@@ -38,7 +40,8 @@ public struct ChatsFeature {
     public enum Action: BindableAction{
         case binding(BindingAction<State>)
         case path(StackActionOf<Path>)
-        
+        case destination(PresentationAction<Destination.Action>)
+
         case onTask
         case onDisappear
         case visibleListsResponse([ChatList])
@@ -58,6 +61,12 @@ public struct ChatsFeature {
     public enum Path {
         case conversation(ConversationFeature)
         case userProfile(UserProfileFeature)
+    }
+    
+    @Reducer
+    public enum Destination {
+        case listEditor(ListEditorFeature)
+        case reorderLists(ReorderListsFeature)
     }
     
     public init(){
@@ -87,6 +96,9 @@ public struct ChatsFeature {
             case .visibleListsResponse(let lists):
                 state.lists = lists
                 return .none
+            case .listTapped(.add):
+                state.destination = .listEditor(ListEditorFeature.State(mode: .create))
+                return .none
             case .listTapped:
                 return .none
             case .newChatTapped:
@@ -105,13 +117,17 @@ public struct ChatsFeature {
                 return .none
             case .path(_):
                 return .none
+            case .destination(_):
+                return .none
             }
         }
         .forEach(\.path, action: \.path)
         .forEach(\.chats, action: \.chats) {
             ChatRowFeature()
         }
+        .ifLet(\.$destination, action: \.destination)
     }
 }
 
 extension ChatsFeature.Path.State: Equatable { }
+extension ChatsFeature.Destination.State: Equatable { }

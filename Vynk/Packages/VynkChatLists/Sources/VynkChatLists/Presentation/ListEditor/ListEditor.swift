@@ -10,15 +10,15 @@ import VynkDesignSystem
 import ComposableArchitecture
 
 @available(iOS 17.0, *)
-struct ListEditor: View {
+public struct ListEditor: View {
     @Bindable var store: StoreOf<ListEditorFeature>
     
-    init(store: StoreOf<ListEditorFeature>) {
+    public init(store: StoreOf<ListEditorFeature>) {
         self.store = store
         UITextField.appearance().clearButtonMode = .whileEditing
     }
     
-    var body: some View {
+    public var body: some View {
         NavigationStack {
             List {
                 Section {
@@ -36,7 +36,7 @@ struct ListEditor: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarCloseButton(placement: .topBarLeading){
-                    
+                    store.send(.closeButtonTapped)
                 }
                 
                 CheckButton(isEnabled: store.isSaveEnabled) {

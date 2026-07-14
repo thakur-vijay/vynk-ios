@@ -12,14 +12,21 @@ import VynkAuthKit
 import VynkMainKit
 import VynkFoundation
 import VynkChatsKit
+import VynkChatLists
 
 @available(iOS 17.0, *)
 public final class RootDIContainer {
     private let countryDIContainer: CountryPickerDIContainer
     private let chatsDIContainer: ChatsDIContainer
-    public init(countryDIContainer: CountryPickerDIContainer, chatsDIContainer: ChatsDIContainer) {
+    private let listsDIContainer: ListsDIContainer
+    public init(
+        countryDIContainer: CountryPickerDIContainer,
+        chatsDIContainer: ChatsDIContainer,
+        listsDIContainer: ListsDIContainer
+    ) {
         self.countryDIContainer = countryDIContainer
         self.chatsDIContainer = chatsDIContainer
+        self.listsDIContainer = listsDIContainer
         Log.debug("Called")
     }
 
@@ -28,8 +35,9 @@ public final class RootDIContainer {
     ) {
         RootFeature()
     } withDependencies: {
-        $0.countryPickerClient = self.countryDIContainer.client
-        $0.chatsClient = self.chatsDIContainer.client
+        self.countryDIContainer.register(&$0)
+        self.chatsDIContainer.register(&$0)
+        self.listsDIContainer.register(&$0)
     }
 
     @MainActor public func makeView() -> some View {

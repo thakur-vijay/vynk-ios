@@ -10,7 +10,7 @@ import VynkDesignSystem
 import Foundation
 
 @Reducer
-internal struct ReorderListsFeature {
+public struct ReorderListsFeature {
     
     @Dependency(\.chatListsClient)
     private var chatListsClient
@@ -19,7 +19,7 @@ internal struct ReorderListsFeature {
     private var dismiss
 
     @ObservableState
-    struct State: Equatable {
+    public struct State: Equatable {
         public var lists: [ChatList] = []
         public var availablePresets: [ChatList] = []
         @Presents
@@ -29,7 +29,7 @@ internal struct ReorderListsFeature {
         public init() {}
     }
 
-    enum Action {
+    public enum Action {
         case onTask
         case onDisappear
 
@@ -50,14 +50,14 @@ internal struct ReorderListsFeature {
         }
     }
 
-    init() {}
+    public init() {}
     
     private enum CancelID {
         case visibleLists
         case availablePresets
     }
 
-    var body: some ReducerOf<Self> {
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             let client = chatListsClient
             switch action {
