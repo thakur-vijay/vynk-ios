@@ -2,13 +2,13 @@
 //  SwiftUIView.swift
 //  VynkSettingsKit
 //
-//  Created by Vijay Thakur on 11/07/26.
+//  Created by Vijay Thakur on 16/07/26.
 //
 
 import ComposableArchitecture
 
 @Reducer
-public struct SettingsFeature {
+public struct UserHeaderFeature {
     
     @ObservableState
     public struct State: Equatable {
@@ -19,7 +19,7 @@ public struct SettingsFeature {
     }
     
     public enum Action {
-        case logoutTapped
+        
     }
     
     public init(){
@@ -28,9 +28,7 @@ public struct SettingsFeature {
     
     public var body: some ReducerOf<Self> {
         Reduce { state, action in
-            switch action {
-            case .logoutTapped: return .none
-            }
+            return .none
         }
     }
 }

@@ -9,16 +9,16 @@ import SwiftUI
 import ComposableArchitecture
 
 @available(iOS 17.0, *)
-struct ListsView: View {
+public struct ListsView: View {
     @Bindable var store: StoreOf<ListsFeature>
     
-    init(
+    public init(
         store: StoreOf<ListsFeature>,
     ) {
         self.store = store
     }
     
-    var body: some View {
+    public var body: some View {
         List {
             if store.isCustomListsEmpty{
                 CreateCustomListSection {
@@ -72,9 +72,6 @@ struct ListsView: View {
         }
         .task {
             await store.send(.onTask).finish()
-        }
-        .onDisappear {
-            store.send(.onDisappear)
         }
     }
 }

@@ -30,7 +30,6 @@ public struct ListsFeature{
     
     public enum Action {
         case onTask
-        case onDisappear
         case visibleListsResponse([ChatList])
         case availablePresetsResponse([ChatList])
         case restorePresetTapped(String)
@@ -44,7 +43,8 @@ public struct ListsFeature{
     }
     
     private enum CancelID {
-        case observations
+        case visibleLists
+        case availablePresets
     }
     
     public var body: some ReducerOf<Self> {
@@ -59,14 +59,14 @@ public struct ListsFeature{
                             await send(.visibleListsResponse(lists))
                         }
                     }
-                    .cancellable(id: CancelID.observations),
+                    .cancellable(id: CancelID.visibleLists),
 
                     .run { send in
                         for try await presets in client.observeAvailablePresets() {
                             await send(.availablePresetsResponse(presets))
                         }
                     }
-                    .cancellable(id: CancelID.observations)
+                    .cancellable(id: CancelID.availablePresets)
                 )
             case .visibleListsResponse(let lists):
                 state.lists = lists.map({ model in
@@ -82,8 +82,6 @@ public struct ListsFeature{
                 return .run { _ in
                     try await client.restorePreset(id)
                 }
-            case .onDisappear:
-                return .cancel(id: CancelID.observations)
             case .createListButtonTapped:
                 state.destination = .listEditor(
                     ListEditorFeature.State(mode: .create)

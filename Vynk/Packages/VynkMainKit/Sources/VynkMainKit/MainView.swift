@@ -92,6 +92,7 @@ public struct MainView: View {
                          action: \.settings
                     )
                 )
+                .toolbarVisibility(store.settings.prefersTabBarHidden ? .hidden : .visible, for: .tabBar)
             }
         }
     }
