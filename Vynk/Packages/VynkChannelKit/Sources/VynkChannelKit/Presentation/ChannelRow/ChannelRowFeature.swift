@@ -1,8 +1,8 @@
 //
 //  SwiftUIView.swift
-//  VynkChatsKit
+//  VynkChannelKit
 //
-//  Created by Vijay Thakur on 12/07/26.
+//  Created by Vijay Thakur on 16/07/26.
 //
 
 import ComposableArchitecture
@@ -10,7 +10,7 @@ import Foundation
 import VynkMessageThreadKit
 
 @Reducer
-public struct ChatRowFeature {
+public struct ChannelRowFeature {
 
     @ObservableState
     public struct State: Equatable, Identifiable {
@@ -33,7 +33,7 @@ public struct ChatRowFeature {
         case archiveTapped
         case moreTapped
 
-        case contextMenu(ChatContextAction)
+        case contextMenu(ChannelContextAction)
         
         case delegate(Delegate)
         

@@ -1,10 +1,9 @@
 //
-//  MessageThreadRowView.swift
-//  VynkChatsKit
+//  SwiftUIView.swift
+//  VynkChannelKit
 //
-//  Created by Vijay Thakur on 12/07/26.
+//  Created by Vijay Thakur on 16/07/26.
 //
-
 
 import SwiftUI
 import VynkDesignSystem
@@ -12,16 +11,20 @@ import VynkImage
 import ComposableArchitecture
 import VynkMessageThreadKit
 
-struct ChatRowView: View {
+public struct ChannelRowView: View {
 
-    @Bindable var store: StoreOf<ChatRowFeature>
+    @Bindable var store: StoreOf<ChannelRowFeature>
+    
+    public init(store: StoreOf<ChannelRowFeature>) {
+        self.store = store
+    }
 
-    var body: some View {
+    public var body: some View {
         let model = store.model
         MessageThreadRowView(model: store.model) {
                 store.send(.tapped)
             } contextMenu: {
-                ChatContextMenu(userName: model.title) { action in
+                ChannelContextMenu(userName: model.title) { action in
                     store.send(.contextMenu(action))
                 }
             } leadingSwipeActions: {

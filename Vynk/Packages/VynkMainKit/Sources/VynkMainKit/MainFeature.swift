@@ -55,23 +55,23 @@ public struct MainFeature {
         Scope(\.updates, action: \.updates) {
             UpdatesFeature()
         }
-        
+//        
         Scope(\.calls, action: \.calls) {
             CallsFeature()
         }
-        
+//        
         Scope(\.communities, action: \.communities) {
             CommunitiesFeature()
         }
-        
+//        
         Scope(\.chats, action: \.chats) {
             ChatsFeature()
         }
-        
+//        
         Scope(\.settings, action: \.settings) {
             SettingsFeature()
         }
-        
+//        
         Reduce { state, action in
             switch action {
 

@@ -4,45 +4,39 @@
 import PackageDescription
 
 let package = Package(
-    name: "VynkChatsKit",
-    platforms: [
-        .iOS(.v18)
-    ],
+    name: "VynkMessageThreadKit",
+    platforms: [.iOS(.v18)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "VynkChatsKit",
-            targets: ["VynkChatsKit"]
+            name: "VynkMessageThreadKit",
+            targets: ["VynkMessageThreadKit"]
         ),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
-        .package(path: "../VynkChatLists"),
         .package(path: "../VynkDesignSystem"),
+        .package(path: "../VynkFoundation"),
         .package(path: "../VynkImage"),
-        .package(path: "../VynkUserProfileKit"),
-        .package(path: "../VynkMessageThreadKit"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "VynkChatsKit",
+            name: "VynkMessageThreadKit",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-                .product(name: "VynkChatLists", package: "VynkChatLists"),
                 .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
+                .product(name: "VynkFoundation", package: "VynkFoundation"),
                 .product(name: "VynkImage", package: "VynkImage"),
-                .product(name: "VynkUserProfileKit", package: "VynkUserProfileKit"),
-                .product(name: "VynkMessageThreadKit", package: "VynkMessageThreadKit"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
         ),
         .testTarget(
-            name: "VynkChatsKitTests",
-            dependencies: ["VynkChatsKit"],
+            name: "VynkMessageThreadKitTests",
+            dependencies: ["VynkMessageThreadKit"],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],

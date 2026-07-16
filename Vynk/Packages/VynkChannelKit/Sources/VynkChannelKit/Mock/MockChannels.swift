@@ -1,21 +1,14 @@
 //
-//  MessageRowModel.swift
-//  Vynk
+//  MockChats.swift
+//  VynkChannelKit
 //
-//  Created by Vijay Thakur on 26/05/26.
+//  Created by Vijay Thakur on 16/07/26.
 //
 
 import Foundation
 import VynkMessageThreadKit
 
-public struct MessageRowModel: Identifiable, Hashable {
-    public let id: String
-    public let message: MessageModel
-    public let isFirstInGroup: Bool
-    public let isLastInGroup: Bool
-}
-
-public struct MockChats {
+public struct MockChannels {
     
     public nonisolated(unsafe) static let list: [MessageThreadModel] = [
         .init(

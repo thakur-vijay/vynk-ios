@@ -6,14 +6,15 @@
 //
 
 import ComposableArchitecture
+import VynkMessageThreadKit
 
 @Reducer
 public struct ConversationHeaderFeature {
     
     @ObservableState
     public struct State: Equatable {
-        public var model: MessageThreadRowModel
-        public init(model: MessageThreadRowModel){
+        public var model: MessageThreadModel
+        public init(model: MessageThreadModel){
             self.model = model
         }
     }

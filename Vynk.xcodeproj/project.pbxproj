@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1831848430091EC8008984ED /* VynkChannelKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1831848330091EC8008984ED /* VynkChannelKit */; };
 		1872370730022B2300CBC763 /* VynkAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370630022B2300CBC763 /* VynkAuthKit */; };
 		1872370930022B2300CBC763 /* VynkChatLists in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370830022B2300CBC763 /* VynkChatLists */; };
 		1872370B30022B2300CBC763 /* VynkCountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370A30022B2300CBC763 /* VynkCountryPicker */; };
@@ -25,6 +26,8 @@
 		187237583002756000CBC763 /* VynkCallsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 187237573002756000CBC763 /* VynkCallsKit */; };
 		1872375A3002757200CBC763 /* VynkCommunitiesKit in Frameworks */ = {isa = PBXBuildFile; productRef = 187237593002757200CBC763 /* VynkCommunitiesKit */; };
 		1872375D300275A400CBC763 /* VynkSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872375C300275A400CBC763 /* VynkSettingsKit */; };
+		189EDD483007FAA300165480 /* VynkMessageThreadKit in Frameworks */ = {isa = PBXBuildFile; productRef = 189EDD473007FAA300165480 /* VynkMessageThreadKit */; };
+		189EDD4B3007FDEC00165480 /* VynkStatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 189EDD4A3007FDEC00165480 /* VynkStatusKit */; };
 		18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */; };
 		18FDB0E63002806200DFC4B6 /* VynkChatsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18FDB0E53002806200DFC4B6 /* VynkChatsKit */; };
 /* End PBXBuildFile section */
@@ -59,6 +62,7 @@
 			membershipExceptions = (
 				Packages/VynkAuthKit,
 				Packages/VynkCallsKit,
+				Packages/VynkChannelKit,
 				Packages/VynkChatLists,
 				Packages/VynkChatsKit,
 				Packages/VynkCommunitiesKit,
@@ -69,9 +73,11 @@
 				Packages/VynkImage,
 				Packages/VynkMainKit,
 				Packages/VynkMediaKit,
+				Packages/VynkMessageThreadKit,
 				Packages/VynkRootKit,
 				Packages/VynkSecurity,
 				Packages/VynkSettingsKit,
+				Packages/VynkStatusKit,
 				Packages/VynkUpdatesKit,
 				Packages/VynkUserProfileKit,
 			);
@@ -109,6 +115,7 @@
 				1872371530022B2300CBC763 /* VynkLifecycleMacros in Frameworks */,
 				18FDB0E63002806200DFC4B6 /* VynkChatsKit in Frameworks */,
 				1872370D30022B2300CBC763 /* VynkDatabaseKit in Frameworks */,
+				1831848430091EC8008984ED /* VynkChannelKit in Frameworks */,
 				1872371D30022B2300CBC763 /* VynkRootKit in Frameworks */,
 				1872370B30022B2300CBC763 /* VynkCountryPicker in Frameworks */,
 				1872372230022C9F00CBC763 /* GRDB in Frameworks */,
@@ -118,9 +125,11 @@
 				1872371130022B2300CBC763 /* VynkFoundation in Frameworks */,
 				1872371730022B2300CBC763 /* VynkLifecycleMacrosClient in Frameworks */,
 				1872371F30022B2300CBC763 /* VynkSecurity in Frameworks */,
+				189EDD483007FAA300165480 /* VynkMessageThreadKit in Frameworks */,
 				1872372530022EBE00CBC763 /* VynkCameraKit in Frameworks */,
 				18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */,
 				187237583002756000CBC763 /* VynkCallsKit in Frameworks */,
+				189EDD4B3007FDEC00165480 /* VynkStatusKit in Frameworks */,
 				1872371330022B2300CBC763 /* VynkImage in Frameworks */,
 				1872370930022B2300CBC763 /* VynkChatLists in Frameworks */,
 				1872370730022B2300CBC763 /* VynkAuthKit in Frameworks */,
@@ -214,6 +223,9 @@
 				1872375C300275A400CBC763 /* VynkSettingsKit */,
 				18FDB0E53002806200DFC4B6 /* VynkChatsKit */,
 				18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */,
+				189EDD473007FAA300165480 /* VynkMessageThreadKit */,
+				189EDD4A3007FDEC00165480 /* VynkStatusKit */,
+				1831848330091EC8008984ED /* VynkChannelKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -727,6 +739,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1831848330091EC8008984ED /* VynkChannelKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkChannelKit;
+		};
 		1872370630022B2300CBC763 /* VynkAuthKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkAuthKit;
@@ -800,6 +816,14 @@
 		1872375C300275A400CBC763 /* VynkSettingsKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkSettingsKit;
+		};
+		189EDD473007FAA300165480 /* VynkMessageThreadKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkMessageThreadKit;
+		};
+		189EDD4A3007FDEC00165480 /* VynkStatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkStatusKit;
 		};
 		18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */ = {
 			isa = XCSwiftPackageProductDependency;

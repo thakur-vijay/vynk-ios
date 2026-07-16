@@ -1,14 +1,22 @@
 //
-//  ChannelsSectionView.swift
-//  Vynk
+//  SwiftUIView.swift
+//  VynkChannelKit
 //
-//  Created by Vijay Thakur on 29/05/26.
+//  Created by Vijay Thakur on 16/07/26.
 //
 
 import SwiftUI
+import VynkDesignSystem
+import ComposableArchitecture
 
-struct ChannelsSectionView: View {
-    var body: some View {
+public struct ChannelsView: View {
+    let store: StoreOf<ChannelsFeature>
+    
+    public init(store: StoreOf<ChannelsFeature>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         VStack(spacing: AppSpacing.xs){
             header
             list
@@ -38,8 +46,13 @@ struct ChannelsSectionView: View {
     
     var list: some View {
         LazyVStack {
-            ForEach(MockDataFactory.chats.prefix(3)) { channel in
-                MessageThreadRowView(model: channel)
+            ForEach(
+                store.scope(
+                    state: \.channels,
+                    action: \.channels
+                )
+            ) { store in
+                ChannelRowView(store: store)
             }
         }
     }

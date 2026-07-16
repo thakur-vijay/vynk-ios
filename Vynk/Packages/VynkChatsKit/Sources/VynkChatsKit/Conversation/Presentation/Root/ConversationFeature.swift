@@ -7,13 +7,14 @@
 
 import ComposableArchitecture
 import Foundation
+import VynkMessageThreadKit
 
 @Reducer
 public struct ConversationFeature {
     
     @ObservableState
     public struct State: Equatable {
-        public var model: MessageThreadRowModel
+        public var model: MessageThreadModel
         var input = ConversationInputFeature.State()
         var header: ConversationHeaderFeature.State
         public var messages = MessageModel.sampleList
@@ -26,7 +27,7 @@ public struct ConversationFeature {
             MessageGroupingHelper.groupMessagesByDay(messages)
         }
         
-        public init(model: MessageThreadRowModel){
+        public init(model: MessageThreadModel){
             self.model = model
             self.header = ConversationHeaderFeature.State(model: model)
         }
