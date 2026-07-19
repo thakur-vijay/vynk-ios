@@ -30,7 +30,8 @@ final class AppDIContainer {
         RootDIContainer(
             countryDIContainer: countryPickerDIContainer,
             chatsDIContainer: chatsDIContainer,
-            listsDIContainer: listsDIContainer
+            listsDIContainer: listsDIContainer,
+            screenBrighness: screenBrightnessManager
         )
     }()
     

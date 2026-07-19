@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import VynkChatLists
+import VynkQRCodeKit
 
 @Reducer
 public struct SettingsFeature {
@@ -24,7 +25,7 @@ public struct SettingsFeature {
         
         public var prefersTabBarHidden: Bool {
             switch path.last {
-            case .lists: return true
+            case .lists, .qrCode: return true
             default: return false
             }
         }
@@ -37,6 +38,7 @@ public struct SettingsFeature {
         case preferences(PreferencesSectionFeature.Action)
         case support(SupportSectionFeature.Action)
         case logoutTapped
+        case qrTapped
     }
     
     public init(){
@@ -73,6 +75,9 @@ public struct SettingsFeature {
                 return .none
             case .path:
                 return .none
+            case .qrTapped:
+                state.path.append(.qrCode(ProfileQRCodeFeature.State()))
+                return .none
             }
         }
         .forEach(\.path, action: \.path)
@@ -84,6 +89,7 @@ extension SettingsFeature {
     @Reducer
     public enum Path {
         case lists(ListsFeature)
+        case qrCode(ProfileQRCodeFeature)
     }
 }
 

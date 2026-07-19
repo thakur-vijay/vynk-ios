@@ -21,25 +21,21 @@ public struct UpdatesView: View {
     public var body: some View {
         NavigationStack {
             List{
-                Section {
-                    StatusesView(
-                        store: store.scope(
-                            \.status,
-                             action: \.status
-                        )
+                StatusesView(
+                    store: store.scope(
+                        \.status,
+                         action: \.status
                     )
-                    .clearListRowStyle()
-                }
+                )
+                .clearListRowStyle()
                 
-                Section {
-                    ChannelsView(
-                        store: store.scope(
-                            \.channels,
-                             action: \.channels
-                        )
+                ChannelsView(
+                    store: store.scope(
+                        \.channels,
+                         action: \.channels
                     )
-                    .clearListRowStyle()
-                }
+                )
+                .clearListRowStyle()
             }
             .listStyle(.plain)
             .listSectionSpacing(20)

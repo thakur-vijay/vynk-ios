@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1831848430091EC8008984ED /* VynkChannelKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1831848330091EC8008984ED /* VynkChannelKit */; };
+		18673DD9300BE75C00C78106 /* VynkQRCodeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18673DD8300BE75C00C78106 /* VynkQRCodeKit */; };
 		1872370730022B2300CBC763 /* VynkAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370630022B2300CBC763 /* VynkAuthKit */; };
 		1872370930022B2300CBC763 /* VynkChatLists in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370830022B2300CBC763 /* VynkChatLists */; };
 		1872370B30022B2300CBC763 /* VynkCountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370A30022B2300CBC763 /* VynkCountryPicker */; };
@@ -74,6 +75,7 @@
 				Packages/VynkMainKit,
 				Packages/VynkMediaKit,
 				Packages/VynkMessageThreadKit,
+				Packages/VynkQRCodeKit,
 				Packages/VynkRootKit,
 				Packages/VynkSecurity,
 				Packages/VynkSettingsKit,
@@ -130,6 +132,7 @@
 				18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */,
 				187237583002756000CBC763 /* VynkCallsKit in Frameworks */,
 				189EDD4B3007FDEC00165480 /* VynkStatusKit in Frameworks */,
+				18673DD9300BE75C00C78106 /* VynkQRCodeKit in Frameworks */,
 				1872371330022B2300CBC763 /* VynkImage in Frameworks */,
 				1872370930022B2300CBC763 /* VynkChatLists in Frameworks */,
 				1872370730022B2300CBC763 /* VynkAuthKit in Frameworks */,
@@ -226,6 +229,7 @@
 				189EDD473007FAA300165480 /* VynkMessageThreadKit */,
 				189EDD4A3007FDEC00165480 /* VynkStatusKit */,
 				1831848330091EC8008984ED /* VynkChannelKit */,
+				18673DD8300BE75C00C78106 /* VynkQRCodeKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -742,6 +746,10 @@
 		1831848330091EC8008984ED /* VynkChannelKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkChannelKit;
+		};
+		18673DD8300BE75C00C78106 /* VynkQRCodeKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkQRCodeKit;
 		};
 		1872370630022B2300CBC763 /* VynkAuthKit */ = {
 			isa = XCSwiftPackageProductDependency;

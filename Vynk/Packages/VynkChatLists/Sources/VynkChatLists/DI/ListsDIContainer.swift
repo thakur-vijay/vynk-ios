@@ -73,13 +73,4 @@ public final class ListsDIContainer: @MainActor ChatListsRouting{
         values.chatListsClient = client
     }
     
-    
-    @MainActor public func makeListsView() -> AnyView {
-        let store = Store(initialState: ListsFeature.State()) {
-            ListsFeature()
-        }
-        return AnyView(ListsView(
-            store: store,
-        ))
-    }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 public enum MockImages {
 
-    static let avatar =
+    public static let avatar =
 
     "https://images.pexels.com/photos/10754449/pexels-photo-10754449.jpeg"
 

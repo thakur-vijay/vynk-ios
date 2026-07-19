@@ -4,16 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "VynkMessageThreadKit",
+    name: "VynkQRCodeKit",
     platforms: [.iOS(.v18)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "VynkMessageThreadKit",
-            targets: ["VynkMessageThreadKit"]
+            name: "VynkQRCodeKit",
+            targets: ["VynkQRCodeKit"]
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
         .package(path: "../VynkDesignSystem"),
         .package(path: "../VynkFoundation"),
         .package(path: "../VynkImage"),
@@ -22,8 +23,9 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "VynkMessageThreadKit",
+            name: "VynkQRCodeKit",
             dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
                 .product(name: "VynkFoundation", package: "VynkFoundation"),
                 .product(name: "VynkImage", package: "VynkImage"),
@@ -33,8 +35,8 @@ let package = Package(
             ],
         ),
         .testTarget(
-            name: "VynkMessageThreadKitTests",
-            dependencies: ["VynkMessageThreadKit"],
+            name: "VynkQRCodeKitTests",
+            dependencies: ["VynkQRCodeKit"],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],

@@ -69,7 +69,7 @@ final class SettingsDIContainer {
         case .row(let rowId):
             switch rowId {
             case .privacy: privacyDIContainer.makePrivacyView()
-            case .lists: listsDIContainer.makeListsView()
+            case .lists: Text("Test")
             default: Text("Test")
             }
         case .privacy(let rowId):

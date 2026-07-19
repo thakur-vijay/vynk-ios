@@ -20,6 +20,7 @@ let package = Package(
         .package(path: "../VynkDesignSystem"),
         .package(path: "../VynkImage"),
         .package(path: "../VynkChatLists"),
+        .package(path: "../VynkQRCodeKit"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -31,6 +32,7 @@ let package = Package(
                 .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
                 .product(name: "VynkImage", package: "VynkImage"),
                 .product(name: "VynkChatLists", package: "VynkChatLists"),
+                .product(name: "VynkQRCodeKit", package: "VynkQRCodeKit"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),

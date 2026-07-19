@@ -7,7 +7,6 @@
 
 import ComposableArchitecture
 import Foundation
-import VynkUserProfileKit
 
 @Reducer
 public struct ChannelsFeature {

@@ -8,7 +8,7 @@
 import UIKit
 
 @MainActor
-public protocol ScreenBrightnessManaging {
+public protocol ScreenBrightnessManaging: Sendable{
     func setBrightness(_ brightness: ScreenBrightness)
     func restoreBrightness()
 }

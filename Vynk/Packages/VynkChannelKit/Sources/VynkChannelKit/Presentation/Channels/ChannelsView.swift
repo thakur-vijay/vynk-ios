@@ -45,7 +45,7 @@ public struct ChannelsView: View {
     }
     
     var list: some View {
-        LazyVStack {
+        Section {
             ForEach(
                 store.scope(
                     state: \.channels,

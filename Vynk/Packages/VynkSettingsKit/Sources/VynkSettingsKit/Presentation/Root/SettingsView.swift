@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import VynkDesignSystem
 import VynkChatLists
+import VynkQRCodeKit
 
 public struct SettingsView: View {
     @Bindable var store: StoreOf<SettingsFeature>
@@ -59,7 +60,7 @@ public struct SettingsView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("", systemImage: AppSymbols.qrcode.name){
-//                        router.push(.profileQRCode)
+                        store.send(.qrTapped)
                     }
                 }
             }
@@ -70,6 +71,8 @@ public struct SettingsView: View {
             switch store.case {
             case .lists(let store):
                 ListsView(store: store)
+            case .qrCode(let store):
+                ProfileQRCodeView(store: store)
             }
         }
     }
