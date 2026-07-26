@@ -13,7 +13,7 @@ final class AppRouter: ChatNavigator{
     
     let chatsRouter: ChatsRouter
 
-    let settingsRouter: SettingsRouter
+//    let settingsRouter: SettingsRouter
     
     var navigationRequest: PendingNavigation?
     
@@ -21,7 +21,7 @@ final class AppRouter: ChatNavigator{
         
         chatsRouter = .init()
         
-        settingsRouter = .init()
+//        settingsRouter = .init()
         
     }
     
@@ -48,7 +48,7 @@ final class AppRouter: ChatNavigator{
      
     func openChat()async {
 
-        settingsRouter.popToRoot()
+//        settingsRouter.popToRoot()
         
         await Task.yield()
         

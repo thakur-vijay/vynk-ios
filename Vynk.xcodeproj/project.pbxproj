@@ -75,6 +75,7 @@
 				Packages/VynkDesignSystem,
 				Packages/VynkFoundation,
 				Packages/VynkImage,
+				Packages/VynkInviteKit,
 				Packages/VynkMainKit,
 				Packages/VynkMediaKit,
 				Packages/VynkMessageThreadKit,
