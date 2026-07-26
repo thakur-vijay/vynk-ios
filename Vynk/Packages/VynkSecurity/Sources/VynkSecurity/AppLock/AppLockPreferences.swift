@@ -8,7 +8,7 @@
 import Foundation
 
 @MainActor
-public protocol AppLockPreferences: AnyObject {
+public protocol AppLockPreferences: AnyObject, Sendable {
     var isAppLockEnabled: Bool { get set }
     var appLockOption: String { get set }
 }

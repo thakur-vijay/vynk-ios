@@ -11,9 +11,15 @@ import VynkCallsKit
 import VynkCommunitiesKit
 import VynkChatsKit
 import VynkSettingsKit
+import VynkSecurity
+import VynkAppLockKit
+import SwiftUI
 
 @Reducer
 public struct MainFeature {
+    
+    @Dependency(\.appLockManager)
+    private var appLockManager
     
     @ObservableState
     public struct State: Equatable {
@@ -24,6 +30,8 @@ public struct MainFeature {
         public var communities = CommunitiesFeature.State()
         public var chats = ChatsFeature.State()
         public var settings = SettingsFeature.State()
+        
+        public var appLock: AppLockFeature.State?
         public init(){
             
         }
@@ -37,6 +45,11 @@ public struct MainFeature {
         case communities(CommunitiesFeature.Action)
         case chats(ChatsFeature.Action)
         case settings(SettingsFeature.Action)
+        
+        case appLock(AppLockFeature.Action)
+        
+        case scenePhaseChanged(ScenePhase)
+        case shouldLock
         
         case delegate(Delegate)
 
@@ -73,6 +86,7 @@ public struct MainFeature {
         }
 //        
         Reduce { state, action in
+            let appLockManager = appLockManager
             switch action {
             case .settings(.logoutTapped):
                 return .send(.delegate(.logoutSucceeded))
@@ -97,7 +111,52 @@ public struct MainFeature {
                  .chats,
                  .settings:
                 return .none
+
+            case let .scenePhaseChanged(phase):
+                print(phase)
+                switch phase {
+                    
+                case .background:
+                    return .run { _ in
+                        await appLockManager.didEnterBackground()
+                    }
+                    
+                case .active:
+                    
+                    return .run { send in
+                        await appLockManager.didBecomeActive()
+                        if await appLockManager.shouldShowLockScreen {
+                            print("lock")
+                            await send(.shouldLock)
+                        }else {
+                            print("unlock")
+                        }
+                    }
+                case .inactive:
+                    
+                    return .none
+                    
+                @unknown default:
+                    
+                    return .none
+                    
+                }
+            case .shouldLock:
+                state.appLock = AppLockFeature.State()
+                return .none
+            case let .appLock(action):
+                switch action {
+                case .delegate(.unlocked):
+                    state.appLock = nil
+                    return .none
+
+                default:
+                    return .none
+                }
             }
+        }
+        .ifLet(\.appLock, action: \.appLock) {
+            AppLockFeature()
         }
     }
 }

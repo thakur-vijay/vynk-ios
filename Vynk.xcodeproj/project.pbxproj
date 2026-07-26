@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1831848430091EC8008984ED /* VynkChannelKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1831848330091EC8008984ED /* VynkChannelKit */; };
 		18497A2F30151336007ECA4E /* VynkScannerKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18497A2E30151336007ECA4E /* VynkScannerKit */; };
+		184D194A301644B000845F0B /* VynkAppLockKit in Frameworks */ = {isa = PBXBuildFile; productRef = 184D1949301644B000845F0B /* VynkAppLockKit */; };
 		18673DD9300BE75C00C78106 /* VynkQRCodeKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18673DD8300BE75C00C78106 /* VynkQRCodeKit */; };
 		1872370730022B2300CBC763 /* VynkAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370630022B2300CBC763 /* VynkAuthKit */; };
 		1872370930022B2300CBC763 /* VynkChatLists in Frameworks */ = {isa = PBXBuildFile; productRef = 1872370830022B2300CBC763 /* VynkChatLists */; };
@@ -62,6 +63,7 @@
 		18F4AA872FEE559200C6898E /* Exceptions for "Vynk" folder in "Vynk" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Packages/VynkAppLockKit,
 				Packages/VynkAuthKit,
 				Packages/VynkCallsKit,
 				Packages/VynkChannelKit,
@@ -76,6 +78,7 @@
 				Packages/VynkMainKit,
 				Packages/VynkMediaKit,
 				Packages/VynkMessageThreadKit,
+				Packages/VynkPrivacyKit,
 				Packages/VynkQRCodeKit,
 				Packages/VynkRootKit,
 				Packages/VynkScannerKit,
@@ -123,6 +126,7 @@
 				1872371D30022B2300CBC763 /* VynkRootKit in Frameworks */,
 				18497A2F30151336007ECA4E /* VynkScannerKit in Frameworks */,
 				1872370B30022B2300CBC763 /* VynkCountryPicker in Frameworks */,
+				184D194A301644B000845F0B /* VynkAppLockKit in Frameworks */,
 				1872372230022C9F00CBC763 /* GRDB in Frameworks */,
 				1872375D300275A400CBC763 /* VynkSettingsKit in Frameworks */,
 				1872375A3002757200CBC763 /* VynkCommunitiesKit in Frameworks */,
@@ -234,6 +238,7 @@
 				1831848330091EC8008984ED /* VynkChannelKit */,
 				18673DD8300BE75C00C78106 /* VynkQRCodeKit */,
 				18497A2E30151336007ECA4E /* VynkScannerKit */,
+				184D1949301644B000845F0B /* VynkAppLockKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -754,6 +759,10 @@
 		18497A2E30151336007ECA4E /* VynkScannerKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkScannerKit;
+		};
+		184D1949301644B000845F0B /* VynkAppLockKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkAppLockKit;
 		};
 		18673DD8300BE75C00C78106 /* VynkQRCodeKit */ = {
 			isa = XCSwiftPackageProductDependency;

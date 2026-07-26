@@ -15,6 +15,8 @@ import VynkChatsKit
 import VynkChatLists
 import VynkQRCodeKit
 import VynkScannerKit
+import VynkSecurity
+import VynkAppLockKit
 
 @available(iOS 17.0, *)
 public final class RootDIContainer {
@@ -23,18 +25,24 @@ public final class RootDIContainer {
     private let listsDIContainer: ListsDIContainer
     private let screenBrighness: ScreenBrightnessManaging
     private let scannerDIContainer: ScannerDIContainer
+    private let appLockManager: AppLockManager
+    private let appLockDIContainer: AppLockDIContainer
     public init(
         countryDIContainer: CountryPickerDIContainer,
         chatsDIContainer: ChatsDIContainer,
         listsDIContainer: ListsDIContainer,
         screenBrighness: ScreenBrightnessManaging,
-        scannerDIContainer: ScannerDIContainer
+        scannerDIContainer: ScannerDIContainer,
+        appLockManager: AppLockManager,
+        appLockDIContainer: AppLockDIContainer
     ) {
         self.countryDIContainer = countryDIContainer
         self.chatsDIContainer = chatsDIContainer
         self.listsDIContainer = listsDIContainer
         self.screenBrighness = screenBrighness
         self.scannerDIContainer = scannerDIContainer
+        self.appLockManager = appLockManager
+        self.appLockDIContainer = appLockDIContainer
         Log.debug("Called")
     }
 
@@ -47,6 +55,9 @@ public final class RootDIContainer {
         self.chatsDIContainer.register(&$0)
         self.listsDIContainer.register(&$0)
         self.scannerDIContainer.register(&$0)
+        self.appLockDIContainer.register(&$0)
+        
+        $0.appLockManager = self.appLockManager
         $0.screenBrightness = .init(
             setBrightness: self.screenBrighness.setBrightness(_:),
             restoreBrightness: self.screenBrighness.restoreBrightness

@@ -16,6 +16,7 @@ import VynkCountryPicker
 import VynkRootKit
 import VynkChatsKit
 import VynkScannerKit
+import VynkAppLockKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -33,7 +34,9 @@ final class AppDIContainer {
             chatsDIContainer: chatsDIContainer,
             listsDIContainer: listsDIContainer,
             screenBrighness: screenBrightnessManager,
-            scannerDIContainer: scannerDIContainer
+            scannerDIContainer: scannerDIContainer,
+            appLockManager: appLockManager,
+            appLockDIContainer: appLockDIContainer
         )
     }()
     
@@ -58,16 +61,16 @@ final class AppDIContainer {
         ChatsDIContainer(chatListsRouting: listsDIContainer)
     }()
     
-    lazy var settingsDIContainer: SettingsDIContainer = {
-        SettingsDIContainer(
-            appLockManager: appLockManager,
-            brightnessManager: screenBrightnessManager,
-            listsDIContainer: listsDIContainer,
-//            scannerDIContainer: scannerDIContainer,
-            router: appRouter.settingsRouter,
-            chatNavigator: appRouter
-        )
-    }()
+//    lazy var settingsDIContainer: SettingsDIContainer = {
+//        SettingsDIContainer(
+//            appLockManager: appLockManager,
+//            brightnessManager: screenBrightnessManager,
+//            listsDIContainer: listsDIContainer,
+////            scannerDIContainer: scannerDIContainer,
+//            router: appRouter.settingsRouter,
+//            chatNavigator: appRouter
+//        )
+//    }()
     
    
     lazy var addContactDIContainer: AddContactDIContainer = {
@@ -85,6 +88,10 @@ final class AppDIContainer {
     
     lazy var appPreferences: AppPreferencesManaging = {
         AppPreferences()
+    }()
+    
+    lazy var appLockPreferences: some AppLockPreferences = {
+        UserDefaultsAppLockPreferences()
     }()
     
     lazy var deviceContactsDataSource: DeviceContactsDataSource = {
@@ -109,11 +116,11 @@ final class AppDIContainer {
     }()
     
     lazy var appLockDIContainer: AppLockDIContainer = {
-        AppLockDIContainer(appPreferences: appPreferences)
+        AppLockDIContainer(preferences: appLockPreferences)
     }()
     
     lazy var appLockManager: AppLockManager = {
-        AppLockManager(preferences: appPreferences)
+        AppLockManager(preferences: appLockPreferences)
     }()
     
     lazy var cameraDIContainer: CameraDIContainer = {

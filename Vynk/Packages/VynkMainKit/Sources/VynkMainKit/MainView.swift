@@ -13,6 +13,7 @@ import VynkCommunitiesKit
 import VynkChatsKit
 import VynkSettingsKit
 import VynkDesignSystem
+import VynkAppLockKit
 
 public struct MainView: View {
     @Bindable var store: StoreOf<MainFeature>
@@ -29,6 +30,9 @@ public struct MainView: View {
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
+    
+    @Environment(\.scenePhase)
+    private var scenePhase
     
     public var body: some View {
         TabView(selection: $store.selectedTab) {
@@ -94,6 +98,25 @@ public struct MainView: View {
                 )
                 .toolbarVisibility(store.settings.prefersTabBarHidden ? .hidden : .visible, for: .tabBar)
             }
+        }
+        .overlay {
+            if let appLockStore = store.scope(
+                state: \.appLock,
+                
+                action: \.appLock
+                
+            ) {
+                
+                AppLockView(store: appLockStore)
+                
+            }
+            
+        }
+        
+        .onChange(of: scenePhase) { _, newPhase in
+            
+            store.send(.scenePhaseChanged(newPhase))
+            
         }
     }
 }

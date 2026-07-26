@@ -7,8 +7,7 @@
 
 import Foundation
 
-@MainActor
-public protocol LocalAuthenticating {
+public protocol LocalAuthenticating: Sendable{
 
     func authenticate(
         reason: String
