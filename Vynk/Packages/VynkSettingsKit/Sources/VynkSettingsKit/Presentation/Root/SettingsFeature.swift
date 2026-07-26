@@ -39,6 +39,12 @@ public struct SettingsFeature {
         case support(SupportSectionFeature.Action)
         case logoutTapped
         case qrTapped
+        
+        case delegate(Delegate)
+        
+        public enum Delegate {
+            case openChat
+        }
     }
     
     public init(){
@@ -73,10 +79,14 @@ public struct SettingsFeature {
                 return .none
             case .logoutTapped:
                 return .none
+            case .path(.element(id: _, action: .qrCode(.delegate(.openChat)))):
+                return .send(.delegate(.openChat))
             case .path:
                 return .none
             case .qrTapped:
                 state.path.append(.qrCode(ProfileQRCodeFeature.State()))
+                return .none
+            case .delegate:
                 return .none
             }
         }

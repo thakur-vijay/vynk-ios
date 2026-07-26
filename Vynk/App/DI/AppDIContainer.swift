@@ -15,6 +15,7 @@ import VynkAuthKit
 import VynkCountryPicker
 import VynkRootKit
 import VynkChatsKit
+import VynkScannerKit
 
 final class AppDIContainer {
     private let configuration = AppConfiguration.shared
@@ -31,7 +32,8 @@ final class AppDIContainer {
             countryDIContainer: countryPickerDIContainer,
             chatsDIContainer: chatsDIContainer,
             listsDIContainer: listsDIContainer,
-            screenBrighness: screenBrightnessManager
+            screenBrighness: screenBrightnessManager,
+            scannerDIContainer: scannerDIContainer
         )
     }()
     
@@ -61,7 +63,7 @@ final class AppDIContainer {
             appLockManager: appLockManager,
             brightnessManager: screenBrightnessManager,
             listsDIContainer: listsDIContainer,
-            scannerDIContainer: scannerDIContainer,
+//            scannerDIContainer: scannerDIContainer,
             router: appRouter.settingsRouter,
             chatNavigator: appRouter
         )

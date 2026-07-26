@@ -53,39 +53,39 @@ struct ProfileQRCodeView: View {
         .onChange(of: phase) { oldValue, newValue in
             viewModel.handleSceneBrightness(for: newValue)
         }
-        .fullScreenCover(item: $router.activeFullScreenCover) { fullScreenCover in
-            switch fullScreenCover {
-            case .scanner:
-                diContainer.makeScannerSheet { result in
-                    switch result {
-                    case .qrCode(let value):
-                        if value.isEmpty {
-                            ///present alert
-                        }else {
-                            ///look up for user
-                            ///if found, dismiss scanner
-                            let isContactSaved = true
-                            if isContactSaved {
-                                router.dismissSheet()
-                                Task {
-                                    await viewModel.didScanUser()
-                                }
-                            }else {
-                                router.presentSheet(.addToContacts)
-                            }
-                        }
-                    @unknown default:
-                        break
-                    }
-                }
-                .sheet(item: $router.activeSheet) { sheet in
-                    switch sheet {
-                    case .addToContacts: Text("")
-                            .presentationDetents([.medium])
-                    }
-                }
-    
-            }
-        }
+//        .fullScreenCover(item: $router.activeFullScreenCover) { fullScreenCover in
+//            switch fullScreenCover {
+//            case .scanner:
+//                diContainer.makeScannerSheet { result in
+//                    switch result {
+//                    case .qrCode(let value):
+//                        if value.isEmpty {
+//                            ///present alert
+//                        }else {
+//                            ///look up for user
+//                            ///if found, dismiss scanner
+//                            let isContactSaved = true
+//                            if isContactSaved {
+//                                router.dismissSheet()
+//                                Task {
+//                                    await viewModel.didScanUser()
+//                                }
+//                            }else {
+//                                router.presentSheet(.addToContacts)
+//                            }
+//                        }
+//                    @unknown default:
+//                        break
+//                    }
+//                }
+//                .sheet(item: $router.activeSheet) { sheet in
+//                    switch sheet {
+//                    case .addToContacts: Text("")
+//                            .presentationDetents([.medium])
+//                    }
+//                }
+//    
+//            }
+//        }
     }
 }

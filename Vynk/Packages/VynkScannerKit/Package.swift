@@ -4,41 +4,35 @@
 import PackageDescription
 
 let package = Package(
-    name: "VynkQRCodeKit",
+    name: "VynkScannerKit",
     platforms: [.iOS(.v18)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "VynkQRCodeKit",
-            targets: ["VynkQRCodeKit"]
+            name: "VynkScannerKit",
+            targets: ["VynkScannerKit"]
         ),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
-        .package(path: "../VynkDesignSystem"),
-        .package(path: "../VynkFoundation"),
-        .package(path: "../VynkImage"),
-        .package(path: "../VynkScannerKit"),
+        .package(path: "../VynkDesignSystem")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "VynkQRCodeKit",
+            name: "VynkScannerKit",
             dependencies: [
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
-                .product(name: "VynkFoundation", package: "VynkFoundation"),
-                .product(name: "VynkImage", package: "VynkImage"),
-                .product(name: "VynkScannerKit", package: "VynkScannerKit"),
             ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],
         ),
         .testTarget(
-            name: "VynkQRCodeKitTests",
-            dependencies: ["VynkQRCodeKit"],
+            name: "VynkScannerKitTests",
+            dependencies: ["VynkScannerKit"],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],

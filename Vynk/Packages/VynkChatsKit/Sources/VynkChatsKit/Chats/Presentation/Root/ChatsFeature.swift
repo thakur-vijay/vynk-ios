@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import Foundation
 import VynkChatLists
+import VynkMessageThreadKit
 import VynkUserProfileKit
 
 @Reducer
@@ -49,6 +50,7 @@ public struct ChatsFeature {
         case newChatTapped
         case cameraTapped
         case chats(IdentifiedActionOf<ChatRowFeature>)
+        case openConversation(MessageThreadModel)
         
         case delegate(Delegate)
 
@@ -106,8 +108,7 @@ public struct ChatsFeature {
             case .cameraTapped:
                 return .none
             case .chats(.element(_, action: .delegate(.openConversation(let model)))):
-                state.path.append(.conversation(ConversationFeature.State(model: model)))
-                return .none
+                return .send(.openConversation(model))
             case .chats:
                 return .none
             case .delegate(_):
@@ -118,6 +119,9 @@ public struct ChatsFeature {
             case .path(_):
                 return .none
             case .destination(_):
+                return .none
+            case .openConversation(let model):
+                state.path.append(.conversation(ConversationFeature.State(model: model)))
                 return .none
             }
         }

@@ -8,9 +8,10 @@
 import SwiftUI
 import ComposableArchitecture
 import VynkDesignSystem
+import VynkScannerKit
 
 public struct ProfileQRCodeView: View {
-    let store: StoreOf<ProfileQRCodeFeature>
+    @Bindable var store: StoreOf<ProfileQRCodeFeature>
     
     public init(store: StoreOf<ProfileQRCodeFeature>) {
         self.store = store
@@ -43,6 +44,12 @@ public struct ProfileQRCodeView: View {
                 Button("", systemImage: AppSymbols.Share.share.name){
                     store.send(.shareTapped)
                 }
+            }
+        }
+        .fullScreenCover(item: $store.scope(\.destination, action: \.destination)){ store in
+            switch store.case {
+            case .scanner(let store):
+                ScannerView(store: store)
             }
         }
         .task {

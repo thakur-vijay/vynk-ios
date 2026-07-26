@@ -14,7 +14,7 @@ final class SettingsDIContainer {
     private let appLockManager: AppLockManager
     private let brightnessManager: ScreenBrightnessManaging
     private let listsDIContainer: ListsDIContainer
-    private let scannerDIContainer: ScannerDIContainer
+//    private let scannerDIContainer: ScannerDIContainer
     private let router: SettingsRouter
     private let chatNavigator: ChatNavigator
     
@@ -22,14 +22,14 @@ final class SettingsDIContainer {
         appLockManager: AppLockManager,
         brightnessManager: ScreenBrightnessManaging,
         listsDIContainer: ListsDIContainer,
-        scannerDIContainer: ScannerDIContainer,
+//        scannerDIContainer: ScannerDIContainer,
         router: SettingsRouter,
         chatNavigator: ChatNavigator
     ) {
         self.appLockManager = appLockManager
         self.brightnessManager = brightnessManager
         self.listsDIContainer = listsDIContainer
-        self.scannerDIContainer = scannerDIContainer
+//        self.scannerDIContainer = scannerDIContainer
         self.router = router
         self.chatNavigator = chatNavigator
     }
@@ -54,9 +54,7 @@ final class SettingsDIContainer {
         ProfileQRCodeDIContainer(
             screenBrightnessManager: brightnessManager,
             chatNavigator: chatNavigator
-        ) { result in
-            self.scannerDIContainer.makeScannerView(result: result)
-        }
+        )
     }()
     
     @ViewBuilder

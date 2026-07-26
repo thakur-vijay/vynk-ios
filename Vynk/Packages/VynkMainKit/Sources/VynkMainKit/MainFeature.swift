@@ -74,10 +74,17 @@ public struct MainFeature {
 //        
         Reduce { state, action in
             switch action {
-
             case .settings(.logoutTapped):
                 return .send(.delegate(.logoutSucceeded))
+            case .settings(.delegate(.openChat)):
+                state.settings.path.removeAll()
+                state.selectedTab = .chats
 
+                return .send(
+                    .chats(
+                        .openConversation(MockChats.list.first!)
+                    )
+                )
             case .binding:
                 return .none
 

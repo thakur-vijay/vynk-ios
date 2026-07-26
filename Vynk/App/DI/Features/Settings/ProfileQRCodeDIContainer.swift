@@ -10,15 +10,15 @@ import VynkCameraKit
 final class ProfileQRCodeDIContainer {
     private let screenBrightnessManager: ScreenBrightnessManaging
     private let chatNavigator: ChatNavigator
-    private let makeScannerView: (@escaping (ScannerResult) -> Void) -> ScannerView
+//    private let makeScannerView: (@escaping (ScannerResult) -> Void) -> ScannerView
     
     init(
         screenBrightnessManager: ScreenBrightnessManaging,
         chatNavigator: ChatNavigator,
-        makeScannerView: @escaping (@escaping (ScannerResult) -> Void) -> ScannerView
+//        makeScannerView: @escaping (@escaping (ScannerResult) -> Void) -> ScannerView
     ) {
         self.screenBrightnessManager = screenBrightnessManager
-        self.makeScannerView = makeScannerView
+//        self.makeScannerView = makeScannerView
         self.chatNavigator = chatNavigator
     }
     
@@ -34,8 +34,8 @@ final class ProfileQRCodeDIContainer {
             diContainer: self
         )
     }
-    
-    func makeScannerSheet(result: @escaping (ScannerResult) -> Void)-> ScannerView {
-        makeScannerView(result)
-    }
+//    
+//    func makeScannerSheet(result: @escaping (ScannerResult) -> Void)-> ScannerView {
+////        makeScannerView(result)
+//    }
 }
