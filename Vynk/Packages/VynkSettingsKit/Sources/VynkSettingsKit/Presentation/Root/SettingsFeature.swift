@@ -8,6 +8,7 @@
 import ComposableArchitecture
 import VynkChatLists
 import VynkQRCodeKit
+import VynkPrivacyKit
 
 @Reducer
 public struct SettingsFeature {
@@ -73,6 +74,9 @@ public struct SettingsFeature {
                 return .none
             case .general:
                 return .none
+            case .preferences(.rowTapped(.privacy)):
+                state.path.append(.privacy(PrivacyFeature.State()))
+                return .none
             case .preferences(_):
                 return .none
             case .support(_):
@@ -100,6 +104,7 @@ extension SettingsFeature {
     public enum Path {
         case lists(ListsFeature)
         case qrCode(ProfileQRCodeFeature)
+        case privacy(PrivacyFeature)
     }
 }
 

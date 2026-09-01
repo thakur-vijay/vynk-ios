@@ -13,15 +13,11 @@ struct PrivacyView: View {
         _viewModel = State(wrappedValue: viewModel)
     }
   
-//    @Environment(SettingsRouter.self)
-//    private var router
-    
     var body: some View {
         List {
             ForEach(viewModel.sections) { section in
                 SectionView(section: section, toggleBinding: viewModel.binding(for:)) { rowID, kind in
                     if kind == .navigation {
-//                        router.push(.privacy(rowID))
                     }
                 }
             }

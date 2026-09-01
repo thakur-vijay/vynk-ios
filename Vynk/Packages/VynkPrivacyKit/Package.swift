@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "VynkPrivacyKit",
+    platforms: [.iOS(.v18)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -12,11 +13,19 @@ let package = Package(
             targets: ["VynkPrivacyKit"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", revision: "1.26.0"),
+        .package(path: "../VynkDesignSystem"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "VynkPrivacyKit",
+            dependencies: [
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "VynkDesignSystem", package: "VynkDesignSystem"),
+            ],
             swiftSettings: [
                 .enableUpcomingFeature("ApproachableConcurrency"),
             ],

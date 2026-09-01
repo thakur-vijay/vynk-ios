@@ -31,6 +31,7 @@
 		1872375D300275A400CBC763 /* VynkSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1872375C300275A400CBC763 /* VynkSettingsKit */; };
 		189EDD483007FAA300165480 /* VynkMessageThreadKit in Frameworks */ = {isa = PBXBuildFile; productRef = 189EDD473007FAA300165480 /* VynkMessageThreadKit */; };
 		189EDD4B3007FDEC00165480 /* VynkStatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 189EDD4A3007FDEC00165480 /* VynkStatusKit */; };
+		18A5490F3017BCB8004C4FA5 /* VynkPrivacyKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18A5490E3017BCB8004C4FA5 /* VynkPrivacyKit */; };
 		18CBCD0D3004128B007B2E98 /* VynkUserProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */; };
 		18FDB0E63002806200DFC4B6 /* VynkChatsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18FDB0E53002806200DFC4B6 /* VynkChatsKit */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A5490F3017BCB8004C4FA5 /* VynkPrivacyKit in Frameworks */,
 				1872371930022B2300CBC763 /* VynkMainKit in Frameworks */,
 				1872371530022B2300CBC763 /* VynkLifecycleMacros in Frameworks */,
 				18FDB0E63002806200DFC4B6 /* VynkChatsKit in Frameworks */,
@@ -240,6 +242,7 @@
 				18673DD8300BE75C00C78106 /* VynkQRCodeKit */,
 				18497A2E30151336007ECA4E /* VynkScannerKit */,
 				184D1949301644B000845F0B /* VynkAppLockKit */,
+				18A5490E3017BCB8004C4FA5 /* VynkPrivacyKit */,
 			);
 			productName = Vynk;
 			productReference = 188696882FB1AD3200A5BFA7 /* Vynk.app */;
@@ -850,6 +853,10 @@
 		189EDD4A3007FDEC00165480 /* VynkStatusKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = VynkStatusKit;
+		};
+		18A5490E3017BCB8004C4FA5 /* VynkPrivacyKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = VynkPrivacyKit;
 		};
 		18CBCD0C3004128B007B2E98 /* VynkUserProfileKit */ = {
 			isa = XCSwiftPackageProductDependency;

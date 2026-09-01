@@ -10,6 +10,7 @@ import ComposableArchitecture
 import VynkDesignSystem
 import VynkChatLists
 import VynkQRCodeKit
+import VynkPrivacyKit
 
 public struct SettingsView: View {
     @Bindable var store: StoreOf<SettingsFeature>
@@ -64,15 +65,14 @@ public struct SettingsView: View {
                     }
                 }
             }
-//            .navigationDestination(for: SettingsRoute.self) { route in
-//                diContainer.makeDestination(for: route)
-//            }
         } destination: { store in
             switch store.case {
             case .lists(let store):
                 ListsView(store: store)
             case .qrCode(let store):
                 ProfileQRCodeView(store: store)
+            case .privacy(let store):
+                PrivacyView(store: store)
             }
         }
     }
